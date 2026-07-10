@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel Díaz | Portfolio & Resume</title>
-    <!-- Fuentes estilo Retro/Brutalista de la referencia -->
+    <title>Joel Díaz | Portfolio & Tech Hub</title>
+    <!-- Fuentes Estilo Retro/Brutalista de la referencia -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- HERO SECTION (Bloque Verde Oscuro) --- */
+        /* --- HERO SECTION --- */
         .hero {
             background-color: var(--forest-green);
             color: var(--white);
@@ -95,7 +95,6 @@
             z-index: 2;
         }
 
-        /* Efecto de texto delineado repetido idéntico a la imagen 1000006693.jpg */
         .text-outline-stack {
             font-family: var(--font-serif);
             font-size: clamp(4rem, 8vw, 6.5rem);
@@ -119,7 +118,6 @@
             padding: 30px;
         }
 
-        /* Contenedor flotante de información en el bloque verde */
         .hero-meta-text {
             max-width: 320px;
             font-size: 0.95rem;
@@ -130,7 +128,6 @@
             margin-top: 40px;
         }
 
-        /* Botón Circular Intersector de Scroll */
         .scroll-badge {
             width: 110px;
             height: 110px;
@@ -154,7 +151,7 @@
             text-decoration: none;
         }
 
-        /* --- CUERPO PRINCIPAL (Estilo Resume en Bloque Crema) --- */
+        /* --- CUERPO PRINCIPAL --- */
         .main-container {
             padding: 120px 6% 80px 6%;
             display: grid;
@@ -180,7 +177,7 @@
         }
 
         .btn-link-cta {
-            background-color: #f06449; /* Tono naranja/coral del botón de la imagen */
+            background-color: #f06449; /* Tono coral de la referencia */
             color: var(--white);
             padding: 14px 32px;
             border-radius: 30px;
@@ -190,9 +187,10 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 15px rgba(240, 100, 73, 0.2);
+            border: none;
+            cursor: pointer;
         }
 
-        /* Sección de Enfoque / Educación modificada */
         .section-title {
             font-family: var(--font-serif);
             font-size: 2.2rem;
@@ -202,76 +200,79 @@
             padding-bottom: 10px;
         }
 
-        .timeline-item {
-            margin-bottom: 30px;
-            position: relative;
-            padding-left: 25px;
+        /* Grid de Tarjetas de Proyectos */
+        .grid-portfolio {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 20px;
         }
 
-        .timeline-item::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: #f06449;
-            font-size: 0.9rem;
+        .portfolio-card {
+            background: var(--white);
+            border: 2px solid rgba(0,0,0,0.05);
+            border-radius: 24px;
+            padding: 35px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
         }
 
-        .timeline-date {
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 5px;
+        .portfolio-card:hover {
+            border-color: var(--ochre);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+        }
+
+        .card-top .category-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            background-color: var(--forest-green);
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-top h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
             color: var(--black);
         }
 
-        .timeline-content h4 {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
-            margin-bottom: 4px;
-        }
-
-        .timeline-content p {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Caja de Experiencia destacada (Bloque Amarillo) */
-        .experience-box {
-            background-color: var(--ochre);
-            padding: 40px;
-            border-radius: 24px;
-            margin-top: 40px;
-        }
-
-        .experience-box h3 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-        }
-
-        .pill-container {
+        .card-bottom {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 25px;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        .pill {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        .card-bottom .view-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f06449;
+        }
+
+        .card-bottom .arrow {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-card:hover .arrow {
+            transform: translateX(6px);
         }
 
         /* --- COLUMNA DERECHA --- */
-        .right-col {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Tarjeta de Contacto Estilo Credencial */
         .profile-card-specs {
             background-color: var(--forest-green);
             border-radius: 24px;
@@ -281,7 +282,7 @@
         }
 
         .profile-img-placeholder {
-            height: 280px;
+            height: 240px;
             background-color: #354a39;
             position: relative;
             display: flex;
@@ -289,7 +290,6 @@
             justify-content: center;
         }
 
-        /* Badges flotantes sobre la foto idénticos a la referencia */
         .floating-badge {
             position: absolute;
             background-color: var(--ochre);
@@ -313,19 +313,14 @@
             font-family: var(--font-serif);
             font-size: 1.6rem;
             margin-bottom: 15px;
-            letter-spacing: 0.5px;
         }
 
         .contact-row {
             font-size: 0.85rem;
             color: rgba(255,255,255,0.7);
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        /* Bloque de Skills Técnicos */
         .skills-headline {
             font-family: var(--font-serif);
             font-size: 2.2rem;
@@ -341,7 +336,7 @@
         }
 
         .skills-col h4 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 15px;
@@ -369,7 +364,6 @@
             line-height: 1.6;
         }
 
-        /* --- SECCIÓN ACTIVIDADES & HOBBIES --- */
         .bottom-row-grid {
             grid-column: span 2;
             display: grid;
@@ -405,10 +399,112 @@
             border: 1px solid rgba(0,0,0,0.05);
         }
 
+        /* --- INTERACTIVIDAD: VENTANA MODAL EXPANDIBLE --- */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-modal.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--cream);
+            color: var(--black);
+            width: 90%;
+            max-width: 680px;
+            padding: 40px;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .project-modal.is-active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .modal-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #f06449;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .modal-tech-stack {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .modal-image-area {
+            background-color: var(--forest-green);
+            height: 280px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
         @media (max-width: 968px) {
-            .hero-content, .main-container, .bottom-row-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero-content, .main-container, .bottom-row-grid { grid-template-columns: 1fr; }
             .bottom-row-grid { grid-column: span 1; }
             .hero-giant-title { font-size: 3.5rem; }
             .left-col .greeting h2 { font-size: 3rem; }
@@ -417,12 +513,12 @@
 </head>
 <body>
 
-    <!-- Hero Section (Verde) -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-nav">
             <div class="hero-brand">Joel Díaz</div>
             <div class="hero-menu">
-                <a href="#work">Proyectos</a>
+                <a href="#proyectos">Proyectos</a>
                 <a href="#skills">Habilidades</a>
                 <a href="https://wa.me/507XXXXXXXX" class="cta-mini" target="_blank">Contacto</a>
             </div>
@@ -434,14 +530,11 @@
                 <div class="text-outline-stack">WEB DEV</div>
                 <div class="text-outline-stack">TECH REP</div>
                 <div class="text-outline-stack">PORTFOLIO</div>
-                
                 <p class="hero-meta-text">
-                    Desarrollo front-end enfocado en optimización comercial y soluciones robustas de hardware. Código limpio y funcional para el mundo real.
+                    Desarrollo front-end enfocado en optimización comercial y soluciones robustas de hardware. Interfaces limpias, veloces y funcionales.
                 </p>
             </div>
-
             <div style="display: flex; justify-content: flex-end;">
-                <!-- Bloque de color simulando la estética de la imagen -->
                 <div class="hero-profile-box">
                     <div style="font-family: var(--font-serif); font-size: 2rem; color: var(--forest-green); font-weight:700;">
                         TecnoTrade PTY
@@ -453,83 +546,95 @@
         <a href="#content" class="scroll-badge">Scroll<br>down</a>
     </section>
 
-    <!-- Main Content Container (Crema) -->
+    <!-- Main Content Container -->
     <main class="main-container" id="content">
         
-        <!-- Columna Izquierda -->
+        <!-- Columna Izquierda: Bio e Interactividad de Proyectos -->
         <div class="left-col">
             <div class="greeting">
                 <h2>Hola, <br>soy Joel !</h2>
                 <p class="bio-p">
-                    Desarrollador Front-End y técnico especialista en hardware radicado en Ciudad de Panamá. Me dedico a estructurar plataformas web interactivas (PWAs) y herramientas digitales a medida para comercios y servicios locales.
+                    Especialista en desarrollo Front-End y soporte técnico de hardware en Ciudad de Panamá. Construyo Progressive Web Apps (PWAs) y herramientas a medida para optimizar el rendimiento y la conversión de comercios locales.
                 </p>
-                <a href="https://wa.me/507XXXXXXXX" class="btn-link-cta" target="_blank">
-                    <span>Escríbi al WhatsApp</span> ↗
-                </a>
             </div>
 
-            <h3 class="section-title">Foco & Desarrollo</h3>
+            <h3 class="section-title" id="proyectos">Proyectos Destacados</h3>
             
-            <div class="timeline-item">
-                <div class="timeline-date">2026</div>
-                <div class="timeline-content">
-                    <h4>E-commerce Product Configurator</h4>
-                    <p>Diseño y despliegue de un configurador interactivo para accesorios móviles con integración directa a flujos de pedido.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">2025</div>
-                <div class="timeline-content">
-                    <h4>Local Sharing Browser Utility</h4>
-                    <p>Desarrollo front-end de una utilidad web para transferencia de archivos locales optimizada para navegadores web.</p>
-                </div>
-            </div>
-
-            <!-- Caja de Experiencia Comercial (Amarilla) -->
-            <div class="experience-box" id="work">
-                <h3>Categorías de Sitio</h3>
-                <p>Estructuras optimizadas listas para implementarse en nichos comerciales estratégicos de la zona de El Cangrejo:</p>
+            <div class="grid-portfolio">
                 
-                <div class="timeline-item" style="margin-top: 20px;">
-                    <div class="timeline-date">Restaurantes & Bares</div>
-                    <div class="timeline-content"><p>Menús interactivos dinámicos y landings de conversión (Caso de estudio: Prototipo Armónica).</p></div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Spas & Salones de Belleza</div>
-                    <div class="timeline-content"><p>Catálogos estéticos visuales y layouts preparados para integración de reservas.</p></div>
+                <!-- Tarjeta 1: Urban Skate -->
+                <div class="portfolio-card" 
+                     data-title="Restaurante Prototipo Urban Skate"
+                     data-category="Restaurantes & Ocio"
+                     data-tech="HTML5 · CSS3 · JavaScript Vanilla"
+                     data-link="https://tecnotradepty.github.io/armpty/"
+                     data-image=""
+                     data-desc="Estructura de catálogo dinámico y menú interactivo optimizado para restaurantes con temática urbana. Diseñado con un enfoque mobile-first para agilizar la visualización de platos, implementando transiciones limpias y un rendimiento de carga instantáneo ideal para clientes en zonas de alto tráfico como El Cangrejo.">
+                    <div class="card-top">
+                        <span class="category-badge">Restaurantes</span>
+                        <h3>Restaurante Prototipo Urban Skate</h3>
+                    </div>
+                    <div class="card-bottom">
+                        <span class="view-link">Pica para ver más</span>
+                        <span class="arrow">→</span>
+                    </div>
                 </div>
 
-                <div class="pill-container">
-                    <div class="pill">#FrontEnd</div>
-                    <div class="pill">#PWA</div>
-                    <div class="pill">#Responsive</div>
-                    <div class="pill">#UI-Design</div>
+                <!-- Tarjeta 2: Artextual / Transferencia -->
+                <div class="portfolio-card" 
+                     data-title="Web de Transferencia de Archivos"
+                     data-category="Herramientas Web"
+                     data-tech="JavaScript ES6 · Web APIs · PWA"
+                     data-link="https://j0elsito.github.io/artextual.github.io/#"
+                     data-image=""
+                     data-desc="Utilidad web diseñada para la transferencia local de archivos directamente desde el navegador, asegurando cero pérdida de calidad en los documentos. Integra scripts ligeros optimizados para flujos rápidos, combinando monetización nativa y una interfaz brutalista minimalista.">
+                    <div class="card-top">
+                        <span class="category-badge">Utilidades</span>
+                        <h3>Transferencia de Archivos sin Perder Calidad</h3>
+                    </div>
+                    <div class="card-bottom">
+                        <span class="view-link">Pica para ver más</span>
+                        <span class="arrow">→</span>
+                    </div>
                 </div>
+
+                <!-- Tarjeta 3: TecnoTrade -->
+                <div class="portfolio-card" 
+                     data-title="TecnoTrade PTY | Plataforma de Dispositivos"
+                     data-category="Hardware & Tech"
+                     data-tech="HTML5 · CSS Grid · Responsive Design"
+                     data-link="https://j0elsito.github.io/tecnotrade/?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
+                     data-image=""
+                     data-desc="Diseño de interfaz de marca enfocado en servicios técnicos especializados, venta e intercambio de smartphones. Estructura ligera orientada a un público joven y tecnológico, optimizando los puntos de contacto para la captación rápida de clientes a nivel local.">
+                    <div class="card-top">
+                        <span class="category-badge">Soporte & Hardware</span>
+                        <h3>TecnoTrade: Reparación e Intercambio de Teléfonos</h3>
+                    </div>
+                    <div class="card-bottom">
+                        <span class="view-link">Pica para ver más</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <!-- Columna Derecha -->
+        <!-- Columna Derecha: Resume & Skills -->
         <div class="right-col" id="skills">
             
-            <!-- Credencial de Soporte Técnico -->
             <div class="profile-card-specs">
                 <div class="profile-img-placeholder">
                     <div class="floating-badge badge-1">Front-End Dev</div>
-                    <div class="floating-badge badge-2">Panamá</div>
-                    <div style="font-family: var(--font-serif); font-size: 3rem; color: rgba(255,255,255,0.15); font-weight:700;">
-                        JD
-                    </div>
+                    <div class="floating-badge badge-2">Panamá Centro</div>
+                    <div style="font-family: var(--font-serif); font-size: 3rem; color: rgba(255,255,255,0.15); font-weight:700;">JD</div>
                 </div>
                 <div class="contact-info-block">
                     <h3>Contacto</h3>
-                    <div class="contact-row">📍 Panamá Centro, Ciudad de Panamá</div>
+                    <div class="contact-row">📍 El Cangrejo / Bella Vista, Panamá</div>
                     <div class="contact-row">💼 TecnoTrade PTY</div>
-                    <div class="contact-row">🌐 github.com/joeldiaz</div>
                 </div>
             </div>
 
-            <!-- Skills & Tecnologías -->
             <h3 class="skills-headline">Technical Skills</h3>
             <div class="text-outline-stack" style="font-size: 3.5rem; margin-bottom: 30px;">RESUME RESUME</div>
 
@@ -539,55 +644,37 @@
                     <div class="square-badge-container">
                         <div class="square-badge">HTML5</div>
                         <div class="square-badge">CSS3</div>
-                        <div class="square-badge">JS (ES6)</div>
+                        <div class="square-badge">JavaScript</div>
                         <div class="square-badge">Git</div>
-                        <div class="square-badge">GitHub</div>
+                        <div class="square-badge">GitHub Pages</div>
                     </div>
                 </div>
 
                 <div class="skills-col">
-                    <h4>Hardware & Design</h4>
+                    <h4>Hardware & Dev</h4>
                     <ul class="skills-list-text">
-                        <li>• Arquitectura de Dispositivos</li>
-                        <li>• Diagnóstico de Placas</li>
+                        <li>• Optimización Front-End</li>
+                        <li>• Estructuras PWA</li>
+                        <li>• Diagnóstico de Hardware Móvil</li>
                         <li>• Integración de Sensores LiDAR</li>
-                        <li>• Modelado UI Comercial</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Subsección inferior: Actividades e Intereses -->
             <div class="bottom-row-grid">
                 <div>
-                    <h3 class="section-title" style="margin: 0 0 20px 0;">Actividades</h3>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2026</div>
-                        <div class="timeline-content">
-                            <h4>Rebranding TecnoTrade PTY</h4>
-                            <p>Evolución de marca hacia una identidad visual minimalista enfocada en tecnología.</p>
-                        </div>
-                    </div>
+                    <h3 class="section-title" style="margin: 0 0 20px 0;">Proyectos</h3>
+                    <div class="square-badge" style="margin-bottom: 10px; display:block;">Configurador de Accesorios</div>
+                    <div class="square-badge" style="display:block;">Utility File Share PWA</div>
                 </div>
 
                 <div>
                     <h3 class="section-title" style="margin: 0 0 20px 0;">Intereses</h3>
                     <div class="icon-hub-grid">
-                        <div class="icon-item">
-                            <div class="icon-box">🏋️‍♂️</div>
-                            <span>Gym</span>
-                        </div>
-                        <div class="icon-item">
-                            <div class="icon-box">📱</div>
-                            <span>Hardware</span>
-                        </div>
-                        <div class="icon-item">
-                            <div class="icon-box">🎨</div>
-                            <span>UI Design</span>
-                        </div>
-                        <div class="icon-item">
-                            <div class="icon-box">🚀</div>
-                            <span>PWAs</span>
-                        </div>
+                        <div class="icon-item"><div class="icon-box">🏋️‍♂️</div><span>Gym</span></div>
+                        <div class="icon-item"><div class="icon-box">📱</div><span>Hardware</span></div>
+                        <div class="icon-item"><div class="icon-box">🎨</div><span>UI/UX</span></div>
+                        <div class="icon-item"><div class="icon-box">⚡</div><span>PWAs</span></div>
                     </div>
                 </div>
             </div>
@@ -595,10 +682,87 @@
         </div>
     </main>
 
-    <!-- Footer Simple Brutal -->
+    <!-- Ventana Modal de Expansión -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="closeModal">✕ Cerra</button>
+            <span class="modal-category" id="modalCategory">CATEGORÍA</span>
+            <h2 class="modal-title" id="modalTitle">Título del Proyecto</h2>
+            <div class="modal-tech-stack" id="modalTech">Tech Stack</div>
+            
+            <div class="modal-image-area" id="modalImg">
+                <span id="modalImgPlaceholder">[ Vista Previa del Proyecto ]</span>
+            </div>
+            
+            <p class="modal-description" id="modalDesc">Descripción larga del proyecto...</p>
+            
+            <a href="#" class="btn-link-cta" id="modalLiveLink" target="_blank">
+                <span>Visitar Sitio en Vivo</span> ↗
+            </a>
+        </div>
+    </div>
+
     <footer style="background-color: var(--black); color: var(--white); text-align: center; padding: 40px; font-size: 0.85rem;">
         <p>&copy; 2026 Joel Díaz / TecnoTrade PTY. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Lógica de Interactividad -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.portfolio-card');
+            const modal = document.getElementById('projectModal');
+            const closeBtn = document.getElementById('closeModal');
+            
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            const modalTech = document.getElementById('modalTech');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalImg = document.getElementById('modalImg');
+            const modalImgPlaceholder = document.getElementById('modalImgPlaceholder');
+            const modalLiveLink = document.getElementById('modalLiveLink');
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const title = card.getAttribute('data-title');
+                    const category = card.getAttribute('data-category');
+                    const tech = card.getAttribute('data-tech');
+                    const desc = card.getAttribute('data-desc');
+                    const link = card.getAttribute('data-link');
+                    const imgUrl = card.getAttribute('data-image');
+
+                    // Inyección de textos y enlaces directos
+                    modalTitle.textContent = title;
+                    modalCategory.textContent = category;
+                    modalTech.textContent = tech;
+                    modalDesc.textContent = desc;
+                    modalLiveLink.setAttribute('href', link);
+
+                    // Manejo dinámico de imágenes/capturas
+                    if (imgUrl && imgUrl.trim() !== "") {
+                        modalImg.style.backgroundImage = `url('${imgUrl}')`;
+                        modalImgPlaceholder.style.display = 'none';
+                    } else {
+                        modalImg.style.backgroundImage = 'none';
+                        modalImgPlaceholder.style.display = 'block';
+                    }
+
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = '';
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
