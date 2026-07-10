@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joel Díaz | Portfolio & Tech Hub</title>
-    <!-- Fuentes Estilo Retro/Brutalista de la referencia -->
+    <!-- Fuentes Estilo Retro/Brutalista -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --forest-green: #243327; /* Verde oscuro principal de la imagen */
-            --cream: #f4f0ea;       /* Fondo arena/crema de la sección inferior */
-            --ochre: #f2a93b;       /* Amarillo ocre para acentos y badges */
-            --black: #0d0d0d;       /* Negro sólido para bloques de texto */
+            --forest-green: #243327;
+            --cream: #f4f0ea;
+            --ochre: #f2a93b;
+            --black: #0d0d0d;
             --white: #ffffff;
             --font-serif: 'Fraunces', serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -32,6 +32,19 @@
             font-family: var(--font-sans);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- MOTION GRAPHICS: CLASES DE REVELADO --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- HERO SECTION --- */
@@ -95,6 +108,7 @@
             z-index: 2;
         }
 
+        /* Preparados para el movimiento de Motion Graphics lateral */
         .text-outline-stack {
             font-family: var(--font-serif);
             font-size: clamp(4rem, 8vw, 6.5rem);
@@ -103,6 +117,9 @@
             -webkit-text-stroke: 1px rgba(242, 169, 59, 0.4);
             color: transparent;
             margin-top: 10px;
+            white-space: nowrap;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
 
         .hero-profile-box {
@@ -149,6 +166,7 @@
             z-index: 5;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             text-decoration: none;
+            will-change: transform;
         }
 
         /* --- CUERPO PRINCIPAL --- */
@@ -177,7 +195,7 @@
         }
 
         .btn-link-cta {
-            background-color: #f06449; /* Tono coral de la referencia */
+            background-color: #f06449;
             color: var(--white);
             padding: 14px 32px;
             border-radius: 30px;
@@ -200,7 +218,6 @@
             padding-bottom: 10px;
         }
 
-        /* Grid de Tarjetas de Proyectos */
         .grid-portfolio {
             display: flex;
             flex-direction: column;
@@ -399,7 +416,7 @@
             border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- INTERACTIVIDAD: VENTANA MODAL EXPANDIBLE --- */
+        /* --- MODAL EXPANDIBLE --- */
         .project-modal {
             position: fixed;
             top: 0;
@@ -527,9 +544,10 @@
         <div class="hero-content">
             <div>
                 <h1 class="hero-giant-title">PORTFOLIO</h1>
-                <div class="text-outline-stack">WEB DEV</div>
-                <div class="text-outline-stack">TECH REP</div>
-                <div class="text-outline-stack">PORTFOLIO</div>
+                <!-- Textos con clases identificadoras para Motion Parallax -->
+                <div class="text-outline-stack layer-left">WEB DEV</div>
+                <div class="text-outline-stack layer-right">TECH REP</div>
+                <div class="text-outline-stack layer-left">PORTFOLIO</div>
                 <p class="hero-meta-text">
                     Desarrollo front-end enfocado en optimización comercial y soluciones robustas de hardware. Interfaces limpias, veloces y funcionales.
                 </p>
@@ -543,27 +561,27 @@
             </div>
         </div>
 
-        <a href="#content" class="scroll-badge">Scroll<br>down</a>
+        <a href="#content" class="scroll-badge" id="scrollBadge">Scroll<br>down</a>
     </section>
 
     <!-- Main Content Container -->
     <main class="main-container" id="content">
         
-        <!-- Columna Izquierda: Bio e Interactividad de Proyectos -->
+        <!-- Columna Izquierda: Bio y Tarjetas Reales -->
         <div class="left-col">
-            <div class="greeting">
+            <div class="greeting reveal">
                 <h2>Hola, <br>soy Joel !</h2>
                 <p class="bio-p">
                     Especialista en desarrollo Front-End y soporte técnico de hardware en Ciudad de Panamá. Construyo Progressive Web Apps (PWAs) y herramientas a medida para optimizar el rendimiento y la conversión de comercios locales.
                 </p>
             </div>
 
-            <h3 class="section-title" id="proyectos">Proyectos Destacados</h3>
+            <h3 class="section-title reveal" id="proyectos">Proyectos Destacados</h3>
             
             <div class="grid-portfolio">
                 
                 <!-- Tarjeta 1: Urban Skate -->
-                <div class="portfolio-card" 
+                <div class="portfolio-card reveal" 
                      data-title="Restaurante Prototipo Urban Skate"
                      data-category="Restaurantes & Ocio"
                      data-tech="HTML5 · CSS3 · JavaScript Vanilla"
@@ -580,8 +598,8 @@
                     </div>
                 </div>
 
-                <!-- Tarjeta 2: Artextual / Transferencia -->
-                <div class="portfolio-card" 
+                <!-- Tarjeta 2: Artextual -->
+                <div class="portfolio-card reveal" 
                      data-title="Web de Transferencia de Archivos"
                      data-category="Herramientas Web"
                      data-tech="JavaScript ES6 · Web APIs · PWA"
@@ -599,7 +617,7 @@
                 </div>
 
                 <!-- Tarjeta 3: TecnoTrade -->
-                <div class="portfolio-card" 
+                <div class="portfolio-card reveal" 
                      data-title="TecnoTrade PTY | Plataforma de Dispositivos"
                      data-category="Hardware & Tech"
                      data-tech="HTML5 · CSS Grid · Responsive Design"
@@ -622,7 +640,7 @@
         <!-- Columna Derecha: Resume & Skills -->
         <div class="right-col" id="skills">
             
-            <div class="profile-card-specs">
+            <div class="profile-card-specs reveal">
                 <div class="profile-img-placeholder">
                     <div class="floating-badge badge-1">Front-End Dev</div>
                     <div class="floating-badge badge-2">Panamá Centro</div>
@@ -635,10 +653,10 @@
                 </div>
             </div>
 
-            <h3 class="skills-headline">Technical Skills</h3>
-            <div class="text-outline-stack" style="font-size: 3.5rem; margin-bottom: 30px;">RESUME RESUME</div>
+            <h3 class="skills-headline reveal">Technical Skills</h3>
+            <div class="text-outline-stack reveal" style="font-size: 3.5rem; margin-bottom: 30px;">RESUME RESUME</div>
 
-            <div class="skills-grid">
+            <div class="skills-grid reveal">
                 <div class="skills-col">
                     <h4>Software Skills</h4>
                     <div class="square-badge-container">
@@ -661,7 +679,7 @@
                 </div>
             </div>
 
-            <div class="bottom-row-grid">
+            <div class="bottom-row-grid reveal">
                 <div>
                     <h3 class="section-title" style="margin: 0 0 20px 0;">Proyectos</h3>
                     <div class="square-badge" style="margin-bottom: 10px; display:block;">Configurador de Accesorios</div>
@@ -706,9 +724,11 @@
         <p>&copy; 2026 Joel Díaz / TecnoTrade PTY. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Lógica de Interactividad -->
+    <!-- Lógica de Interactividad y Motion Graphics -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. INTERACTIVIDAD DE LOS MODALES ---
             const cards = document.querySelectorAll('.portfolio-card');
             const modal = document.getElementById('projectModal');
             const closeBtn = document.getElementById('closeModal');
@@ -730,14 +750,12 @@
                     const link = card.getAttribute('data-link');
                     const imgUrl = card.getAttribute('data-image');
 
-                    // Inyección de textos y enlaces directos
                     modalTitle.textContent = title;
                     modalCategory.textContent = category;
                     modalTech.textContent = tech;
                     modalDesc.textContent = desc;
                     modalLiveLink.setAttribute('href', link);
 
-                    // Manejo dinámico de imágenes/capturas
                     if (imgUrl && imgUrl.trim() !== "") {
                         modalImg.style.backgroundImage = `url('${imgUrl}')`;
                         modalImgPlaceholder.style.display = 'none';
@@ -761,6 +779,44 @@
                 if (e.target === modal) {
                     closeModal();
                 }
+            });
+
+            // --- 2. MOTION GRAPHICS: PARALLAX & SCROLL EFFECTS ---
+            const layersLeft = document.querySelectorAll('.layer-left');
+            const layersRight = document.querySelectorAll('.layer-right');
+            const scrollBadge = document.getElementById('scrollBadge');
+
+            window.addEventListener('scroll', () => {
+                let speed = window.scrollY;
+                
+                // Los textos alternados se mueven hacia los lados de forma fluida
+                layersLeft.forEach(layer => {
+                    layer.style.transform = `translateX(${speed * 0.4}px)`;
+                });
+                layersRight.forEach(layer => {
+                    layer.style.transform = `translateX(-${speed * 0.4}px)`;
+                });
+
+                // Rotación del badge circular "Scroll Down" en base al scroll
+                scrollBadge.style.transform = `translateX(-50%) rotate(${speed * 0.2}deg)`;
+            });
+
+            // --- 3. MOTION GRAPHICS: REVELADO SÓLIDO (INTERSECTION OBSERVER) ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Solo se ejecuta una vez para mejorar performance
+                    }
+                });
+            }, {
+                threshold: 0.15 // Se activa cuando el 15% del elemento ya es visible
+            });
+
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
             });
         });
     </script>
