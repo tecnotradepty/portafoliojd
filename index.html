@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel Díaz | Front-End Developer & Tech Specialist</title>
+    <title>Joel Díaz | Portfolio & Resume</title>
+    <!-- Fuentes estilo Retro/Brutalista de la referencia -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-pure: #0a0a0a;
-            --bg-card: #121212;
-            --bg-card-hover: #1a1a1a;
-            --text-main: #ffffff;
-            --text-muted: #8e8e93;
-            --accent: #ffffff; /* Acabado monocromático elegante */
-            --border-color: rgba(255, 255, 255, 0.08);
-            --radius-lg: 32px;
-            --radius-md: 16px;
+            --forest-green: #243327; /* Verde oscuro principal de la imagen */
+            --cream: #f4f0ea;       /* Fondo arena/crema de la sección inferior */
+            --ochre: #f2a93b;       /* Amarillo ocre para acentos y badges */
+            --black: #0d0d0d;       /* Negro sólido para bloques de texto */
+            --white: #ffffff;
+            --font-serif: 'Fraunces', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
@@ -28,438 +27,578 @@
         }
 
         body {
-            background-color: var(--bg-pure);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--black);
+            font-family: var(--font-sans);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, .hero-num {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-        }
-
-        /* Navbar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 6%;
-            position: absolute;
-            width: 100%;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--text-muted);
-        }
-
-        .btn-cta {
-            background: var(--text-main);
-            color: var(--bg-pure);
-            padding: 12px 24px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .btn-cta:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
-        }
-
-        /* Hero Container (Imitando la curva superior de la imagen de referencia) */
-        .hero-block {
-            background: linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
-            border-bottom-left-radius: var(--radius-lg);
-            border-bottom-right-radius: var(--radius-lg);
-            padding: 160px 6% 80px 6%;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.28fr 0.82fr;
-            gap: 40px;
-            align-items: flex-end;
-            margin-bottom: 80px;
-        }
-
-        .hero-title-area .tagline {
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .hero-title-area h1 {
-            font-size: clamp(3rem, 6vw, 4.5rem);
-            line-height: 1.05;
-            letter-spacing: -2px;
-        }
-
-        .hero-desc-area p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Pilares de servicios (Métricas en horizontal) */
-        .hero-pillars {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 40px;
-        }
-
-        .pillar-item .hero-num {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .pillar-item h3 {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        /* Zona de Enfoque / Estrategia */
-        .focus-section {
-            padding: 100px 6%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        .focus-section h2 {
-            font-size: 2.5rem;
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-
-        .focus-right p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        /* Portafolio por Categorías */
-        .portfolio-section {
-            padding: 40px 6% 100px 6%;
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .grid-portfolio {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .portfolio-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 30px;
-            height: 380px;
+        /* --- HERO SECTION (Bloque Verde Oscuro) --- */
+        .hero {
+            background-color: var(--forest-green);
+            color: var(--white);
+            padding: 40px 6% 120px 6%;
+            position: relative;
+            min-height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: background 0.3s, border-color 0.3s, transform 0.3s;
-            text-decoration: none;
-            color: inherit;
         }
 
-        .portfolio-card:hover {
-            background: var(--bg-card-hover);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-4px);
-        }
-
-        .card-top .category-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 100px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .card-top h3 {
-            font-size: 1.75rem;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .card-bottom {
+        .hero-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
-        .card-bottom .view-link {
+        .hero-brand {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-menu a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
             font-size: 0.9rem;
             font-weight: 500;
         }
 
-        .card-bottom .arrow {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
+        .hero-menu .cta-mini {
+            background-color: var(--ochre);
+            color: var(--black);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
         }
 
-        .portfolio-card:hover .arrow {
-            transform: translateX(5px);
-        }
-
-        /* Tech & Repair Section */
-        .tech-section {
-            background: #0f0f0f;
-            margin: 0 6%;
-            padding: 60px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
+        .hero-content {
+            margin-top: 60px;
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             align-items: center;
+            position: relative;
         }
 
-        .tech-left h3 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
+        .hero-giant-title {
+            font-family: var(--font-serif);
+            font-size: clamp(4.5rem, 10vw, 7.5rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--cream);
+            position: relative;
+            z-index: 2;
         }
 
-        .tech-left p {
-            color: var(--text-muted);
+        /* Efecto de texto delineado repetido idéntico a la imagen 1000006693.jpg */
+        .text-outline-stack {
+            font-family: var(--font-serif);
+            font-size: clamp(4rem, 8vw, 6.5rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            -webkit-text-stroke: 1px rgba(242, 169, 59, 0.4);
+            color: transparent;
+            margin-top: 10px;
+        }
+
+        .hero-profile-box {
+            position: relative;
+            background-color: var(--ochre);
+            border-radius: 30px;
+            width: 85%;
+            height: 420px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        /* Contenedor flotante de información en el bloque verde */
+        .hero-meta-text {
+            max-width: 320px;
+            font-size: 0.95rem;
             line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+            border-left: 2px solid var(--ochre);
+            padding-left: 15px;
+            margin-top: 40px;
         }
 
-        .tech-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .spec-item h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .spec-item p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        /* Footer / Contacto */
-        footer {
-            padding: 100px 6% 60px 6%;
+        /* Botón Circular Intersector de Scroll */
+        .scroll-badge {
+            width: 110px;
+            height: 110px;
+            background-color: var(--ochre);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             text-align: center;
-            border-top: 1px solid var(--border-color);
-            margin-top: 100px;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.85rem;
+            line-height: 1.2;
+            position: absolute;
+            bottom: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-decoration: none;
         }
 
-        footer h2 {
-            font-size: 3rem;
+        /* --- CUERPO PRINCIPAL (Estilo Resume en Bloque Crema) --- */
+        .main-container {
+            padding: 120px 6% 80px 6%;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+        }
+
+        /* --- COLUMNA IZQUIERDA --- */
+        .left-col .greeting h2 {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
             letter-spacing: -1px;
+        }
+
+        .left-col .bio-p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .btn-link-cta {
+            background-color: #f06449; /* Tono naranja/coral del botón de la imagen */
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(240, 100, 73, 0.2);
+        }
+
+        /* Sección de Enfoque / Educación modificada */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--forest-green);
+            margin: 60px 0 30px 0;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #f06449;
+            font-size: 0.9rem;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            color: var(--black);
+        }
+
+        .timeline-content h4 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Caja de Experiencia destacada (Bloque Amarillo) */
+        .experience-box {
+            background-color: var(--ochre);
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 40px;
+        }
+
+        .experience-box h3 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+
+        .pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .pill {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- COLUMNA DERECHA --- */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tarjeta de Contacto Estilo Credencial */
+        .profile-card-specs {
+            background-color: var(--forest-green);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+        }
+
+        .profile-img-placeholder {
+            height: 280px;
+            background-color: #354a39;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Badges flotantes sobre la foto idénticos a la referencia */
+        .floating-badge {
+            position: absolute;
+            background-color: var(--ochre);
+            color: var(--black);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-1 { top: 20px; left: 20px; }
+        .badge-2 { bottom: 20px; right: 20px; }
+
+        .contact-info-block {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 30px;
+        }
+
+        .contact-info-block h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-row {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Bloque de Skills Técnicos */
+        .skills-headline {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--forest-green);
             margin-bottom: 20px;
         }
 
-        .footer-links {
-            margin: 40px 0;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
+        .skills-col h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #555;
         }
 
-        .footer-links a:hover {
-            color: var(--text-main);
+        .square-badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .copyright {
+        .square-badge {
+            background-color: var(--white);
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .skills-list-text {
+            list-style: none;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- SECCIÓN ACTIVIDADES & HOBBIES --- */
+        .bottom-row-grid {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            border-top: 2px solid rgba(0,0,0,0.05);
+            padding-top: 50px;
+            margin-top: 40px;
+        }
+
+        .icon-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .icon-item {
+            text-align: center;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.3);
+            font-weight: 600;
         }
 
-        /* Responsivo básico */
+        .icon-box {
+            background-color: var(--white);
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
         @media (max-width: 968px) {
-            .hero-grid, .focus-section, .grid-portfolio, .tech-section {
+            .hero-content, .main-container, .bottom-row-grid {
                 grid-template-columns: 1fr;
             }
-            .hero-pillars {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
-            header {
-                padding: 20px 4%;
-            }
-            nav {
-                display: none; /* Simplificado para móviles */
-            }
+            .bottom-row-grid { grid-column: span 1; }
+            .hero-giant-title { font-size: 3.5rem; }
+            .left-col .greeting h2 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Joel Díaz <span>/ TecnoTrade</span></div>
-        <nav>
-            <a href="#proyectos">Sitios Web</a>
-            <a href="#hardware">Soporte Tech</a>
-        </nav>
-        <a href="https://wa.me/507XXXXXXXX" class="btn-cta" target="_blank">Escríbeme</a>
-    </header>
-
-    <section class="hero-block">
-        <div class="hero-grid">
-            <div class="hero-title-area">
-                <span class="tagline">Desarrollo Front-End & Hardware</span>
-                <h1>Construyendo <br>plataformas que impulsan negocios.</h1>
-            </div>
-            <div class="hero-desc-area">
-                <p>Especialista en la creación de interfaces web fluidas y optimizadas para el sector comercial. Desde menús interactivos hasta sistemas listos para conversión.</p>
-                <a href="https://wa.me/507XXXXXXXX" class="btn-cta" target="_blank">Iniciar un proyecto</a>
+    <!-- Hero Section (Verde) -->
+    <section class="hero">
+        <div class="hero-nav">
+            <div class="hero-brand">Joel Díaz</div>
+            <div class="hero-menu">
+                <a href="#work">Proyectos</a>
+                <a href="#skills">Habilidades</a>
+                <a href="https://wa.me/507XXXXXXXX" class="cta-mini" target="_blank">Contacto</a>
             </div>
         </div>
 
-        <div class="hero-pillars">
-            <div class="pillar-item">
-                <span class="hero-num">#01</span>
-                <h3>Desarrollo Web</h3>
+        <div class="hero-content">
+            <div>
+                <h1 class="hero-giant-title">PORTFOLIO</h1>
+                <div class="text-outline-stack">WEB DEV</div>
+                <div class="text-outline-stack">TECH REP</div>
+                <div class="text-outline-stack">PORTFOLIO</div>
+                
+                <p class="hero-meta-text">
+                    Desarrollo front-end enfocado en optimización comercial y soluciones robustas de hardware. Código limpio y funcional para el mundo real.
+                </p>
             </div>
-            <div class="pillar-item">
-                <span class="hero-num">#02</span>
-                <h3>Interfaces PWA</h3>
-            </div>
-            <div class="pillar-item">
-                <span class="hero-num">#03</span>
-                <h3>Optimización de Código</h3>
-            </div>
-            <div class="pillar-item">
-                <span class="hero-num">#04</span>
-                <h3>Soporte Hardware</h3>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <!-- Bloque de color simulando la estética de la imagen -->
+                <div class="hero-profile-box">
+                    <div style="font-family: var(--font-serif); font-size: 2rem; color: var(--forest-green); font-weight:700;">
+                        TecnoTrade PTY
+                    </div>
+                </div>
             </div>
         </div>
+
+        <a href="#content" class="scroll-badge">Scroll<br>down</a>
     </section>
 
-    <section class="focus-section">
-        <div class="focus-left">
-            <h2>Digitalizando la experiencia comercial en El Cangrejo y Panamá Centro.</h2>
-        </div>
-        <div class="focus-right">
-            <p>Me enfoco en dotar a los negocios locales —restaurantes, bares y centros estéticos— de herramientas interactivas que de verdad transformen la atención al cliente, transmitiendo máxima confianza y un acabado estético impecable desde la primera carga.</p>
-        </div>
-    </section>
-
-    <section class="portfolio-section" id="proyectos">
-        <div class="section-header">
-            <h2>Sitios & Páginas Web</h2>
-        </div>
+    <!-- Main Content Container (Crema) -->
+    <main class="main-container" id="content">
         
-        <div class="grid-portfolio">
-            <a href="#" class="portfolio-card">
-                <div class="card-top">
-                    <span class="category-badge">Restaurantes</span>
-                    <h3>Menús Interactivos & Catálogos Dinámicos</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="view-link">Ver Prototipos (Armónica)</span>
-                    <span class="arrow">→</span>
-                </div>
-            </a>
-
-            <a href="#" class="portfolio-card">
-                <div class="card-top">
-                    <span class="category-badge">Spas & Estética</span>
-                    <h3>Plataformas de Visualización de Servicios</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="view-link">Explorar Estructura</span>
-                    <span class="arrow">→</span>
-                </div>
-            </a>
-
-            <a href="#" class="portfolio-card">
-                <div class="card-top">
-                    <span class="category-badge">Bares & Ocio</span>
-                    <h3>Landing Pages de Alta Conversión para Eventos</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="view-link">Ver Diseños</span>
-                    <span class="arrow">→</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="tech-section" id="hardware">
-        <div class="tech-left">
-            <h3>Taller Tecnológico & TecnoTrade PTY</h3>
-            <p>Más allá de las líneas de código, domino la arquitectura del hardware. Ofrezco soluciones completas que van desde el despliegue del software hasta la puesta a punto de tus dispositivos de trabajo.</p>
-        </div>
-        <div class="tech-specs">
-            <div class="spec-item">
-                <h4>Diagnóstico Integrado</h4>
-                <p>Montaje, configuración de sistemas operativos y resolución de fallos críticos en laptops y tablets.</p>
+        <!-- Columna Izquierda -->
+        <div class="left-col">
+            <div class="greeting">
+                <h2>Hola, <br>soy Joel !</h2>
+                <p class="bio-p">
+                    Desarrollador Front-End y técnico especialista en hardware radicado en Ciudad de Panamá. Me dedico a estructurar plataformas web interactivas (PWAs) y herramientas digitales a medida para comercios y servicios locales.
+                </p>
+                <a href="https://wa.me/507XXXXXXXX" class="btn-link-cta" target="_blank">
+                    <span>Escríbi al WhatsApp</span> ↗
+                </a>
             </div>
-            <div class="spec-item">
-                <h4>Soporte Móvil Premium</h4>
-                <p>Especialización en optimización de hardware móvil, asegurando que tus herramientas de venta estén operativas 24/7.</p>
+
+            <h3 class="section-title">Foco & Desarrollo</h3>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2026</div>
+                <div class="timeline-content">
+                    <h4>E-commerce Product Configurator</h4>
+                    <p>Diseño y despliegue de un configurador interactivo para accesorios móviles con integración directa a flujos de pedido.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h4>Local Sharing Browser Utility</h4>
+                    <p>Desarrollo front-end de una utilidad web para transferencia de archivos locales optimizada para navegadores web.</p>
+                </div>
+            </div>
+
+            <!-- Caja de Experiencia Comercial (Amarilla) -->
+            <div class="experience-box" id="work">
+                <h3>Categorías de Sitio</h3>
+                <p>Estructuras optimizadas listas para implementarse en nichos comerciales estratégicos de la zona de El Cangrejo:</p>
+                
+                <div class="timeline-item" style="margin-top: 20px;">
+                    <div class="timeline-date">Restaurantes & Bares</div>
+                    <div class="timeline-content"><p>Menús interactivos dinámicos y landings de conversión (Caso de estudio: Prototipo Armónica).</p></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Spas & Salones de Belleza</div>
+                    <div class="timeline-content"><p>Catálogos estéticos visuales y layouts preparados para integración de reservas.</p></div>
+                </div>
+
+                <div class="pill-container">
+                    <div class="pill">#FrontEnd</div>
+                    <div class="pill">#PWA</div>
+                    <div class="pill">#Responsive</div>
+                    <div class="pill">#UI-Design</div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <h2>¿Llevamos tu negocio al siguiente nivel?</h2>
-        <div class="footer-links">
-            <a href="https://wa.me/507XXXXXXXX" target="_blank">WhatsApp</a>
-            <a href="#" target="_blank">Instagram</a>
-            <a href="#" target="_blank">GitHub</a>
+        <!-- Columna Derecha -->
+        <div class="right-col" id="skills">
+            
+            <!-- Credencial de Soporte Técnico -->
+            <div class="profile-card-specs">
+                <div class="profile-img-placeholder">
+                    <div class="floating-badge badge-1">Front-End Dev</div>
+                    <div class="floating-badge badge-2">Panamá</div>
+                    <div style="font-family: var(--font-serif); font-size: 3rem; color: rgba(255,255,255,0.15); font-weight:700;">
+                        JD
+                    </div>
+                </div>
+                <div class="contact-info-block">
+                    <h3>Contacto</h3>
+                    <div class="contact-row">📍 Panamá Centro, Ciudad de Panamá</div>
+                    <div class="contact-row">💼 TecnoTrade PTY</div>
+                    <div class="contact-row">🌐 github.com/joeldiaz</div>
+                </div>
+            </div>
+
+            <!-- Skills & Tecnologías -->
+            <h3 class="skills-headline">Technical Skills</h3>
+            <div class="text-outline-stack" style="font-size: 3.5rem; margin-bottom: 30px;">RESUME RESUME</div>
+
+            <div class="skills-grid">
+                <div class="skills-col">
+                    <h4>Software Skills</h4>
+                    <div class="square-badge-container">
+                        <div class="square-badge">HTML5</div>
+                        <div class="square-badge">CSS3</div>
+                        <div class="square-badge">JS (ES6)</div>
+                        <div class="square-badge">Git</div>
+                        <div class="square-badge">GitHub</div>
+                    </div>
+                </div>
+
+                <div class="skills-col">
+                    <h4>Hardware & Design</h4>
+                    <ul class="skills-list-text">
+                        <li>• Arquitectura de Dispositivos</li>
+                        <li>• Diagnóstico de Placas</li>
+                        <li>• Integración de Sensores LiDAR</li>
+                        <li>• Modelado UI Comercial</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Subsección inferior: Actividades e Intereses -->
+            <div class="bottom-row-grid">
+                <div>
+                    <h3 class="section-title" style="margin: 0 0 20px 0;">Actividades</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026</div>
+                        <div class="timeline-content">
+                            <h4>Rebranding TecnoTrade PTY</h4>
+                            <p>Evolución de marca hacia una identidad visual minimalista enfocada en tecnología.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-title" style="margin: 0 0 20px 0;">Intereses</h3>
+                    <div class="icon-hub-grid">
+                        <div class="icon-item">
+                            <div class="icon-box">🏋️‍♂️</div>
+                            <span>Gym</span>
+                        </div>
+                        <div class="icon-item">
+                            <div class="icon-box">📱</div>
+                            <span>Hardware</span>
+                        </div>
+                        <div class="icon-item">
+                            <div class="icon-box">🎨</div>
+                            <span>UI Design</span>
+                        </div>
+                        <div class="icon-item">
+                            <div class="icon-box">🚀</div>
+                            <span>PWAs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <p class="copyright">&copy; 2026 Joel Díaz / TecnoTrade PTY. Todos los derechos reservados.</p>
+    </main>
+
+    <!-- Footer Simple Brutal -->
+    <footer style="background-color: var(--black); color: var(--white); text-align: center; padding: 40px; font-size: 0.85rem;">
+        <p>&copy; 2026 Joel Díaz / TecnoTrade PTY. Todos los derechos reservados.</p>
     </footer>
 
 </body>
 </html>
-
