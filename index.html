@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joel Díaz | Tech Expert & Soluciones Pesadas</title>
+    <!-- Fuentes Modernas de Alta Gama -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --forest-green: #243327; /* Verde oscuro principal */
-            --cream: #f4f0ea;       /* Fondo arena/crema limpio */
-            --ochre: #f2a93b;       /* Amarillo ocre brutalista */
-            --black: #0d0d0d;       /* Negro sólido tipográfico y bordes */
-            --white: #ffffff;
-            --coral: #f06449;       /* Color de acento para botones comerciales */
-            --font-serif: 'Fraunces', serif;
+            --bg-base: #06080c;        /* Fondo oscuro espacial profundo */
+            --bg-card: #10141e;        /* Tarjetas estilo interfaz de alta tecnología */
+            --bg-card-hover: #161c2a;  /* Hover dinámico */
+            --electric-gold: #ffb800;  /* Oro eléctrico vibrante para destacar */
+            --cyber-coral: #ff4d30;    /* Coral neón de alta conversión */
+            --text-pure: #ffffff;      /* Blanco limpio */
+            --text-muted: #8fa0b5;    /* Gris azulado de legibilidad tech */
+            --border-neon: 1px solid rgba(255, 255, 255, 0.08);
+            --brutal-shadow: 6px 6px 0px #000000;
+            --font-display: 'Space Grotesk', sans-serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
-            --brutal-border: 3px solid #0d0d0d;
         }
 
         * {
@@ -28,17 +31,30 @@
         }
 
         body {
-            background-color: var(--cream);
-            color: var(--black);
+            background-color: var(--bg-base);
+            color: var(--text-pure);
             font-family: var(--font-sans);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- REVELADO CON MOTION GRAPHICS --- */
+        /* --- GLOW EFECTO 3D DE ATMÓSFERA --- */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.06) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- REVELADO SMOOTH CON ACELERACIÓN DE HARDWARE --- */
         .reveal {
             opacity: 0;
-            transform: translateY(35px);
+            transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
@@ -48,58 +64,74 @@
             transform: translateY(0);
         }
 
-        /* --- ENCABEZADO CON BOTONES BRUTALISTAS DE ATENCIÓN DE UNA --- */
+        /* --- HEADER: COMPACTO, AFILADO Y PREMIUM --- */
         header {
-            background-color: var(--forest-green);
-            padding: 25px 6% 10px 6%;
+            background-color: rgba(6, 8, 12, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 20px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+            border-bottom: var(--border-neon);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .brand-logo {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
+            font-family: var(--font-display);
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--cream);
+            letter-spacing: -1px;
+            color: var(--text-pure);
+        }
+
+        .brand-logo span {
+            color: var(--electric-gold);
         }
 
         .contact-pill-box {
             display: flex;
             gap: 12px;
-            flex-wrap: wrap;
         }
 
         .contact-btn {
-            background-color: var(--cream);
-            color: var(--black);
+            background-color: var(--bg-card);
+            color: var(--text-pure);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 700;
             padding: 10px 18px;
-            border-radius: 8px;
-            border: var(--brutal-border);
-            box-shadow: 3px 3px 0px var(--black);
-            transition: transform 0.1s, box-shadow 0.1s;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
         .contact-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--black);
+            transform: translateY(-2px);
+            background-color: var(--white);
+            color: var(--bg-base);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.05);
+            border-color: var(--text-pure);
         }
 
-        .contact-btn.btn-wa { background-color: #25d366; color: var(--white); }
-        .contact-btn.btn-ig { background-color: var(--ochre); color: var(--black); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            background-color: var(--forest-green);
+        .contact-btn.btn-wa { 
+            background-color: #16a34a; 
+            color: var(--white); 
+            border: none;
+        }
+        .contact-btn.btn-wa:hover {
+            background-color: #15803d;
+            box-shadow: 0 10px 25px rgba(22, 163, 74, 0.3);
             color: var(--white);
-            padding: 60px 6% 140px 6%;
+        }
+
+        /* --- HERO SECTION 3D CYBER-BRUTALISM --- */
+        .hero {
+            padding: 80px 6% 120px 6%;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -111,25 +143,28 @@
             grid-template-columns: 1.25fr 0.75fr;
             gap: 60px;
             align-items: center;
+            position: relative;
             z-index: 2;
         }
 
         .hero-giant-title {
-            font-family: var(--font-serif);
-            font-size: clamp(3.8rem, 8vw, 6.5rem);
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 7vw, 6rem);
             line-height: 0.9;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            color: var(--cream);
-            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: -3px;
+            color: var(--text-pure);
+            margin-bottom: 20px;
         }
 
         .text-outline-stack {
-            font-family: var(--font-serif);
-            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
             line-height: 0.9;
+            font-weight: 700;
             text-transform: uppercase;
-            -webkit-text-stroke: 1px rgba(242, 169, 59, 0.3);
+            letter-spacing: -2px;
+            -webkit-text-stroke: 1px rgba(255, 184, 0, 0.25);
             color: transparent;
             margin-top: 5px;
             white-space: nowrap;
@@ -138,40 +173,38 @@
         }
 
         .hero-text-paragraph {
-            max-width: 580px;
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
-            line-height: 1.5;
-            color: var(--cream);
+            max-width: 560px;
+            font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+            line-height: 1.6;
+            color: var(--text-muted);
             margin-top: 35px;
         }
 
-        /* VALLA PUBLICITARIA TECNOTRADE (TARJETA AMARILLA CLIQUEABLE) */
+        /* VALLA PUBLICITARIA 3D INTERACTIVA (TARJETA AMARILLA CYBER) */
         .billboard-card {
-            background-color: var(--ochre);
-            color: var(--black);
-            border: var(--brutal-border);
+            background-color: var(--electric-gold);
+            color: var(--bg-base);
             border-radius: 24px;
-            padding: 40px 30px;
-            box-shadow: 8px 8px 0px var(--black);
-            text-decoration: none;
+            padding: 40px 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 380px;
+            height: 400px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 30px 60px rgba(255, 184, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.4);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
             background-size: cover;
             background-position: center;
         }
 
-        /* Capa de contraste lista para cuando subas el screenshot de IG */
+        /* Efecto Overlay Degradado Espectacular */
         .billboard-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(242, 169, 59, 0.95) 0%, rgba(242, 169, 59, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.95) 0%, rgba(230, 160, 0, 0.8) 100%);
             z-index: 1;
         }
 
@@ -185,126 +218,127 @@
         }
 
         .billboard-tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 700;
-            background-color: var(--black);
-            color: var(--white);
+            font-weight: 800;
+            background-color: var(--bg-base);
+            color: var(--text-pure);
             padding: 6px 14px;
-            border-radius: 6px;
+            border-radius: 8px;
             align-self: flex-start;
         }
 
         .billboard-main-text {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 3vw, 2.6rem);
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
             line-height: 1.1;
             font-weight: 700;
+            letter-spacing: -1px;
             margin: 20px 0;
         }
 
         .billboard-action-badge {
-            background-color: var(--coral);
-            color: var(--white);
-            border: 2px solid var(--black);
-            padding: 10px 20px;
+            background-color: var(--bg-base);
+            color: var(--text-pure);
+            padding: 14px 28px;
             font-weight: 700;
-            border-radius: 8px;
+            border-radius: 12px;
             align-self: flex-start;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
-            animation: pulse-brutal 1.5s infinite;
-        }
-
-        @keyframes pulse-brutal {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(240, 100, 73, 0.4); }
-            100% { transform: scale(1); }
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .billboard-card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--black);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(255, 184, 0, 0.25);
         }
 
-        /* Badge Rotativo de Scroll */
+        .billboard-card:hover .billboard-action-badge {
+            background-color: var(--cyber-coral);
+            color: var(--text-pure);
+        }
+
+        /* Círculo Rotativo de Scroll Moderno */
         .scroll-badge {
-            width: 110px;
-            height: 110px;
-            background-color: var(--ochre);
-            color: var(--black);
-            border: var(--brutal-border);
+            width: 90px;
+            height: 90px;
+            background-color: rgba(16, 20, 30, 0.6);
+            color: var(--text-pure);
+            border: var(--border-neon);
+            backdrop-filter: blur(8px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             text-align: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             line-height: 1.2;
             position: absolute;
-            bottom: -55px;
+            bottom: -45px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 5;
-            box-shadow: 4px 4px 0px var(--black);
             text-decoration: none;
             will-change: transform;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- CONTENEDOR DE CONTENIDO (CREMA) --- */
+        /* --- CONTENEDOR PRINCIPAL --- */
         .main-container {
-            padding: 120px 6% 80px 6%;
+            padding: 100px 6% 80px 6%;
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 80px;
+            gap: 60px;
+            position: relative;
         }
 
-        /* --- BARRA DE ACCESO RÁPIDO / CATEGORÍAS FIJAS --- */
+        /* --- BARRA DE FILTROS ESTILO CYBER STICKY --- */
         .category-bar-wrapper {
             position: sticky;
-            top: 0;
-            background-color: var(--cream);
+            top: 80px;
+            background-color: rgba(6, 8, 12, 0.9);
+            backdrop-filter: blur(12px);
             padding: 15px 0;
-            z-index: 10;
-            border-bottom: 2px solid rgba(0,0,0,0.05);
-            margin-bottom: 35px;
+            z-index: 90;
+            border-bottom: var(--border-neon);
+            margin-bottom: 40px;
         }
 
         .category-bar {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             overflow-x: auto;
             white-space: nowrap;
-            padding-bottom: 5px;
         }
 
-        /* Ocultar barra de scroll estética en filtros */
         .category-bar::-webkit-scrollbar { display: none; }
 
         .filter-btn {
-            background-color: var(--white);
-            color: var(--black);
-            border: 2px solid var(--black);
-            padding: 10px 22px;
+            background-color: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 12px 24px;
             font-size: 0.9rem;
-            font-weight: 700;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
-            text-transform: capitalize;
-            transition: all 0.15s ease;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background-color: var(--forest-green);
-            color: var(--white);
-            transform: translate(-2px, -2px);
-            box-shadow: 3px 3px 0px var(--black);
+            background-color: var(--text-pure);
+            color: var(--bg-base);
+            font-weight: 700;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.1);
         }
 
-        /* --- GRID DE PROYECTOS 2X2 (ESTILO YOUTUBE / MARKETPLACE) --- */
+        /* --- GRID DE PRODUCTOS 2X2 CON PROFUNDIDAD 3D --- */
         .grid-portfolio {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -312,58 +346,69 @@
         }
 
         .marketplace-card {
-            background-color: var(--white);
-            border: var(--brutal-border);
-            border-radius: 16px;
+            background-color: var(--bg-card);
+            border: var(--border-neon);
+            border-radius: 20px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 5px 5px 0px var(--black);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
         }
 
         .marketplace-card:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 8px 8px 0px var(--black);
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 184, 0, 0.03);
         }
 
-        /* Mitad Superior: Miniatura / Previsualización Directa */
+        /* Contenedor Superior: Miniatura Fluida */
         .card-preview-thumb {
             width: 100%;
-            height: 230px;
-            background-color: #d1cbd4;
+            height: 240px;
+            background-color: #0d111a;
             background-size: cover;
             background-position: center;
-            border-bottom: var(--brutal-border);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-bottom: var(--border-neon);
+        }
+
+        /* Efecto de degradado sutil sobre las capturas */
+        .card-preview-thumb::after {
+            content: '';
+            position: absolute;
+            top: 0; left:0; width:100%; height:100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(16, 20, 30, 0.4) 100%);
         }
 
         .card-thumb-placeholder {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: rgba(0,0,0,0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.15);
+            letter-spacing: 2px;
         }
 
         .card-badge-floating {
             position: absolute;
-            top: 15px; left: 15px;
-            background-color: var(--black);
-            color: var(--white);
-            padding: 4px 10px;
+            top: 20px; left: 20px;
+            background-color: rgba(6, 8, 12, 0.75);
+            backdrop-filter: blur(8px);
+            color: var(--electric-gold);
+            border: 1px solid rgba(255,184,0,0.3);
+            padding: 6px 14px;
             font-size: 0.75rem;
             font-weight: 700;
-            border-radius: 4px;
+            border-radius: 8px;
             text-transform: uppercase;
+            z-index: 2;
         }
 
-        /* Mitad Inferior: Contenido e Información */
+        /* Contenedor Inferior: Información Limpia */
         .card-body-info {
-            padding: 25px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -371,92 +416,94 @@
         }
 
         .card-body-info h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.45rem;
             line-height: 1.2;
-            margin-bottom: 10px;
-            color: var(--black);
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            color: var(--text-pure);
         }
 
         .card-body-info p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #444;
-            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 25px;
         }
 
         .btn-visit-solution {
-            background-color: var(--coral);
-            color: var(--white);
+            background-color: rgba(255,255,255,0.04);
+            color: var(--text-pure);
             text-decoration: none;
             text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            border: 2px solid var(--black);
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: 2px 2px 0px var(--black);
-            transition: all 0.1s;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             margin-top: auto;
         }
 
         .btn-visit-solution:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 4px 4px 0px var(--black);
+            background-color: var(--cyber-coral);
+            border-color: var(--cyber-coral);
+            box-shadow: 0 10px 20px rgba(240, 100, 73, 0.25);
+            transform: translateY(-2px);
         }
 
-        /* Estado de Carga API */
         .loading-skeleton {
             grid-column: span 2;
             text-align: center;
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            padding: 60px 0;
-            color: var(--forest-green);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            padding: 80px 0;
+            color: var(--electric-gold);
+            letter-spacing: 1px;
         }
 
-        /* --- COLUMNA DERECHA: EXPERTO EN TECNOLOGÍA (PUZZLE SOLVER) --- */
+        /* --- COLUMNA DERECHA: SECCIÓN PUZZLE SOLVER PREMIUM --- */
         .skills-headline {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: 2.2rem;
-            color: var(--forest-green);
-            margin-bottom: 15px;
+            letter-spacing: -1px;
+            color: var(--text-pure);
+            margin-bottom: 20px;
         }
 
         .puzzle-solver-profile-box {
-            background-color: var(--white);
-            border: var(--brutal-border);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 5px 5px 0px var(--black);
+            background-color: var(--bg-card);
+            border: var(--border-neon);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
             margin-bottom: 40px;
         }
 
         .puzzle-solver-profile-box h4 {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--forest-green);
-            border-bottom: 2px solid rgba(0,0,0,0.05);
-            padding-bottom: 8px;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+            color: var(--electric-gold);
+            letter-spacing: -0.5px;
         }
 
         .puzzle-solver-profile-box p {
             font-size: 0.95rem;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-muted);
         }
 
         .heavy-pillar {
-            margin-top: 25px;
+            margin-top: 35px;
         }
 
         .heavy-pillar h5 {
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--coral);
-            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            color: var(--cyber-coral);
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
@@ -464,82 +511,87 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .square-badge {
-            background-color: var(--cream);
-            border: 1px solid var(--black);
-            padding: 8px 12px;
+            background-color: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-pure);
+            padding: 8px 14px;
             font-size: 0.8rem;
-            font-weight: 700;
-            border-radius: 6px;
+            font-weight: 600;
+            border-radius: 8px;
         }
 
         .skills-list-text {
             list-style: none;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
         }
 
         .skills-list-text li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             position: relative;
-            padding-left: 15px;
+            padding-left: 20px;
         }
 
         .skills-list-text li::before {
             content: '🧩';
             position: absolute;
             left: 0;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .interests-icon-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .interest-icon-item {
-            background-color: var(--white);
-            border: 1px solid var(--black);
-            border-radius: 10px;
-            padding: 12px 5px;
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 15px 5px;
             text-align: center;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 600;
+            color: var(--text-muted);
         }
 
-        .interest-icon-item div { font-size: 1.4rem; margin-bottom: 4px; }
+        .interest-icon-item div { font-size: 1.5rem; margin-bottom: 6px; }
 
         @media (max-width: 968px) {
             .hero-content, .main-container, .grid-portfolio { grid-template-columns: 1fr; }
             .loading-skeleton { grid-column: span 1; }
             header { flex-direction: column; gap: 20px; text-align: center; }
-            .contact-pill-box { justify-content: center; }
-            .billboard-card { height: 320px; }
+            .category-bar-wrapper { top: 140px; }
+            .billboard-card { height: 340px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Encabezado Cyber Premium -->
     <header>
-        <div class="brand-logo">disq creativo</div>
+        <div class="brand-logo">disq<span>creativo</span></div>
         <div class="contact-pill-box">
-            <a href="https://www.instagram.com/tecnotradepty/" class="contact-btn btn-ig" target="_blank">
+            <a href="https://www.instagram.com/tecnotradepty/" class="contact-btn" target="_blank">
                 Instagram
             </a>
             <a href="https://wa.me/50768529324" class="contact-btn btn-wa" target="_blank">
                 WhatsApp Directo
             </a>
             <a href="mailto:tecnotradeptyss@gmail.com" class="contact-btn" target="_blank">
-                tecnotradeptyss@gmail.com
+                Email
             </a>
         </div>
     </header>
 
+    <!-- Hero Section con Efecto de Profundidad 3D -->
     <section class="hero">
         <div class="hero-content">
             <div>
@@ -553,9 +605,10 @@
                 </p>
             </div>
 
+            <!-- Valla Publicitaria Interactiva de TecnoTrade -->
             <a href="https://www.instagram.com/tecnotradepty/" class="billboard-card" id="instagramBillboard" target="_blank">
                 <div class="billboard-content">
-                    <span class="billboard-tag">TecnoTrade PTY</span>
+                    <span class="billboard-tag">Espacio Publicitario</span>
                     <h2 class="billboard-main-text">¿Compra, vende o repara tu teléfono?</h2>
                     <div class="billboard-action-badge">Toca Aquí</div>
                 </div>
@@ -565,10 +618,13 @@
         <a href="#content" class="scroll-badge" id="scrollBadge">Scroll<br>down</a>
     </section>
 
+    <!-- Contenedor Base Estilo Aplicación de Alta Tecnología -->
     <main class="main-container" id="content">
         
+        <!-- Columna Izquierda: Filtro Rápido y Grid 2x2 Marketplace -->
         <div class="left-col">
             
+            <!-- Barra de Categorías Fijas Interactiva -->
             <div class="category-bar-wrapper">
                 <div class="category-bar" id="categoryBar">
                     <button class="filter-btn active" data-category="todos">Todos los puzzles</button>
@@ -578,21 +634,23 @@
                 </div>
             </div>
 
+            <!-- Grid 2x2 de Productos Alimentado por Sheets API -->
             <div class="grid-portfolio" id="portfolioGrid">
                 <div class="loading-skeleton">Descifrando la base de datos...</div>
             </div>
 
         </div>
 
+        <!-- Columna Derecha: El Experto en Tecnología (Puzzle Solver) -->
         <div class="right-col">
             
             <h3 class="skills-headline reveal">Expertise General</h3>
-            <div class="text-outline-stack reveal" style="font-size: 3.5rem; margin-bottom: 25px; -webkit-text-stroke: 1px rgba(36, 51, 39, 0.3);">CAPABILITIES</div>
+            <div class="text-outline-stack reveal" style="font-size: 3.2rem; margin-bottom: 25px; -webkit-text-stroke: 1px rgba(255,255,255,0.08);">CAPABILITIES</div>
 
             <div class="puzzle-solver-profile-box reveal">
                 <h4>El Enfoque "Puzzle Solver"</h4>
                 <p>
-                    Me pones una computadora, una idea de startup o una placa lógica averiada al frente y no veo un obstáculo; veo un rompecabezas listo para ser optimizado. Utilizo **Inteligencia Artificial de última generación** para acelerar drásticamente los tiempos de programación y desarrollo de código, garantizando acabados limpios y de nivel corporativo en tiempo récord.
+                    Me pones una computadora, una idea de negocio o una placa lógica averiada al frente y mi mente solo ve un rompecabezas esperando ser optimizado. Utilizo **Inteligencia Artificial avanzada** para acelerar drásticamente los tiempos de programación y modelado, garantizando acabados robustos y de nivel corporativo en tiempo récord.
                 </p>
 
                 <div class="heavy-pillar">
@@ -603,21 +661,22 @@
                         <div class="square-badge">JavaScript (ES6+)</div>
                         <div class="square-badge">Git & GitHub Pages</div>
                         <div class="square-badge">PWA Architecture</div>
-                        <div class="square-badge">AI Code Integration</div>
+                        <div class="square-badge">AI Code Automation</div>
                     </div>
                 </div>
 
                 <div class="heavy-pillar">
                     <h5>Hardware & Producción Digital</h5>
                     <ul class="skills-list-text">
-                        <li>Construcción de Startups y Portafolios Comerciales Finos.</li>
-                        <li>Producción de Contenido Híbrba (Edición Manual Avanzada + Generación por IA).</li>
-                        <li>Edición de Imagen y Video Corporativo de Alta Conversión.</li>
-                        <li>Diagnóstico Completo de Placas Móviles y Arquitectura Física de Computadores.</li>
+                        <li>Construcción acelerada de Startups y Portafolios Comerciales Finos.</li>
+                        <li>Producción Audiovisual Híbrida (Edición Manual Pro + Generación por IA).</li>
+                        <li>Edición de Imagen y Video optimizado para conversión en Redes Sociales.</li>
+                        <li>Diagnóstico micro-electrónico de Hardware Móvil y Arquitectura de Sistemas.</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- Sección de Intereses -->
             <div class="puzzle-solver-profile-box reveal">
                 <h4>Intereses Activos</h4>
                 <div class="interests-icon-grid">
@@ -631,14 +690,14 @@
         </div>
     </main>
 
-    <footer style="background-color: var(--black); color: var(--white); text-align: center; padding: 40px; font-size: 0.85rem; border-top: var(--brutal-border);">
+    <footer style="background-color: var(--bg-base); color: var(--text-muted); text-align: center; padding: 40px; font-size: 0.85rem; border-top: var(--border-neon);">
         <p>&copy; 2026 Joel Díaz / disq creativo. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- INTERACTIVIDAD REVISADA Y FILTRADO INMUNE A ERRORES -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // CONFIGURACIÓN DE TU API PROPIA DE GOOGLE SHEETS
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             
             let proyectosData = [];
@@ -652,37 +711,45 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    console.error("Error trayendo el puzzle de proyectos:", error);
-                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--coral);">Fallo de conexión. Verifica que el Apps Script esté en modo "Cualquiera".</div>';
+                    console.error("Error trayendo los proyectos de Sheets:", error);
+                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--cyber-coral);">Fallo de conexión. Verifica que tu Apps Script esté configurado para "Cualquiera".</div>';
                 }
             }
 
-            // --- 2. RENDERIZADO DEL GRID 2X2 ESTILO MARKETPLACE ---
+            // --- 2. RENDERIZADO LOGÍSTICO COMPLETO (INMUNE A PLURALES/SINGULARES) ---
             function renderGrid(categoriaFiltro) {
-                grid.innerHTML = ''; // Limpiar esqueleto de carga
+                grid.innerHTML = ''; 
                 
-                // Filtrado lógico
                 const proyectosFiltrados = proyectosData.filter(p => {
                     if (categoriaFiltro === 'todos') return true;
-                    return p.categoria.toLowerCase() === categoriaFiltro.toLowerCase();
+                    
+                    // Normalización extrema para evitar fallos de concordancia
+                    let catSheet = p.categoria.toLowerCase().trim();
+                    let catFiltro = categoriaFiltro.toLowerCase().trim();
+                    
+                    // Remover las "s" finales para comparar las raíces de las palabras (ej: "webs" -> "web", "utilidades" -> "utilidade")
+                    let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
+                    let stemFiltro = catFiltro.endsWith('s') ? catFiltro.slice(0, -1) : catFiltro;
+                    
+                    return catSheet.includes(stemFiltro) || 
+                           catFiltro.includes(stemSheet) || 
+                           stemSheet.includes(stemFiltro);
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos subidos en esta categoría aún.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos en esta categoría por el momento.</div>';
                     return;
                 }
 
-                // Generación limpia de tarjetas
+                // Inyección de Tarjetas Estilo Miniatura de YouTube / Marketplace
                 proyectosFiltrados.forEach(p => {
                     const card = document.createElement('div');
-                    card.className = 'marketplace-card reveal is-visible'; // Asigna clase de revelado instantáneo
+                    card.className = 'marketplace-card reveal is-visible';
 
-                    // Manejo dinámico de miniaturas de previsualización directa
                     let thumbContent = `<span class="card-thumb-placeholder">[ Sin Captura ]</span>`;
                     if (p.imagen && p.imagen.trim() !== "") {
-                        thumbContent = ``;
                         card.innerHTML = `
-                            <div class="card-preview-thumb" style="background-image: url('${p.imagen}')">
+                            <div class="card-preview-thumb" style="background-image: url('${p.imagen.trim()}')">
                                 <span class="card-badge-floating">${p.categoria}</span>
                             </div>
                         `;
@@ -695,7 +762,6 @@
                         `;
                     }
 
-                    // Bloque de información inferior de la tarjeta
                     const bodyInfo = document.createElement('div');
                     bodyInfo.className = 'card-body-info';
                     bodyInfo.innerHTML = `
@@ -711,7 +777,7 @@
                 });
             }
 
-            // --- 3. LOGICA DE INTERRUPTORES DE LA BARRA DE CATEGORÍAS ---
+            // --- 3. MANEJO DE INTERRUPTORES DE FILTROS ---
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterButtons.forEach(b => b.classList.remove('active'));
@@ -721,7 +787,7 @@
                 });
             });
 
-            // --- 4. MOTION GRAPHICS: PARALLAX LATERAL Y ROTACIÓN DE BADGE ---
+            // --- 4. MOTION GRAPHICS: PARALLAX SUAVE Y ROTACIÓN 3D DE BADGE ---
             const layersLeft = document.querySelectorAll('.layer-left');
             const layersRight = document.querySelectorAll('.layer-right');
             const scrollBadge = document.getElementById('scrollBadge');
@@ -730,17 +796,17 @@
                 let currentScroll = window.scrollY;
                 
                 layersLeft.forEach(layer => {
-                    layer.style.transform = `translateX(${currentScroll * 0.35}px)`;
+                    layer.style.transform = `translateX(${currentScroll * 0.3}px)`;
                 });
                 layersRight.forEach(layer => {
-                    layer.style.transform = `translateX(-${currentScroll * 0.35}px)`;
+                    layer.style.transform = `translateX(-${currentScroll * 0.3}px)`;
                 });
 
-                // Rotación del círculo de Scroll Down
-                scrollBadge.style.transform = `translateX(-50%) rotate(${currentScroll * 0.18}deg)`;
+                // Rotación fina en el badge circular de scroll down
+                scrollBadge.style.transform = `translateX(-50%) rotate(${currentScroll * 0.15}deg)`;
             });
 
-            // --- 5. MOTION GRAPHICS: INTERSECTION OBSERVER PARA EFECTO REVELADO ---
+            // --- 5. INTERSECTION OBSERVER DE CARGA FLUIDA ---
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
@@ -749,11 +815,11 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12 });
+            }, { threshold: 0.1 });
 
             revealElements.forEach(el => observer.observe(el));
 
-            // Disparar carga de la API inmediatamente
+            // Carga inicial automática
             fetchProyectos();
         });
     </script>
