@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel Díaz | Portfolio & Tech Hub</title>
-    <!-- Fuentes Estilo Retro/Brutalista -->
+    <title>Joel Díaz | Tech Expert & Soluciones Pesadas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --forest-green: #243327;
-            --cream: #f4f0ea;
-            --ochre: #f2a93b;
-            --black: #0d0d0d;
+            --forest-green: #243327; /* Verde oscuro principal */
+            --cream: #f4f0ea;       /* Fondo arena/crema limpio */
+            --ochre: #f2a93b;       /* Amarillo ocre brutalista */
+            --black: #0d0d0d;       /* Negro sólido tipográfico y bordes */
             --white: #ffffff;
+            --coral: #f06449;       /* Color de acento para botones comerciales */
             --font-serif: 'Fraunces', serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --brutal-border: 3px solid #0d0d0d;
         }
 
         * {
@@ -34,10 +35,10 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- MOTION GRAPHICS: CLASES DE REVELADO --- */
+        /* --- REVELADO CON MOTION GRAPHICS --- */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(35px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
@@ -47,116 +48,200 @@
             transform: translateY(0);
         }
 
+        /* --- ENCABEZADO CON BOTONES BRUTALISTAS DE ATENCIÓN DE UNA --- */
+        header {
+            background-color: var(--forest-green);
+            padding: 25px 6% 10px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--cream);
+        }
+
+        .contact-pill-box {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background-color: var(--cream);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: var(--brutal-border);
+            box-shadow: 3px 3px 0px var(--black);
+            transition: transform 0.1s, box-shadow 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--black);
+        }
+
+        .contact-btn.btn-wa { background-color: #25d366; color: var(--white); }
+        .contact-btn.btn-ig { background-color: var(--ochre); color: var(--black); }
+
         /* --- HERO SECTION --- */
         .hero {
             background-color: var(--forest-green);
             color: var(--white);
-            padding: 40px 6% 120px 6%;
+            padding: 60px 6% 140px 6%;
             position: relative;
-            min-height: 95vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .hero-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-brand {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .hero-menu a {
-            color: var(--white);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .hero-menu .cta-mini {
-            background-color: var(--ochre);
-            color: var(--black);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
+            justify-content: center;
         }
 
         .hero-content {
-            margin-top: 60px;
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 60px;
             align-items: center;
-            position: relative;
+            z-index: 2;
         }
 
         .hero-giant-title {
             font-family: var(--font-serif);
-            font-size: clamp(4.5rem, 10vw, 7.5rem);
-            line-height: 0.85;
+            font-size: clamp(3.8rem, 8vw, 6.5rem);
+            line-height: 0.9;
             text-transform: uppercase;
             letter-spacing: -2px;
             color: var(--cream);
-            position: relative;
-            z-index: 2;
+            margin-bottom: 25px;
         }
 
-        /* Preparados para el movimiento de Motion Graphics lateral */
         .text-outline-stack {
             font-family: var(--font-serif);
-            font-size: clamp(4rem, 8vw, 6.5rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
             line-height: 0.9;
             text-transform: uppercase;
-            -webkit-text-stroke: 1px rgba(242, 169, 59, 0.4);
+            -webkit-text-stroke: 1px rgba(242, 169, 59, 0.3);
             color: transparent;
-            margin-top: 10px;
+            margin-top: 5px;
             white-space: nowrap;
             transition: transform 0.1s ease-out;
             will-change: transform;
         }
 
-        .hero-profile-box {
-            position: relative;
-            background-color: var(--ochre);
-            border-radius: 30px;
-            width: 85%;
-            height: 420px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
-        }
-
-        .hero-meta-text {
-            max-width: 320px;
-            font-size: 0.95rem;
+        .hero-text-paragraph {
+            max-width: 580px;
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.8);
-            border-left: 2px solid var(--ochre);
-            padding-left: 15px;
-            margin-top: 40px;
+            color: var(--cream);
+            margin-top: 35px;
         }
 
+        /* VALLA PUBLICITARIA TECNOTRADE (TARJETA AMARILLA CLIQUEABLE) */
+        .billboard-card {
+            background-color: var(--ochre);
+            color: var(--black);
+            border: var(--brutal-border);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 8px 8px 0px var(--black);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 380px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Capa de contraste lista para cuando subas el screenshot de IG */
+        .billboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(242, 169, 59, 0.95) 0%, rgba(242, 169, 59, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .billboard-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .billboard-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 6px;
+            align-self: flex-start;
+        }
+
+        .billboard-main-text {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            line-height: 1.1;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .billboard-action-badge {
+            background-color: var(--coral);
+            color: var(--white);
+            border: 2px solid var(--black);
+            padding: 10px 20px;
+            font-weight: 700;
+            border-radius: 8px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            animation: pulse-brutal 1.5s infinite;
+        }
+
+        @keyframes pulse-brutal {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(240, 100, 73, 0.4); }
+            100% { transform: scale(1); }
+        }
+
+        .billboard-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--black);
+        }
+
+        /* Badge Rotativo de Scroll */
         .scroll-badge {
             width: 110px;
             height: 110px;
             background-color: var(--ochre);
             color: var(--black);
+            border: var(--brutal-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             text-align: center;
             justify-content: center;
-            font-family: var(--font-sans);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
             line-height: 1.2;
             position: absolute;
@@ -164,660 +249,512 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 5;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 4px 4px 0px var(--black);
             text-decoration: none;
             will-change: transform;
         }
 
-        /* --- CUERPO PRINCIPAL --- */
+        /* --- CONTENEDOR DE CONTENIDO (CREMA) --- */
         .main-container {
             padding: 120px 6% 80px 6%;
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 80px;
         }
 
-        /* --- COLUMNA IZQUIERDA --- */
-        .left-col .greeting h2 {
-            font-family: var(--font-serif);
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .left-col .bio-p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #4a4a4a;
-            margin-bottom: 35px;
-            max-width: 500px;
-        }
-
-        .btn-link-cta {
-            background-color: #f06449;
-            color: var(--white);
-            padding: 14px 32px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(240, 100, 73, 0.2);
-            border: none;
-            cursor: pointer;
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: var(--forest-green);
-            margin: 60px 0 30px 0;
+        /* --- BARRA DE ACCESO RÁPIDO / CATEGORÍAS FIJAS --- */
+        .category-bar-wrapper {
+            position: sticky;
+            top: 0;
+            background-color: var(--cream);
+            padding: 15px 0;
+            z-index: 10;
             border-bottom: 2px solid rgba(0,0,0,0.05);
-            padding-bottom: 10px;
+            margin-bottom: 35px;
         }
 
-        .grid-portfolio {
+        .category-bar {
             display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-top: 20px;
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
         }
 
-        .portfolio-card {
-            background: var(--white);
-            border: 2px solid rgba(0,0,0,0.05);
-            border-radius: 24px;
-            padding: 35px;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
+        /* Ocultar barra de scroll estética en filtros */
+        .category-bar::-webkit-scrollbar { display: none; }
 
-        .portfolio-card:hover {
-            border-color: var(--ochre);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-        }
-
-        .card-top .category-badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--white);
-            background-color: var(--forest-green);
-            padding: 6px 14px;
-            border-radius: 100px;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .card-top h3 {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
+        .filter-btn {
+            background-color: var(--white);
             color: var(--black);
+            border: 2px solid var(--black);
+            padding: 10px 22px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: capitalize;
+            transition: all 0.15s ease;
         }
 
-        .card-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .card-bottom .view-link {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #f06449;
-        }
-
-        .card-bottom .arrow {
-            font-size: 1.3rem;
-            transition: transform 0.3s;
-        }
-
-        .portfolio-card:hover .arrow {
-            transform: translateX(6px);
-        }
-
-        /* --- COLUMNA DERECHA --- */
-        .profile-card-specs {
+        .filter-btn:hover, .filter-btn.active {
             background-color: var(--forest-green);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            margin-bottom: 50px;
+            color: var(--white);
+            transform: translate(-2px, -2px);
+            box-shadow: 3px 3px 0px var(--black);
         }
 
-        .profile-img-placeholder {
-            height: 240px;
-            background-color: #354a39;
+        /* --- GRID DE PROYECTOS 2X2 (ESTILO YOUTUBE / MARKETPLACE) --- */
+        .grid-portfolio {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .marketplace-card {
+            background-color: var(--white);
+            border: var(--brutal-border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 5px 0px var(--black);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .marketplace-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px var(--black);
+        }
+
+        /* Mitad Superior: Miniatura / Previsualización Directa */
+        .card-preview-thumb {
+            width: 100%;
+            height: 230px;
+            background-color: #d1cbd4;
+            background-size: cover;
+            background-position: center;
+            border-bottom: var(--brutal-border);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .floating-badge {
-            position: absolute;
-            background-color: var(--ochre);
-            color: var(--black);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
+        .card-thumb-placeholder {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .badge-1 { top: 20px; left: 20px; }
-        .badge-2 { bottom: 20px; right: 20px; }
-
-        .contact-info-block {
+        .card-badge-floating {
+            position: absolute;
+            top: 15px; left: 15px;
             background-color: var(--black);
             color: var(--white);
-            padding: 30px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
         }
 
-        .contact-info-block h3 {
+        /* Mitad Inferior: Contenido e Información */
+        .card-body-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .card-body-info h3 {
             font-family: var(--font-serif);
-            font-size: 1.6rem;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            color: var(--black);
         }
 
-        .contact-row {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 8px;
+        .card-body-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #444;
+            margin-bottom: 20px;
         }
 
+        .btn-visit-solution {
+            background-color: var(--coral);
+            color: var(--white);
+            text-decoration: none;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid var(--black);
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 0px var(--black);
+            transition: all 0.1s;
+            margin-top: auto;
+        }
+
+        .btn-visit-solution:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px var(--black);
+        }
+
+        /* Estado de Carga API */
+        .loading-skeleton {
+            grid-column: span 2;
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            padding: 60px 0;
+            color: var(--forest-green);
+        }
+
+        /* --- COLUMNA DERECHA: EXPERTO EN TECNOLOGÍA (PUZZLE SOLVER) --- */
         .skills-headline {
             font-family: var(--font-serif);
             font-size: 2.2rem;
             color: var(--forest-green);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .puzzle-solver-profile-box {
+            background-color: var(--white);
+            border: var(--brutal-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 5px 5px 0px var(--black);
             margin-bottom: 40px;
         }
 
-        .skills-col h4 {
+        .puzzle-solver-profile-box h4 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--forest-green);
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            padding-bottom: 8px;
+        }
+
+        .puzzle-solver-profile-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .heavy-pillar {
+            margin-top: 25px;
+        }
+
+        .heavy-pillar h5 {
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
-            color: #555;
+            color: var(--coral);
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .square-badge-container {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-top: 10px;
         }
 
         .square-badge {
-            background-color: var(--white);
-            border: 1px solid rgba(0,0,0,0.1);
-            padding: 10px 14px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 8px;
+            background-color: var(--cream);
+            border: 1px solid var(--black);
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 6px;
         }
 
         .skills-list-text {
             list-style: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
         }
 
-        .bottom-row-grid {
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            border-top: 2px solid rgba(0,0,0,0.05);
-            padding-top: 50px;
-            margin-top: 40px;
+        .skills-list-text li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
         }
 
-        .icon-hub-grid {
+        .skills-list-text li::before {
+            content: '🧩';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        .interests-icon-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
-        .icon-item {
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .icon-box {
+        .interest-icon-item {
             background-color: var(--white);
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* --- MODAL EXPANDIBLE --- */
-        .project-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(13, 13, 13, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-modal.is-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background-color: var(--cream);
-            color: var(--black);
-            width: 90%;
-            max-width: 680px;
-            padding: 40px;
-            border-radius: 24px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .project-modal.is-active .modal-content {
-            transform: scale(1) translateY(0);
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-family: var(--font-sans);
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .modal-category {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #f06449;
+            border: 1px solid var(--black);
+            border-radius: 10px;
+            padding: 12px 5px;
+            text-align: center;
+            font-size: 0.75rem;
             font-weight: 700;
-            display: block;
-            margin-bottom: 10px;
         }
 
-        .modal-title {
-            font-family: var(--font-serif);
-            font-size: 2.4rem;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .modal-tech-stack {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 25px;
-        }
-
-        .modal-image-area {
-            background-color: var(--forest-green);
-            height: 280px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            font-weight: 500;
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .modal-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 30px;
-        }
+        .interest-icon-item div { font-size: 1.4rem; margin-bottom: 4px; }
 
         @media (max-width: 968px) {
-            .hero-content, .main-container, .bottom-row-grid { grid-template-columns: 1fr; }
-            .bottom-row-grid { grid-column: span 1; }
-            .hero-giant-title { font-size: 3.5rem; }
-            .left-col .greeting h2 { font-size: 3rem; }
+            .hero-content, .main-container, .grid-portfolio { grid-template-columns: 1fr; }
+            .loading-skeleton { grid-column: span 1; }
+            header { flex-direction: column; gap: 20px; text-align: center; }
+            .contact-pill-box { justify-content: center; }
+            .billboard-card { height: 320px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-nav">
-            <div class="hero-brand">Joel Díaz</div>
-            <div class="hero-menu">
-                <a href="#proyectos">Proyectos</a>
-                <a href="#skills">Habilidades</a>
-                <a href="https://wa.me/507XXXXXXXX" class="cta-mini" target="_blank">Contacto</a>
-            </div>
+    <header>
+        <div class="brand-logo">disq creativo</div>
+        <div class="contact-pill-box">
+            <a href="https://www.instagram.com/tecnotradepty/" class="contact-btn btn-ig" target="_blank">
+                Instagram
+            </a>
+            <a href="https://wa.me/50768529324" class="contact-btn btn-wa" target="_blank">
+                WhatsApp Directo
+            </a>
+            <a href="mailto:tecnotradeptyss@gmail.com" class="contact-btn" target="_blank">
+                tecnotradeptyss@gmail.com
+            </a>
         </div>
+    </header>
 
+    <section class="hero">
         <div class="hero-content">
             <div>
-                <h1 class="hero-giant-title">PORTFOLIO</h1>
-                <!-- Textos con clases identificadoras para Motion Parallax -->
-                <div class="text-outline-stack layer-left">WEB DEV</div>
-                <div class="text-outline-stack layer-right">TECH REP</div>
-                <div class="text-outline-stack layer-left">PORTFOLIO</div>
-                <p class="hero-meta-text">
-                    Desarrollo front-end enfocado en optimización comercial y soluciones robustas de hardware. Interfaces limpias, veloces y funcionales.
+                <h1 class="hero-giant-title">EL PORTAFOLIO DE JOEL</h1>
+                
+                <div class="text-outline-stack layer-left">DISQ CREATIVO</div>
+                <div class="text-outline-stack layer-right">PUZZLE SOLVER</div>
+                
+                <p class="hero-text-paragraph">
+                    Me llamo Joel y soy disq creativo. Armo soluciones tecnológicas eficientes en tiempos cómodos y sin rodeos. En internet el tiempo vuela: cada segundo de espera para tu proyecto es un billete menos en tu bolsillo. Chequea a lo que me dedico ↓
                 </p>
             </div>
-            <div style="display: flex; justify-content: flex-end;">
-                <div class="hero-profile-box">
-                    <div style="font-family: var(--font-serif); font-size: 2rem; color: var(--forest-green); font-weight:700;">
-                        TecnoTrade PTY
-                    </div>
+
+            <a href="https://www.instagram.com/tecnotradepty/" class="billboard-card" id="instagramBillboard" target="_blank">
+                <div class="billboard-content">
+                    <span class="billboard-tag">TecnoTrade PTY</span>
+                    <h2 class="billboard-main-text">¿Compra, vende o repara tu teléfono?</h2>
+                    <div class="billboard-action-badge">Toca Aquí</div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <a href="#content" class="scroll-badge" id="scrollBadge">Scroll<br>down</a>
     </section>
 
-    <!-- Main Content Container -->
     <main class="main-container" id="content">
         
-        <!-- Columna Izquierda: Bio y Tarjetas Reales -->
         <div class="left-col">
-            <div class="greeting reveal">
-                <h2>Hola, <br>soy Joel !</h2>
-                <p class="bio-p">
-                    Especialista en desarrollo Front-End y soporte técnico de hardware en Ciudad de Panamá. Construyo Progressive Web Apps (PWAs) y herramientas a medida para optimizar el rendimiento y la conversión de comercios locales.
-                </p>
-            </div>
-
-            <h3 class="section-title reveal" id="proyectos">Proyectos Destacados</h3>
             
-            <div class="grid-portfolio">
-                
-                <!-- Tarjeta 1: Urban Skate -->
-                <div class="portfolio-card reveal" 
-                     data-title="Restaurante Prototipo Urban Skate"
-                     data-category="Restaurantes & Ocio"
-                     data-tech="HTML5 · CSS3 · JavaScript Vanilla"
-                     data-link="https://tecnotradepty.github.io/armpty/"
-                     data-image=""
-                     data-desc="Estructura de catálogo dinámico y menú interactivo optimizado para restaurantes con temática urbana. Diseñado con un enfoque mobile-first para agilizar la visualización de platos, implementando transiciones limpias y un rendimiento de carga instantáneo ideal para clientes en zonas de alto tráfico como El Cangrejo.">
-                    <div class="card-top">
-                        <span class="category-badge">Restaurantes</span>
-                        <h3>Restaurante Prototipo Urban Skate</h3>
-                    </div>
-                    <div class="card-bottom">
-                        <span class="view-link">Pica para ver más</span>
-                        <span class="arrow">→</span>
-                    </div>
+            <div class="category-bar-wrapper">
+                <div class="category-bar" id="categoryBar">
+                    <button class="filter-btn active" data-category="todos">Todos los puzzles</button>
+                    <button class="filter-btn" data-category="webs">webs</button>
+                    <button class="filter-btn" data-category="producción de contenido">producción de contenido</button>
+                    <button class="filter-btn" data-category="soluciones de hardware">soluciones de hardware</button>
                 </div>
-
-                <!-- Tarjeta 2: Artextual -->
-                <div class="portfolio-card reveal" 
-                     data-title="Web de Transferencia de Archivos"
-                     data-category="Herramientas Web"
-                     data-tech="JavaScript ES6 · Web APIs · PWA"
-                     data-link="https://j0elsito.github.io/artextual.github.io/#"
-                     data-image=""
-                     data-desc="Utilidad web diseñada para la transferencia local de archivos directamente desde el navegador, asegurando cero pérdida de calidad en los documentos. Integra scripts ligeros optimizados para flujos rápidos, combinando monetización nativa y una interfaz brutalista minimalista.">
-                    <div class="card-top">
-                        <span class="category-badge">Utilidades</span>
-                        <h3>Transferencia de Archivos sin Perder Calidad</h3>
-                    </div>
-                    <div class="card-bottom">
-                        <span class="view-link">Pica para ver más</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </div>
-
-                <!-- Tarjeta 3: TecnoTrade -->
-                <div class="portfolio-card reveal" 
-                     data-title="TecnoTrade PTY | Plataforma de Dispositivos"
-                     data-category="Hardware & Tech"
-                     data-tech="HTML5 · CSS Grid · Responsive Design"
-                     data-link="https://j0elsito.github.io/tecnotrade/?utm_source=ig&utm_medium=social&utm_content=link_in_bio"
-                     data-image=""
-                     data-desc="Diseño de interfaz de marca enfocado en servicios técnicos especializados, venta e intercambio de smartphones. Estructura ligera orientada a un público joven y tecnológico, optimizando los puntos de contacto para la captación rápida de clientes a nivel local.">
-                    <div class="card-top">
-                        <span class="category-badge">Soporte & Hardware</span>
-                        <h3>TecnoTrade: Reparación e Intercambio de Teléfonos</h3>
-                    </div>
-                    <div class="card-bottom">
-                        <span class="view-link">Pica para ver más</span>
-                        <span class="arrow">→</span>
-                    </div>
-                </div>
-
             </div>
+
+            <div class="grid-portfolio" id="portfolioGrid">
+                <div class="loading-skeleton">Descifrando la base de datos...</div>
+            </div>
+
         </div>
 
-        <!-- Columna Derecha: Resume & Skills -->
-        <div class="right-col" id="skills">
+        <div class="right-col">
             
-            <div class="profile-card-specs reveal">
-                <div class="profile-img-placeholder">
-                    <div class="floating-badge badge-1">Front-End Dev</div>
-                    <div class="floating-badge badge-2">Panamá Centro</div>
-                    <div style="font-family: var(--font-serif); font-size: 3rem; color: rgba(255,255,255,0.15); font-weight:700;">JD</div>
-                </div>
-                <div class="contact-info-block">
-                    <h3>Contacto</h3>
-                    <div class="contact-row">📍 El Cangrejo / Bella Vista, Panamá</div>
-                    <div class="contact-row">💼 TecnoTrade PTY</div>
-                </div>
-            </div>
+            <h3 class="skills-headline reveal">Expertise General</h3>
+            <div class="text-outline-stack reveal" style="font-size: 3.5rem; margin-bottom: 25px; -webkit-text-stroke: 1px rgba(36, 51, 39, 0.3);">CAPABILITIES</div>
 
-            <h3 class="skills-headline reveal">Technical Skills</h3>
-            <div class="text-outline-stack reveal" style="font-size: 3.5rem; margin-bottom: 30px;">RESUME RESUME</div>
+            <div class="puzzle-solver-profile-box reveal">
+                <h4>El Enfoque "Puzzle Solver"</h4>
+                <p>
+                    Me pones una computadora, una idea de startup o una placa lógica averiada al frente y no veo un obstáculo; veo un rompecabezas listo para ser optimizado. Utilizo **Inteligencia Artificial de última generación** para acelerar drásticamente los tiempos de programación y desarrollo de código, garantizando acabados limpios y de nivel corporativo en tiempo récord.
+                </p>
 
-            <div class="skills-grid reveal">
-                <div class="skills-col">
-                    <h4>Software Skills</h4>
+                <div class="heavy-pillar">
+                    <h5>Programación & Webs</h5>
                     <div class="square-badge-container">
-                        <div class="square-badge">HTML5</div>
-                        <div class="square-badge">CSS3</div>
-                        <div class="square-badge">JavaScript</div>
-                        <div class="square-badge">Git</div>
-                        <div class="square-badge">GitHub Pages</div>
+                        <div class="square-badge">HTML5 Nativo</div>
+                        <div class="square-badge">CSS3 / Grid / Flexbox</div>
+                        <div class="square-badge">JavaScript (ES6+)</div>
+                        <div class="square-badge">Git & GitHub Pages</div>
+                        <div class="square-badge">PWA Architecture</div>
+                        <div class="square-badge">AI Code Integration</div>
                     </div>
                 </div>
 
-                <div class="skills-col">
-                    <h4>Hardware & Dev</h4>
+                <div class="heavy-pillar">
+                    <h5>Hardware & Producción Digital</h5>
                     <ul class="skills-list-text">
-                        <li>• Optimización Front-End</li>
-                        <li>• Estructuras PWA</li>
-                        <li>• Diagnóstico de Hardware Móvil</li>
-                        <li>• Integración de Sensores LiDAR</li>
+                        <li>Construcción de Startups y Portafolios Comerciales Finos.</li>
+                        <li>Producción de Contenido Híbrba (Edición Manual Avanzada + Generación por IA).</li>
+                        <li>Edición de Imagen y Video Corporativo de Alta Conversión.</li>
+                        <li>Diagnóstico Completo de Placas Móviles y Arquitectura Física de Computadores.</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="bottom-row-grid reveal">
-                <div>
-                    <h3 class="section-title" style="margin: 0 0 20px 0;">Proyectos</h3>
-                    <div class="square-badge" style="margin-bottom: 10px; display:block;">Configurador de Accesorios</div>
-                    <div class="square-badge" style="display:block;">Utility File Share PWA</div>
-                </div>
-
-                <div>
-                    <h3 class="section-title" style="margin: 0 0 20px 0;">Intereses</h3>
-                    <div class="icon-hub-grid">
-                        <div class="icon-item"><div class="icon-box">🏋️‍♂️</div><span>Gym</span></div>
-                        <div class="icon-item"><div class="icon-box">📱</div><span>Hardware</span></div>
-                        <div class="icon-item"><div class="icon-box">🎨</div><span>UI/UX</span></div>
-                        <div class="icon-item"><div class="icon-box">⚡</div><span>PWAs</span></div>
-                    </div>
+            <div class="puzzle-solver-profile-box reveal">
+                <h4>Intereses Activos</h4>
+                <div class="interests-icon-grid">
+                    <div class="interest-icon-item"><div>🏋️‍♂️</div>Gym</div>
+                    <div class="interest-icon-item"><div>📱</div>Hardware</div>
+                    <div class="interest-icon-item"><div>🧩</div>Puzzles</div>
+                    <div class="interest-icon-item"><div>⚡</div>PWAs</div>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Ventana Modal de Expansión -->
-    <div class="project-modal" id="projectModal">
-        <div class="modal-content">
-            <button class="close-modal-btn" id="closeModal">✕ Cerra</button>
-            <span class="modal-category" id="modalCategory">CATEGORÍA</span>
-            <h2 class="modal-title" id="modalTitle">Título del Proyecto</h2>
-            <div class="modal-tech-stack" id="modalTech">Tech Stack</div>
-            
-            <div class="modal-image-area" id="modalImg">
-                <span id="modalImgPlaceholder">[ Vista Previa del Proyecto ]</span>
-            </div>
-            
-            <p class="modal-description" id="modalDesc">Descripción larga del proyecto...</p>
-            
-            <a href="#" class="btn-link-cta" id="modalLiveLink" target="_blank">
-                <span>Visitar Sitio en Vivo</span> ↗
-            </a>
-        </div>
-    </div>
-
-    <footer style="background-color: var(--black); color: var(--white); text-align: center; padding: 40px; font-size: 0.85rem;">
-        <p>&copy; 2026 Joel Díaz / TecnoTrade PTY. Todos los derechos reservados.</p>
+    <footer style="background-color: var(--black); color: var(--white); text-align: center; padding: 40px; font-size: 0.85rem; border-top: var(--brutal-border);">
+        <p>&copy; 2026 Joel Díaz / disq creativo. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Lógica de Interactividad y Motion Graphics -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- 1. INTERACTIVIDAD DE LOS MODALES ---
-            const cards = document.querySelectorAll('.portfolio-card');
-            const modal = document.getElementById('projectModal');
-            const closeBtn = document.getElementById('closeModal');
+            // CONFIGURACIÓN DE TU API PROPIA DE GOOGLE SHEETS
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             
-            const modalTitle = document.getElementById('modalTitle');
-            const modalCategory = document.getElementById('modalCategory');
-            const modalTech = document.getElementById('modalTech');
-            const modalDesc = document.getElementById('modalDesc');
-            const modalImg = document.getElementById('modalImg');
-            const modalImgPlaceholder = document.getElementById('modalImgPlaceholder');
-            const modalLiveLink = document.getElementById('modalLiveLink');
+            let proyectosData = [];
+            const grid = document.getElementById('portfolioGrid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
 
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const title = card.getAttribute('data-title');
-                    const category = card.getAttribute('data-category');
-                    const tech = card.getAttribute('data-tech');
-                    const desc = card.getAttribute('data-desc');
-                    const link = card.getAttribute('data-link');
-                    const imgUrl = card.getAttribute('data-image');
+            // --- 1. SOLICITUD DE DATOS ASÍNCRONA (FETCH API) ---
+            async function fetchProyectos() {
+                try {
+                    const response = await fetch(API_URL);
+                    proyectosData = await response.json();
+                    renderGrid('todos');
+                } catch (error) {
+                    console.error("Error trayendo el puzzle de proyectos:", error);
+                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--coral);">Fallo de conexión. Verifica que el Apps Script esté en modo "Cualquiera".</div>';
+                }
+            }
 
-                    modalTitle.textContent = title;
-                    modalCategory.textContent = category;
-                    modalTech.textContent = tech;
-                    modalDesc.textContent = desc;
-                    modalLiveLink.setAttribute('href', link);
+            // --- 2. RENDERIZADO DEL GRID 2X2 ESTILO MARKETPLACE ---
+            function renderGrid(categoriaFiltro) {
+                grid.innerHTML = ''; // Limpiar esqueleto de carga
+                
+                // Filtrado lógico
+                const proyectosFiltrados = proyectosData.filter(p => {
+                    if (categoriaFiltro === 'todos') return true;
+                    return p.categoria.toLowerCase() === categoriaFiltro.toLowerCase();
+                });
 
-                    if (imgUrl && imgUrl.trim() !== "") {
-                        modalImg.style.backgroundImage = `url('${imgUrl}')`;
-                        modalImgPlaceholder.style.display = 'none';
+                if (proyectosFiltrados.length === 0) {
+                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos subidos en esta categoría aún.</div>';
+                    return;
+                }
+
+                // Generación limpia de tarjetas
+                proyectosFiltrados.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'marketplace-card reveal is-visible'; // Asigna clase de revelado instantáneo
+
+                    // Manejo dinámico de miniaturas de previsualización directa
+                    let thumbContent = `<span class="card-thumb-placeholder">[ Sin Captura ]</span>`;
+                    if (p.imagen && p.imagen.trim() !== "") {
+                        thumbContent = ``;
+                        card.innerHTML = `
+                            <div class="card-preview-thumb" style="background-image: url('${p.imagen}')">
+                                <span class="card-badge-floating">${p.categoria}</span>
+                            </div>
+                        `;
                     } else {
-                        modalImg.style.backgroundImage = 'none';
-                        modalImgPlaceholder.style.display = 'block';
+                        card.innerHTML = `
+                            <div class="card-preview-thumb">
+                                <span class="card-badge-floating">${p.categoria}</span>
+                                ${thumbContent}
+                            </div>
+                        `;
                     }
 
-                    modal.classList.add('is-active');
-                    document.body.style.overflow = 'hidden';
+                    // Bloque de información inferior de la tarjeta
+                    const bodyInfo = document.createElement('div');
+                    bodyInfo.className = 'card-body-info';
+                    bodyInfo.innerHTML = `
+                        <div>
+                            <h3>${p.titulo}</h3>
+                            <p>${p.descripcion}</p>
+                        </div>
+                        <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Explorar Solución ↗</a>
+                    `;
+                    
+                    card.appendChild(bodyInfo);
+                    grid.appendChild(card);
+                });
+            }
+
+            // --- 3. LOGICA DE INTERRUPTORES DE LA BARRA DE CATEGORÍAS ---
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const categoria = btn.getAttribute('data-category');
+                    renderGrid(categoria);
                 });
             });
 
-            const closeModal = () => {
-                modal.classList.remove('is-active');
-                document.body.style.overflow = '';
-            };
-
-            closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // --- 2. MOTION GRAPHICS: PARALLAX & SCROLL EFFECTS ---
+            // --- 4. MOTION GRAPHICS: PARALLAX LATERAL Y ROTACIÓN DE BADGE ---
             const layersLeft = document.querySelectorAll('.layer-left');
             const layersRight = document.querySelectorAll('.layer-right');
             const scrollBadge = document.getElementById('scrollBadge');
 
             window.addEventListener('scroll', () => {
-                let speed = window.scrollY;
+                let currentScroll = window.scrollY;
                 
-                // Los textos alternados se mueven hacia los lados de forma fluida
                 layersLeft.forEach(layer => {
-                    layer.style.transform = `translateX(${speed * 0.4}px)`;
+                    layer.style.transform = `translateX(${currentScroll * 0.35}px)`;
                 });
                 layersRight.forEach(layer => {
-                    layer.style.transform = `translateX(-${speed * 0.4}px)`;
+                    layer.style.transform = `translateX(-${currentScroll * 0.35}px)`;
                 });
 
-                // Rotación del badge circular "Scroll Down" en base al scroll
-                scrollBadge.style.transform = `translateX(-50%) rotate(${speed * 0.2}deg)`;
+                // Rotación del círculo de Scroll Down
+                scrollBadge.style.transform = `translateX(-50%) rotate(${currentScroll * 0.18}deg)`;
             });
 
-            // --- 3. MOTION GRAPHICS: REVELADO SÓLIDO (INTERSECTION OBSERVER) ---
+            // --- 5. MOTION GRAPHICS: INTERSECTION OBSERVER PARA EFECTO REVELADO ---
             const revealElements = document.querySelectorAll('.reveal');
-            
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Solo se ejecuta una vez para mejorar performance
+                        obs.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.15 // Se activa cuando el 15% del elemento ya es visible
-            });
+            }, { threshold: 0.12 });
 
-            revealElements.forEach(element => {
-                revealObserver.observe(element);
-            });
+            revealElements.forEach(el => observer.observe(el));
+
+            // Disparar carga de la API inmediatamente
+            fetchProyectos();
         });
     </script>
 </body>
