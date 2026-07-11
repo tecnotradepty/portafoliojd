@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel Díaz | Minimalismo Surrealista 3D</title>
+    <title>Joel Díaz | Minimalismo Vanguardista</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-infinite: #05070a;    /* Fondo oscuro infinito de alta tecnología */
-            --bg-glass: rgba(14, 20, 32, 0.65); /* Base translúcida */
-            --canary-yellow: #FFE600; /* Amarillo canario neón */
-            --surreal-pink: #FF529A;  /* Rosa plano de alta gama */
-            --cyber-cyan: #00F0FF;    /* Acento cyan eléctrico */
+            --bg-infinite: #0a0c10;    /* Negro profundo editorial */
+            --bg-card: #121620;        /* Contenedores premium sólidos */
+            --canary-yellow: #FFE600; /* Amarillo Canario Neón */
+            --surreal-pink: #FF529A;  /* Rosa Pop */
             --text-pure: #ffffff;
-            --text-muted: #8093a6;
-            --neon-border: 1px solid rgba(255, 255, 255, 0.08);
+            --text-muted: #64748b;     /* Gris balanceado de alta legibilidad */
+            --border-clean: 1px solid rgba(255, 255, 255, 0.08);
             --font-display: 'Syne', sans-serif;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
-            --elastic-curve: cubic-bezier(0.25, 1, 0.5, 1);
+            --elastic-curve: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -35,301 +34,280 @@
             font-family: var(--font-sans);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            perspective: 1200px; /* Habilita el entorno 3D global */
         }
 
-        /* --- GRADIENTES INFINITOS DE FONDO CON TEXTURA GENÉRICA --- */
-        .infinite-glow-1 {
+        /* --- LUZ LÍQUIDA ATMOSFÉRICA DE FONDO --- */
+        .infinite-glow {
             position: absolute; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(255, 230, 0, 0.08) 0%, transparent 70%);
-            top: -150px; left: -100px; z-index: 0; pointer-events: none;
-        }
-        .infinite-glow-2 {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(255, 82, 154, 0.06) 0%, transparent 70%);
-            top: 400px; right: -200px; z-index: 0; pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 230, 0, 0.04) 0%, transparent 70%);
+            top: -100px; left: -100px; pointer-events: none; z-index: 0;
         }
 
+        /* --- HEADER EDITORIAL --- */
         header {
-            background-color: rgba(5, 7, 10, 0.75);
-            backdrop-filter: blur(20px);
-            padding: 20px 6%;
+            padding: 30px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: var(--neon-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background-color: rgba(10, 12, 16, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: var(--border-clean);
+            position: sticky; top: 0; z-index: 100;
         }
 
         .brand-logo {
             font-family: var(--font-display);
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
         .brand-logo span { color: var(--surreal-pink); }
 
-        .contact-pill-box { display: flex; gap: 12px; }
+        .contact-pill-box { display: flex; gap: 14px; }
 
         .contact-btn {
-            background-color: var(--bg-glass);
             color: var(--text-pure);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 10px 20px;
-            border-radius: 12px;
-            border: var(--neon-border);
-            backdrop-filter: blur(10px);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 12px 22px;
+            border-radius: 8px;
+            background-color: var(--bg-card);
+            border: var(--border-clean);
             transition: all 0.3s var(--elastic-curve);
         }
         .contact-btn:hover {
             background-color: var(--text-pure);
             color: var(--bg-infinite);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
         }
-        .contact-btn.btn-wa { background-color: rgba(37, 211, 102, 0.15); border-color: #25D366; color: #25D366; }
-        .contact-btn.btn-wa:hover { background-color: #25D366; color: var(--text-pure); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); }
+        .contact-btn.btn-wa { border-color: #25D366; color: #25D366; }
+        .contact-btn.btn-wa:hover { background-color: #25D366; color: var(--text-pure); }
 
-        /* --- HERO CON CONFIGURACIÓN DE ELEMENTOS INTERACTIVOS --- */
-        .hero { padding: 80px 6% 120px 6%; position: relative; z-index: 1; }
+        /* --- HERO SECTIONS REESTRUCTURADO SIN COLISIONES --- */
+        .hero { padding: 90px 6% 140px 6%; position: relative; z-index: 1; }
 
         .hero-content {
             display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 60px;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 80px;
             align-items: center;
         }
 
         .hero-giant-title {
             font-family: var(--font-display);
-            font-size: clamp(3.5rem, 7vw, 6.2rem);
-            line-height: 0.85;
+            font-size: clamp(3.5rem, 6.5vw, 5.5rem);
+            line-height: 0.9;
             letter-spacing: -3px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
+        /* Líneas decorativas reubicadas estratégicamente */
         .text-outline-stack {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 0.85;
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.12);
+            letter-spacing: -1px;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
             color: transparent;
-            margin-top: 6px;
-            white-space: nowrap;
-            transition: transform 0.1s ease-out;
-            will-change: transform;
+            margin-top: 10px;
+            transition: transform 0.1s var(--elastic-curve);
         }
 
         .hero-text-paragraph {
-            max-width: 540px;
-            font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+            max-width: 520px;
+            font-size: clamp(1.05rem, 1.5vw, 1.15rem);
             line-height: 1.6;
             color: var(--text-muted);
-            margin-top: 35px;
+            margin-top: 40px;
         }
 
-        /* VALLA PUBLICITARIA 3D INTERACTIVA COMPLETA (TILT MECHANICS) */
-        .billboard-container-3d {
-            perspective: 1000px; /* Crea caja de perspectiva para el hijo */
-        }
+        /* TARJETA INTERACTIVA PREMIUM CON MARCO DE PROFUNDIDAD */
+        .billboard-container-3d { perspective: 1000px; }
 
         .billboard-card {
             background-color: var(--bg-card);
-            border: var(--neon-border);
-            border-radius: 28px;
-            padding: 40px 35px;
+            border: var(--border-clean);
+            border-radius: 24px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 410px;
+            height: 430px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             text-decoration: none;
             color: var(--text-pure);
             background-size: cover;
-            background-position: center;
-            transform-style: preserve-3d; /* Obliga a los elementos hijos a flotar en capas 3D */
-            transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+            background-position: center top;
+            transform-style: preserve-3 Bradford;
+            transition: transform 0.2s var(--elastic-curve), box-shadow 0.3s ease;
         }
 
+        /* Máscara de elegancia para unificar el fondo de Instagram */
         .billboard-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(5, 7, 10, 0.8) 0%, rgba(14, 20, 32, 0.5) 100%);
+            background: linear-gradient(180deg, rgba(10, 12, 16, 0.75) 0%, rgba(10, 12, 16, 0.9) 100%);
             z-index: 1;
             transition: opacity 0.3s ease;
         }
-        .billboard-card:hover::before { opacity: 0.45; }
+        .billboard-card:hover::before { opacity: 0.5; }
 
         .billboard-content {
             position: relative; z-index: 2; height: 100%;
             display: flex; flex-direction: column; justify-content: space-between;
-            transform: translateZ(50px); /* Hace que el contenido flote físicamente 50px por encima de la imagen */
         }
 
         .billboard-tag {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800;
-            color: var(--canary-yellow); background: rgba(255,230,0,0.1);
-            border: 1px solid rgba(255,230,0,0.2); padding: 6px 14px; border-radius: 8px; align-self: flex-start;
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--canary-yellow); background: rgba(255, 230, 0, 0.08);
+            border: 1px solid rgba(255, 230, 0, 0.15); padding: 6px 14px; border-radius: 6px; align-self: flex-start;
         }
 
+        /* Etiqueta Sólida Protectora Anti-Aplastamiento */
         .billboard-main-text {
-            font-family: var(--font-display); font-size: clamp(1.8rem, 2.5vw, 2.2rem);
-            line-height: 1.15; letter-spacing: -1px; margin: 20px 0;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            font-family: var(--font-display); font-size: clamp(1.4rem, 2vw, 1.8rem);
+            line-height: 1.25; letter-spacing: -0.5px; margin: 20px 0;
+            background-color: rgba(10, 12, 16, 0.95);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px; border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
 
         .billboard-action-badge {
             background-color: var(--canary-yellow); color: var(--bg-infinite);
-            padding: 14px 28px; font-weight: 800; border-radius: 14px; align-self: flex-start;
-            text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;
-            transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 10px 20px rgba(255,230,0,0.2);
+            padding: 14px 28px; font-weight: 800; border-radius: 12px;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;
+            align-self: flex-start; transition: all 0.3s var(--elastic-curve);
         }
         .billboard-card:hover .billboard-action-badge {
-            background-color: var(--surreal-pink);
-            color: var(--text-pure);
-            transform: translateZ(20px);
-            box-shadow: 0 10px 25px rgba(255,82,154,0.3);
+            background-color: var(--text-pure);
+            transform: scale(1.05);
         }
 
-        /* --- AVATAR INTERACTIVO SURREALISTA PLANO-3D --- */
+        /* El Ojo Surrealista del Observador (The Watcher) */
         .surreal-watcher-container {
-            position: absolute; bottom: -60px; right: 42%;
-            width: 150px; height: 150px; z-index: 5; pointer-events: none;
-            transform: translateZ(30px);
+            position: absolute; bottom: -40px; right: 45%;
+            width: 120px; height: 120px; z-index: 5; pointer-events: none;
         }
 
         .scroll-badge {
-            width: 85px; height: 85px; background-color: var(--bg-glass);
-            color: var(--text-pure); border: var(--neon-border); backdrop-filter: blur(10px);
+            width: 80px; height: 80px; background-color: var(--bg-card);
+            color: var(--text-pure); border: var(--border-clean);
             border-radius: 50%; display: flex; align-items: center; text-align: center; justify-content: center;
-            font-weight: 800; font-size: 0.75rem; position: absolute; bottom: -42px; left: 50%;
+            font-weight: 800; font-size: 0.7rem; position: absolute; bottom: -40px; left: 50%;
             transform: translateX(-50%); z-index: 6; text-decoration: none;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); will-change: transform;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        /* --- CONTENEDOR PRINCIPAL INTERFAZ --- */
+        /* --- ESTRUCTURA DE CONTENEDOR CONTEMPORÁNEO --- */
         .main-container {
-            padding: 110px 6% 80px 6%;
+            padding: 120px 6% 80px 6%;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            background: linear-gradient(180deg, rgba(5,7,10,0) 0%, #090d14 100%);
-            border-top: var(--neon-border);
-            position: relative; z-index: 2;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 80px;
+            border-top: var(--border-clean);
         }
 
+        /* BARRA DE FILTROS MINIMALISTA */
         .category-bar-wrapper {
-            position: sticky; top: 78px; background-color: rgba(5, 7, 10, 0.85);
+            position: sticky; top: 78px; background-color: rgba(10, 12, 16, 0.9);
             backdrop-filter: blur(20px); padding: 15px 0; z-index: 90;
-            border-bottom: var(--neon-border); margin-bottom: 40px;
+            border-bottom: var(--border-clean); margin-bottom: 40px;
         }
 
         .category-bar { display: flex; gap: 12px; overflow-x: auto; }
         .category-bar::-webkit-scrollbar { display: none; }
 
         .filter-btn {
-            background-color: var(--bg-glass); color: var(--text-muted);
-            border: var(--neon-border); padding: 12px 24px; font-size: 0.85rem;
-            font-weight: 700; border-radius: 14px; cursor: pointer;
+            background-color: transparent; color: var(--text-muted);
+            border: 1px solid transparent; padding: 12px 24px; font-size: 0.85rem;
+            font-weight: 600; border-radius: 10px; cursor: pointer;
             transition: all 0.3s var(--elastic-curve);
         }
         .filter-btn:hover, .filter-btn.active {
-            background-color: var(--canary-yellow); color: var(--bg-infinite);
-            font-weight: 800; transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,230,0,0.2);
+            background-color: var(--bg-card); border-color: rgba(255,255,255,0.1); color: var(--text-pure);
         }
 
-        /* --- GRID DE PRODUCTOS CON SOPORTE TILT 3D REAL --- */
-        .grid-portfolio { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; perspective: 1000px; }
-
-        .tilt-card-wrapper { perspective: 1000px; }
+        /* --- GRID DE PROYECTOS 2X2 RE-ESPACIADO --- */
+        .grid-portfolio { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; }
 
         .marketplace-card {
-            background-color: var(--bg-glass); border: var(--neon-border);
+            background-color: var(--bg-card); border: var(--border-clean);
             border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
-            transform-style: preserve-3d;
-            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            transition: transform 0.3s var(--elastic-curve), border-color 0.3s;
         }
         .marketplace-card:hover {
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,240,255,0.03);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
         }
 
         .card-preview-thumb {
-            width: 100%; height: 240px; background-color: #0b0f17;
+            width: 100%; height: 250px; background-color: #0e121a;
             background-size: cover; background-position: center; position: relative;
-            border-bottom: var(--neon-border); transform: translateZ(20px);
+            border-bottom: var(--border-clean);
         }
 
         .card-badge-floating {
             position: absolute; top: 20px; left: 20px;
-            background-color: rgba(5, 7, 10, 0.85); backdrop-filter: blur(8px);
-            color: var(--surreal-pink); border: 1px solid rgba(255,82,154,0.25);
-            padding: 6px 14px; font-size: 0.7rem; font-weight: 800; border-radius: 8px;
+            background-color: var(--bg-infinite); color: var(--canary-yellow);
+            border: 1px solid rgba(255,230,0,0.25);
+            padding: 6px 14px; font-size: 0.7rem; font-weight: 800; border-radius: 6px;
             text-transform: uppercase; z-index: 2;
         }
 
-        .card-body-info { padding: 30px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; transform: translateZ(35px); }
+        .card-body-info { padding: 35px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
 
         .card-body-info h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 12px; letter-spacing: -0.5px; }
 
-        .card-body-info p { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 25px; }
+        .card-body-info p { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 30px; }
 
         .btn-visit-solution {
-            background-color: rgba(255,255,255,0.03); color: var(--text-pure);
+            background-color: rgba(255,255,255,0.02); color: var(--text-pure);
             text-decoration: none; text-align: center; padding: 14px;
-            border-radius: 14px; border: 1px solid rgba(255,255,255,0.08);
-            font-weight: 800; font-size: 0.9rem; transition: all 0.2s ease;
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);
+            font-weight: 700; font-size: 0.85rem; transition: all 0.2s ease;
         }
         .btn-visit-solution:hover {
-            background-color: var(--cyber-cyan); color: var(--bg-infinite);
-            border-color: var(--cyber-cyan); transform: translateZ(10px);
-            box-shadow: 0 10px 20px rgba(0,240,255,0.25);
+            background-color: var(--text-pure); color: var(--bg-infinite);
         }
 
-        .loading-skeleton { grid-column: span 2; text-align: center; font-family: var(--font-display); font-size: 1.5rem; padding: 60px 0; color: var(--canary-yellow); }
+        .loading-skeleton { grid-column: span 2; text-align: center; font-family: var(--font-display); font-size: 1.4rem; padding: 80px 0; color: var(--canary-yellow); }
 
-        /* --- COLUMNA DERECHA CAPABILITIES --- */
-        .skills-headline { font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 10px; }
+        /* --- COLUMNA DERECHA PERFIL TECH --- */
+        .skills-headline { font-family: var(--font-display); font-size: 2.1rem; margin-bottom: 15px; }
 
         .puzzle-solver-profile-box {
-            background-color: var(--bg-glass); border: var(--neon-border);
-            border-radius: 24px; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            margin-bottom: 35px; backdrop-filter: blur(10px);
+            background-color: var(--bg-card); border: var(--border-clean);
+            border-radius: 24px; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            margin-bottom: 35px;
         }
 
-        .puzzle-solver-profile-box h4 { font-family: var(--font-display); font-size: 1.35rem; margin-bottom: 12px; color: var(--canary-yellow); }
-
+        .puzzle-solver-profile-box h4 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 12px; color: var(--canary-yellow); }
         .puzzle-solver-profile-box p { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
 
         .heavy-pillar { margin-top: 35px; }
-        .heavy-pillar h5 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--surreal-pink); margin-bottom: 12px; font-weight: 800; }
+        .heavy-pillar h5 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--surreal-pink); margin-bottom: 12px; font-weight: 800; }
 
         .square-badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .square-badge { background-color: rgba(255,255,255,0.02); border: var(--neon-border); color: var(--text-pure); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; border-radius: 10px; }
+        .square-badge { background-color: rgba(255,255,255,0.02); border: var(--border-clean); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; border-radius: 8px; }
 
         .skills-list-text { list-style: none; font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); }
         .skills-list-text li { margin-bottom: 10px; position: relative; padding-left: 22px; }
         .skills-list-text li::before { content: '🧩'; position: absolute; left: 0; font-size: 0.85rem; }
 
         .interests-icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
-        .interest-icon-item { background-color: rgba(255,255,255,0.01); border: var(--neon-border); border-radius: 14px; padding: 15px 5px; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
-        .interest-icon-item div { font-size: 1.4rem; margin-bottom: 6px; }
+        .interest-icon-item { background-color: rgba(255,255,255,0.01); border: var(--border-clean); border-radius: 12px; padding: 15px 5px; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+        .interest-icon-item div { font-size: 1.3rem; margin-bottom: 6px; }
 
         .reveal {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s var(--elastic-curve), transform 0.6s var(--elastic-curve);
         }
         .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
@@ -338,21 +316,20 @@
             .loading-skeleton { grid-column: span 1; }
             header { flex-direction: column; gap: 15px; text-align: center; }
             .category-bar-wrapper { top: 135px; }
-            .billboard-card { height: 360px; }
+            .billboard-card { height: 380px; }
             .surreal-watcher-container { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="infinite-glow-1"></div>
-    <div class="infinite-glow-2"></div>
+    <div class="infinite-glow"></div>
 
     <header>
         <div class="brand-logo">disq<span>creativo</span></div>
         <div class="contact-pill-box">
             <a href="https://www.instagram.com/tecnotradepty/" class="contact-btn" target="_blank">Instagram</a>
-            <a href="https://wa.me/50768529324" class="contact-btn btn-wa" target="_blank">WhatsApp Directo</a>
+            <a href="https://wa.me/50768529324" class="contact-btn btn-wa" target="_blank">WhatsApp</a>
             <a href="mailto:tecnotradeptyss@gmail.com" class="contact-btn" target="_blank">Email</a>
         </div>
     </header>
@@ -368,8 +345,7 @@
                 </p>
             </div>
 
-            <!-- Contenedor 3D de la Valla Publicitaria -->
-            <div class="billboard-container-3d tilt-target">
+            <div class="billboard-container-3d">
                 <a href="https://www.instagram.com/tecnotradepty/" class="billboard-card" id="instagramBillboard" target="_blank" style="background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/05e524020b4073f435eb94519b9d5bfb19b5b893/images/Captura%20de%20pantalla%20tecnotrade.png');">
                     <div class="billboard-content">
                         <span class="billboard-tag">TecnoTrade PTY</span>
@@ -380,18 +356,13 @@
             </div>
         </div>
 
-        <!-- El Nuevo Personaje Abstracto (The Watcher) - Ojo interactivo vectorizado -->
         <div class="surreal-watcher-container">
             <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <!-- Silueta abstracta minimalista lineal -->
-                <path d="M30,75 C25,50 35,25 50,25 C65,25 75,50 70,75" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
-                <!-- Contenedor de Ojo Surrealista Puro (Rosa Plano) -->
+                <path d="M30,75 C25,50 35,25 50,25 C65,25 75,50 70,75" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="none"/>
                 <path d="M25,45 Q50,20 75,45 Q50,70 25,45 Z" fill="var(--surreal-pink)"/>
-                <ellipse cx="50" cy="45" rx="12" ry="12" fill="#FFFFFF"/>
-                <!-- Pupila Móvil -->
-                <circle id="watcherPupil" cx="50" cy="45" r="5" fill="var(--bg-infinite)"/>
-                <!-- Detalles de Rayos Eléctricos Neón (Canary Yellow) -->
-                <path d="M50,12 L50,20 M18,45 L10,45 M90,45 L82,45" stroke="var(--canary-yellow)" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="50" cy="45" rx="11" ry="11" fill="#FFFFFF"/>
+                <circle id="watcherPupil" cx="50" cy="45" r="4.5" fill="var(--bg-infinite)"/>
+                <path d="M50,14 L50,20 M18,45 L12,45 M88,45 L82,45" stroke="var(--canary-yellow)" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
         </div>
 
@@ -409,7 +380,6 @@
                 </div>
             </div>
 
-            <!-- Grid 2x2 con envoltorios 3D de interacción reactiva -->
             <div class="grid-portfolio" id="portfolioGrid">
                 <div class="loading-skeleton">Descifrando la base de datos...</div>
             </div>
@@ -417,12 +387,12 @@
 
         <div class="right-col">
             <h3 class="skills-headline reveal">Expertise General</h3>
-            <div class="text-outline-stack reveal" style="font-size: 3rem; margin-bottom: 25px; -webkit-text-stroke: 1px rgba(255,255,255,0.05);">CAPABILITIES</div>
+            <div class="text-outline-stack reveal" style="font-size: 2.5rem; margin-bottom: 25px; -webkit-text-stroke: 1px rgba(255,255,255,0.05);">CAPABILITIES</div>
 
             <div class="puzzle-solver-profile-box reveal">
                 <h4>El Enfoque "Puzzle Solver"</h4>
                 <p>
-                    Me pones una computadora, una idea de negocio o una placa lógica averiada al frente y mi mente solo ve un rompecabezas esperando ser optimizado. Utilizo **Inteligencia Artificial avanzada** para acelerar drásticamente los tiempos de programación y modelado,ini garantizando acabados robustos y de nivel corporativo en tiempo récord.
+                    Me pones una computadora, una idea de negocio o una placa lógica averiada al frente y mi mente solo ve un rompecabezas esperando ser optimizado. Utilizo **Inteligencia Artificial avanzada** para acelerar drásticamente los tiempos de programación y modelado, garantizando acabados robustos y de nivel corporativo en tiempo récord.
                 </p>
 
                 <div class="heavy-pillar">
@@ -460,11 +430,10 @@
         </div>
     </main>
 
-    <footer style="background-color: var(--bg-infinite); color: var(--text-muted); text-align: center; padding: 40px; font-size: 0.85rem; border-top: var(--neon-border);">
+    <footer style="background-color: var(--bg-infinite); color: var(--text-muted); text-align: center; padding: 40px; font-size: 0.85rem; border-top: var(--border-clean);">
         <p>&copy; 2026 Joel Díaz / disq creativo. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA INTEACTIVA 3D AVANZADA (TILT SENSOR & FETCH ENGINE) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
@@ -473,23 +442,22 @@
             const filterButtons = document.querySelectorAll('.filter-btn');
             const pupil = document.getElementById('watcherPupil');
 
-            // --- 1. ACELERACIÓN INTERACTIVA DE PUPILA (EYE TRACKING) ---
+            // --- 1. EYE TRACKING ENGINE ---
             window.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 6 - 3;
-                const y = (e.clientY / window.innerHeight) * 6 - 3;
+                const x = (e.clientX / window.innerWidth) * 4 - 2;
+                const y = (e.clientY / window.innerHeight) * 4 - 2;
                 pupil.style.transform = `translate(${x}px, ${y}px)`;
             });
 
-            // --- 2. MOTOR DE INCLINACIÓN TRIDIMENSIONAL REAL (REAL 3D TILT EFFECT) ---
+            // --- 2. SMOOTH 3D TILT ENGINE ---
             function apply3DTilt(element) {
                 element.addEventListener('mousemove', (e) => {
                     const rect = element.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
                     
-                    // Calcular los ángulos de rotación física basados en la posición del mouse
-                    const rotateX = ((rect.height / 2) - y) / 12; 
-                    const rotateY = (x - (rect.width / 2)) / 12;
+                    const rotateX = ((rect.height / 2) - y) / 14; 
+                    const rotateY = (x - (rect.width / 2)) / 14;
                     
                     element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 });
@@ -499,22 +467,21 @@
                 });
             }
 
-            // Aplicar el efecto de profundidad 3D a la valla publicitaria inicial
             apply3DTilt(document.getElementById('instagramBillboard'));
 
-            // --- 3. CONEXIÓN ASÍNCRONA CON LA API DE GOOGLE SHEETS ---
+            // --- 3. FETCH API FROM GOOGLE SHEETS ---
             async function fetchProyectos() {
                 try {
                     const response = await fetch(API_URL);
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    console.error("Error descifrando el puzzle de Sheets:", error);
-                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--surreal-pink);">Fallo de conexión en el puente de datos.</div>';
+                    console.error("Error trayendo los datos de Sheets:", error);
+                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--surreal-pink);">Fallo de sincronización en la base de datos.</div>';
                 }
             }
 
-            // --- 4. ENGINE DE RENDERIZADO PARA LAS TARJETAS MARKETPLACE EN 3D ---
+            // --- 4. DATA RENDER ENGINE (INMUNE A ERRORES) ---
             function renderGrid(categoriaFiltro) {
                 grid.innerHTML = ''; 
                 
@@ -530,7 +497,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos listados aquí en este momento.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos listados en esta sección.</div>';
                     return;
                 }
 
@@ -552,7 +519,7 @@
                         card.innerHTML = `
                             <div class="card-preview-thumb">
                                 <span class="card-badge-floating">${p.categoria}</span>
-                                <div style="display:flex; height:100%; align-items:center; justify-content:center; color:rgba(255,255,255,0.1); font-size:0.8rem; font-weight:700;">[ SIN CAPTURA ]</div>
+                                <div style="display:flex; height:100%; align-items:center; justify-content:center; color:rgba(255,255,255,0.05); font-size:0.8rem; font-weight:700;">[ SIN PREVISUALIZACIÓN ]</div>
                             </div>
                         `;
                     }
@@ -571,12 +538,11 @@
                     wrapper.appendChild(card);
                     grid.appendChild(wrapper);
 
-                    // Activar físicas de inclinación 3D en la tarjeta inyectada dinámicamente
                     apply3DTilt(card);
                 });
             }
 
-            // --- 5. LOGICA DE INTERRUPTORES DE FILTRADO ---
+            // --- 5. INTERRUPTORES DE FILTRADO ---
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterButtons.forEach(b => b.classList.remove('active'));
@@ -585,19 +551,19 @@
                 });
             });
 
-            // --- 6. MOTION GRAPHICS: PARALLAX LATERAL DE SCROLL & BOTÓN ROTATIVO ---
+            // --- 6. PARALLAX Y SCROLL ENGINE ---
             const layersLeft = document.querySelectorAll('.layer-left');
             const layersRight = document.querySelectorAll('.layer-right');
             const scrollBadge = document.getElementById('scrollBadge');
 
             window.addEventListener('scroll', () => {
                 let currentScroll = window.scrollY;
-                layersLeft.forEach(l => l.style.transform = `translateX(${currentScroll * 0.25}px)`);
-                layersRight.forEach(l => l.style.transform = `translateX(-${currentScroll * 0.25}px)`);
-                scrollBadge.style.transform = `translateX(-50%) rotate(${currentScroll * 0.15}deg)`;
+                layersLeft.forEach(l => l.style.transform = `translateX(${currentScroll * 0.18}px)`);
+                layersRight.forEach(l => l.style.transform = `translateX(-${currentScroll * 0.18}px)`);
+                scrollBadge.style.transform = `translateX(-50%) rotate(${currentScroll * 0.12}deg)`;
             });
 
-            // --- 7. REVELADO INTERSECTION OBSERVER ---
+            // --- 7. INTERSECTION OBSERVER ---
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
@@ -606,11 +572,10 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.05 });
 
             revealElements.forEach(el => observer.observe(el));
             
-            // Disparar carga de datos iniciales
             fetchProyectos();
         });
     </script>
