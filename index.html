@@ -3,439 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joel Díaz | Street Art Portfolio</title>
+    <title>Disk Creativo | Unidad de Almacenamiento Visual & Código</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fuentes: Permanent Marker (Trazos Grunge) y Space Grotesk (Limpieza Tech) -->
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Glitch&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #111111;         /* Fondo asfalto profundo */
-            --brand-yellow: #FFD700;    /* Amarillo Mostaza/Canario estilo marcador */
-            --text-pure: #ffffff;
-            --text-muted: #a0a0a0;
-            --border-thick: 3px solid #ffffff; /* Trazos gruesos estilo cómic/street */
-            --font-marker: 'Permanent Marker', cursive;
-            --font-sans: 'Space Grotesk', sans-serif;
-            --offset-shadow: 6px 6px 0px var(--brand-yellow);
-            --offset-shadow-hover: 10px 10px 0px var(--brand-yellow);
-            --elastic-curve: cubic-bezier(0.25, 1, 0.5, 1);
+            /* Paleta Iridiscente / Cyber-Brutalista */
+            --bg-dark: #0A0A0A;
+            --brand-purple: #6B00FF;
+            --neon-cyan: #00F0FF;
+            --neon-magenta: #FF003C;
+            --neon-yellow: #FAFF00;
+            --text-light: #F0F0F0;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-glitch: 'Rubik Glitch', system-ui;
+            --font-body: 'Space Grotesk', sans-serif;
+            
+            --brutal-border: 4px solid var(--text-light);
+            --brutal-shadow: 8px 8px 0px var(--brand-purple);
+            --hover-shadow: 12px 12px 0px var(--neon-cyan);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair; /* Cursor tech */
+        }
 
         body {
             background-color: var(--bg-dark);
-            color: var(--text-pure);
-            font-family: var(--font-sans);
+            color: var(--text-light);
+            font-family: var(--font-body);
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px; /* Textura sutil de puntos de fondo */
+            background-image: 
+                linear-gradient(rgba(107, 0, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(107, 0, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px; /* Grid cyberpunk de fondo */
         }
 
-        /* --- DOODLES DECORATIVOS ABSOLUTOS --- */
-        .doodle-star {
-            position: absolute; width: 60px; height: 60px;
-            background-color: var(--brand-yellow);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 0; pointer-events: none;
-        }
-        .star-1 { top: 15%; right: 10%; transform: rotate(15deg); }
-        .star-2 { bottom: 5%; left: 5%; width: 80px; height: 80px; transform: rotate(-10deg); }
-
-        /* --- HEADER ESTILO STICKER --- */
-        header {
-            padding: 25px 6%; display: flex; justify-content: space-between; align-items: center;
-            background-color: transparent; position: relative; z-index: 100;
+        /* --- NAVEGACIÓN --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4vw;
+            border-bottom: var(--brutal-border);
+            background: var(--bg-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .brand-logo {
-            font-family: var(--font-marker); font-size: 2rem; letter-spacing: 2px;
-            color: var(--text-pure); text-shadow: 3px 3px 0px var(--brand-yellow);
-            transform: rotate(-2deg);
+        .logo {
+            font-family: var(--font-glitch);
+            font-size: 2.5rem;
+            color: var(--neon-yellow);
+            text-shadow: 3px 3px 0px var(--brand-purple);
+            text-transform: uppercase;
         }
-
-        .contact-pill-box { display: flex; gap: 15px; }
 
         .contact-btn {
-            color: var(--bg-dark); font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700;
-            text-transform: uppercase; padding: 10px 18px;
-            background-color: var(--text-pure); border: 2px solid var(--bg-dark);
-            box-shadow: 4px 4px 0px var(--brand-yellow);
-            text-decoration: none; transition: all 0.2s ease;
+            font-family: var(--font-body);
+            font-weight: 700;
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            padding: 10px 24px;
+            text-decoration: none;
+            border: var(--brutal-border);
+            border-color: var(--bg-dark);
+            box-shadow: 4px 4px 0px var(--neon-magenta);
+            text-transform: uppercase;
+            transition: all 0.1s linear;
         }
+
         .contact-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--brand-yellow);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px var(--neon-yellow);
         }
 
-        /* --- HERO SECTIONS GRUNGE --- */
-        .hero { padding: 60px 6% 120px 6%; position: relative; z-index: 1; }
-
-        .hero-content {
-            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center;
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 10vh 4vw;
+            position: relative;
+            border-bottom: var(--brutal-border);
+            overflow: hidden;
         }
 
-        .hero-giant-title {
-            font-family: var(--font-marker); font-size: clamp(4rem, 8vw, 7.5rem);
-            line-height: 0.9; color: var(--text-pure);
-            text-shadow: 5px 5px 0px var(--brand-yellow); margin-bottom: 20px;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 15vw, 12rem);
+            line-height: 0.85;
+            color: var(--bg-dark);
+            -webkit-text-stroke: 2px var(--text-light);
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title span {
+            color: var(--brand-purple);
+            -webkit-text-stroke: 0;
+            text-shadow: 6px 6px 0px var(--neon-cyan);
+            display: block;
+            margin-left: 5vw;
         }
 
         .hero-subtitle {
-            font-family: var(--font-marker); font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--brand-yellow); transform: rotate(-1deg);
+            font-family: var(--font-glitch);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--neon-magenta);
+            margin-top: 20px;
+            transform: rotate(-2deg);
+            z-index: 3;
+            position: relative;
         }
 
-        .hero-text-paragraph {
-            max-width: 500px; font-size: 1.1rem; line-height: 1.6; font-weight: 500;
-            color: var(--text-pure); margin-top: 30px;
-            background-color: rgba(255,255,255,0.03); padding: 20px;
-            border-left: 4px solid var(--brand-yellow);
+        .hero-copy {
+            max-width: 600px;
+            margin-top: 40px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            background: var(--brand-purple);
+            padding: 20px;
+            border: var(--brutal-border);
+            box-shadow: var(--brutal-shadow);
+            transform: rotate(1deg);
         }
 
-        /* TARJETA INTERACTIVA (POLAROID OFFSET FRAME) */
-        .billboard-container-3d { perspective: 1200px; position: relative; }
-
-        .polaroid-frame {
-            background-color: var(--text-pure); padding: 15px 15px 40px 15px;
-            border: 2px solid var(--bg-dark); box-shadow: var(--offset-shadow);
-            transform: rotate(2deg); transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative; transform-style: preserve-3d;
-        }
-        .polaroid-frame:hover {
-            box-shadow: var(--offset-shadow-hover);
-        }
-
-        .billboard-card {
-            background-color: var(--bg-dark); border: 2px solid var(--bg-dark);
-            height: 380px; position: relative; overflow: hidden;
-            text-decoration: none; display: flex; flex-direction: column; justify-content: space-between;
-            background-size: cover; background-position: center;
+        /* --- MARQUEE (CINTA DE SERVICIOS) --- */
+        .marquee-container {
+            background: var(--neon-yellow);
+            color: var(--bg-dark);
+            padding: 15px 0;
+            border-bottom: var(--brutal-border);
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            text-transform: uppercase;
         }
 
-        .billboard-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(17, 17, 17, 0.4); z-index: 1; transition: background 0.3s ease;
-        }
-        .polaroid-frame:hover .billboard-card::before { background: rgba(17, 17, 17, 0.1); }
-
-        .billboard-content {
-            position: relative; z-index: 2; height: 100%; padding: 25px;
-            display: flex; flex-direction: column; justify-content: space-between;
-            transform: translateZ(30px);
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
         }
 
-        /* Etiquetas Estilo Referencia ("Bandung, 22 years old") */
-        .bio-tag {
-            position: absolute; bottom: 10px; right: -20px;
-            background-color: var(--brand-yellow); color: var(--bg-dark);
-            font-family: var(--font-marker); font-size: 1.1rem;
-            padding: 8px 15px; border: 2px solid var(--bg-dark);
-            box-shadow: 3px 3px 0px var(--text-pure);
-            transform: rotate(-5deg); z-index: 10;
-        }
-        
-        .location-tag {
-            position: absolute; top: -15px; left: -15px;
-            background-color: var(--text-pure); color: var(--bg-dark);
-            font-weight: 700; padding: 5px 12px; border: 2px solid var(--bg-dark);
-            box-shadow: 3px 3px 0px var(--brand-yellow);
-            transform: rotate(3deg); z-index: 10; font-size: 0.85rem;
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        .billboard-main-text {
-            font-family: var(--font-marker); font-size: clamp(1.8rem, 2.5vw, 2.2rem);
-            line-height: 1.1; color: var(--text-pure);
-            text-shadow: 2px 2px 0px var(--bg-dark);
-            background-color: rgba(17, 17, 17, 0.8);
-            border: 2px solid var(--brand-yellow);
-            padding: 15px; transform: rotate(-2deg);
+        /* --- EQUIPO / DATA SECTORS --- */
+        .team-section {
+            padding: 80px 4vw;
+            border-bottom: var(--brutal-border);
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
         }
 
-        .billboard-action-badge {
-            background-color: var(--brand-yellow); color: var(--bg-dark);
-            padding: 12px 24px; font-weight: 700; border: 2px solid var(--bg-dark);
-            text-transform: uppercase; font-size: 0.9rem; align-self: flex-start;
-            box-shadow: 3px 3px 0px var(--bg-dark); transition: all 0.2s ease;
+        .section-header {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--neon-cyan);
+            margin-bottom: 40px;
+            text-shadow: 4px 4px 0px var(--brand-purple);
         }
 
-        /* EL OJO GEOMÉTRICO GRUNGE (Basado en la esquina inferior de tu imagen) */
-        .grunge-eye-container {
-            position: absolute; bottom: -80px; left: 10%;
-            width: 180px; height: 180px; z-index: 5; pointer-events: none;
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        /* --- CONTENEDOR DE LA GRID --- */
-        .main-container {
-            padding: 100px 6% 80px 6%; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 80px;
+        .team-card {
+            background: var(--bg-dark);
+            border: var(--brutal-border);
+            padding: 30px;
+            box-shadow: var(--brutal-shadow);
+            transition: all 0.2s;
+            position: relative;
         }
 
-        /* BARRA DE FILTROS CINTA ADHESIVA */
-        .category-bar-wrapper {
-            position: sticky; top: 20px; z-index: 90; margin-bottom: 40px;
+        .team-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: var(--hover-shadow);
+            background: rgba(107, 0, 255, 0.1);
         }
 
-        .category-bar { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;}
-        .category-bar::-webkit-scrollbar { display: none; }
+        .team-card h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--neon-yellow);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            display: inline-block;
+            background: var(--text-light);
+            color: var(--bg-dark);
+            font-weight: 700;
+            padding: 5px 10px;
+            margin-bottom: 15px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .team-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        /* --- PORTAFOLIO (SHEETS API) --- */
+        .portfolio-section {
+            padding: 80px 4vw;
+        }
+
+        .category-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
 
         .filter-btn {
-            background-color: transparent; color: var(--text-pure);
-            border: 2px dashed var(--text-muted); padding: 10px 20px; font-size: 0.9rem;
-            font-weight: 700; font-family: var(--font-sans); cursor: pointer; text-transform: uppercase;
+            background: transparent;
+            color: var(--text-light);
+            border: 2px dashed var(--neon-magenta);
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--neon-magenta);
+            color: var(--bg-dark);
+            border-style: solid;
+            transform: skewX(-10deg);
+        }
+
+        .grid-portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        /* Estilos re-adaptados para las tarjetas del script */
+        .marketplace-card {
+            background: var(--bg-dark);
+            border: var(--brutal-border);
+            box-shadow: 6px 6px 0px var(--neon-cyan);
+            display: flex;
+            flex-direction: column;
             transition: all 0.2s ease;
         }
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--brand-yellow); color: var(--bg-dark);
-            border: 2px solid var(--bg-dark); box-shadow: 4px 4px 0px var(--text-pure);
-            transform: rotate(-2deg);
-        }
 
-        /* --- GRID DE PROYECTOS (ESTILO CARTAS OFFSET) --- */
-        .grid-portfolio { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-
-        .marketplace-card {
-            background-color: var(--bg-dark); border: 2px solid var(--text-pure);
-            display: flex; flex-direction: column; position: relative;
-            box-shadow: 6px 6px 0px var(--text-muted);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
         .marketplace-card:hover {
-            transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--brand-yellow);
-            border-color: var(--brand-yellow);
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px var(--neon-yellow);
+            border-color: var(--brand-purple);
         }
 
         .card-preview-thumb {
-            width: 100%; height: 220px; background-color: #222;
-            background-size: cover; background-position: center; border-bottom: 2px solid var(--text-pure);
+            width: 100%;
+            height: 250px;
+            background-color: #222;
+            background-size: cover;
+            background-position: center;
+            border-bottom: var(--brutal-border);
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.3s;
+        }
+        
+        .marketplace-card:hover .card-preview-thumb {
+            filter: grayscale(0%) contrast(100%);
         }
 
         .card-badge-floating {
-            position: absolute; top: 15px; left: -10px;
-            background-color: var(--brand-yellow); color: var(--bg-dark);
-            border: 2px solid var(--bg-dark); padding: 5px 12px; font-weight: 700;
-            text-transform: uppercase; font-size: 0.75rem; font-family: var(--font-sans);
-            box-shadow: 2px 2px 0px var(--text-pure);
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--neon-yellow);
+            color: var(--bg-dark);
+            border: var(--brutal-border);
+            padding: 5px 15px;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            transform: rotate(5deg);
         }
 
-        .card-body-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-body-info h3 { font-family: var(--font-marker); font-size: 1.5rem; margin-bottom: 10px; color: var(--brand-yellow); }
-        .card-body-info p { font-size: 0.95rem; line-height: 1.5; margin-bottom: 25px; font-weight: 500; }
+        .card-body-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body-info h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card-body-info p {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            color: #ccc;
+        }
 
         .btn-visit-solution {
-            margin-top: auto; background-color: var(--text-pure); color: var(--bg-dark);
-            text-align: center; padding: 12px; font-weight: 700; text-decoration: none;
-            border: 2px solid var(--bg-dark); box-shadow: 3px 3px 0px var(--brand-yellow);
-            text-transform: uppercase; font-size: 0.85rem; transition: all 0.15s ease;
-        }
-        .btn-visit-solution:hover { background-color: var(--brand-yellow); }
-
-        .loading-skeleton { grid-column: span 2; text-align: center; font-family: var(--font-marker); font-size: 1.8rem; padding: 80px 0; color: var(--brand-yellow); }
-
-        /* --- COLUMNA DERECHA: TEXTOS ENORMES Y ASTERISCOS --- */
-        .skills-headline {
-            font-family: var(--font-marker); font-size: 3rem; line-height: 1;
-            color: var(--text-pure); text-shadow: 3px 3px 0px var(--brand-yellow); margin-bottom: 30px;
+            margin-top: auto;
+            background: var(--brand-purple);
+            color: var(--text-light);
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            border: var(--brutal-border);
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px var(--neon-cyan);
+            transition: background 0.2s;
         }
 
-        .puzzle-solver-profile-box { margin-bottom: 40px; }
-        .puzzle-solver-profile-box p { font-size: 1rem; line-height: 1.6; font-weight: 500; }
-
-        .heavy-pillar { margin-top: 35px; border-top: 2px dashed var(--text-muted); padding-top: 20px; }
-        .heavy-pillar h5 { font-family: var(--font-marker); font-size: 1.8rem; color: var(--brand-yellow); margin-bottom: 15px; }
-
-        .skills-list-text { list-style: none; font-size: 1rem; line-height: 1.7; font-weight: 500; }
-        .skills-list-text li { position: relative; padding-left: 25px; margin-bottom: 10px; }
-        /* Viñeta de asterisco amarillo inspirado en la referencia */
-        .skills-list-text li::before { content: '*'; position: absolute; left: 0; top: 4px; font-family: var(--font-marker); font-size: 1.5rem; color: var(--brand-yellow); line-height: 1; }
-
-        .square-badge-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        .square-badge { border: 2px solid var(--text-pure); padding: 8px 12px; font-weight: 700; font-size: 0.85rem; box-shadow: 3px 3px 0px var(--brand-yellow); }
-
-        .interests-icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px; }
-        .interest-icon-item {
-            border: 2px solid var(--text-pure); padding: 15px 5px; text-align: center; font-weight: 700; font-size: 0.8rem;
-            box-shadow: 3px 3px 0px var(--brand-yellow); transform: rotate(1deg);
+        .btn-visit-solution:hover {
+            background: var(--neon-magenta);
+            color: var(--bg-dark);
         }
-        .interest-icon-item div { font-size: 1.5rem; margin-bottom: 8px; }
 
-        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .loading-skeleton {
+            grid-column: 1 / -1;
+            font-family: var(--font-glitch);
+            font-size: 3rem;
+            color: var(--brand-purple);
+            text-align: center;
+            padding: 50px 0;
+            animation: pulse 1s infinite alternate;
+        }
 
-        @media (max-width: 968px) {
-            .hero-content, .main-container, .grid-portfolio { grid-template-columns: 1fr; }
-            .hero-giant-title { font-size: 3.5rem; }
-            .polaroid-frame { transform: rotate(0deg); }
-            .grunge-eye-container { display: none; }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        footer {
+            border-top: var(--brutal-border);
+            padding: 40px;
+            text-align: center;
+            background: var(--brand-purple);
+            color: var(--text-light);
+            font-family: var(--font-display);
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .hero-copy { transform: rotate(0); }
+            .team-card:hover { transform: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="doodle-star star-1"></div>
-    <div class="doodle-star star-2"></div>
-
-    <header>
-        <div class="brand-logo">JOEL<br><span style="font-size: 1.2rem;">DÍAZ</span></div>
-        <div class="contact-pill-box">
-            <a href="https://www.instagram.com/tecnotradepty/" class="contact-btn" target="_blank">IG</a>
-            <a href="https://wa.me/50768529324" class="contact-btn" target="_blank" style="background-color: var(--brand-yellow);">WA</a>
-            <a href="mailto:tecnotradeptyss@gmail.com" class="contact-btn" target="_blank">EMAIL</a>
-        </div>
-    </header>
+    <nav>
+        <div class="logo">DISK_</div>
+        <a href="mailto:info@diskcreativo.com" class="contact-btn">Run Command: Contacto</a>
+    </nav>
 
     <section class="hero">
-        <div class="hero-content">
-            <div>
-                <h1 class="hero-giant-title">ABOUT ME! HI!</h1>
-                <div class="hero-subtitle">I AM JOEL DÍAZ</div>
-                <p class="hero-text-paragraph">
-                    Soy la mente detrás de disq creativo. Armo soluciones tecnológicas eficientes en tiempos cómodos y sin rodeos. En internet el tiempo vuela: cada segundo de espera para tu proyecto es un billete menos en tu bolsillo.
-                </p>
-            </div>
-
-            <div class="billboard-container-3d">
-                <div class="location-tag">Panamá</div>
-                <div class="bio-tag">19 years old</div>
-                
-                <div class="polaroid-frame" id="instagramBillboard">
-                    <a href="https://www.instagram.com/tecnotradepty/" class="billboard-card" target="_blank" style="background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/05e524020b4073f435eb94519b9d5bfb19b5b893/images/Captura%20de%20pantalla%20tecnotrade.png');">
-                        <div class="billboard-content">
-                            <div></div> <!-- Espaciador superior para que el texto baje -->
-                            <div>
-                                <h2 class="billboard-main-text">¿Compra, vende o repara tu teléfono?</h2>
-                                <div class="billboard-action-badge">Toca Aquí</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ojo Geométrico Grunge Interactivo -->
-        <div class="grunge-eye-container">
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <!-- Contorno irregular -->
-                <path d="M5,50 L30,20 L70,15 L95,50 L75,85 L25,80 Z" stroke="var(--brand-yellow)" stroke-width="4" fill="none" stroke-linejoin="round"/>
-                <!-- Párpado interno -->
-                <path d="M15,50 L40,30 L60,30 L85,50 L65,70 L35,70 Z" stroke="#ffffff" stroke-width="2" fill="none" stroke-linejoin="round"/>
-                <!-- Pupila que sigue al mouse -->
-                <circle id="grungePupil" cx="50" cy="50" r="8" fill="var(--brand-yellow)"/>
-                <!-- Rayos abstractos -->
-                <path d="M50,15 L50,0 M15,25 L5,15 M85,25 L95,15" stroke="var(--brand-yellow)" stroke-width="3"/>
-            </svg>
+        <h1 class="hero-title">
+            DISK <span>CREATIVO</span>
+        </h1>
+        <div class="hero-subtitle">Sí, somos *disque* creativos.</div>
+        
+        <div class="hero-copy">
+            <p><strong>[ SYSTEM OVERRIDE ]</strong> Dominamos el ecosistema digital. ¿Webs, Apps, PWAs? Check. ¿Soluciones empresariales a medida? Check. No hay límite técnico que nos detenga: lo que sabemos, lo ejecutamos con precisión militar. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.</p>
         </div>
     </section>
 
-    <main class="main-container" id="content">
-        <div class="left-col">
-            <div class="category-bar-wrapper">
-                <div class="category-bar" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">Todos</button>
-                    <button class="filter-btn" data-category="webs">Webs</button>
-                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
-                </div>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            * DESARROLLO WEB * PWAs * APPS MÓVILES * BRANDING * UI/UX * ESTRATEGIA DIGITAL * AUTOMATIZACIÓN * MARKETING TECNOLÓGICO * DESARROLLO WEB * PWAs * APPS MÓVILES * BRANDING * UI/UX * ESTRATEGIA DIGITAL * AUTOMATIZACIÓN * MARKETING TECNOLÓGICO
+        </div>
+    </div>
+
+    <section class="team-section">
+        <h2 class="section-header">/// CORE TEAM</h2>
+        <div class="team-grid">
+            
+            <div class="team-card">
+                <h3>JOEL DÍAZ</h3>
+                <span class="team-role">Dev & Arquitectura Web</span>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
 
-            <div class="grid-portfolio" id="portfolioGrid">
-                <div class="loading-skeleton">Descifrando la base de datos...</div>
+            <div class="team-card" style="border-color: var(--neon-cyan); box-shadow: 8px 8px 0px var(--neon-yellow);">
+                <h3 style="color: var(--neon-magenta);">JONATHAN OROZCO</h3>
+                <span class="team-role">Estrategia & Operaciones</span>
+                <p>El puente entre el código y el mercado. Marketing para Tecnotrade & Mobile Hub, y asistencia táctica para escalar proyectos sin fricción.</p>
             </div>
+
+            <div class="team-card" style="border-color: var(--neon-magenta); box-shadow: 8px 8px 0px var(--neon-cyan);">
+                <h3 style="color: var(--brand-purple);">AYL JONES</h3>
+                <span class="team-role">Dirección Creativa & Mkt</span>
+                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al marketing de Disk Creativo.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="portfolio-section" id="content">
+        <h2 class="section-header">/// ARCHIVOS PROCESADOS</h2>
+        
+        <div class="category-bar" id="categoryBar">
+            <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+            <button class="filter-btn" data-category="webs">/WEBS</button>
+            <button class="filter-btn" data-category="producción de contenido">/CONTENIDO</button>
+            <button class="filter-btn" data-category="soluciones de hardware">/HARDWARE</button>
         </div>
 
-        <div class="right-col">
-            <h3 class="skills-headline reveal">THIS IS MY<br>STRENGTHS!</h3>
-
-            <div class="puzzle-solver-profile-box reveal">
-                <p>
-                    Me pones una computadora, una idea de negocio o una placa lógica averiada al frente y mi mente solo ve un rompecabezas esperando ser optimizado. Utilizo Inteligencia Artificial avanzada para acelerar drásticamente los tiempos de programación.
-                </p>
-
-                <div class="heavy-pillar">
-                    <h5>* SKILLS</h5>
-                    <div class="square-badge-container">
-                        <div class="square-badge">HTML5 Nativo</div>
-                        <div class="square-badge">CSS3 / Grid</div>
-                        <div class="square-badge">JavaScript (ES6+)</div>
-                        <div class="square-badge">Git & GitHub</div>
-                        <div class="square-badge">AI Automation</div>
-                    </div>
-                </div>
-
-                <div class="heavy-pillar">
-                    <h5>* EXPERIENCES</h5>
-                    <ul class="skills-list-text">
-                        <li>Construcción acelerada de Startups y Portafolios Comerciales.</li>
-                        <li>Producción Audiovisual Híbrida (Edición Manual Pro + Generación IA).</li>
-                        <li>Edición de Imagen y Video optimizado para conversión en Redes Sociales.</li>
-                        <li>Diagnóstico micro-electrónico de Hardware Móvil y Sistemas.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="puzzle-solver-profile-box reveal">
-                <h5 style="font-family: var(--font-marker); font-size: 1.8rem; color: var(--text-pure); margin-bottom: 15px;">* INTERESTS</h5>
-                <div class="interests-icon-grid">
-                    <div class="interest-icon-item"><div>🏋️‍♂️</div>Gym</div>
-                    <div class="interest-icon-item"><div>📱</div>Hardware</div>
-                    <div class="interest-icon-item"><div>🧩</div>Puzzles</div>
-                    <div class="interest-icon-item"><div>⚡</div>PWAs</div>
-                </div>
-            </div>
+        <div class="grid-portfolio" id="portfolioGrid">
+            <div class="loading-skeleton">HACIENDO FETCH A LA BASE DE DATOS...</div>
         </div>
-    </main>
+    </section>
 
-    <footer style="border-top: 2px dashed var(--text-muted); text-align: center; padding: 40px; font-weight: 700;">
-        <p>&copy; 2026 JOEL DÍAZ / DISQ CREATIVO.</p>
+    <footer>
+        [ END OF FILE ] &copy; 2026 DISK CREATIVO.
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Se mantiene la API exacta de tu versión anterior para no quebrar el backend
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
             const filterButtons = document.querySelectorAll('.filter-btn');
-            const pupil = document.getElementById('grungePupil');
 
-            // --- EYE TRACKING ENGINE ---
-            window.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 12 - 6;
-                const y = (e.clientY / window.innerHeight) * 12 - 6;
-                pupil.style.transform = `translate(${x}px, ${y}px)`;
-            });
-
-            // --- POLAROID 3D TILT ENGINE ---
-            function apply3DTilt(element) {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const rotateX = ((rect.height / 2) - y) / 15; 
-                    const rotateY = (x - (rect.width / 2)) / 15;
-                    // Mantiene el tilt y respeta la rotación inicial de la polaroid (-2deg)
-                    element.style.transform = `rotate(2deg) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-                element.addEventListener('mouseleave', () => {
-                    element.style.transform = 'rotate(2deg) rotateX(0deg) rotateY(0deg)';
-                });
-            }
-
-            apply3DTilt(document.getElementById('instagramBillboard'));
-
-            // --- FETCH API ---
             async function fetchProyectos() {
                 try {
                     const response = await fetch(API_URL);
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">Fallo al leer datos.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="color: var(--neon-magenta);">ERROR 404: FALLO AL LEER SECTORES DEL DISCO.</div>';
                 }
             }
 
-            // --- RENDER GRID ---
             function renderGrid(categoriaFiltro) {
                 grid.innerHTML = ''; 
                 
@@ -449,13 +470,13 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton">No hay proyectos.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="color: var(--neon-cyan);">NO HAY ARCHIVOS EN ESTE DIRECTORIO.</div>';
                     return;
                 }
 
                 proyectosFiltrados.forEach(p => {
                     const card = document.createElement('div');
-                    card.className = 'marketplace-card reveal is-visible';
+                    card.className = 'marketplace-card';
 
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
                     if (imgUrl !== "") {
@@ -477,7 +498,7 @@
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
                         </div>
-                        <a href="${p.enlace}" class="btn-visit-solution" target="_blank">VER PROYECTO ↗</a>
+                        <a href="${p.enlace}" class="btn-visit-solution" target="_blank">EJECUTAR PROYECTO ↗</a>
                     `;
                     
                     card.appendChild(bodyInfo);
@@ -485,7 +506,6 @@
                 });
             }
 
-            // --- FILTROS ---
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterButtons.forEach(b => b.classList.remove('active'));
@@ -494,19 +514,6 @@
                 });
             });
 
-            // --- INTERSECTION OBSERVER ---
-            const revealElements = document.querySelectorAll('.reveal');
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            revealElements.forEach(el => observer.observe(el));
-            
             fetchProyectos();
         });
     </script>
