@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Rubik+Glitch&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -21,6 +21,7 @@
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
+            --font-glitch: 'Rubik Glitch', system-ui;
             --font-creative: 'Permanent Marker', cursive;
             --font-body: 'Space Grotesk', sans-serif;
         }
@@ -67,31 +68,34 @@
             font-family: var(--font-body);
         }
 
-        /* --- CAJAS ESTILO GOTAS ORGÁNICAS DERRAMADAS --- */
+        /* --- CAJAS ESTILO SPLAT (MANCHA DE PINTURA DERRAMADA) --- */
         .splash-box {
-            background: linear-gradient(135deg, var(--brand-purple), var(--brand-purple-dark));
+            background: var(--brand-purple);
             color: #FFFFFF;
             font-family: var(--font-creative);
             font-size: 1.3rem;
-            padding: 20px 40px;
-            /*clip-path complejo para geometría irregular y derramada */
-            clip-path: polygon(50% 0%, 75% 5%, 90% 15%, 100% 35%, 95% 65%, 85% 85%, 70% 95%, 50% 100%, 30% 98%, 15% 90%, 5% 70%, 0% 40%, 10% 15%, 25% 5%);
-            box-shadow: 0px 15px 30px rgba(107, 0, 255, 0.35);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 25px 45px;
+            /* Geometría hiper-irregular simulando una salpicadura / mancha real */
+            clip-path: polygon(
+                45% 0%, 55% 15%, 85% 5%, 75% 25%, 100% 35%, 80% 50%, 
+                95% 75%, 75% 65%, 65% 95%, 50% 80%, 35% 100%, 25% 70%, 
+                0% 85%, 15% 55%, 0% 35%, 20% 30%, 5% 5%, 35% 15%
+            );
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             letter-spacing: 1.5px;
-            border: none;
             position: relative;
             z-index: 50;
+            filter: drop-shadow(0px 10px 15px rgba(107, 0, 255, 0.4));
         }
 
         .splash-box:hover {
-            /* Alteración de la geometría para efecto de líquido expandiéndose */
-            clip-path: polygon(45% 3%, 70% 10%, 85% 20%, 98% 40%, 100% 60%, 90% 80%, 75% 90%, 55% 100%, 35% 98%, 18% 92%, 8% 75%, 3% 50%, 15% 20%, 30% 10%);
-            transform: scale(1.05) rotate(-1.5deg);
-            box-shadow: 0px 25px 45px rgba(107, 0, 255, 0.5);
+            transform: scale(1.08) rotate(2deg);
+            background: var(--brand-purple-dark);
             color: #FFFFFF;
         }
 
@@ -139,40 +143,40 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 12; position: relative; }
         
-        /* --- ESTILO VERDADERO LIQUID GLASS TRANSLÚCIDO (I, E) --- */
+        /* --- ESTILO LIQUID GLASS APLICADO DIRECTAMENTE A LA FUENTE --- */
         .liquid-glass-letter {
+            font-family: var(--font-glitch); /* Efecto Glitch Restaurado */
             display: inline-block;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: var(--font-display);
-            /* FONDO TRANSLÚCIDO PURO - SE ELIMINÓ EL BLOQUE SÓLIDO */
-            background: transparent;
-            /* El blur mágico que distorsionará el logo al pasar por detrás - AUMENTADO */
-            backdrop-filter: blur(25px) saturate(180%) contrast(1.1);
-            -webkit-backdrop-filter: blur(25px) saturate(180%) contrast(1.1);
-            /* Borde translúcido sutil para definir la forma */
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px; /* Bordes suaves tipo cristal soplado */
-            padding: 0 18px;
-            margin: 0 8px;
-            box-shadow: 0 15px 40px rgba(107, 0, 255, 0.1), inset 0 0 25px rgba(255, 255, 255, 0.3);
+            
+            /* Textura iridiscente / arcoíris cristalino inyectada en la letra */
+            background: linear-gradient(
+                120deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 200, 255, 0.7) 20%, 
+                rgba(200, 255, 255, 0.8) 40%, 
+                rgba(255, 255, 255, 0.5) 60%, 
+                rgba(255, 255, 200, 0.8) 80%, 
+                rgba(255, 255, 255, 0.95) 100%
+            );
+            background-size: 200% auto;
+            
+            /* Esto recorta el fondo brillante para que tome la forma de la letra */
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Filtros para darle ese toque de vidrio 3D y despegue de la pantalla */
+            filter: drop-shadow(3px 5px 8px rgba(107, 0, 255, 0.4)) drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.9));
+            
             position: relative;
-            z-index: 20; /* Siempre por encima del logo para lograr la distorsión visual */
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            z-index: 20; /* Siempre al frente del logo */
+            animation: shineGlass 4s linear infinite;
         }
 
-        /* Brillo sutil y translúcido dentro del cristal */
-        .liquid-glass-letter::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent 50%),
-                        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.1), transparent 50%);
-            mix-blend-mode: color-dodge;
-            pointer-events: none;
-            opacity: 0.6;
+        /* Animación para que el brillo líquido se mueva dentro de la letra */
+        @keyframes shineGlass {
+            to { background-position: 200% center; }
         }
 
         .giant-transparent-logo {
@@ -397,8 +401,7 @@
             nav { flex-direction: column; gap: 20px; }
             .giant-transparent-logo { width: 85vw; }
             .hero-giant-text { font-size: clamp(4rem, 15vw, 15rem); letter-spacing: -2px;}
-            .liquid-glass-letter { padding: 0 10px; border-radius: 12px; margin: 0 4px; border-width: 1px;}
-            .splash-box { font-size: 1rem; padding: 15px 30px; }
+            .splash-box { font-size: 1.1rem; padding: 20px 35px; }
         }
     </style>
 </head>
@@ -436,7 +439,7 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
         </div>
 
-        <div class="splash-box" style="margin-top: 5rem; font-size: 1.6rem; padding: 25px 60px; z-index: 10;">
+        <div class="splash-box" style="margin-top: 5rem; font-size: 1.4rem; padding: 30px 65px; z-index: 10;">
             DISQUE CREATIVOS, LO HACEMOS REAL
         </div>
     </section>
@@ -492,7 +495,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Interacción Parallax para el Logo Gigante - Suavizado
+            // Interacción Parallax para el Logo Gigante
             const heroContainer = document.getElementById('hero-container');
             const logo = document.getElementById('dynamic-logo');
             
@@ -501,7 +504,6 @@
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
                 
-                // Mueve el logo sutilmente en dirección opuesta al mouse
                 logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
             });
 
