@@ -11,7 +11,8 @@
     
     <style>
         :root {
-            var(--bg-cream): #F4F3EF;       
+            /* Paleta Editorial Disk Creativo */
+            --bg-cream: #F4F3EF;       
             --brand-purple: #6B00FF;   
             --brand-purple-dark: #4A00E0;
             --neon-cyan: #00F0FF;
@@ -31,13 +32,13 @@
         }
 
         body {
-            background-color: #F4F3EF;
+            background-color: var(--bg-cream);
             color: var(--text-dark);
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Espacio abajo para que la cámara no tape contenido al final */
-            padding-bottom: 160px; 
+            /* Espacio abajo para la cámara gigante */
+            padding-bottom: 220px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -68,7 +69,7 @@
             font-family: var(--font-body);
         }
 
-        /* --- CAJAS ESTILO SPLASH DE PINTURA (IMÁGENES) --- */
+        /* --- CAJAS ESTILO SPLASH (TAMAÑOS AGRANDADOS) --- */
         .splat-base {
             color: #FFFFFF;
             font-family: var(--font-creative);
@@ -83,25 +84,25 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* Splat Corto (Botón de Contacto) */
+        /* Splat Corto (Botón de Contacto) - AGRANDADO */
         .splat-short {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000006bd881f58f53c6ff8407c2f9.png');
             background-size: 100% 100%;
-            width: 200px;
-            height: 70px;
-            font-size: 1rem;
-            padding-bottom: 5px;
+            width: 250px; /* Aumentado para que el texto respire */
+            height: 90px; /* Aumentado */
+            font-size: 1.15rem;
+            padding-bottom: 8px; /* Ajuste visual exacto para centrar */
             filter: drop-shadow(0px 6px 10px rgba(107,0,255,0.3));
         }
 
-        /* Splat Largo (Status inferior) */
+        /* Splat Largo (Status inferior) - AGRANDADO */
         .splat-long {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/1784603721693.png');
             background-size: 100% 100%;
-            width: clamp(280px, 70vw, 600px);
-            height: 100px;
+            width: clamp(340px, 85vw, 750px); /* Mucho más ancho */
+            height: 140px; /* Más alto para que el texto no toque bordes */
             font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-            margin-top: 2rem; /* COMPACTADO: Reducido de 4rem a 2rem */
+            margin-top: 2rem; 
             filter: drop-shadow(0px 8px 12px rgba(107,0,255,0.3));
             z-index: 10;
         }
@@ -114,12 +115,12 @@
         /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
-            min-height: 85vh; /* COMPACTADO: Reducido de 100vh a 85vh */
+            min-height: 85vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12vh 2vw 2vh 2vw; /* COMPACTADO */
+            padding: 12vh 2vw 2vh 2vw; 
             overflow: hidden;
             background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.06) 0%, transparent 60%);
         }
@@ -200,7 +201,7 @@
         /* --- SECCIÓN DARK (EQUIPO / IDENTIDAD) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
-            padding: 4rem 4vw; /* COMPACTADO: Reducido de 8rem a 4rem */
+            padding: 4rem 4vw; 
             color: #F4F3EF;
             position: relative;
         }
@@ -210,14 +211,14 @@
             font-size: clamp(4rem, 12vw, 12rem);
             line-height: 0.8;
             color: var(--brand-purple);
-            margin-bottom: 2rem; /* COMPACTADO */
+            margin-bottom: 2rem; 
             text-align: left;
         }
 
         .team-grid-editorial {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem; /* COMPACTADO: Reducido de 3rem a 2rem */
+            gap: 2rem; 
             border-top: 1px solid rgba(244, 243, 239, 0.1);
             padding-top: 2rem;
         }
@@ -248,8 +249,8 @@
 
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
-            background-color: #F4F3EF;
-            padding: 4rem 4vw; /* COMPACTADO: Reducido de 8rem a 4rem */
+            background-color: var(--bg-cream);
+            padding: 4rem 4vw; 
         }
 
         .portfolio-massive-title {
@@ -257,7 +258,7 @@
             font-size: clamp(3.5rem, 10vw, 10rem);
             line-height: 0.8;
             color: var(--text-dark);
-            margin-bottom: 0.5rem; /* COMPACTADO */
+            margin-bottom: 0.5rem; 
             text-transform: uppercase;
         }
 
@@ -265,7 +266,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 2rem; /* COMPACTADO */
+            margin-bottom: 2rem; 
             flex-wrap: wrap;
             gap: 1.5rem;
             border-bottom: 2px solid var(--brand-purple);
@@ -293,14 +294,14 @@
 
         .filter-btn:hover, .filter-btn.active {
             background: var(--brand-purple);
-            color: #F4F3EF;
+            color: var(--bg-cream);
             border-color: var(--brand-purple);
         }
 
         .grid-portfolio {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem; /* COMPACTADO */
+            gap: 2rem; 
         }
 
         .marketplace-card {
@@ -312,7 +313,7 @@
 
         .card-preview-thumb {
             width: 100%;
-            height: 250px; /* COMPACTADO */
+            height: 250px; 
             background-color: #e5e3db;
             background-size: cover;
             background-position: center;
@@ -383,17 +384,16 @@
             50% { opacity: 0.4; }
         }
 
-        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI) - REPARADA Y PROPORCIONAL --- */
+        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - AGRANDADA) --- */
         .camera-nav-bar {
             position: fixed;
             bottom: -5px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%; 
-            max-width: 800px; /* Evita que crezca sin control en pantallas gigantes */
-            height: 180px; /* ALTURA AUMENTADA PARA RECUPERAR LA PROPORCIÓN */
+            max-width: 900px; /* Incrementado para que la cámara sea masiva */
+            height: 220px; /* ALTURA MUCHO MAYOR PARA EVITAR EL TEXTO DESBORDADO */
             
-            /* AQUÍ ESTÁ LA MAGIA: CONTAIN en lugar de 100% 100% */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000009d70820c862da0c8c90eab1d.png');
             background-size: contain; 
             background-position: center bottom; 
@@ -403,8 +403,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5%; 
-            padding-top: 35px; /* Ajuste para bajar el texto a la zona de botones */
+            gap: 6%; /* Mayor separación */
+            padding-top: 55px; /* IMPORTANTE: Empuja el texto HASTA ABAJO dentro del cuerpo de la cámara */
             filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.3));
         }
 
@@ -452,8 +452,8 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             background-color: var(--dark-slate);
-            color: #F4F3EF;
-            padding-bottom: 180px; /* COMPACTADO pero asegurando espacio para la cámara */
+            color: var(--bg-cream);
+            padding-bottom: 240px; /* Margen vital para que la cámara no oculte el footer */
         }
 
         @media (max-width: 900px) {
@@ -465,16 +465,18 @@
                 letter-spacing: -2px;
             }
 
-            /* BARRA CÁMARA MÓVIL: ALTURA CORRECTA SIN ESTIRAR */
+            /* BARRA CÁMARA MÓVIL: AGRANDADA Y CON EL TEXTO CENTRADO */
             .camera-nav-bar { 
-                height: 125px; /* Altura generosa para móvil */
-                gap: 3%; 
-                padding-top: 18px; 
+                height: 140px; /* Cámara móvil más alta */
+                gap: 4%; 
+                padding-top: 30px; /* Centra el texto dentro del gráfico */
+                max-width: 100vw;
             }
             .camera-nav-link { font-size: 0.65rem; }
             
-            .splat-short { width: 180px; height: 65px; font-size: 0.9rem;}
-            .splat-long { width: 90vw; height: 90px; font-size: 1.1rem; }
+            /* SPLATS MÓVIL AGRANDADOS */
+            .splat-short { width: 210px; height: 75px; font-size: 1rem;}
+            .splat-long { width: 95vw; height: 110px; font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -583,8 +585,7 @@
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    
-                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
+                    logo.style.transform = `translate(calc(-50% + ${x * -30}px), calc(-50% + ${y * -30}px))`;
                 });
 
                 heroContainer.addEventListener('mouseleave', () => {
