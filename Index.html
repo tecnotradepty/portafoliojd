@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disk Creativo | Unidad de Almacenamiento Editorial</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Desplazamiento suave para los anclajes de la cámara */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            /* Paleta Editorial Disk Creativo */
+            --bg-cream: #F4F3EF;       
+            --brand-purple: #6B00FF;   
+            --dark-slate: #110E17;     
+            --text-dark: #1A1A1A;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            /* Padding inferior masivo para que el Dock de la cámara no cubra contenido final */
+            padding-bottom: 300px; 
+        }
+
+        /* --- EFECTO DE RUIDO (NOISE) --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* --- NAVEGACIÓN SUPERIOR (MINIMALISTA) --- */
+        header {
+            display: flex;
+            justify-content: center; /* Centrado absoluto del título */
+            align-items: center;
+            padding: 2.5rem 4vw;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .header-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            letter-spacing: 1px;
+        }
+
+        /* --- HERO SECTION (SECCIÓN 1 - DISK CREATIVO) CON FONDO MORADO --- */
+        .hero-section {
+            position: relative;
+            min-height: 95vh; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12vh 2vw 2vh 2vw; 
+            overflow: hidden;
+            
+            /* IMPLEMENTACIÓN CORRECTA DEL PNG MORADO COMO FONDO DE LA SECCIÓN 1 */
+            background-color: var(--bg-cream); /* Crema base */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f92a3f6eb547d9f9c4199787a7c58e11b1b6c213/DIQC/file_000000006760820c9cba8a53520e4d63.png');
+            background-position: center bottom; /* Manchas emergiendo desde abajo */
+            background-repeat: no-repeat;
+            background-size: cover; /* Asegura cobertura total de la sección */
+        }
+
+        .hero-sandwich {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            z-index: 10; /* Asegura que el texto esté sobre el splash morado */
+        }
+
+        .hero-giant-text {
+            font-family: var(--font-display);
+            font-size: clamp(8rem, 30vw, 25rem);
+            line-height: 0.85;
+            color: var(--brand-purple);
+            text-align: center;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-giant-text div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .z-back { z-index: 1; position: relative; }
+        .z-front { z-index: 10; position: relative; }
+        
+        /* --- ESTILO LIQUID GLASS ESTÁTICO Y PRISMÁTICO (E, I, I) --- */
+        .liquid-glass-letter {
+            font-family: var(--font-display);
+            display: inline-block;
+            
+            /* Textura transparente con toques prismáticos en los bordes */
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.6) 0%, 
+                rgba(0, 240, 255, 0.5) 20%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.4) 80%,  
+                rgba(255, 255, 255, 0.6) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            
+            /* Relleno casi transparente para ver el disco por detrás */
+            color: rgba(255, 255, 255, 0.1);
+            
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            text-shadow: 
+                0px 5px 15px rgba(0, 0, 0, 0.2), 
+                0px 0px 20px rgba(255, 255, 255, 0.3); 
+            
+            position: relative;
+            z-index: 20; 
+        }
+
+        .giant-transparent-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(350px, 55vw, 800px); 
+            z-index: 5; 
+            animation: floatLogo 8s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
+
+        /* --- SECCIÓN DARK (EQUIPO / IDENTIDAD) --- */
+        .dark-intro-section {
+            background-color: var(--dark-slate);
+            padding: 4rem 4vw; 
+            color: #F4F3EF;
+            position: relative;
+        }
+
+        .giant-dark-heading {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 12rem);
+            line-height: 0.8;
+            color: var(--brand-purple);
+            margin-bottom: 2rem; 
+            text-align: left;
+        }
+
+        .team-grid-editorial {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; 
+            border-top: 1px solid rgba(244, 243, 239, 0.1);
+            padding-top: 2rem;
+        }
+
+        .team-member-col h4 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: #F4F3EF;
+            margin-bottom: 0.2rem;
+            letter-spacing: 1px;
+        }
+
+        .team-member-col .role {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--brand-purple);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .team-member-col p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #A09DA5;
+            font-weight: 400;
+        }
+
+        /* --- PORTAFOLIO (API SHEETS) --- */
+        .portfolio-section {
+            background-color: var(--bg-cream);
+            padding: 4rem 4vw; 
+        }
+
+        .portfolio-massive-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 10rem);
+            line-height: 0.8;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem; 
+            text-transform: uppercase;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem; 
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-bottom: 2px solid var(--brand-purple);
+            padding-bottom: 1.5rem;
+        }
+
+        .category-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            padding: 6px 20px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--brand-purple);
+            color: var(--bg-cream);
+            border-color: var(--brand-purple);
+        }
+
+        .grid-portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem; 
+        }
+
+        .marketplace-card {
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card-preview-thumb {
+            width: 100%;
+            height: 250px; 
+            background-color: #e5e3db;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 1rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .marketplace-card:hover .card-preview-thumb {
+            transform: translateY(-5px);
+            border-color: var(--brand-purple);
+        }
+
+        .card-body-info h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-body-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .btn-visit-solution {
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--brand-purple);
+            border-bottom: 2px solid var(--brand-purple);
+            align-self: flex-start;
+            padding-bottom: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-visit-solution:hover {
+            color: var(--neon-magenta);
+            border-color: var(--neon-magenta);
+        }
+
+        .loading-skeleton {
+            grid-column: 1 / -1;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--brand-purple);
+            text-align: left;
+            padding: 2rem 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* =========================================================
+           SISTEMA DE DOCK INDEPENDIENTE (SÓLO CÁMARA + HITBOXES)
+           ========================================================= */
+        
+        .dock-system {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 1000;
+            pointer-events: none; /* Deja pasar los clics si no tocan la cámara */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: -5px;
+        }
+
+        /* Capa Frente: Contenedor Físico de la Cámara, Proporcionado y Optimizado */
+        .camera-container {
+            position: relative;
+            width: 100%;
+            /* TAMAÑO OPTIMIZADO: No es gigante, parece un panel táctico real */
+            max-width: 800px; 
+            pointer-events: auto; /* Reactiva los clics sobre la cámara */
+            /* SIN FONDO MORADO AQUÍ. Sólo la cámara. */
+        }
+
+        .camera-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0px -5px 20px rgba(0,0,0,0.4));
+        }
+
+        /* Hitboxes invisibles calibradas sobre los botones de la cámara */
+        .hitbox {
+            position: absolute;
+            bottom: 18%; 
+            height: 35%; 
+            z-index: 1010;
+            cursor: pointer;
+            /* Descomentar para ajustar hitboxes: border: 1px solid red; */
+        }
+
+        /* Coordenadas horizontales (X) */
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            background-color: var(--dark-slate);
+            color: var(--bg-cream);
+            padding-bottom: 200px; 
+        }
+
+        /* --- MEDIA QUERIES (MÓVIL) --- */
+        @media (max-width: 900px) {
+            .giant-transparent-logo { width: 80vw; }
+            .hero-giant-text { font-size: clamp(6.5rem, 25vw, 22rem); letter-spacing: -2px; }
+            
+            /* Ajuste para que la cámara llegue de borde a borde en el móvil */
+            .camera-container { max-width: 100vw; }
+            
+            body { padding-bottom: 150px; }
+            footer { padding-bottom: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <header>
+        <div class="header-logo-text">DISQ // CREATIVO</div>
+    </header>
+
+    <section class="hero-section" id="inicio">
+        
+        <div class="hero-sandwich">
+            <h1 class="hero-giant-text">
+                <div>
+                    <span class="z-back">D</span>
+                    <span class="z-front liquid-glass-letter">I</span>
+                    <span class="z-back">S</span>
+                    <span class="z-front">K</span>
+                </div>
+                <div>
+                    <span class="z-front">C</span>
+                    <span class="z-back">R</span>
+                    <span class="z-front liquid-glass-letter">E</span>
+                    <span class="z-back">A</span>
+                    <span class="z-back">T</span>
+                    <span class="z-front liquid-glass-letter">I</span>
+                    <span class="z-back">V</span>
+                    <span class="z-back">O</span>
+                </div>
+            </h1>
+
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
+        </div>
+    </section>
+
+    <section class="dark-intro-section" id="identidad">
+        <h2 class="giant-dark-heading">SOMOS<br>EL DISCO</h2>
+        
+        <div class="team-grid-editorial">
+            <div class="team-member-col">
+                <h4>JOEL DÍAZ</h4>
+                <span class="role">Dev & Arquitectura Web</span>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
+            </div>
+            <div class="team-member-col">
+                <h4>JONATHAN OROZCO</h4>
+                <span class="role">Estrategia & Operaciones</span>
+                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
+            </div>
+            <div class="team-member-col">
+                <h4>AYL JONES</h4>
+                <span class="role">Dirección Creativa & Mkt</span>
+                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section" id="proyectos">
+        
+        <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
+
+        <div class="portfolio-header">
+            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
+            </p>
+            
+            <div class="category-bar" id="categoryBar">
+                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                <button class="filter-btn" data-category="webs">Webs</button>
+                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
+            </div>
+        </div>
+
+        <div class="grid-portfolio" id="portfolioGrid">
+            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
+        </div>
+    </section>
+
+    <footer>
+        [ END OF FILE ] © 2026 DISK CREATIVO
+    </footer>
+
+    <div class="dock-system">
+        <div class="camera-container">
+            <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/b112027725818c1f63f2de93f101dc4ccbbee440/DIQC/1784610614803.png" alt="Barra de Navegación Cámara">
+            
+            <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+            <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+            <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+            <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const heroContainer = document.getElementById('inicio');
+            const logo = document.getElementById('dynamic-logo');
+            
+            if(heroContainer && logo) {
+                heroContainer.addEventListener('mousemove', (e) => {
+                    const rect = heroContainer.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
+                });
+
+                heroContainer.addEventListener('mouseleave', () => {
+                    logo.style.transform = `translate(-50%, -50%)`;
+                });
+            }
+
+            // Lógica de Google Sheets API (Intacta)
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
+            let proyectosData = [];
+            const grid = document.getElementById('portfolioGrid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            async function fetchProyectos() {
+                try {
+                    const response = await fetch(API_URL);
+                    proyectosData = await response.json();
+                    renderGrid('todos');
+                } catch (error) {
+                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
+                }
+            }
+
+            function renderGrid(categoriaFiltro) {
+                grid.innerHTML = ''; 
+                
+                const proyectosFiltrados = proyectosData.filter(p => {
+                    if (categoriaFiltro === 'todos') return true;
+                    let catSheet = p.categoria.toLowerCase().trim();
+                    let catFiltro = categoriaFiltro.toLowerCase().trim();
+                    let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
+                    let stemFiltro = catFiltro.endsWith('s') ? catFiltro.slice(0, -1) : catFiltro;
+                    return catSheet.includes(stemFiltro) || catFiltro.includes(catSheet) || stemSheet.includes(stemFiltro);
+                });
+
+                if (proyectosFiltrados.length === 0) {
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
+                    return;
+                }
+
+                proyectosFiltrados.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'marketplace-card';
+
+                    let imgUrl = p.imagen ? p.imagen.trim() : "";
+                    let headerHtml = imgUrl !== "" 
+                        ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
+                        : `<div class="card-preview-thumb"></div>`;
+
+                    card.innerHTML = `
+                        ${headerHtml}
+                        <div class="card-body-info">
+                            <span class="card-badge">${p.categoria}</span>
+                            <h3>${p.titulo}</h3>
+                            <p>${p.descripcion}</p>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+            }
+
+            if(filterButtons.length > 0) {
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        renderGrid(btn.getAttribute('data-category'));
+                    });
+                });
+            }
+
+            fetchProyectos();
+        });
+    </script>
+</body>
+</html>
+
