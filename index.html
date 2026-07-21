@@ -12,12 +12,12 @@
     <style>
         :root {
             /* Paleta Editorial Disk Creativo */
-            --bg-cream: #F4F3EF;       /* Fondo hueso/crema principal */
-            --brand-purple: #6B00FF;   /* Morado Ultravioleta principal */
+            --bg-cream: #F4F3EF;       
+            --brand-purple: #6B00FF;   
             --brand-purple-dark: #4A00E0;
             --neon-cyan: #00F0FF;
             --neon-magenta: #FF003C;
-            --dark-slate: #110E17;     /* Cero negro puro */
+            --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
@@ -37,8 +37,8 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Espacio abajo para que la barra cámara no tape contenido al hacer scroll */
-            padding-bottom: 150px; 
+            /* Espacio abajo para que la cámara gigante no tape contenido al hacer scroll */
+            padding-bottom: 160px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -91,7 +91,7 @@
             width: 220px;
             height: 80px;
             font-size: 1.1rem;
-            padding-bottom: 5px; /* Ajuste visual para centrar en la imagen */
+            padding-bottom: 5px;
             filter: drop-shadow(0px 8px 12px rgba(107,0,255,0.3));
         }
 
@@ -112,7 +112,7 @@
             filter: drop-shadow(0px 12px 18px rgba(107,0,255,0.5));
         }
 
-        /* --- HERO SECTION (JUEGO DE CAPAS, TEXTO GIGANTE) --- */
+        /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
             min-height: 100vh;
@@ -135,8 +135,7 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            /* TAMAÑO GIGANTE - INCREMENTADO */
-            font-size: clamp(8rem, 30vw, 25rem); 
+            font-size: clamp(8rem, 30vw, 25rem); /* TAMAÑO GIGANTE MANTENIDO */
             line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
@@ -153,35 +152,30 @@
             align-items: center;
         }
 
-        /* Utilidad de capas (Z-Index Sandwich) */
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- ESTILO VERDADERO LIQUID GLASS TRANSLÚCIDO (E, I, I) - Apple Style Clean Glass --- */
+        /* --- ESTILO PURE LIQUID GLASS (APPLE STYLE) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             color: rgba(255, 255, 255, 0.8);
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             
-            /* Textura iridiscente sutil y translúcida */
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(180, 255, 255, 0.2) 20%, rgba(255, 200, 255, 0.3) 40%, rgba(255, 255, 255, 0.6) 60%, rgba(180, 255, 255, 0.2) 80%, rgba(255, 255, 255, 0.5) 100%);
             background-size: 200% auto;
             
-            /* Recorta el fondo brillante para que tome la forma de la letra */
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Filtros para darle ese toque de vidrio 3D y despegue de la pantalla - MEJORADO */
             filter: drop-shadow(0px 10px 20px rgba(107, 0, 255, 0.4)) drop-shadow(inset 0 0 10px rgba(255, 255, 255, 0.5)) saturate(160%);
             
             position: relative;
-            z-index: 20; /* Siempre por encima del logo para lograr la distorsión visual */
+            z-index: 20; 
             animation: shineGlass 5s linear infinite;
         }
 
-        /* Animación para que el brillo líquido se mueva dentro de la letra */
         @keyframes shineGlass {
             to { background-position: 200% center; }
         }
@@ -191,9 +185,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* TAMAÑO DEL LOGO INCREMENTADO - Apple Style Dominante */
-            width: clamp(350px, 55vw, 800px); 
-            z-index: 5; /* Pasa POR DEBAJO de las letras Liquid Glass (E, I, I) */
+            width: clamp(350px, 55vw, 800px); /* TAMAÑO GIGANTE MANTENIDO */
+            z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
@@ -391,31 +384,27 @@
             50% { opacity: 0.4; }
         }
 
-        /* --- NUEVO: BARRA DE NAVEGACIÓN INFERIOR DE ANCHO COMPLETO (CÁMARA UI) --- */
+        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - SIN CAJA NEGRA, TAMAÑO AUMENTADO) --- */
         .camera-nav-bar {
             position: fixed;
-            bottom: 0;
+            bottom: -5px; /* Ligero margen negativo para integrarlo perfecto a la base */
             left: 0;
-            /* ANCHO COMPLETO - INCREMENTADO */
             width: 100%; 
-            height: 130px; 
-            /* Fondo sólido para que se integre perfectamente en la base */
-            background-color: var(--dark-slate);
+            height: 150px; /* TAMAÑO AUMENTADO (era 130px) */
+            background-color: transparent; /* SE ELIMINÓ LA CAJA NEGRA/DARK SLATE */
             
-            /* LA IMAGEN DE LA CÁMARA ES EL FONDO DE LA BARRA COMPLETA */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000009d70820c862da0c8c90eab1d.png');
-            background-size: contain; /* O contain para que se escale con el ancho */
-            background-position: center top; 
+            background-size: 100% 100%; /* Estira la imagen para ocupar el 100% del ancho como un Dock */
+            background-position: center bottom; 
             background-repeat: no-repeat;
             
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* SEPARACIÓN PARA LOS BOTONES ORGÁNICOS EN LA CÁMARA */
             gap: 5%; 
-            padding-top: 15px; /* Compensa la joroba superior de la cámara */
-            filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.5));
+            padding-top: 25px; /* Empuja los textos hacia abajo para alinearlos con los botones de la cámara */
+            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.3)); /* Sombra para resaltar la cámara transparente */
         }
 
         .camera-nav-link {
@@ -439,7 +428,6 @@
             color: var(--neon-cyan);
         }
 
-        /* Pequeño punto debajo del texto simulando una luz LED encendida en la cámara */
         .camera-nav-link::after {
             content: '';
             width: 6px;
@@ -469,23 +457,23 @@
         @media (max-width: 900px) {
             header { flex-direction: column; gap: 20px; }
             
-            /* Logo y Título GIGANTES - No reducir agresivamente */
+            /* Logo y Título GIGANTES mantenidos */
             .giant-transparent-logo { 
-                width: 80vw; /* Dominante en móvil */
+                width: 80vw; 
             }
             .hero-giant-text { 
-                font-size: clamp(6.5rem, 25vw, 22rem); /* Large, with a clean minimum. */
+                font-size: clamp(6.5rem, 25vw, 22rem); 
                 letter-spacing: -2px;
             }
 
-            .camera-nav-link { font-size: 0.65rem; }
+            /* BARRA CÁMARA MÓVIL: MÁS GRANDE Y SIN CAJA NEGRA */
             .camera-nav-bar { 
-                height: 80px; /* Smaller bar on mobile, but full width */
-                gap: 2%; 
-                padding-top: 10px; 
+                height: 110px; /* TAMAÑO AUMENTADO EN MÓVIL (era 80px) */
+                gap: 3%; 
+                padding-top: 15px; 
             }
-            .camera-nav-bar::after {
-                height: 60px;
+            .camera-nav-link { 
+                font-size: 0.75rem; /* Texto un poco más grande para acompañar la cámara */
             }
         }
     </style>
