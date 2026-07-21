@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disk Creativo | Unidad de Almacenamiento Editorial</title>
+    <title>Disk Creativo | Playground de Empresas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oi&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
@@ -16,7 +16,7 @@
         }
 
         :root {
-            /* Crema Hueso de tu imagen */
+            /* Crema Hueso extraído de tu imagen base */
             --bg-cream: #F2F1EC;       
             --brand-purple: #6B00FF;   
             --dark-slate: #110E17;     
@@ -24,7 +24,6 @@
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
-            --font-creative-greeting: 'Oi', cursive;
         }
 
         * {
@@ -39,7 +38,7 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding inferior para la cámara fija */
+            /* Padding inferior masivo universal para el Dock de la cámara */
             padding-bottom: 250px; 
         }
 
@@ -53,51 +52,27 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN SUPERIOR (SALUDO REDUCIDO Y BALANCEADO) --- */
-        header {
-            display: flex;
-            justify-content: center; 
-            align-items: center;
-            padding: 2.5rem 4vw 0 4vw;
-            position: absolute;
-            width: 100%;
-            z-index: 100;
-        }
-
-        .header-greeting-text {
-            font-family: var(--font-creative-greeting);
-            /* Tamaño reducido drásticamente para no robar protagonismo */
-            font-size: clamp(0.7rem, 1.5vw, 1.2rem); 
-            color: var(--dark-slate); 
-            text-align: center;
-            line-height: 1.5;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            max-width: 90vw;
-            opacity: 0.85; /* Sutil transparencia para balancear */
-        }
-
-        /* --- HERO SECTION (SECCIÓN 1 - DISK CREATIVO) --- */
+        /* --- HERO SECTION (LIMPIA, SIN TEXTO ARRIBA Y CON ESPACIO) --- */
         .hero-section {
             position: relative;
-            /* Altura automática: evita abismos en Z Fold 6 y móviles */
-            min-height: auto; 
+            /* Restauramos la altura dinámica para que se adapte al aire que le damos */
+            min-height: 100vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            /* Padding forzado para separar del splash inferior */
-            padding: 22vh 2vw 25vh 2vw; 
+            justify-content: flex-start; /* Anclado arriba para separarlo del fondo morado */
+            
+            /* PADDING AJUSTADO: Mucho espacio arriba, y muchísimo espacio abajo para NO tocar la mancha */
+            padding: 18vh 2vw 35vh 2vw; 
             overflow: hidden;
             
-            /* TRUCO CSS: Gradiente para fundir el borde de la imagen con el color crema */
+            /* FONDO MORADO ORGÁNICO - Sin aplastar */
             background-color: var(--bg-cream); 
-            background-image: 
-                linear-gradient(to bottom, var(--bg-cream) 40%, rgba(242, 241, 236, 0) 80%),
-                url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
-            background-position: center top, center bottom; 
-            background-repeat: no-repeat, no-repeat;
-            background-size: 100% 100%, 100% auto; 
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
+            background-position: center bottom; 
+            background-repeat: no-repeat;
+            /* 100% de ancho, altura automática para que recupere su forma original (no PDF) */
+            background-size: 100% auto; 
         }
 
         .hero-sandwich {
@@ -131,41 +106,40 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS CORREGIDO (CERO BUGS DE CAJA BLANCA) --- */
+        /* --- LIQUID GLASS RESTAURADO (ESTILO APPLE PREMIUM) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Gradiente interno prismático */
+            /* Gradiente iridiscente translúcido original */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.9) 0%, 
-                rgba(0, 240, 255, 0.6) 30%, 
-                rgba(255, 255, 255, 0.2) 50%, 
-                rgba(255, 0, 60, 0.5) 80%,  
+                rgba(255, 255, 255, 0.7) 0%, 
+                rgba(0, 240, 255, 0.4) 15%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.2) 85%,  
                 rgba(255, 255, 255, 0.8) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             
-            /* Color base transparente */
-            color: transparent;
+            /* Base casi transparente */
+            color: rgba(255, 255, 255, 0.15);
             
-            /* Trazos y sombras para simular cristal volumétrico sin backdrop-filter */
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+            /* Borde de cristal y glow de refracción */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
             text-shadow: 
-                0px 8px 20px rgba(0, 0, 0, 0.15), /* Sombra física de caída */
-                0px 0px 15px rgba(255, 255, 255, 0.4); /* Brillo interno simulado */
+                0px 5px 15px rgba(0, 0, 0, 0.25), 
+                0px 0px 25px rgba(255, 255, 255, 0.4); 
             
             position: relative;
             z-index: 20; 
-            /* Se ha eliminado el 'backdrop-filter' problemático */
         }
 
         .giant-transparent-logo {
             position: absolute;
-            /* Subimos el logo ligeramente para que jamás toque el piso morado */
-            top: 45%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: clamp(300px, 50vw, 800px); 
@@ -181,29 +155,82 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- SECCIÓN DARK (EQUIPO / IDENTIDAD) --- */
+        /* --- SECCIÓN DARK (NUEVA: PLAYGROUND + OPERADORES) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
-            padding: 4rem 4vw; 
+            padding: 6rem 4vw; 
             color: #F4F3EF;
             position: relative;
         }
 
-        .giant-dark-heading {
+        /* Bloque 1: El Manifiesto y la Maqueta 3D */
+        .playground-container {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem; /* Espacio antes de los operadores */
+        }
+
+        .playground-text h2 {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 12rem);
-            line-height: 0.8;
+            font-size: clamp(3rem, 5vw, 5rem);
             color: var(--brand-purple);
-            margin-bottom: 2rem; 
-            text-align: left;
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .playground-text p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #A09DA5;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+        }
+
+        .playground-text .highlight-text {
+            color: #F4F3EF;
+            font-weight: 700;
+        }
+
+        .playground-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .playground-image img {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
+            transform: scale(1.05); /* Pop visual 3D */
+            transition: transform 0.5s ease;
+        }
+
+        .playground-image img:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        /* Bloque 2: Operadores del Sistema (Equipo) */
+        .system-operators-header {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(244, 243, 239, 0.1);
+            padding-bottom: 10px;
         }
 
         .team-grid-editorial {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem; 
-            border-top: 1px solid rgba(244, 243, 239, 0.1);
-            padding-top: 2rem;
         }
 
         .team-member-col h4 {
@@ -384,7 +411,6 @@
            ========================================================= */
         
         .camera-container {
-            /* Anclaje fijo absoluto al fondo universal */
             position: fixed;
             bottom: -5px; 
             left: 50%;
@@ -411,32 +437,30 @@
             height: 35%; 
             z-index: 1010;
             cursor: pointer;
-            
-            /* Solución al recuadro azul de selección en móviles */
             -webkit-tap-highlight-color: transparent;
             outline: none;
             user-select: none;
         }
 
-        /* Coordenadas X */
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES EXTREMA COMPACTACIÓN (MÓVILES COMO Z FOLD) --- */
+        /* --- MEDIA QUERIES (RESPONSIVIDAD MÓVIL) --- */
         @media (max-width: 900px) {
-            header { padding: 1.5rem 4vw 0 4vw; }
-            
-            /* Ajuste de compresión para pantallas estrechas */
             .hero-section {
                 padding-top: 15vh;
-                padding-bottom: 25vh; /* Evita que choque con el dock */
-                /* En móvil reducimos la invasión vertical de la mancha */
-                background-size: 100% 100%, 100% 35vh; 
+                /* Espacio inferior asegurado para no chocar en móvil */
+                padding-bottom: 28vh; 
             }
-
             .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); letter-spacing: -2px; }
+            
+            /* El diorama 3D pasa abajo del texto en celular */
+            .playground-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
             
             .camera-container { max-width: 100vw; }
             body { padding-bottom: 120px; }
@@ -447,10 +471,6 @@
 <body>
 
     <div class="noise-overlay"></div>
-
-    <header>
-        <div class="header-greeting-text">¿Ey que xopa? Nosotros somos disque creativos</div>
-    </header>
 
     <section class="hero-section" id="inicio">
         
@@ -479,7 +499,24 @@
     </section>
 
     <section class="dark-intro-section" id="identidad">
-        <h2 class="giant-dark-heading">SOMOS<br>EL DISCO</h2>
+        
+        <div class="playground-container">
+            <div class="playground-text">
+                <h2>Somos Disk Creativo.<br>El Playground de tu empresa.</h2>
+                <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">metiendo mente</span> a un proyecto ambicioso, nosotros construimos la infraestructura para hacerlo real.</p>
+                <p>Desde plataformas web desarrolladas desde cero hasta rebrandings diseñados para tirar <span class="highlight-text">pifia</span> en tu sector. Innovamos rápido, optimizamos tus costos y aseguramos que cada paso se dé en terreno <span class="highlight-text">sólido</span>.</p>
+                <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo más grande del país y expandir nuestra visión al mundo. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
+                <p style="margin-top: 2rem; font-weight: 700; color: var(--brand-purple);">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
+            </div>
+            
+            <div class="playground-image">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground">
+            </div>
+        </div>
+
+        <div class="system-operators-header">
+            [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        </div>
         
         <div class="team-grid-editorial">
             <div class="team-member-col">
