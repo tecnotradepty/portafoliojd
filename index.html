@@ -18,7 +18,6 @@
             --brand-purple: #6B00FF;   
             --brand-purple-dark: #4A00E0;
             --neon-cyan: #00F0FF;
-            --neon-magenta: #FF003C;
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
@@ -40,7 +39,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             /* Espacio extra masivo abajo para la cámara gigante */
-            padding-bottom: 380px; 
+            padding-bottom: 450px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -157,29 +156,36 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- ESTILO PURE LIQUID GLASS (APPLE STYLE) --- */
+        /* --- ESTILO LIQUID GLASS ESTÁTICO Y PRISMÁTICO (E, I, I) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
-            color: rgba(255, 255, 255, 0.8);
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
             
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(180, 255, 255, 0.2) 20%, rgba(255, 200, 255, 0.3) 40%, rgba(255, 255, 255, 0.6) 60%, rgba(180, 255, 255, 0.2) 80%, rgba(255, 255, 255, 0.5) 100%);
-            background-size: 200% auto;
-            
+            /* Textura transparente con toques prismáticos (cyan, magenta suave, blanco) en los bordes */
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.7) 0%, 
+                rgba(0, 240, 255, 0.4) 15%, /* Refracción Cyan */
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.2) 85%,  /* Refracción Magenta */
+                rgba(255, 255, 255, 0.8) 100%
+            );
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
             
-            filter: drop-shadow(0px 10px 20px rgba(107, 0, 255, 0.4)) drop-shadow(inset 0 0 10px rgba(255, 255, 255, 0.5)) saturate(160%);
+            /* Relleno casi transparente para ver el disco por detrás */
+            color: rgba(255, 255, 255, 0.15);
+            
+            /* Borde de cristal y sombreado estructural para simular borrosidad/grosor */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+            text-shadow: 
+                0px 5px 15px rgba(0, 0, 0, 0.25), /* Sombra física de despegue */
+                0px 0px 25px rgba(255, 255, 255, 0.4); /* Glow interior simulando refracción borrosa */
             
             position: relative;
             z-index: 20; 
-            animation: shineGlass 5s linear infinite;
-        }
-
-        @keyframes shineGlass {
-            to { background-position: 200% center; }
+            /* SIN ANIMACIÓN. Estático como pidió el usuario. */
         }
 
         .giant-transparent-logo {
@@ -189,6 +195,7 @@
             transform: translate(-50%, -50%);
             width: clamp(350px, 55vw, 800px); 
             z-index: 5; 
+            /* Esta es la ÚNICA animación, el logo pasando por debajo del Liquid Glass */
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
@@ -386,17 +393,17 @@
             50% { opacity: 0.4; }
         }
 
-        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - ULTRA FIT & ICONS) --- */
+        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA FÍSICA Y PROPORCIONADA) --- */
         .camera-nav-bar {
             position: fixed;
-            bottom: -5px; 
+            bottom: -2px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%; 
             max-width: 1100px; 
             
-            /* ALTURA MASIVA Y PROPORCIONAL MANTENIDA */
-            height: 350px; 
+            /* ALTURA MASIVA para que la cámara no se vea estirada horizontalmente */
+            height: 420px; 
             
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000009d70820c862da0c8c90eab1d.png');
             background-size: 100% 100%; 
@@ -409,69 +416,46 @@
             align-items: center;
             gap: 4%; 
             
-            /* PADDING REDUCIDO: Esto "sube" los textos para que se asienten DENTRO de la cámara */
-            padding-top: 100px; 
+            /* Ajuste preciso para que los textos bajen a la faja negra de la cámara */
+            padding-top: 130px; 
             
-            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.4));
+            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.5));
         }
 
         .camera-nav-link {
-            color: #FFFFFF;
             text-decoration: none;
             font-family: var(--font-body);
             display: flex;
-            flex-direction: column; /* Icono arriba, texto abajo */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: 8px; /* Espacio entre icono y texto */
-            opacity: 0.7;
-            transition: all 0.3s ease;
+            gap: 6px;
+            
+            /* Estética de botón grabado/impreso en chasis plástico */
+            color: #8A8A8A; /* Color gris base */
+            text-shadow: -1px -1px 0px rgba(0,0,0,0.8), 1px 1px 0px rgba(255,255,255,0.15); /* Efecto Inset Físico */
+            transition: color 0.3s ease;
         }
 
-        /* Estilo para los Iconos Tácticos */
         .camera-nav-link i {
-            font-size: 1.5rem; /* Tamaño masivo para el icono */
-            color: #FFFFFF;
-            transition: all 0.3s ease;
+            font-size: 1.4rem; 
+            color: inherit;
         }
 
-        /* Estilo para el Texto de Función */
         .camera-nav-link span {
-            font-size: 0.8rem; /* Tamaño reducido para jerarquía */
-            font-weight: 600;
+            font-size: 0.85rem; 
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #FFFFFF;
-            transition: all 0.3s ease;
+            letter-spacing: 1.5px;
+            color: inherit;
         }
 
-        /* Estado Encendido (Hover & Active) */
+        /* Estado "Activo/Presionado" - Color plano sin brillos irreales */
         .camera-nav-link:hover, .camera-nav-link.active {
-            opacity: 1;
-        }
-
-        .camera-nav-link:hover i, .camera-nav-link.active i,
-        .camera-nav-link:hover span, .camera-nav-link.active span {
             color: var(--neon-cyan);
-            filter: drop-shadow(0 0 10px var(--neon-cyan));
-        }
-
-        /* Puntito LED encendido abajo MANTENIDO */
-        .camera-nav-link::after {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background-color: var(--neon-cyan);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s;
-            box-shadow: 0 0 10px var(--neon-cyan);
-            margin-top: 5px; /* Separación del texto */
-        }
-
-        .camera-nav-link:hover::after, .camera-nav-link.active::after {
-            opacity: 1;
+            /* Mantenemos la sombra hendida física, quitamos glows */
+            text-shadow: -1px -1px 0px rgba(0,0,0,0.8);
         }
 
         footer {
@@ -483,10 +467,10 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 350px; 
+            padding-bottom: 400px; 
         }
 
-        /* --- MEDIA QUERIES (OPTIMIZACIÓN MÓVIL EXTREMA) --- */
+        /* --- MEDIA QUERIES (MÓVIL) --- */
         @media (max-width: 900px) {
             header { flex-direction: column; gap: 15px; padding: 1.5rem 4vw; }
             
@@ -496,22 +480,17 @@
                 letter-spacing: -2px;
             }
 
-            /* BARRA CÁMARA MÓVIL FORZADA Y ALINEADA */
+            /* BARRA CÁMARA MÓVIL ALARGADA HACIA ABAJO */
             .camera-nav-bar { 
-                height: 190px; /* Altura generosa pero proporcional en móvil */
+                height: 250px; /* Altura masiva en móvil para no aplastarla */
                 gap: 2%; 
-                padding-top: 60px; /* Texto centrado DENTRO de la cámara */
+                padding-top: 80px; /* Empuja el texto al centro */
                 max-width: 100vw;
             }
             
-            .camera-nav-link i {
-                font-size: 1.1rem; /* Iconos más pequeños en móvil */
-            }
-            .camera-nav-link span { 
-                font-size: 0.6rem; /* Texto legible pero compacto */
-            }
+            .camera-nav-link i { font-size: 1.1rem; }
+            .camera-nav-link span { font-size: 0.6rem; }
             
-            /* SPLATS MÓVIL FORZADOS */
             .splat-short { width: 230px; height: 80px; font-size: 1rem;}
             .splat-long { 
                 width: 98vw; 
@@ -520,9 +499,7 @@
                 padding-bottom: 10px; 
             }
             
-            footer {
-                padding-bottom: 220px; 
-            }
+            footer { padding-bottom: 260px; }
         }
     </style>
 </head>
