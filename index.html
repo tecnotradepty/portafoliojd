@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
@@ -18,13 +18,10 @@
         :root {
             --bg-cream: #F4F3EF;       
             --brand-purple: #6B00FF;   
-            --brand-purple-dark: #4A00E0;
-            --neon-cyan: #00F0FF;
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
-            --font-creative: 'Permanent Marker', cursive;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
@@ -54,7 +51,7 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN SUPERIOR (MINIMALISTA COMO EN EL VIDEO) --- */
+        /* --- NAVEGACIÓN SUPERIOR (MINIMALISTA) --- */
         header {
             display: flex;
             justify-content: center; /* Centrado absoluto */
@@ -121,23 +118,22 @@
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Textura transparente con toques prismáticos (cyan, magenta suave, blanco) en los bordes */
+            /* Textura transparente con toques prismáticos en los bordes */
             background: linear-gradient(
                 135deg, 
                 rgba(255, 255, 255, 0.6) 0%, 
-                rgba(0, 240, 255, 0.5) 20%, /* Refracción Cyan */
+                rgba(0, 240, 255, 0.5) 20%, 
                 rgba(255, 255, 255, 0.1) 40%, 
                 rgba(255, 255, 255, 0.1) 60%, 
-                rgba(255, 0, 60, 0.4) 80%,  /* Refracción Magenta */
+                rgba(255, 0, 60, 0.4) 80%,  
                 rgba(255, 255, 255, 0.6) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             
-            /* Relleno casi completamente transparente para ver el disco por detrás */
+            /* Relleno casi transparente para ver el disco por detrás */
             color: rgba(255, 255, 255, 0.1);
             
-            /* Borde de cristal y sombreado estructural para simular borrosidad/grosor */
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             text-shadow: 
                 0px 5px 15px rgba(0, 0, 0, 0.2), 
@@ -145,7 +141,6 @@
             
             position: relative;
             z-index: 20; 
-            /* SIN ANIMACIÓN. Estático. El dinamismo lo pone el logo rotando detrás. */
         }
 
         .giant-transparent-logo {
@@ -155,7 +150,6 @@
             transform: translate(-50%, -50%);
             width: clamp(350px, 55vw, 800px); 
             z-index: 5; 
-            /* Esta es la ÚNICA animación, el logo pasando por debajo del Liquid Glass */
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
@@ -353,6 +347,67 @@
             50% { opacity: 0.4; }
         }
 
+        /* =========================================================
+           SISTEMA DE DOCK MULTI-CAPA (SPLASH FONDO + CÁMARA FRENTE)
+           ========================================================= */
+        
+        .dock-system {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 1000;
+            pointer-events: none; /* Deja pasar los clics hacia el fondo si no tocan la cámara */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Capa 1: Mancha Morada de Fondo */
+        .dock-splash-bg {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100vw;
+            height: auto;
+            max-height: 45vh; /* Evita que cubra toda la pantalla en móviles muy altos */
+            object-fit: cover;
+            object-position: top;
+            z-index: -1; 
+        }
+
+        /* Capa 2: Contenedor Físico de la Cámara */
+        .camera-container {
+            position: relative;
+            width: 100%;
+            max-width: 850px; /* Ancho máximo para la cámara */
+            pointer-events: auto; /* Reactiva los clics sobre la cámara */
+            margin-bottom: -5px; /* Hunde ligeramente la cámara */
+        }
+
+        .camera-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0px -5px 20px rgba(0,0,0,0.4));
+        }
+
+        /* Hitboxes invisibles calibradas sobre los botones de la cámara */
+        .hitbox {
+            position: absolute;
+            bottom: 18%; 
+            height: 35%; 
+            z-index: 1010;
+            cursor: pointer;
+            /* Descomentar para ajustar hitboxes: border: 1px solid red; */
+        }
+
+        /* Coordenadas horizontales (X) */
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
+
         footer {
             text-align: center;
             padding: 3rem;
@@ -362,63 +417,20 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 120px; 
+            padding-bottom: 250px; 
         }
-
-        /* =========================================================
-           SISTEMA DE DOCK (CÁMARA + SPLASH) CON HITBOXES INVISIBLES
-           ========================================================= */
-        .camera-container {
-            position: fixed;
-            bottom: -5px; /* Ancla la imagen al fondo, sutilmente sobrepasada para tapar bordes duros */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 900px; /* Tamaño máximo para que se vea masivo, igual al video */
-            z-index: 1000;
-            pointer-events: none; /* Permite que la zona transparente de la imagen no bloquee la web */
-        }
-
-        /* La imagen se auto-escala conservando el aspect ratio original siempre */
-        .camera-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            pointer-events: auto; /* Reactiva los clics solo sobre la imagen */
-            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.3)); /* Sombra para despegar la mancha del fondo crema */
-        }
-
-        /* Hitboxes invisibles calibradas sobre los botones de la cámara */
-        .hitbox {
-            position: absolute;
-            pointer-events: auto;
-            /* Altura y posicionamiento Y basado en la imagen */
-            bottom: 15%; 
-            height: 35%; 
-            z-index: 1010;
-            cursor: pointer;
-            
-            /* ⚠️ TRUCO DE DESARROLLADOR: 
-               Si necesitas mover los botones, descomenta la siguiente línea 
-               para ver las cajas rojas y ajustar los porcentajes de "left" y "width". */
-            /* border: 2px solid #FF003C; background: rgba(255, 0, 60, 0.3); */
-        }
-
-        /* Coordenadas horizontales (X) en porcentajes, adaptadas a tu imagen */
-        .hitbox-inicio { left: 21%; width: 13%; }
-        .hitbox-identidad { left: 35%; width: 13%; }
-        .hitbox-proyectos { left: 51%; width: 13%; }
-        .hitbox-contacto { left: 66.5%; width: 13%; }
 
         /* --- MEDIA QUERIES (MÓVIL) --- */
         @media (max-width: 900px) {
-            header { flex-direction: column; gap: 15px; padding: 1.5rem 4vw; }
             .giant-transparent-logo { width: 80vw; }
             .hero-giant-text { font-size: clamp(6.5rem, 25vw, 22rem); letter-spacing: -2px; }
             
-            /* En móvil la cámara abarca el 100% del ancho, ajustando sus hitboxes automáticamente */
-            .camera-container { max-width: 100vw; bottom: 0; }
-            body { padding-bottom: 150px; }
+            /* Ajuste para que la cámara llegue de borde a borde en el móvil */
+            .camera-container { max-width: 100vw; margin-bottom: 0; }
+            .dock-splash-bg { max-height: 30vh; } /* Splash más sutil en móvil */
+            
+            body { padding-bottom: 180px; }
+            footer { padding-bottom: 180px; }
         }
     </style>
 </head>
@@ -504,13 +516,17 @@
         [ END OF FILE ] © 2026 DISK CREATIVO
     </footer>
 
-    <div class="camera-container">
-        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f92a3f6eb547d9f9c4199787a7c58e11b1b6c213/DIQC/file_000000006760820c9cba8a53520e4d63.png" alt="Barra de Navegación Cámara">
+    <div class="dock-system">
+        <img class="dock-splash-bg" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f92a3f6eb547d9f9c4199787a7c58e11b1b6c213/DIQC/file_000000006760820c9cba8a53520e4d63.png" alt="Splash Background">
         
-        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
-        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
-        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
-        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+        <div class="camera-container">
+            <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/b112027725818c1f63f2de93f101dc4ccbbee440/DIQC/1784610614803.png" alt="Barra de Navegación Cámara">
+            
+            <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+            <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+            <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+            <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+        </div>
     </div>
 
     <script>
