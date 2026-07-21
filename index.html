@@ -10,13 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Desplazamiento suave nativo para los botones de la cámara */
         html {
             scroll-behavior: smooth;
         }
 
         :root {
-            /* Paleta Editorial Disk Creativo */
             --bg-cream: #F4F3EF;       
             --brand-purple: #6B00FF;   
             --brand-purple-dark: #4A00E0;
@@ -41,8 +39,8 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Espacio extra abajo para la cámara gigante */
-            padding-bottom: 250px; 
+            /* Espacio inferior reservado para que la barra fija no tape contenido */
+            padding-bottom: 140px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -73,7 +71,7 @@
             font-family: var(--font-body);
         }
 
-        /* --- CAJAS ESTILO SPLASH (FORCE WRAP) --- */
+        /* --- CAJAS ESTILO SPLASH --- */
         .splat-base {
             color: #FFFFFF;
             font-family: var(--font-creative);
@@ -89,7 +87,6 @@
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
-        /* Splat Corto (Botón de Contacto) */
         .splat-short {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000006bd881f58f53c6ff8407c2f9.png');
             width: 280px;  
@@ -99,7 +96,6 @@
             filter: drop-shadow(0px 6px 10px rgba(107,0,255,0.3));
         }
 
-        /* Splat Largo (Status inferior) */
         .splat-long {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/1784603721693.png');
             width: clamp(450px, 95vw, 1000px); 
@@ -159,12 +155,10 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- ESTILO LIQUID GLASS ESTÁTICO Y PRISMÁTICO (E, I, I) --- */
+        /* --- ESTILO PURE LIQUID GLASS ESTÁTICO Y PRISMÁTICO (E, I, I) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
-            
-            /* Textura transparente con toques prismáticos en los bordes */
             background: linear-gradient(
                 135deg, 
                 rgba(255, 255, 255, 0.7) 0%, 
@@ -176,19 +170,13 @@
             );
             -webkit-background-clip: text;
             background-clip: text;
-            
-            /* Relleno casi transparente para ver el disco por detrás */
             color: rgba(255, 255, 255, 0.15);
-            
-            /* Borde de cristal y sombreado estructural para simular borrosidad/grosor */
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
             text-shadow: 
                 0px 5px 15px rgba(0, 0, 0, 0.25), 
                 0px 0px 25px rgba(255, 255, 255, 0.4); 
-            
             position: relative;
             z-index: 20; 
-            /* SIN ANIMACIÓN */
         }
 
         .giant-transparent-logo {
@@ -198,7 +186,6 @@
             transform: translate(-50%, -50%);
             width: clamp(350px, 55vw, 800px); 
             z-index: 5; 
-            /* Esta es la ÚNICA animación, el logo pasando por debajo del Liquid Glass */
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
@@ -397,43 +384,44 @@
         }
 
         /* =========================================================
-           NUEVO SISTEMA DE CÁMARA (IMAGEN + BOTONES INVISIBLES)
+           BARRA DE CÁMARA OPTIMIZADA (FIJA AL FONDO Y PROPORCIONADA)
            ========================================================= */
         .camera-image-nav {
             position: fixed;
-            bottom: -2px; /* Anclado al ras inferior */
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%; 
-            max-width: 1100px; 
+            width: 100%;
+            max-width: 750px; /* Tamaño controlado para que luzca como un dock de cámara profesional y no gigante */
             z-index: 1000;
-            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.5));
+            pointer-events: none; /* Permite que el contenedor no bloquee clics fuera de la imagen */
         }
 
-        /* La imagen dicta la altura automáticamente manteniendo la proporción real */
         .camera-image-nav img {
             width: 100%;
             height: auto;
             display: block;
+            pointer-events: auto; /* Restaura clics en la imagen de la cámara */
+            filter: drop-shadow(0px -8px 25px rgba(0,0,0,0.4));
         }
 
-        /* Base para las zonas clickeables invisibles */
+        /* Hitboxes invisibles calibradas milimétricamente sobre los botones físicos */
         .invisible-link {
             position: absolute;
-            /* La altura y posición en Y se estima basada en tu diseño */
-            top: 55%; 
-            height: 35%; 
-            z-index: 10;
+            pointer-events: auto; /* Habilita clics en los enlaces */
+            top: 48%; 
+            height: 42%; 
+            z-index: 1010;
             cursor: pointer;
-            /* Descomenta la siguiente línea si necesitas ver los botones para calibrarlos visualmente */
-            /* border: 2px solid rgba(0, 240, 255, 0.5); background: rgba(0, 240, 255, 0.1); */
+            /* Descomentar temporalmente para depurar y ver los cuadros interactivos si es necesario: */
+            /* border: 1px solid red; background: rgba(255,0,0,0.2); */
         }
 
-        /* Posiciones en X por porcentajes para que escalen perfecto en móviles y PC */
-        .link-inicio { left: 14%; width: 15%; }
-        .link-identidad { left: 32%; width: 15%; }
-        .link-proyectos { left: 51%; width: 17%; }
-        .link-contact { left: 71%; width: 15%; }
+        /* Posicionamiento porcentual ajustado con precisión de cirujano a los 4 botones */
+        .link-inicio { left: 22.5%; width: 12.5%; }
+        .link-identidad { left: 37.5%; width: 14%; }
+        .link-proyectos { left: 53.5%; width: 13.5%; }
+        .link-contact { left: 69%; width: 13%; }
 
         footer {
             text-align: center;
@@ -444,7 +432,7 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 250px; 
+            padding-bottom: 120px; 
         }
 
         /* --- MEDIA QUERIES (MÓVIL) --- */
@@ -455,9 +443,9 @@
             .splat-short { width: 230px; height: 80px; font-size: 1rem;}
             .splat-long { width: 98vw; height: 140px; font-size: 0.95rem; padding-bottom: 10px; }
             
-            /* Ajuste de márgenes para móvil (la imagen de la cámara se auto-escala) */
-            body { padding-bottom: 120px; }
-            footer { padding-bottom: 120px; }
+            .camera-image-nav {
+                max-width: 100%; /* En móviles ocupa todo el ancho con perfecta proporción de alto */
+            }
         }
     </style>
 </head>
