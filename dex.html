@@ -37,7 +37,6 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding ajustado para el nuevo Dock "Gadget" */
             padding-bottom: 120px; 
         }
 
@@ -51,21 +50,21 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION (NUEVO FONDO RETRO Y CENTRADO PERFECTO) --- */
+        /* --- HERO SECTION (FONDO CORREGIDO Y CENTRADO PERFECTO) --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Título y logo centrados en la pantalla */
+            justify-content: center; 
             padding: 2vw; 
             overflow: hidden;
             
-            /* FONDO RETRO ARCOÍRIS */
+            /* NUEVO FONDO RETRO ARCOÍRIS RECORTADO Y CENTRADO */
             background-color: var(--bg-cream); 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/858a3d3d80731014ee5727f5548c6f5341ff7937/DIQC/39964286_1784665770068788(1).jpg');
-            background-position: center center; 
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dcfbcbca31014c3127a2976ff1db6938a7f325ba/DIQC/39964286_1784665770068788(1)(1).jpg');
+            background-position: center center; /* Ahora sí se clava el centro */
             background-repeat: no-repeat;
             background-size: cover; 
         }
@@ -101,32 +100,46 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS RESTAURADO (VERSIÓN BLOQUE FÍSICO QUE TE GUSTÓ) --- */
+        /* --- LIQUID GLASS RESTAURADO (VERSIÓN PURE TEXT REFRACTION QUE TE GUSTÓ) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Caja de cristal físico translúcido */
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            /* Gradiente iridiscente translúcido original aplicado AL TEXTO */
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.6) 0%, 
+                rgba(0, 240, 255, 0.5) 20%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.4) 80%,  
+                rgba(255, 255, 255, 0.6) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
             
-            /* Bordes del cristal */
-            border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 12px; 
+            /* Base translúcida */
+            color: rgba(255, 255, 255, 0.1);
             
-            /* Letra semi-transparente adentro */
-            color: rgba(255,255,255,0.2);
-            -webkit-text-stroke: 1px rgba(255,255,255,0.6);
+            /* Trazos y sombras para simular cristal volumétrico (sin bordes de bloque feos) */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            text-shadow: 
+                0px 5px 15px rgba(0, 0, 0, 0.2), 
+                0px 0px 20px rgba(255, 255, 255, 0.3); 
             
-            /* Espaciado para simular un cubo/botón */
-            padding: 0 15px;
-            margin: 0 5px;
+            /* Efecto de refracción real en navegadores modernos */
+            backdrop-filter: blur(8px) saturate(180%);
+            -webkit-backdrop-filter: blur(8px) saturate(180%);
             
-            /* Sombra física */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             position: relative;
             z-index: 20; 
+
+            /* Eliminados los bordes, paddings y box-shadows de bloque de la versión errónea V8 */
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
         }
 
         .giant-transparent-logo {
@@ -158,7 +171,7 @@
         /* Layout Rígido 2 Columnas (Dashboard Mantenido en Móvil) */
         .playground-container {
             display: grid;
-            grid-template-columns: 55% 45%; /* Texto izq, Maqueta der. SIEMPRE. */
+            grid-template-columns: 55% 45%; 
             gap: 3rem;
             align-items: center;
             margin-bottom: 6rem;
@@ -174,7 +187,7 @@
         }
 
         .playground-text p {
-            font-size: clamp(0.7rem, 1.2vw, 1.05rem); /* Auto-escala en móviles para caber */
+            font-size: clamp(0.7rem, 1.2vw, 1.05rem); 
             line-height: 1.6;
             color: #A09DA5;
             margin-bottom: 1.2rem;
@@ -410,12 +423,11 @@
         
         .camera-container {
             position: fixed;
-            /* Flota ligeramente sobre el borde para enfatizar que es un gadget */
             bottom: 15px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 95%; /* 95% en móviles para dar margen */
-            max-width: 500px; /* Candado estricto en PC, se verá como un control remoto de lujo */
+            width: 95%; 
+            max-width: 500px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -425,9 +437,8 @@
             height: auto;
             display: block;
             pointer-events: auto; 
-            /* Sombra profunda para que resalte del fondo web */
             filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
-            border-radius: 20px; /* Suavidad extra en esquinas por si acaso */
+            border-radius: 20px; 
         }
 
         /* Hitboxes invisibles calibradas milimétricamente */
@@ -458,11 +469,11 @@
                 gap: 15px;
             }
             .playground-text h2 {
-                font-size: 1.2rem; /* Reduce para caber perfecto */
+                font-size: 1.2rem; 
                 margin-bottom: 0.8rem;
             }
             .playground-text p {
-                font-size: 0.65rem; /* Letra pequeña, tech y legible */
+                font-size: 0.65rem; 
                 line-height: 1.4;
                 margin-bottom: 0.6rem;
             }
