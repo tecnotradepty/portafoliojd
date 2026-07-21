@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oi&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
@@ -16,14 +16,16 @@
         }
 
         :root {
-            /* Paleta Editorial Disk Creativo */
-            --bg-cream: #F4F3EF;       
+            /* NUEVO COLOR CREMA HUESO SAMPLED DEL PNG file_...927.png */
+            --bg-cream: #F2F1EC;       
             --brand-purple: #6B00FF;   
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
+            /* NUEVA FUENTE CREATIVA Y LOCA */
+            --font-creative-greeting: 'Oi', cursive;
         }
 
         * {
@@ -38,8 +40,8 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding inferior ajustado para que no haya un abismo de scroll después de la cámara */
-            padding-bottom: 180px; 
+            /* Padding inferior masivo universal para que el contenido no quede oculto por el Dock de la cámara */
+            padding-bottom: 250px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -52,10 +54,10 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN SUPERIOR (MINIMALISTA) --- */
+        /* --- NAVEGACIÓN SUPERIOR CON NUEVO TEXTO Y FUENTE LOCA --- */
         header {
             display: flex;
-            justify-content: center; 
+            justify-content: center; /* Centrado absoluto del título */
             align-items: center;
             padding: 2.5rem 4vw;
             position: absolute;
@@ -63,26 +65,29 @@
             z-index: 100;
         }
 
-        .header-logo-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            font-family: var(--font-body);
+        .header-greeting-text {
+            font-family: var(--font-creative-greeting);
+            font-size: clamp(1.2rem, 3.5vw, 2rem); /* Escala perfecta del saludo juvenil */
+            color: var(--dark-slate); /* No es morado, es oscuro para contraste */
+            text-align: center;
+            line-height: 1.2;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            max-width: 90vw;
         }
 
-        /* --- HERO SECTION (SECCIÓN 1 - DISK CREATIVO) --- */
+        /* --- HERO SECTION (SECCIÓN 1) CON FONDO MORADO COMBINADO --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Sube el contenido visualmente */
-            padding: 18vh 2vw 0 2vw; 
+            justify-content: center;
+            padding: 18vh 2vw 2vh 2vw; 
             overflow: hidden;
             
-            /* NUEVO PNG MORADO CON FONDO CREMA PARA LA SECCIÓN 1 */
+            /* PNG MORADO COMO FONDO DE LA SECCIÓN 1 - COMBINA PERFECTO CON EL NUEVO CREMA */
             background-color: var(--bg-cream); 
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
             background-position: center bottom; 
@@ -125,7 +130,6 @@
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
-            
             background: linear-gradient(
                 135deg, 
                 rgba(255, 255, 255, 0.6) 0%, 
@@ -364,19 +368,21 @@
         }
 
         /* =========================================================
-           SISTEMA DE DOCK (CÁMARA FÍSICA AL RAS)
+           SISTEMA DE DOCK (CÁMARA FÍSICA AL RAS - UNIVERSAL)
            ========================================================= */
         
         .camera-container {
-            /* SOLUCIÓN PC Y MÓVIL: Anclaje fijo absoluto al fondo de la pantalla sin envoltorios extra */
+            /* SOLUCIÓN PC Y MÓVIL UNIVERSAL: Anclaje fijo absoluto al fondo de la pantalla, sin Flexbox complejo */
             position: fixed;
-            bottom: -5px; 
+            bottom: -5px; /* Hunde ligeramente la cámara para tapar cualquier borde duro del PNG */
             left: 50%;
             transform: translateX(-50%);
+            
+            /* MODIFICACIÓN UNIVERSAL: Ocupa todo el ancho siempre, como en el teléfono */
             width: 100%;
-            max-width: 800px; /* Tamaño máximo controlado en PC */
+            max-width: 100vw; 
             z-index: 1000;
-            pointer-events: none; /* Permite scroll a los costados de la cámara en PC */
+            pointer-events: none; /* Deja pasar los clics si no tocan la cámara */
         }
 
         .camera-img {
@@ -402,20 +408,18 @@
             user-select: none;
         }
 
-        /* Coordenadas horizontales (X) */
+        /* Coordenadas horizontales (X) en porcentajes adaptados al PNG */
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (MÓVIL) --- */
+        /* --- MEDIA QUERIES (Ajustes de texto, ya no de cámara) --- */
         @media (max-width: 900px) {
             .giant-transparent-logo { width: 80vw; }
             .hero-giant-text { font-size: clamp(6.5rem, 25vw, 22rem); letter-spacing: -2px; }
             
-            /* Ajuste para que la cámara llegue de borde a borde en el móvil */
-            .camera-container { max-width: 100vw; }
-            
+            /* En móvil necesitamos menos padding extra al final porque la cámara es proporcionalmente más baja en la web */
             body { padding-bottom: 100px; }
             footer { padding-bottom: 100px; }
         }
@@ -426,7 +430,7 @@
     <div class="noise-overlay"></div>
 
     <header>
-        <div class="header-logo-text">DISQ // CREATIVO</div>
+        <div class="header-greeting-text">¿Ey que xopa? Nosotros somos disque creativos</div>
     </header>
 
     <section class="hero-section" id="inicio">
