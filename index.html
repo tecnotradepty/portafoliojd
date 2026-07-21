@@ -3,47 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disk Creativo | Unidad de Almacenamiento Visual & Código</title>
+    <title>Disk Creativo | Agencia Digital</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Glitch&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Paleta Iridiscente / Cyber-Brutalista */
-            --bg-dark: #0A0A0A;
-            --brand-purple: #6B00FF;
-            --neon-cyan: #00F0FF;
-            --neon-magenta: #FF003C;
-            --neon-yellow: #FAFF00;
-            --text-light: #F0F0F0;
+            /* Paleta Editorial Disk Creativo */
+            --bg-cream: #F4F3EF;       /* Fondo crema elegante */
+            --brand-purple: #4A00E0;   /* Morado profundo principal */
+            --light-purple: #E2D9F3;   /* Lila para bloques de contraste */
+            --text-dark: #221F2D;      /* Texto oscuro (no es negro puro) */
             
-            --font-display: 'Anton', sans-serif;
-            --font-glitch: 'Rubik Glitch', system-ui;
+            --font-display: 'Bebas Neue', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
-            
-            --brutal-border: 4px solid var(--text-light);
-            --brutal-shadow: 8px 8px 0px var(--brand-purple);
-            --hover-shadow: 12px 12px 0px var(--neon-cyan);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: crosshair; /* Cursor tech */
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
             font-family: var(--font-body);
             overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(107, 0, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(107, 0, 255, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px; /* Grid cyberpunk de fondo */
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- NAVEGACIÓN --- */
@@ -51,397 +40,413 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 4vw;
-            border-bottom: var(--brutal-border);
-            background: var(--bg-dark);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 2rem 4vw;
+            position: absolute;
+            width: 100%;
+            z-index: 100;
         }
 
-        .logo {
-            font-family: var(--font-glitch);
-            font-size: 2.5rem;
-            color: var(--neon-yellow);
-            text-shadow: 3px 3px 0px var(--brand-purple);
-            text-transform: uppercase;
-        }
-
-        .contact-btn {
-            font-family: var(--font-body);
-            font-weight: 700;
-            background: var(--neon-cyan);
-            color: var(--bg-dark);
-            padding: 10px 24px;
-            text-decoration: none;
-            border: var(--brutal-border);
-            border-color: var(--bg-dark);
-            box-shadow: 4px 4px 0px var(--neon-magenta);
-            text-transform: uppercase;
-            transition: all 0.1s linear;
-        }
-
-        .contact-btn:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 8px 8px 0px var(--neon-yellow);
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 10vh 4vw;
-            position: relative;
-            border-bottom: var(--brutal-border);
-            overflow: hidden;
-        }
-
-        .hero-title {
+        .logo-text {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 12rem);
-            line-height: 0.85;
-            color: var(--bg-dark);
-            -webkit-text-stroke: 2px var(--text-light);
+            font-size: 2.5rem;
+            color: var(--brand-purple);
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .nav-links {
+            font-size: 0.9rem;
+            font-weight: 600;
             text-transform: uppercase;
+        }
+
+        /* --- SECCIÓN 1: HERO (Inspirado en el bloque superior) --- */
+        .hero-section {
+            background-color: var(--light-purple);
+            padding: 15vh 4vw 5vh 4vw;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 70vh;
+        }
+
+        .giant-heading {
+            font-family: var(--font-display);
+            font-size: clamp(6rem, 20vw, 18rem);
+            line-height: 0.8;
+            color: var(--brand-purple);
+            margin: 0;
             position: relative;
             z-index: 2;
         }
 
-        .hero-title span {
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            max-width: 600px;
+            margin-top: 2rem;
             color: var(--brand-purple);
-            -webkit-text-stroke: 0;
-            text-shadow: 6px 6px 0px var(--neon-cyan);
-            display: block;
-            margin-left: 5vw;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .hero-subtitle {
-            font-family: var(--font-glitch);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            color: var(--neon-magenta);
-            margin-top: 20px;
-            transform: rotate(-2deg);
-            z-index: 3;
+        /* Scribbles decorativos simulados con CSS */
+        .scribble {
+            position: absolute;
+            color: var(--brand-purple);
+            opacity: 0.2;
+            font-family: 'Times New Roman', serif;
+            font-size: 15rem;
+            font-style: italic;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .scribble-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
+        .scribble-2 { bottom: 10%; right: 10%; transform: rotate(15deg); }
+
+        /* --- SECCIÓN 2: NOSOTROS (Inspirado en bloque "WHO I AM") --- */
+        .about-section {
+            background-color: var(--bg-cream);
+            padding: 8rem 4vw;
             position: relative;
         }
 
-        .hero-copy {
-            max-width: 600px;
-            margin-top: 40px;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            background: var(--brand-purple);
-            padding: 20px;
-            border: var(--brutal-border);
-            box-shadow: var(--brutal-shadow);
-            transform: rotate(1deg);
-        }
-
-        /* --- MARQUEE (CINTA DE SERVICIOS) --- */
-        .marquee-container {
-            background: var(--neon-yellow);
-            color: var(--bg-dark);
-            padding: 15px 0;
-            border-bottom: var(--brutal-border);
-            overflow: hidden;
-            white-space: nowrap;
+        .about-heading {
             font-family: var(--font-display);
-            font-size: 2rem;
-            text-transform: uppercase;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 15s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* --- EQUIPO / DATA SECTORS --- */
-        .team-section {
-            padding: 80px 4vw;
-            border-bottom: var(--brutal-border);
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
-        }
-
-        .section-header {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            color: var(--neon-cyan);
-            margin-bottom: 40px;
-            text-shadow: 4px 4px 0px var(--brand-purple);
+            font-size: clamp(5rem, 15vw, 15rem);
+            line-height: 0.8;
+            color: var(--brand-purple);
+            margin-bottom: 3rem;
+            opacity: 0.9;
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .team-card {
-            background: var(--bg-dark);
-            border: var(--brutal-border);
-            padding: 30px;
-            box-shadow: var(--brutal-shadow);
-            transition: all 0.2s;
+            gap: 3rem;
+            margin-top: -4rem; /* Superpone la grid con el título gigante */
             position: relative;
+            z-index: 2;
         }
 
-        .team-card:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: var(--hover-shadow);
-            background: rgba(107, 0, 255, 0.1);
+        .team-member {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(74, 0, 224, 0.05);
         }
 
-        .team-card h3 {
+        .team-member h3 {
             font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--neon-yellow);
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            color: var(--brand-purple);
+            line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
         .team-role {
-            display: inline-block;
-            background: var(--text-light);
-            color: var(--bg-dark);
             font-weight: 700;
-            padding: 5px 10px;
-            margin-bottom: 15px;
-            border: 2px solid var(--bg-dark);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
-        .team-card p {
+        .team-member p {
             font-size: 1rem;
-            line-height: 1.5;
-            color: var(--text-light);
+            line-height: 1.6;
+            color: var(--text-dark);
         }
 
-        /* --- PORTAFOLIO (SHEETS API) --- */
+        /* --- SECCIÓN 3: HABILIDADES (Inspirado en bloque verde inferior) --- */
+        .skills-section {
+            background-color: var(--brand-purple);
+            padding: 8rem 4vw;
+            color: var(--bg-cream);
+            position: relative;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .skill-box {
+            background-color: var(--bg-cream);
+            color: var(--brand-purple);
+            padding: 3rem 1.5rem;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            aspect-ratio: 1 / 1; /* Cuadrados perfectos redondeados */
+        }
+
+        .skills-text-center {
+            padding: 0 2rem;
+        }
+
+        .skills-text-center h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .skills-text-center p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .skills-bottom-text {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 12rem);
+            line-height: 0.8;
+            text-align: center;
+            color: var(--bg-cream);
+            margin: 0;
+        }
+
+        /* --- SECCIÓN 4: PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
-            padding: 80px 4vw;
+            background-color: var(--bg-cream);
+            padding: 8rem 4vw;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .portfolio-heading {
+            font-family: var(--font-display);
+            font-size: 6rem;
+            color: var(--brand-purple);
+            line-height: 0.8;
         }
 
         .category-bar {
             display: flex;
-            gap: 15px;
-            margin-bottom: 40px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .filter-btn {
             background: transparent;
-            color: var(--text-light);
-            border: 2px dashed var(--neon-magenta);
-            padding: 10px 20px;
+            color: var(--text-dark);
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            padding: 8px 20px;
             font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             text-transform: uppercase;
-            transition: all 0.2s;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--neon-magenta);
-            color: var(--bg-dark);
-            border-style: solid;
-            transform: skewX(-10deg);
+            background: var(--brand-purple);
+            color: var(--bg-cream);
+            border-color: var(--brand-purple);
         }
 
         .grid-portfolio {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
-        /* Estilos re-adaptados para las tarjetas del script */
+        /* Tarjetas de Portafolio estilo editorial */
         .marketplace-card {
-            background: var(--bg-dark);
-            border: var(--brutal-border);
-            box-shadow: 6px 6px 0px var(--neon-cyan);
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: all 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
         }
 
         .marketplace-card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 10px 10px 0px var(--neon-yellow);
-            border-color: var(--brand-purple);
+            transform: translateY(-10px);
         }
 
         .card-preview-thumb {
             width: 100%;
             height: 250px;
-            background-color: #222;
+            background-color: var(--light-purple);
             background-size: cover;
             background-position: center;
-            border-bottom: var(--brutal-border);
-            filter: grayscale(100%) contrast(120%);
-            transition: filter 0.3s;
-        }
-        
-        .marketplace-card:hover .card-preview-thumb {
-            filter: grayscale(0%) contrast(100%);
-        }
-
-        .card-badge-floating {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: var(--neon-yellow);
-            color: var(--bg-dark);
-            border: var(--brutal-border);
-            padding: 5px 15px;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            transform: rotate(5deg);
         }
 
         .card-body-info {
-            padding: 25px;
+            padding: 2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
+        .card-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
         .card-body-info h3 {
             font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--text-light);
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 1rem;
         }
 
         .card-body-info p {
             font-size: 0.95rem;
-            margin-bottom: 25px;
-            color: #ccc;
+            line-height: 1.5;
+            color: #666;
+            margin-bottom: 2rem;
         }
 
         .btn-visit-solution {
             margin-top: auto;
-            background: var(--brand-purple);
-            color: var(--text-light);
-            text-align: center;
-            padding: 12px;
+            color: var(--brand-purple);
             font-weight: 700;
-            border: var(--brutal-border);
-            text-decoration: none;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            box-shadow: 4px 4px 0px var(--neon-cyan);
-            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .btn-visit-solution:hover {
-            background: var(--neon-magenta);
-            color: var(--bg-dark);
+        .btn-visit-solution::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-visit-solution:hover::after {
+            transform: translateX(5px);
         }
 
         .loading-skeleton {
             grid-column: 1 / -1;
-            font-family: var(--font-glitch);
+            font-family: var(--font-display);
             font-size: 3rem;
             color: var(--brand-purple);
             text-align: center;
-            padding: 50px 0;
-            animation: pulse 1s infinite alternate;
+            padding: 4rem 0;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        footer {
-            border-top: var(--brutal-border);
-            padding: 40px;
-            text-align: center;
-            background: var(--brand-purple);
-            color: var(--text-light);
-            font-family: var(--font-display);
-            font-size: 2rem;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-            .hero-copy { transform: rotate(0); }
-            .team-card:hover { transform: none; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .skills-text-center {
+                order: -1;
+                margin-bottom: 2rem;
+                padding: 0;
+            }
+            .skill-box {
+                aspect-ratio: auto;
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">DISK_</div>
-        <a href="mailto:info@diskcreativo.com" class="contact-btn">Run Command: Contacto</a>
+        <div class="logo-text">DISK CREATIVO</div>
+        <div class="nav-links">AGENCIA DIGITAL</div>
     </nav>
 
-    <section class="hero">
-        <h1 class="hero-title">
-            DISK <span>CREATIVO</span>
-        </h1>
-        <div class="hero-subtitle">Sí, somos *disque* creativos.</div>
+    <section class="hero-section">
+        <div class="scribble scribble-1">*</div>
+        <div class="scribble scribble-2">#</div>
         
-        <div class="hero-copy">
-            <p><strong>[ SYSTEM OVERRIDE ]</strong> Dominamos el ecosistema digital. ¿Webs, Apps, PWAs? Check. ¿Soluciones empresariales a medida? Check. No hay límite técnico que nos detenga: lo que sabemos, lo ejecutamos con precisión militar. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.</p>
-        </div>
+        <h1 class="giant-heading">DISK<br>CREATIVO</h1>
+        <p class="hero-subtitle">Sí, somos *disque* creativos. Unidad de almacenamiento y ejecución de ideas visuales y código.</p>
     </section>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            * DESARROLLO WEB * PWAs * APPS MÓVILES * BRANDING * UI/UX * ESTRATEGIA DIGITAL * AUTOMATIZACIÓN * MARKETING TECNOLÓGICO * DESARROLLO WEB * PWAs * APPS MÓVILES * BRANDING * UI/UX * ESTRATEGIA DIGITAL * AUTOMATIZACIÓN * MARKETING TECNOLÓGICO
-        </div>
-    </div>
-
-    <section class="team-section">
-        <h2 class="section-header">/// CORE TEAM</h2>
+    <section class="about-section">
+        <h2 class="about-heading">QUIÉNES<br>SOMOS</h2>
+        
         <div class="team-grid">
-            
-            <div class="team-card">
+            <div class="team-member">
                 <h3>JOEL DÍAZ</h3>
                 <span class="team-role">Dev & Arquitectura Web</span>
                 <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
 
-            <div class="team-card" style="border-color: var(--neon-cyan); box-shadow: 8px 8px 0px var(--neon-yellow);">
-                <h3 style="color: var(--neon-magenta);">JONATHAN OROZCO</h3>
+            <div class="team-member">
+                <h3>JONATHAN OROZCO</h3>
                 <span class="team-role">Estrategia & Operaciones</span>
                 <p>El puente entre el código y el mercado. Marketing para Tecnotrade & Mobile Hub, y asistencia táctica para escalar proyectos sin fricción.</p>
             </div>
 
-            <div class="team-card" style="border-color: var(--neon-magenta); box-shadow: 8px 8px 0px var(--neon-cyan);">
-                <h3 style="color: var(--brand-purple);">AYL JONES</h3>
+            <div class="team-member">
+                <h3>AYL JONES</h3>
                 <span class="team-role">Dirección Creativa & Mkt</span>
                 <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al marketing de Disk Creativo.</p>
             </div>
-
         </div>
+    </section>
+
+    <section class="skills-section">
+        <div class="skills-container">
+            <div class="skill-box">DESARROLLO<br>WEB & APPS</div>
+            
+            <div class="skills-text-center">
+                <h4>LO QUE TRAEMOS A LA MESA</h4>
+                <p>Dominamos el ecosistema digital. No hay límite técnico que nos detenga: lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero para tu empresa.</p>
+            </div>
+
+            <div class="skill-box">BRANDING &<br>MARKETING</div>
+        </div>
+
+        <h2 class="skills-bottom-text">NUESTRO DISCO</h2>
     </section>
 
     <section class="portfolio-section" id="content">
-        <h2 class="section-header">/// ARCHIVOS PROCESADOS</h2>
-        
-        <div class="category-bar" id="categoryBar">
-            <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-            <button class="filter-btn" data-category="webs">/WEBS</button>
-            <button class="filter-btn" data-category="producción de contenido">/CONTENIDO</button>
-            <button class="filter-btn" data-category="soluciones de hardware">/HARDWARE</button>
+        <div class="portfolio-header">
+            <h2 class="portfolio-heading">ARCHIVOS<br>PROCESADOS</h2>
+            
+            <div class="category-bar" id="categoryBar">
+                <button class="filter-btn active" data-category="todos">Todos</button>
+                <button class="filter-btn" data-category="webs">Webs</button>
+                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
+            </div>
         </div>
 
         <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">HACIENDO FETCH A LA BASE DE DATOS...</div>
+            <div class="loading-skeleton">CARGANDO BASE DE DATOS...</div>
         </div>
     </section>
 
-    <footer>
-        [ END OF FILE ] &copy; 2026 DISK CREATIVO.
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Se mantiene la API exacta de tu versión anterior para no quebrar el backend
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -453,7 +458,7 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="color: var(--neon-magenta);">ERROR 404: FALLO AL LEER SECTORES DEL DISCO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL CONECTAR CON EL DISCO.</div>';
                 }
             }
 
@@ -470,7 +475,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="color: var(--neon-cyan);">NO HAY ARCHIVOS EN ESTE DIRECTORIO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">NO HAY ARCHIVOS EN ESTA CATEGORÍA.</div>';
                     return;
                 }
 
@@ -479,29 +484,20 @@
                     card.className = 'marketplace-card';
 
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
-                    if (imgUrl !== "") {
-                        card.innerHTML = `
-                            <div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>
-                            <span class="card-badge-floating">${p.categoria}</span>
-                        `;
-                    } else {
-                        card.innerHTML = `
-                            <div class="card-preview-thumb"></div>
-                            <span class="card-badge-floating">${p.categoria}</span>
-                        `;
-                    }
+                    let headerHtml = imgUrl !== "" 
+                        ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
+                        : `<div class="card-preview-thumb"></div>`;
 
-                    const bodyInfo = document.createElement('div');
-                    bodyInfo.className = 'card-body-info';
-                    bodyInfo.innerHTML = `
-                        <div>
+                    card.innerHTML = `
+                        ${headerHtml}
+                        <div class="card-body-info">
+                            <span class="card-badge">${p.categoria}</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ver Proyecto</a>
                         </div>
-                        <a href="${p.enlace}" class="btn-visit-solution" target="_blank">EJECUTAR PROYECTO ↗</a>
                     `;
                     
-                    card.appendChild(bodyInfo);
                     grid.appendChild(card);
                 });
             }
