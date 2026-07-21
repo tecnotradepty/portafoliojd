@@ -7,20 +7,21 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Glitch&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Paleta Editorial Disk Creativo */
             --bg-cream: #F4F3EF;       /* Fondo hueso/crema principal */
             --brand-purple: #6B00FF;   /* Morado Ultravioleta principal */
+            --brand-purple-dark: #4A00E0;
             --neon-cyan: #00F0FF;
             --neon-magenta: #FF003C;
             --dark-slate: #110E17;     /* Cero negro puro */
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
-            --font-glitch: 'Rubik Glitch', system-ui;
+            --font-creative: 'Permanent Marker', cursive;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
@@ -48,7 +49,7 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN Y BOTÓN TERMINAL --- */
+        /* --- NAVEGACIÓN --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -66,25 +67,31 @@
             font-family: var(--font-body);
         }
 
-        .terminal-btn {
-            background: var(--bg-cream);
-            color: var(--text-dark);
-            border: 2px solid var(--text-dark);
-            padding: 10px 24px;
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
+        /* --- CAJAS ESTILO SPLASH DE PINTURA --- */
+        .splash-box {
+            background: linear-gradient(135deg, var(--brand-purple), var(--brand-purple-dark));
+            color: #FFFFFF;
+            font-family: var(--font-creative);
+            font-size: 1.2rem;
+            padding: 15px 35px;
+            /* Geometría orgánica simulando líquido/mancha */
+            border-radius: 60% 40% 70% 30% / 40% 50% 60% 50%;
+            box-shadow: 5px 15px 25px rgba(107, 0, 255, 0.3);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            text-align: center;
             text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            border: none;
             position: relative;
-            box-shadow: 4px 4px 0px var(--brand-purple), -2px -2px 15px rgba(0, 240, 255, 0.4), 2px 2px 15px rgba(255, 0, 60, 0.4);
-            transition: all 0.2s ease;
-            border-radius: 4px;
         }
 
-        .terminal-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--brand-purple), -4px -4px 20px rgba(0, 240, 255, 0.6), 4px 4px 20px rgba(255, 0, 60, 0.6);
+        .splash-box:hover {
+            /* Alteración de la geometría para efecto de líquido en movimiento */
+            border-radius: 40% 60% 30% 70% / 50% 60% 40% 50%;
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 8px 20px 35px rgba(107, 0, 255, 0.5);
+            color: #FFFFFF;
         }
 
         /* --- HERO SECTION (JUEGO DE CAPAS) --- */
@@ -100,7 +107,6 @@
             background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.05) 0%, transparent 60%);
         }
 
-        /* Contenedor central del texto y logo */
         .hero-sandwich {
             position: relative;
             display: flex;
@@ -125,12 +131,48 @@
         .hero-giant-text div {
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         /* Utilidad de capas (Z-Index Sandwich) */
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
-        .glitch-font { font-family: var(--font-glitch); color: var(--text-dark); }
+        
+        /* --- ESTILO LIQUID GLASS (IOS / ARCOÍRIS) --- */
+        .liquid-glass-letter {
+            display: inline-block;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: var(--font-display);
+            /* Gradiente translúcido simulando cristal */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
+            /* El blur mágico que distorsionará el logo al pasar por detrás */
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 25px; /* Bordes suaves tipo iOS */
+            padding: 0 15px;
+            margin: 0 5px;
+            box-shadow: 0 10px 30px rgba(107, 0, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.4);
+            position: relative;
+            z-index: 20; /* Siempre por encima del logo para lograr la distorsión visual */
+            overflow: hidden;
+        }
+
+        /* Reflejo iridiscente/arcoíris sutil dentro del cristal */
+        .liquid-glass-letter::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255,0,0,0.15), rgba(255,255,0,0.15), rgba(0,255,0,0.15), rgba(0,255,255,0.15), rgba(0,0,255,0.15), rgba(255,0,255,0.15));
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            animation: rainbowShift 6s linear infinite;
+        }
+
+        @keyframes rainbowShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
 
         .giant-transparent-logo {
             position: absolute;
@@ -138,7 +180,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: clamp(280px, 40vw, 550px);
-            z-index: 5; /* Entre el texto de fondo y el texto frontal */
+            z-index: 5; /* Pasa POR DEBAJO de las letras Liquid Glass */
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.2));
@@ -148,20 +190,6 @@
             0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
             50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-        }
-
-        .system-status {
-            margin-top: 4rem;
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            border: 2px solid var(--brand-purple);
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 15;
         }
 
         /* --- SECCIÓN DARK (EQUIPO) --- */
@@ -285,6 +313,7 @@
             background-position: center;
             margin-bottom: 1.5rem;
             border: 2px solid transparent;
+            border-radius: 12px;
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
@@ -361,8 +390,10 @@
         }
 
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; }
+            nav { flex-direction: column; gap: 20px; }
             .giant-transparent-logo { width: 80vw; }
+            .liquid-glass-letter { padding: 0 8px; border-radius: 15px; }
+            .splash-box { font-size: 1rem; padding: 12px 25px; }
         }
     </style>
 </head>
@@ -372,7 +403,7 @@
 
     <nav>
         <div class="nav-text">DISQ // CREATIVO</div>
-        <a href="mailto:contacto@diskcreativo.com" class="terminal-btn">RUN_CMD > CONTACTO</a>
+        <a href="mailto:contacto@diskcreativo.com" class="splash-box">¡CONTACTO!</a>
     </nav>
 
     <section class="hero-section" id="hero-container">
@@ -381,17 +412,17 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="z-front glitch-font">I</span>
+                    <span class="liquid-glass-letter">I</span>
                     <span class="z-back">S</span>
                     <span class="z-front">K</span>
                 </div>
                 <div>
                     <span class="z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front glitch-font">E</span>
+                    <span class="z-front">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front glitch-font">I</span>
+                    <span class="liquid-glass-letter">I</span>
                     <span class="z-back">V</span>
                     <span class="z-back">O</span>
                 </div>
@@ -400,8 +431,8 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
         </div>
 
-        <div class="system-status">
-            [ STATUS: DISQUE CREATIVOS, LO HACEMOS REAL ]
+        <div class="splash-box" style="margin-top: 4rem; font-size: 1.5rem; padding: 20px 45px;">
+            DISQUE CREATIVOS, LO HACEMOS REAL
         </div>
     </section>
 
