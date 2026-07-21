@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -45,7 +45,7 @@
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.04;
+            opacity: 0.05;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
@@ -61,36 +61,37 @@
         }
 
         .nav-text {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-dark);
             font-family: var(--font-body);
         }
 
-        /* --- CAJAS ESTILO SPLASH DE PINTURA --- */
+        /* --- CAJAS ESTILO GOTAS ORGÁNICAS DERRAMADAS --- */
         .splash-box {
             background: linear-gradient(135deg, var(--brand-purple), var(--brand-purple-dark));
             color: #FFFFFF;
             font-family: var(--font-creative);
-            font-size: 1.2rem;
-            padding: 15px 35px;
-            /* Geometría orgánica simulando líquido/mancha */
-            border-radius: 60% 40% 70% 30% / 40% 50% 60% 50%;
-            box-shadow: 5px 15px 25px rgba(107, 0, 255, 0.3);
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            font-size: 1.3rem;
+            padding: 20px 40px;
+            /*clip-path complejo para geometría irregular y derramada */
+            clip-path: polygon(50% 0%, 75% 5%, 90% 15%, 100% 35%, 95% 65%, 85% 85%, 70% 95%, 50% 100%, 30% 98%, 15% 90%, 5% 70%, 0% 40%, 10% 15%, 25% 5%);
+            box-shadow: 0px 15px 30px rgba(107, 0, 255, 0.35);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             border: none;
             position: relative;
+            z-index: 50;
         }
 
         .splash-box:hover {
-            /* Alteración de la geometría para efecto de líquido en movimiento */
-            border-radius: 40% 60% 30% 70% / 50% 60% 40% 50%;
-            transform: scale(1.05) rotate(-2deg);
-            box-shadow: 8px 20px 35px rgba(107, 0, 255, 0.5);
+            /* Alteración de la geometría para efecto de líquido expandiéndose */
+            clip-path: polygon(45% 3%, 70% 10%, 85% 20%, 98% 40%, 100% 60%, 90% 80%, 75% 90%, 55% 100%, 35% 98%, 18% 92%, 8% 75%, 3% 50%, 15% 20%, 30% 10%);
+            transform: scale(1.05) rotate(-1.5deg);
+            box-shadow: 0px 25px 45px rgba(107, 0, 255, 0.5);
             color: #FFFFFF;
         }
 
@@ -102,9 +103,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15vh 2vw 5vh 2vw;
+            padding: 18vh 2vw 5vh 2vw;
             overflow: hidden;
-            background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.05) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.06) 0%, transparent 65%);
         }
 
         .hero-sandwich {
@@ -117,13 +118,13 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 20vw, 18rem);
-            line-height: 0.85;
+            font-size: clamp(6rem, 21vw, 19rem);
+            line-height: 0.82;
             color: var(--brand-purple);
             text-align: center;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
             display: flex;
             flex-direction: column;
         }
@@ -136,42 +137,42 @@
 
         /* Utilidad de capas (Z-Index Sandwich) */
         .z-back { z-index: 1; position: relative; }
-        .z-front { z-index: 10; position: relative; }
+        .z-front { z-index: 12; position: relative; }
         
-        /* --- ESTILO LIQUID GLASS (IOS / ARCOÍRIS) --- */
+        /* --- ESTILO VERDADERO LIQUID GLASS TRANSLÚCIDO (I, E) --- */
         .liquid-glass-letter {
             display: inline-block;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.7);
             font-family: var(--font-display);
-            /* Gradiente translúcido simulando cristal */
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
-            /* El blur mágico que distorsionará el logo al pasar por detrás */
-            backdrop-filter: blur(15px) saturate(160%);
-            -webkit-backdrop-filter: blur(15px) saturate(160%);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            border-radius: 25px; /* Bordes suaves tipo iOS */
-            padding: 0 15px;
-            margin: 0 5px;
-            box-shadow: 0 10px 30px rgba(107, 0, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.4);
+            /* FONDO TRANSLÚCIDO PURO - SE ELIMINÓ EL BLOQUE SÓLIDO */
+            background: transparent;
+            /* El blur mágico que distorsionará el logo al pasar por detrás - AUMENTADO */
+            backdrop-filter: blur(25px) saturate(180%) contrast(1.1);
+            -webkit-backdrop-filter: blur(25px) saturate(180%) contrast(1.1);
+            /* Borde translúcido sutil para definir la forma */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px; /* Bordes suaves tipo cristal soplado */
+            padding: 0 18px;
+            margin: 0 8px;
+            box-shadow: 0 15px 40px rgba(107, 0, 255, 0.1), inset 0 0 25px rgba(255, 255, 255, 0.3);
             position: relative;
             z-index: 20; /* Siempre por encima del logo para lograr la distorsión visual */
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Reflejo iridiscente/arcoíris sutil dentro del cristal */
+        /* Brillo sutil y translúcido dentro del cristal */
         .liquid-glass-letter::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, rgba(255,0,0,0.15), rgba(255,255,0,0.15), rgba(0,255,0,0.15), rgba(0,255,255,0.15), rgba(0,0,255,0.15), rgba(255,0,255,0.15));
-            mix-blend-mode: overlay;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.1), transparent 50%);
+            mix-blend-mode: color-dodge;
             pointer-events: none;
-            animation: rainbowShift 6s linear infinite;
-        }
-
-        @keyframes rainbowShift {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+            opacity: 0.6;
         }
 
         .giant-transparent-logo {
@@ -179,16 +180,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 40vw, 550px);
-            z-index: 5; /* Pasa POR DEBAJO de las letras Liquid Glass */
+            width: clamp(280px, 42vw, 580px);
+            z-index: 5; /* Pasa POR DEBAJO de las letras Liquid Glass (I, E) */
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
-            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.2));
+            filter: drop-shadow(0px 25px 40px rgba(107, 0, 255, 0.25));
         }
 
         @keyframes floatLogo {
             0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
+            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.03); }
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
@@ -198,11 +199,12 @@
             padding: 8rem 4vw;
             color: var(--bg-cream);
             position: relative;
+            z-index: 10;
         }
 
         .giant-dark-heading {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 15rem);
+            font-size: clamp(5rem, 16vw, 16rem);
             line-height: 0.8;
             color: var(--brand-purple);
             margin-bottom: 4rem;
@@ -212,14 +214,14 @@
         .team-grid-editorial {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            gap: 3.5rem;
             border-top: 1px solid rgba(244, 243, 239, 0.1);
-            padding-top: 3rem;
+            padding-top: 3.5rem;
         }
 
         .team-member-col h4 {
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--bg-cream);
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -227,7 +229,7 @@
 
         .team-member-col .role {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             color: var(--brand-purple);
             margin-bottom: 1.5rem;
@@ -235,7 +237,7 @@
         }
 
         .team-member-col p {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             line-height: 1.6;
             color: #A09DA5;
             font-weight: 400;
@@ -245,11 +247,13 @@
         .portfolio-section {
             background-color: var(--bg-cream);
             padding: 8rem 4vw;
+            position: relative;
+            z-index: 10;
         }
 
         .portfolio-massive-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 12rem);
+            font-size: clamp(4rem, 13vw, 13rem);
             line-height: 0.8;
             color: var(--text-dark);
             margin-bottom: 1rem;
@@ -262,14 +266,14 @@
             align-items: flex-end;
             margin-bottom: 4rem;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 2.5rem;
             border-bottom: 2px solid var(--brand-purple);
-            padding-bottom: 2rem;
+            padding-bottom: 2.5rem;
         }
 
         .category-bar {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -277,9 +281,9 @@
             background: transparent;
             color: var(--text-dark);
             border: 2px solid var(--text-dark);
-            padding: 8px 24px;
+            padding: 10px 26px;
             font-family: var(--font-body);
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
@@ -294,8 +298,8 @@
 
         .grid-portfolio {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 3rem;
         }
 
         .marketplace-card {
@@ -307,7 +311,7 @@
 
         .card-preview-thumb {
             width: 100%;
-            height: 300px;
+            height: 320px;
             background-color: #e5e3db;
             background-size: cover;
             background-position: center;
@@ -318,20 +322,20 @@
         }
 
         .marketplace-card:hover .card-preview-thumb {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--brand-purple);
         }
 
         .card-body-info h3 {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             color: var(--text-dark);
             line-height: 1;
             margin-bottom: 0.5rem;
         }
 
         .card-badge {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--brand-purple);
             text-transform: uppercase;
@@ -340,7 +344,7 @@
         }
 
         .card-body-info p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.5;
             color: #555;
             margin-bottom: 1.5rem;
@@ -348,7 +352,7 @@
 
         .btn-visit-solution {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             text-decoration: none;
             color: var(--brand-purple);
@@ -366,7 +370,7 @@
         .loading-skeleton {
             grid-column: 1 / -1;
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--brand-purple);
             text-align: left;
             padding: 4rem 0;
@@ -380,20 +384,21 @@
 
         footer {
             text-align: center;
-            padding: 3rem;
+            padding: 3.5rem;
             font-family: var(--font-body);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             nav { flex-direction: column; gap: 20px; }
-            .giant-transparent-logo { width: 80vw; }
-            .liquid-glass-letter { padding: 0 8px; border-radius: 15px; }
-            .splash-box { font-size: 1rem; padding: 12px 25px; }
+            .giant-transparent-logo { width: 85vw; }
+            .hero-giant-text { font-size: clamp(4rem, 15vw, 15rem); letter-spacing: -2px;}
+            .liquid-glass-letter { padding: 0 10px; border-radius: 12px; margin: 0 4px; border-width: 1px;}
+            .splash-box { font-size: 1rem; padding: 15px 30px; }
         }
     </style>
 </head>
@@ -419,7 +424,7 @@
                 <div>
                     <span class="z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front">E</span>
+                    <span class="liquid-glass-letter">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
                     <span class="liquid-glass-letter">I</span>
@@ -431,7 +436,7 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
         </div>
 
-        <div class="splash-box" style="margin-top: 4rem; font-size: 1.5rem; padding: 20px 45px;">
+        <div class="splash-box" style="margin-top: 5rem; font-size: 1.6rem; padding: 25px 60px; z-index: 10;">
             DISQUE CREATIVOS, LO HACEMOS REAL
         </div>
     </section>
@@ -463,7 +468,7 @@
         <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
 
         <div class="portfolio-header">
-            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+            <p style="max-width: 520px; font-size: 1.05rem; font-weight: 500; line-height: 1.6;">
                 Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
             </p>
             
@@ -487,7 +492,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Interacción Parallax para el Logo Gigante
+            // Interacción Parallax para el Logo Gigante - Suavizado
             const heroContainer = document.getElementById('hero-container');
             const logo = document.getElementById('dynamic-logo');
             
@@ -496,7 +501,8 @@
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
                 
-                logo.style.transform = `translate(calc(-50% + ${x * -30}px), calc(-50% + ${y * -30}px))`;
+                // Mueve el logo sutilmente en dirección opuesta al mouse
+                logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
             });
 
             heroContainer.addEventListener('mouseleave', () => {
@@ -515,7 +521,7 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--neon-magenta);">ERROR AL LEER EL DISCO.</div>';
                 }
             }
 
@@ -532,7 +538,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;color:var(--neon-cyan);">DIRECTORIO VACÍO.</div>';
                     return;
                 }
 
@@ -551,7 +557,7 @@
                             <span class="card-badge">${p.categoria}</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD ↗</a>
                         </div>
                     `;
                     
