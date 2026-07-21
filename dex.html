@@ -16,7 +16,6 @@
         }
 
         :root {
-            /* Crema Hueso extraído de tu imagen base */
             --bg-cream: #F2F1EC;       
             --brand-purple: #6B00FF;   
             --dark-slate: #110E17;     
@@ -38,8 +37,8 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding inferior masivo universal para el Dock de la cámara */
-            padding-bottom: 250px; 
+            /* Padding ajustado para el nuevo Dock "Gadget" */
+            padding-bottom: 120px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -52,27 +51,23 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION (LIMPIA, SIN TEXTO ARRIBA Y CON ESPACIO) --- */
+        /* --- HERO SECTION (NUEVO FONDO RETRO Y CENTRADO PERFECTO) --- */
         .hero-section {
             position: relative;
-            /* Restauramos la altura dinámica para que se adapte al aire que le damos */
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Anclado arriba para separarlo del fondo morado */
-            
-            /* PADDING AJUSTADO: Mucho espacio arriba, y muchísimo espacio abajo para NO tocar la mancha */
-            padding: 18vh 2vw 35vh 2vw; 
+            justify-content: center; /* Título y logo centrados en la pantalla */
+            padding: 2vw; 
             overflow: hidden;
             
-            /* FONDO MORADO ORGÁNICO - Sin aplastar */
+            /* FONDO RETRO ARCOÍRIS */
             background-color: var(--bg-cream); 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
-            background-position: center bottom; 
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/858a3d3d80731014ee5727f5548c6f5341ff7937/DIQC/39964286_1784665770068788(1).jpg');
+            background-position: center center; 
             background-repeat: no-repeat;
-            /* 100% de ancho, altura automática para que recupere su forma original (no PDF) */
-            background-size: 100% auto; 
+            background-size: cover; 
         }
 
         .hero-sandwich {
@@ -86,7 +81,7 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(6.5rem, 25vw, 25rem);
+            font-size: clamp(5rem, 22vw, 25rem);
             line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
@@ -106,33 +101,30 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS RESTAURADO (ESTILO APPLE PREMIUM) --- */
+        /* --- LIQUID GLASS RESTAURADO (VERSIÓN BLOQUE FÍSICO QUE TE GUSTÓ) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Gradiente iridiscente translúcido original */
-            background: linear-gradient(
-                135deg, 
-                rgba(255, 255, 255, 0.7) 0%, 
-                rgba(0, 240, 255, 0.4) 15%, 
-                rgba(255, 255, 255, 0.1) 40%, 
-                rgba(255, 255, 255, 0.1) 60%, 
-                rgba(255, 0, 60, 0.2) 85%,  
-                rgba(255, 255, 255, 0.8) 100%
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
+            /* Caja de cristal físico translúcido */
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             
-            /* Base casi transparente */
-            color: rgba(255, 255, 255, 0.15);
+            /* Bordes del cristal */
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px; 
             
-            /* Borde de cristal y glow de refracción */
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
-            text-shadow: 
-                0px 5px 15px rgba(0, 0, 0, 0.25), 
-                0px 0px 25px rgba(255, 255, 255, 0.4); 
+            /* Letra semi-transparente adentro */
+            color: rgba(255,255,255,0.2);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.6);
             
+            /* Espaciado para simular un cubo/botón */
+            padding: 0 15px;
+            margin: 0 5px;
+            
+            /* Sombra física */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             position: relative;
             z-index: 20; 
         }
@@ -142,11 +134,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(300px, 50vw, 800px); 
+            width: clamp(280px, 45vw, 800px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
-            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.25));
+            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.4));
         }
 
         @keyframes floatLogo {
@@ -155,7 +147,7 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- SECCIÓN DARK (NUEVA: PLAYGROUND + OPERADORES) --- */
+        /* --- SECCIÓN DARK (IDENTIDAD Y PLAYGROUND) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
             padding: 6rem 4vw; 
@@ -163,18 +155,18 @@
             position: relative;
         }
 
-        /* Bloque 1: El Manifiesto y la Maqueta 3D */
+        /* Layout Rígido 2 Columnas (Dashboard Mantenido en Móvil) */
         .playground-container {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 4rem;
+            grid-template-columns: 55% 45%; /* Texto izq, Maqueta der. SIEMPRE. */
+            gap: 3rem;
             align-items: center;
-            margin-bottom: 6rem; /* Espacio antes de los operadores */
+            margin-bottom: 6rem;
         }
 
         .playground-text h2 {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 5vw, 5rem);
+            font-size: clamp(2rem, 5vw, 5rem);
             color: var(--brand-purple);
             line-height: 0.9;
             margin-bottom: 1.5rem;
@@ -182,7 +174,7 @@
         }
 
         .playground-text p {
-            font-size: 1.05rem;
+            font-size: clamp(0.7rem, 1.2vw, 1.05rem); /* Auto-escala en móviles para caber */
             line-height: 1.6;
             color: #A09DA5;
             margin-bottom: 1.2rem;
@@ -192,6 +184,12 @@
         .playground-text .highlight-text {
             color: #F4F3EF;
             font-weight: 700;
+        }
+
+        .playground-text .cta-text {
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-purple);
         }
 
         .playground-image {
@@ -204,9 +202,9 @@
         .playground-image img {
             width: 100%;
             height: auto;
-            max-width: 600px;
+            max-width: 650px;
             filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
-            transform: scale(1.05); /* Pop visual 3D */
+            transform: scale(1.05); 
             transition: transform 0.5s ease;
         }
 
@@ -214,7 +212,7 @@
             transform: scale(1.08) translateY(-10px);
         }
 
-        /* Bloque 2: Operadores del Sistema (Equipo) */
+        /* Operadores del Sistema (Equipo) */
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -403,20 +401,21 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 200px; 
+            padding-bottom: 150px; 
         }
 
         /* =========================================================
-           SISTEMA DE DOCK (CÁMARA FÍSICA AL RAS - UNIVERSAL)
+           DOCK DE CÁMARA (MODO GADGET: COMPACTO Y CENTRADO)
            ========================================================= */
         
         .camera-container {
             position: fixed;
-            bottom: -5px; 
+            /* Flota ligeramente sobre el borde para enfatizar que es un gadget */
+            bottom: 15px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: 100vw; 
+            width: 95%; /* 95% en móviles para dar margen */
+            max-width: 500px; /* Candado estricto en PC, se verá como un control remoto de lujo */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -426,10 +425,12 @@
             height: auto;
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px -5px 20px rgba(0,0,0,0.4));
+            /* Sombra profunda para que resalte del fondo web */
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            border-radius: 20px; /* Suavidad extra en esquinas por si acaso */
         }
 
-        /* Hitboxes invisibles calibradas */
+        /* Hitboxes invisibles calibradas milimétricamente */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -447,24 +448,29 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (RESPONSIVIDAD MÓVIL) --- */
-        @media (max-width: 900px) {
-            .hero-section {
-                padding-top: 15vh;
-                /* Espacio inferior asegurado para no chocar en móvil */
-                padding-bottom: 28vh; 
-            }
-            .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); letter-spacing: -2px; }
+        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR) --- */
+        @media (max-width: 768px) {
+            .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); }
             
-            /* El diorama 3D pasa abajo del texto en celular */
+            /* Mantiene la vista Dashboard (Texto a la izquierda, Diorama a la derecha) SIEMPRE */
             .playground-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                grid-template-columns: 55% 45%;
+                gap: 15px;
             }
+            .playground-text h2 {
+                font-size: 1.2rem; /* Reduce para caber perfecto */
+                margin-bottom: 0.8rem;
+            }
+            .playground-text p {
+                font-size: 0.65rem; /* Letra pequeña, tech y legible */
+                line-height: 1.4;
+                margin-bottom: 0.6rem;
+            }
+            .playground-text .cta-text { margin-top: 1rem; }
+            .playground-image img { transform: scale(1.1); }
             
-            .camera-container { max-width: 100vw; }
             body { padding-bottom: 120px; }
-            footer { padding-bottom: 150px; }
+            footer { padding-bottom: 120px; }
         }
     </style>
 </head>
@@ -473,22 +479,21 @@
     <div class="noise-overlay"></div>
 
     <section class="hero-section" id="inicio">
-        
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="z-front liquid-glass-letter">I</span>
+                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
                     <span class="z-back">S</span>
                     <span class="z-front">K</span>
                 </div>
                 <div>
                     <span class="z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front liquid-glass-letter">E</span>
+                    <span class="z-front liquid-glass-letter" data-letter="E">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter">I</span>
+                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
                     <span class="z-back">V</span>
                     <span class="z-back">O</span>
                 </div>
@@ -506,7 +511,7 @@
                 <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">metiendo mente</span> a un proyecto ambicioso, nosotros construimos la infraestructura para hacerlo real.</p>
                 <p>Desde plataformas web desarrolladas desde cero hasta rebrandings diseñados para tirar <span class="highlight-text">pifia</span> en tu sector. Innovamos rápido, optimizamos tus costos y aseguramos que cada paso se dé en terreno <span class="highlight-text">sólido</span>.</p>
                 <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo más grande del país y expandir nuestra visión al mundo. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
-                <p style="margin-top: 2rem; font-weight: 700; color: var(--brand-purple);">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
+                <p class="cta-text">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
             </div>
             
             <div class="playground-image">
@@ -538,14 +543,11 @@
     </section>
 
     <section class="portfolio-section" id="proyectos">
-        
         <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
-
         <div class="portfolio-header">
             <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
                 Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
             </p>
-            
             <div class="category-bar" id="categoryBar">
                 <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
                 <button class="filter-btn" data-category="webs">Webs</button>
@@ -565,7 +567,6 @@
 
     <div class="camera-container">
         <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784610614803.png" alt="Barra de Navegación Cámara">
-        
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
         <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
@@ -591,7 +592,6 @@
                 });
             }
 
-            // Lógica de Google Sheets API
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
