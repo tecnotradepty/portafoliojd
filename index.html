@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disk Creativo | Editorial UI</title>
+    <title>Disk Creativo | Unidad de Almacenamiento</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rubik+Glitch&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Paleta Editorial Disk Creativo */
             --bg-cream: #F4F3EF;       /* Fondo hueso/crema principal */
-            --brand-purple: #4A00E0;   /* Morado principal vibrante */
-            --brand-red: #D91A1A;      /* Acento rojo extraído de tu referencia */
-            --dark-slate: #110E17;     /* Pizarra/Morado muy oscuro (Evitando negro puro) */
+            --brand-purple: #6B00FF;   /* Morado Ultravioleta principal */
+            --neon-cyan: #00F0FF;
+            --neon-magenta: #FF003C;
+            --dark-slate: #110E17;     /* Cero negro puro */
             --text-dark: #1A1A1A;
             
-            --font-display: 'Bebas Neue', sans-serif;
+            --font-display: 'Anton', sans-serif;
+            --font-glitch: 'Rubik Glitch', system-ui;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
@@ -36,94 +38,133 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- EFECTO DE RUIDO (NOISE) PARA TODA LA WEB --- */
+        /* --- EFECTO DE RUIDO (NOISE) --- */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.03;
+            opacity: 0.04;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN MINIMALISTA --- */
+        /* --- NAVEGACIÓN Y BOTÓN TERMINAL --- */
         nav {
             display: flex;
             justify-content: space-between;
-            padding: 1.5rem 3vw;
+            align-items: center;
+            padding: 2rem 4vw;
             position: absolute;
             width: 100%;
             z-index: 100;
         }
 
         .nav-text {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+        }
+
+        .terminal-btn {
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            padding: 10px 24px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: -0.5px;
-            color: var(--brand-purple);
-        }
-
-        /* --- HERO SECTION (Estilo TV CRT / Aaron Loeb Referencia) --- */
-        .hero-section {
-            padding: 10vh 3vw 5vh 3vw;
-            min-height: 95vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tv-container {
-            width: 100%;
-            height: 80vh;
-            background-color: #E8E5DF; /* Crema ligeramente más oscuro para contrastar */
-            border-radius: 40px; /* Borde curvo tipo TV */
+            text-decoration: none;
             position: relative;
-            overflow: hidden;
+            box-shadow: 4px 4px 0px var(--brand-purple), -2px -2px 15px rgba(0, 240, 255, 0.4), 2px 2px 15px rgba(255, 0, 60, 0.4);
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .terminal-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--brand-purple), -4px -4px 20px rgba(0, 240, 255, 0.6), 4px 4px 20px rgba(255, 0, 60, 0.6);
+        }
+
+        /* --- HERO SECTION (JUEGO DE CAPAS) --- */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+            padding: 15vh 2vw 5vh 2vw;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.05) 0%, transparent 60%);
+        }
+
+        /* Contenedor central del texto y logo */
+        .hero-sandwich {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(8rem, 25vw, 22rem);
-            line-height: 0.75;
+            font-size: clamp(6rem, 20vw, 18rem);
+            line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
             margin: 0;
-            z-index: 1;
+            text-transform: uppercase;
             letter-spacing: -2px;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* LOGO INTERACTIVO Y ANIMADO */
-        .interactive-logo-container {
+        .hero-giant-text div {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Utilidad de capas (Z-Index Sandwich) */
+        .z-back { z-index: 1; position: relative; }
+        .z-front { z-index: 10; position: relative; }
+        .glitch-font { font-family: var(--font-glitch); color: var(--text-dark); }
+
+        .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(250px, 35vw, 450px);
-            z-index: 2;
-            pointer-events: none; /* Para que el mouse atraviese si es necesario */
-        }
-
-        .disk-logo {
-            width: 100%;
-            height: auto;
-            mix-blend-mode: multiply; /* Elimina el fondo blanco del JPG mágicamente */
-            animation: floatLogo 6s ease-in-out infinite;
-            filter: contrast(1.1) saturate(1.2);
+            width: clamp(280px, 40vw, 550px);
+            z-index: 5; /* Entre el texto de fondo y el texto frontal */
+            animation: floatLogo 8s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.2));
         }
 
         @keyframes floatLogo {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-20px) rotate(2deg) scale(1.02); }
-            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- SECCIÓN DARK (INTRODUCCIÓN DEL EQUIPO) --- */
+        .system-status {
+            margin-top: 4rem;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            border: 2px solid var(--brand-purple);
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 15;
+        }
+
+        /* --- SECCIÓN DARK (EQUIPO) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
             padding: 8rem 4vw;
@@ -133,9 +174,9 @@
 
         .giant-dark-heading {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 20vw, 20rem);
-            line-height: 0.75;
-            color: var(--brand-purple); /* Contraste profundo */
+            font-size: clamp(5rem, 15vw, 15rem);
+            line-height: 0.8;
+            color: var(--brand-purple);
             margin-bottom: 4rem;
             text-align: left;
         }
@@ -144,7 +185,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
-            border-top: 1px solid rgba(244, 243, 239, 0.2);
+            border-top: 1px solid rgba(244, 243, 239, 0.1);
             padding-top: 3rem;
         }
 
@@ -169,9 +210,10 @@
             font-size: 0.95rem;
             line-height: 1.6;
             color: #A09DA5;
+            font-weight: 400;
         }
 
-        /* --- SECCIÓN BLANCA (PORTAFOLIO "HELLO I'M AARON" VIBE) --- */
+        /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
             padding: 8rem 4vw;
@@ -179,7 +221,7 @@
 
         .portfolio-massive-title {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 15rem);
+            font-size: clamp(4rem, 12vw, 12rem);
             line-height: 0.8;
             color: var(--text-dark);
             margin-bottom: 1rem;
@@ -193,11 +235,10 @@
             margin-bottom: 4rem;
             flex-wrap: wrap;
             gap: 2rem;
-            border-bottom: 2px solid var(--text-dark);
+            border-bottom: 2px solid var(--brand-purple);
             padding-bottom: 2rem;
         }
 
-        /* Filtros estilo píldora minimalista */
         .category-bar {
             display: flex;
             gap: 8px;
@@ -207,8 +248,7 @@
         .filter-btn {
             background: transparent;
             color: var(--text-dark);
-            border: 1px solid var(--text-dark);
-            border-radius: 50px;
+            border: 2px solid var(--text-dark);
             padding: 8px 24px;
             font-family: var(--font-body);
             font-size: 0.85rem;
@@ -219,51 +259,38 @@
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--text-dark);
+            background: var(--brand-purple);
             color: var(--bg-cream);
+            border-color: var(--brand-purple);
         }
 
-        /* Grid de Proyectos */
         .grid-portfolio {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .marketplace-card {
             background-color: transparent;
             display: flex;
             flex-direction: column;
-            group: hover;
             cursor: pointer;
         }
 
         .card-preview-thumb {
             width: 100%;
-            height: 350px; /* Más alto, estilo retrato fotográfico */
-            background-color: #dcd9d0;
-            border-radius: 15px; /* Bordes redondeados sutiles */
+            height: 300px;
+            background-color: #e5e3db;
             background-size: cover;
             background-position: center;
             margin-bottom: 1.5rem;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 2px solid transparent;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .marketplace-card:hover .card-preview-thumb {
-            transform: scale(1.02);
-        }
-
-        .card-body-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--brand-purple);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            transform: translateY(-5px);
+            border-color: var(--brand-purple);
         }
 
         .card-body-info h3 {
@@ -272,6 +299,15 @@
             color: var(--text-dark);
             line-height: 1;
             margin-bottom: 0.5rem;
+        }
+
+        .card-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         .card-body-info p {
@@ -286,22 +322,22 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             text-decoration: none;
-            color: var(--text-dark);
-            border-bottom: 1px solid var(--text-dark);
+            color: var(--brand-purple);
+            border-bottom: 2px solid var(--brand-purple);
             align-self: flex-start;
             padding-bottom: 2px;
-            transition: color 0.3s, border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .btn-visit-solution:hover {
-            color: var(--brand-purple);
-            border-color: var(--brand-purple);
+            color: var(--neon-magenta);
+            border-color: var(--neon-magenta);
         }
 
         .loading-skeleton {
             grid-column: 1 / -1;
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--brand-purple);
             text-align: left;
             padding: 4rem 0;
@@ -310,18 +346,24 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            50% { opacity: 0.4; }
         }
 
         footer {
             text-align: center;
             padding: 3rem;
+            font-family: var(--font-body);
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
-            border-top: 1px solid #ddd;
+            background-color: var(--dark-slate);
+            color: var(--bg-cream);
         }
 
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .giant-transparent-logo { width: 80vw; }
+        }
     </style>
 </head>
 <body>
@@ -329,24 +371,37 @@
     <div class="noise-overlay"></div>
 
     <nav>
-        <div class="nav-text">2026 © DISK CREATIVO</div>
-        <div class="nav-text">PANAMÁ</div>
+        <div class="nav-text">DISQ // CREATIVO</div>
+        <a href="mailto:contacto@diskcreativo.com" class="terminal-btn">RUN_CMD > CONTACTO</a>
     </nav>
 
-    <section class="hero-section">
-        <div class="tv-container" id="hero-container">
-            
+    <section class="hero-section" id="hero-container">
+        
+        <div class="hero-sandwich">
             <h1 class="hero-giant-text">
-                DISK<br>CREATIVO
+                <div>
+                    <span class="z-back">D</span>
+                    <span class="z-front glitch-font">I</span>
+                    <span class="z-back">S</span>
+                    <span class="z-front">K</span>
+                </div>
+                <div>
+                    <span class="z-front">C</span>
+                    <span class="z-back">R</span>
+                    <span class="z-front glitch-font">E</span>
+                    <span class="z-back">A</span>
+                    <span class="z-back">T</span>
+                    <span class="z-front glitch-font">I</span>
+                    <span class="z-back">V</span>
+                    <span class="z-back">O</span>
+                </div>
             </h1>
 
-            <div class="interactive-logo-container" id="logo-container">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f2a73097d15793f020ec2de1532853e64a340521/DIQC/IMG-20260715-WA0022(1)(1).jpg" alt="Disk Creativo Logo" class="disk-logo">
-            </div>
-            
-            <div style="position: absolute; bottom: 2rem; text-align: center; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple);">
-                Disque creativo, lo hacemos real.
-            </div>
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
+        </div>
+
+        <div class="system-status">
+            [ STATUS: DISQUE CREATIVOS, LO HACEMOS REAL ]
         </div>
     </section>
 
@@ -377,8 +432,8 @@
         <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
 
         <div class="portfolio-header">
-            <p style="max-width: 400px; font-size: 0.95rem; font-weight: 500; line-height: 1.5;">
-                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero. Explora los sectores del disco.
+            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
             </p>
             
             <div class="category-bar" id="categoryBar">
@@ -390,35 +445,34 @@
         </div>
 
         <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">EXTRAYENDO DATA...</div>
+            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
         </div>
     </section>
 
     <footer>
-        FIN DEL ARCHIVO
+        [ END OF FILE ] © 2026 DISK CREATIVO
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Efecto Parallax en el logo con el movimiento del mouse
+            // Interacción Parallax para el Logo Gigante
             const heroContainer = document.getElementById('hero-container');
-            const logo = document.getElementById('logo-container');
+            const logo = document.getElementById('dynamic-logo');
             
             heroContainer.addEventListener('mousemove', (e) => {
                 const rect = heroContainer.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
                 
-                // Mueve el logo sutilmente en dirección opuesta al mouse
-                logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
+                logo.style.transform = `translate(calc(-50% + ${x * -30}px), calc(-50% + ${y * -30}px))`;
             });
 
             heroContainer.addEventListener('mouseleave', () => {
                 logo.style.transform = `translate(-50%, -50%)`;
             });
 
-            // --- LÓGICA DE GOOGLE SHEETS (Intacta) ---
+            // Lógica de Google Sheets API (Intacta)
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -447,7 +501,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">NO HAY ARCHIVOS EN ESTE DIRECTORIO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
                     return;
                 }
 
@@ -466,7 +520,7 @@
                             <span class="card-badge">${p.categoria}</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar Proyecto</a>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
                         </div>
                     `;
                     
