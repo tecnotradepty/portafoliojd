@@ -56,7 +56,7 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION (FONDO CENTRADO PERFECTO) --- */
+        /* --- HERO SECTION Y SISTEMA GLITCH --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
@@ -66,12 +66,67 @@
             justify-content: center; 
             padding: 2vw; 
             overflow: hidden;
-            
             background-color: var(--bg-cream); 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dcfbcbca31014c3127a2976ff1db6938a7f325ba/DIQC/39964286_1784665770068788(1)(1).jpg');
+        }
+
+        /* Capa base del fondo (aislada para el glitch) */
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; /* Detrás del título y logo */
+        }
+
+        .hero-bg-base {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* NUEVO FONDO ARCOIRIS */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c87fab9594529df0d9f4cee9bade387e552031aa/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
+        }
+
+        /* Capas fantasmas para el desgarro (Glitch Effect) */
+        .hero-bg-base::before,
+        .hero-bg-base::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: inherit;
+            background-position: inherit;
+            background-repeat: inherit;
+            background-size: inherit;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .hero-bg-base::before {
+            left: 5px;
+            filter: hue-rotate(90deg) saturate(1.5) contrast(1.2);
+            animation: glitch-slice 4s infinite linear alternate-reverse;
+        }
+
+        .hero-bg-base::after {
+            left: -5px;
+            filter: hue-rotate(-90deg) saturate(1.5) contrast(1.2);
+            animation: glitch-slice-2 5s infinite linear alternate-reverse;
+        }
+
+        /* Animaciones del VHS Tracking / Cortocircuito */
+        @keyframes glitch-slice {
+            0%, 90% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } /* Reposo absoluto */
+            91% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-10px); }
+            93% { clip-path: inset(80% 0 5% 0); opacity: 1; transform: translateX(10px); }
+            95% { clip-path: inset(30% 0 40% 0); opacity: 1; transform: translateX(-5px); }
+            97%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
+        }
+
+        @keyframes glitch-slice-2 {
+            0%, 92% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } /* Reposo absoluto */
+            93% { clip-path: inset(50% 0 30% 0); opacity: 1; transform: translateX(12px); }
+            95% { clip-path: inset(15% 0 70% 0); opacity: 1; transform: translateX(-12px); }
+            97% { clip-path: inset(70% 0 10% 0); opacity: 1; transform: translateX(6px); }
+            99%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
         }
 
         .hero-sandwich {
@@ -80,7 +135,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            z-index: 10; 
+            z-index: 10; /* Frente a la animación */
         }
 
         .hero-giant-text {
@@ -105,7 +160,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS OPTIMIZADO (Menos Blur, ceñido al texto) --- */
+        /* --- LIQUID GLASS (Menos Blur, ceñido al texto) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -131,7 +186,7 @@
                 0px 5px 15px rgba(0, 0, 0, 0.2), 
                 0px 0px 20px rgba(255, 255, 255, 0.3); 
             
-            /* BLUR REDUCIDO (4px) para que el CD se aprecie más detallado detrás */
+            /* BLUR REDUCIDO (4px) para nitidez */
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
             
@@ -171,10 +226,10 @@
             position: relative;
         }
 
-        /* Layout Rígido 2 Columnas CORREGIDO: fr units evitan desbordamiento de %. */
+        /* Layout Rígido 2 Columnas CORREGIDO (Sin desbordamiento) */
         .playground-container {
             display: grid;
-            grid-template-columns: 1.2fr 1fr; /* Reemplaza el 55/45% que causaba el fallo matemático */
+            grid-template-columns: 1.2fr 1fr; 
             gap: 3rem;
             align-items: center;
             margin-bottom: 6rem;
@@ -220,7 +275,7 @@
         .playground-image img {
             width: 100%;
             height: auto;
-            max-width: 100%; /* Obliga a respetar su caja flex/grid */
+            max-width: 100%; 
             filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
             transform: scale(1.05); 
             transition: transform 0.5s ease;
@@ -446,7 +501,7 @@
             border-radius: 20px; 
         }
 
-        /* Hitboxes invisibles calibradas milimétricamente */
+        /* Hitboxes invisibles */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -464,13 +519,12 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR Y ANTI-OVERFLOW) --- */
+        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR) --- */
         @media (max-width: 768px) {
             .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); }
             
-            /* Corrección final matemática para celulares */
             .playground-container {
-                grid-template-columns: 1.2fr 1fr; /* fr absorbe el espacio restante */
+                grid-template-columns: 1.2fr 1fr; 
                 gap: 15px;
             }
             .playground-text h2 {
@@ -485,7 +539,7 @@
             .playground-text .cta-text { margin-top: 1rem; }
             .playground-image img { 
                 transform: scale(1.1); 
-                max-width: 100%; /* Bloquea el zoom lateral desbordante */
+                max-width: 100%; 
             }
             
             body { padding-bottom: 120px; }
@@ -498,6 +552,11 @@
     <div class="noise-overlay"></div>
 
     <section class="hero-section" id="inicio">
+        
+        <div class="hero-bg">
+            <div class="hero-bg-base"></div>
+        </div>
+
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
