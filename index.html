@@ -11,8 +11,7 @@
     
     <style>
         :root {
-            /* Paleta Editorial Disk Creativo */
-            --bg-cream: #F4F3EF;       
+            var(--bg-cream): #F4F3EF;       
             --brand-purple: #6B00FF;   
             --brand-purple-dark: #4A00E0;
             --neon-cyan: #00F0FF;
@@ -32,12 +31,12 @@
         }
 
         body {
-            background-color: var(--bg-cream);
+            background-color: #F4F3EF;
             color: var(--text-dark);
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Espacio abajo para que la cámara gigante no tape contenido al hacer scroll */
+            /* Espacio abajo para que la cámara no tape contenido al final */
             padding-bottom: 160px; 
         }
 
@@ -56,7 +55,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 4vw;
+            padding: 1.5rem 4vw;
             position: absolute;
             width: 100%;
             z-index: 100;
@@ -88,39 +87,39 @@
         .splat-short {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000006bd881f58f53c6ff8407c2f9.png');
             background-size: 100% 100%;
-            width: 220px;
-            height: 80px;
-            font-size: 1.1rem;
+            width: 200px;
+            height: 70px;
+            font-size: 1rem;
             padding-bottom: 5px;
-            filter: drop-shadow(0px 8px 12px rgba(107,0,255,0.3));
+            filter: drop-shadow(0px 6px 10px rgba(107,0,255,0.3));
         }
 
         /* Splat Largo (Status inferior) */
         .splat-long {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/1784603721693.png');
             background-size: 100% 100%;
-            width: clamp(300px, 80vw, 700px);
-            height: 120px;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            margin-top: 4rem;
-            filter: drop-shadow(0px 10px 15px rgba(107,0,255,0.3));
+            width: clamp(280px, 70vw, 600px);
+            height: 100px;
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            margin-top: 2rem; /* COMPACTADO: Reducido de 4rem a 2rem */
+            filter: drop-shadow(0px 8px 12px rgba(107,0,255,0.3));
             z-index: 10;
         }
 
         .splat-base:hover {
             transform: scale(1.05) rotate(-2deg);
-            filter: drop-shadow(0px 12px 18px rgba(107,0,255,0.5));
+            filter: drop-shadow(0px 10px 15px rgba(107,0,255,0.5));
         }
 
         /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 85vh; /* COMPACTADO: Reducido de 100vh a 85vh */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15vh 2vw 5vh 2vw;
+            padding: 12vh 2vw 2vh 2vw; /* COMPACTADO */
             overflow: hidden;
             background: radial-gradient(circle at 50% 50%, rgba(107,0,255,0.06) 0%, transparent 60%);
         }
@@ -135,7 +134,7 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(8rem, 30vw, 25rem); /* TAMAÑO GIGANTE MANTENIDO */
+            font-size: clamp(8rem, 30vw, 25rem);
             line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
@@ -185,7 +184,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(350px, 55vw, 800px); /* TAMAÑO GIGANTE MANTENIDO */
+            width: clamp(350px, 55vw, 800px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
@@ -201,33 +200,33 @@
         /* --- SECCIÓN DARK (EQUIPO / IDENTIDAD) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
-            padding: 8rem 4vw;
-            color: var(--bg-cream);
+            padding: 4rem 4vw; /* COMPACTADO: Reducido de 8rem a 4rem */
+            color: #F4F3EF;
             position: relative;
         }
 
         .giant-dark-heading {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 15rem);
+            font-size: clamp(4rem, 12vw, 12rem);
             line-height: 0.8;
             color: var(--brand-purple);
-            margin-bottom: 4rem;
+            margin-bottom: 2rem; /* COMPACTADO */
             text-align: left;
         }
 
         .team-grid-editorial {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            gap: 2rem; /* COMPACTADO: Reducido de 3rem a 2rem */
             border-top: 1px solid rgba(244, 243, 239, 0.1);
-            padding-top: 3rem;
+            padding-top: 2rem;
         }
 
         .team-member-col h4 {
             font-family: var(--font-display);
-            font-size: 3rem;
-            color: var(--bg-cream);
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: #F4F3EF;
+            margin-bottom: 0.2rem;
             letter-spacing: 1px;
         }
 
@@ -236,29 +235,29 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             color: var(--brand-purple);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: block;
         }
 
         .team-member-col p {
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #A09DA5;
             font-weight: 400;
         }
 
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
-            background-color: var(--bg-cream);
-            padding: 8rem 4vw;
+            background-color: #F4F3EF;
+            padding: 4rem 4vw; /* COMPACTADO: Reducido de 8rem a 4rem */
         }
 
         .portfolio-massive-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 12rem);
+            font-size: clamp(3.5rem, 10vw, 10rem);
             line-height: 0.8;
             color: var(--text-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem; /* COMPACTADO */
             text-transform: uppercase;
         }
 
@@ -266,11 +265,11 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem; /* COMPACTADO */
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
             border-bottom: 2px solid var(--brand-purple);
-            padding-bottom: 2rem;
+            padding-bottom: 1.5rem;
         }
 
         .category-bar {
@@ -283,9 +282,9 @@
             background: transparent;
             color: var(--text-dark);
             border: 2px solid var(--text-dark);
-            padding: 8px 24px;
+            padding: 6px 20px;
             font-family: var(--font-body);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
@@ -294,14 +293,14 @@
 
         .filter-btn:hover, .filter-btn.active {
             background: var(--brand-purple);
-            color: var(--bg-cream);
+            color: #F4F3EF;
             border-color: var(--brand-purple);
         }
 
         .grid-portfolio {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem; /* COMPACTADO */
         }
 
         .marketplace-card {
@@ -313,11 +312,11 @@
 
         .card-preview-thumb {
             width: 100%;
-            height: 300px;
+            height: 250px; /* COMPACTADO */
             background-color: #e5e3db;
             background-size: cover;
             background-position: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border: 2px solid transparent;
             border-radius: 12px;
             transition: transform 0.3s ease, border-color 0.3s ease;
@@ -330,14 +329,14 @@
 
         .card-body-info h3 {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--text-dark);
             line-height: 1;
             margin-bottom: 0.5rem;
         }
 
         .card-badge {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--brand-purple);
             text-transform: uppercase;
@@ -346,15 +345,15 @@
         }
 
         .card-body-info p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             color: #555;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .btn-visit-solution {
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             text-decoration: none;
             color: var(--brand-purple);
@@ -372,10 +371,10 @@
         .loading-skeleton {
             grid-column: 1 / -1;
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--brand-purple);
             text-align: left;
-            padding: 4rem 0;
+            padding: 2rem 0;
             animation: pulse 1.5s infinite;
         }
 
@@ -384,17 +383,19 @@
             50% { opacity: 0.4; }
         }
 
-        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - SIN CAJA NEGRA, TAMAÑO AUMENTADO) --- */
+        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI) - REPARADA Y PROPORCIONAL --- */
         .camera-nav-bar {
             position: fixed;
-            bottom: -5px; /* Ligero margen negativo para integrarlo perfecto a la base */
-            left: 0;
+            bottom: -5px; 
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%; 
-            height: 150px; /* TAMAÑO AUMENTADO (era 130px) */
-            background-color: transparent; /* SE ELIMINÓ LA CAJA NEGRA/DARK SLATE */
+            max-width: 800px; /* Evita que crezca sin control en pantallas gigantes */
+            height: 180px; /* ALTURA AUMENTADA PARA RECUPERAR LA PROPORCIÓN */
             
+            /* AQUÍ ESTÁ LA MAGIA: CONTAIN en lugar de 100% 100% */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000009d70820c862da0c8c90eab1d.png');
-            background-size: 100% 100%; /* Estira la imagen para ocupar el 100% del ancho como un Dock */
+            background-size: contain; 
             background-position: center bottom; 
             background-repeat: no-repeat;
             
@@ -403,8 +404,8 @@
             justify-content: center;
             align-items: center;
             gap: 5%; 
-            padding-top: 25px; /* Empuja los textos hacia abajo para alinearlos con los botones de la cámara */
-            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.3)); /* Sombra para resaltar la cámara transparente */
+            padding-top: 35px; /* Ajuste para bajar el texto a la zona de botones */
+            filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.3));
         }
 
         .camera-nav-link {
@@ -451,30 +452,29 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             background-color: var(--dark-slate);
-            color: var(--bg-cream);
+            color: #F4F3EF;
+            padding-bottom: 180px; /* COMPACTADO pero asegurando espacio para la cámara */
         }
 
         @media (max-width: 900px) {
-            header { flex-direction: column; gap: 20px; }
+            header { flex-direction: column; gap: 15px; padding: 1.5rem 4vw; }
             
-            /* Logo y Título GIGANTES mantenidos */
-            .giant-transparent-logo { 
-                width: 80vw; 
-            }
+            .giant-transparent-logo { width: 80vw; }
             .hero-giant-text { 
                 font-size: clamp(6.5rem, 25vw, 22rem); 
                 letter-spacing: -2px;
             }
 
-            /* BARRA CÁMARA MÓVIL: MÁS GRANDE Y SIN CAJA NEGRA */
+            /* BARRA CÁMARA MÓVIL: ALTURA CORRECTA SIN ESTIRAR */
             .camera-nav-bar { 
-                height: 110px; /* TAMAÑO AUMENTADO EN MÓVIL (era 80px) */
+                height: 125px; /* Altura generosa para móvil */
                 gap: 3%; 
-                padding-top: 15px; 
+                padding-top: 18px; 
             }
-            .camera-nav-link { 
-                font-size: 0.75rem; /* Texto un poco más grande para acompañar la cámara */
-            }
+            .camera-nav-link { font-size: 0.65rem; }
+            
+            .splat-short { width: 180px; height: 65px; font-size: 0.9rem;}
+            .splat-long { width: 90vw; height: 90px; font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -482,10 +482,10 @@
 
     <div class="noise-overlay"></div>
 
-    <nav>
-        <div class="nav-text">DISQ // CREATIVO</div>
+    <header>
+        <div class="header-logo-text">DISQ // CREATIVO</div>
         <a href="mailto:contacto@diskcreativo.com" class="splat-base splat-short">¡CONTACTO!</a>
-    </nav>
+    </header>
 
     <section class="hero-section" id="inicio">
         
@@ -493,17 +493,17 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="liquid-glass-letter">I</span>
+                    <span class="z-front liquid-glass-letter">I</span>
                     <span class="z-back">S</span>
                     <span class="z-front">K</span>
                 </div>
                 <div>
                     <span class="z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="liquid-glass-letter">E</span>
+                    <span class="z-front liquid-glass-letter">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="liquid-glass-letter">I</span>
+                    <span class="z-front liquid-glass-letter">I</span>
                     <span class="z-back">V</span>
                     <span class="z-back">O</span>
                 </div>
@@ -575,7 +575,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Interacción Parallax para el Logo Gigante - Suavizado
             const heroContainer = document.getElementById('inicio');
             const logo = document.getElementById('dynamic-logo');
             
@@ -585,7 +584,6 @@
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
                     
-                    // Mueve el logo sutilmente en dirección opuesta al mouse
                     logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
                 });
 
@@ -594,7 +592,6 @@
                 });
             }
 
-            // Script para cambiar la luz "activa" en la cámara al hacer scroll
             const navLinks = document.querySelectorAll('.camera-nav-link');
             const sections = document.querySelectorAll('section');
             
@@ -615,7 +612,7 @@
                 });
             });
 
-            // Lógica de Google Sheets API (Intacta)
+            // Lógica de Google Sheets API
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
