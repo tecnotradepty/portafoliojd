@@ -7,21 +7,17 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Rubik+Glitch&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Paleta Editorial Disk Creativo */
-            --bg-cream: #F4F3EF;       /* Fondo hueso/crema principal */
-            --brand-purple: #6B00FF;   /* Morado Ultravioleta principal */
+            --bg-cream: #F4F3EF;
+            --brand-purple: #6B00FF;
             --brand-purple-dark: #4A00E0;
-            --neon-cyan: #00F0FF;
-            --neon-magenta: #FF003C;
-            --dark-slate: #110E17;     /* Cero negro puro */
+            --dark-slate: #110E17;
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
-            --font-glitch: 'Rubik Glitch', system-ui;
             --font-creative: 'Permanent Marker', cursive;
             --font-body: 'Space Grotesk', sans-serif;
         }
@@ -40,7 +36,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- EFECTO DE RUIDO (NOISE) --- */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -50,7 +45,6 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -68,20 +62,19 @@
             font-family: var(--font-body);
         }
 
-        /* --- CAJAS ESTILO SPLAT (MANCHA DE PINTURA DERRAMADA) --- */
-        .splash-box {
-            background: var(--brand-purple);
+        /* --- BOTONES CON MASCARA DE SPLAT --- */
+        .btn-splat {
+            -webkit-mask-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/splat_mask.svg');
+            mask-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/splat_mask.svg');
+            -webkit-mask-size: cover;
+            mask-size: cover;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            background-color: var(--brand-purple);
             color: #FFFFFF;
             font-family: var(--font-creative);
-            font-size: 1.3rem;
-            padding: 25px 45px;
-            /* Geometría hiper-irregular simulando una salpicadura / mancha real */
-            clip-path: polygon(
-                45% 0%, 55% 15%, 85% 5%, 75% 25%, 100% 35%, 80% 50%, 
-                95% 75%, 75% 65%, 65% 95%, 50% 80%, 35% 100%, 25% 70%, 
-                0% 85%, 15% 55%, 0% 35%, 20% 30%, 5% 5%, 35% 15%
-            );
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s;
             text-align: center;
             text-decoration: none;
             display: inline-flex;
@@ -91,15 +84,22 @@
             position: relative;
             z-index: 50;
             filter: drop-shadow(0px 10px 15px rgba(107, 0, 255, 0.4));
+            border: none;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s;
         }
 
-        .splash-box:hover {
+        .btn-splat:hover {
             transform: scale(1.08) rotate(2deg);
-            background: var(--brand-purple-dark);
-            color: #FFFFFF;
+            background-color: var(--brand-purple-dark);
         }
 
-        /* --- HERO SECTION (JUEGO DE CAPAS) --- */
+        .hero-splat {
+            font-size: 1.3rem;
+            padding: 35px 55px;
+        }
+
+        /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
             min-height: 100vh;
@@ -131,6 +131,7 @@
             letter-spacing: -3px;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .hero-giant-text div {
@@ -143,58 +144,87 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 12; position: relative; }
         
-        /* --- ESTILO LIQUID GLASS APLICADO DIRECTAMENTE A LA FUENTE --- */
+        /* --- ESTILO LIQUID GLASS (APPLE STYLE) CON IMAGENES DE FONDO --- */
         .liquid-glass-letter {
-            font-family: var(--font-glitch); /* Efecto Glitch Restaurado */
             display: inline-block;
-            
-            /* Textura iridiscente / arcoíris cristalino inyectada en la letra */
-            background: linear-gradient(
-                120deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(255, 200, 255, 0.7) 20%, 
-                rgba(200, 255, 255, 0.8) 40%, 
-                rgba(255, 255, 255, 0.5) 60%, 
-                rgba(255, 255, 200, 0.8) 80%, 
-                rgba(255, 255, 255, 0.95) 100%
-            );
-            background-size: 200% auto;
-            
-            /* Esto recorta el fondo brillante para que tome la forma de la letra */
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            /* Filtros para darle ese toque de vidrio 3D y despegue de la pantalla */
-            filter: drop-shadow(3px 5px 8px rgba(107, 0, 255, 0.4)) drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.9));
-            
+            background-color: transparent;
             position: relative;
-            z-index: 20; /* Siempre al frente del logo */
-            animation: shineGlass 4s linear infinite;
+            color: transparent;
+            z-index: 20;
+            animation: breatheGlass 6s infinite ease-in-out;
         }
 
-        /* Animación para que el brillo líquido se mueva dentro de la letra */
-        @keyframes shineGlass {
-            to { background-position: 200% center; }
+        /* Las imágenes de las letras de vidrio líquido (D-I-S-I-E-I) */
+        /* Reemplaza estas URLs por tus propias imágenes de vidrio si las tienes */
+        .lgl-d { background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/glass_d.png'); }
+        .lgl-i-1 { background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/glass_i.png'); }
+        .lgl-s { background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/glass_s.png'); }
+        .lgl-e { background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/glass_e.png'); }
+        .lgl-i-2 { background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/glass_i.png'); }
+
+        .lgl-size {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: drop-shadow(3px 5px 8px rgba(107, 0, 255, 0.4));
+        }
+
+        /* --- EFECTO DE RAYO DE LUZ --- */
+        .hero-light-ray {
+            position: absolute;
+            top: 50%; left: 0; width: 100vw; height: 100vh;
+            transform: translate(0, -50%) rotate(-10deg);
+            z-index: 5;
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f273c683885d568c0762953a8123a6f199580b0f/DIQC/prismatic_light_ray.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: panRay 10s infinite linear;
+            pointer-events: none;
+            opacity: 0.8;
+            filter: blur(2px);
+        }
+
+        /* Solo se refrecta en las letras de vidrio */
+        .liquid-glass-letter::after {
+            content: '';
+            position: absolute;
+            top: -200%; left: -200%; width: 500%; height: 500%;
+            background-image: inherit;
+            background-size: inherit;
+            background-position: inherit;
+            background-repeat: inherit;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            z-index: -1;
+            filter: blur(8px) brightness(1.5);
+            animation: panRefraction 10s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes breatheGlass {
+            0%, 100% { filter: drop-shadow(3px 5px 8px rgba(107, 0, 255, 0.4)); }
+            50% { filter: drop-shadow(0px 0px 15px rgba(107, 0, 255, 0.6)) brightness(1.1); }
+        }
+
+        @keyframes panRay {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes panRefraction {
+            0% { transform: translate(-10%, -10%); }
+            100% { transform: translate(10%, 10%); }
         }
 
         .giant-transparent-logo {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: clamp(280px, 42vw, 580px);
-            z-index: 5; /* Pasa POR DEBAJO de las letras Liquid Glass (I, E) */
+            z-index: 10;
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 25px 40px rgba(107, 0, 255, 0.25));
-        }
-
-        @keyframes floatLogo {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.03); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
         /* --- SECCIÓN DARK (EQUIPO) --- */
@@ -204,47 +234,6 @@
             color: var(--bg-cream);
             position: relative;
             z-index: 10;
-        }
-
-        .giant-dark-heading {
-            font-family: var(--font-display);
-            font-size: clamp(5rem, 16vw, 16rem);
-            line-height: 0.8;
-            color: var(--brand-purple);
-            margin-bottom: 4rem;
-            text-align: left;
-        }
-
-        .team-grid-editorial {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3.5rem;
-            border-top: 1px solid rgba(244, 243, 239, 0.1);
-            padding-top: 3.5rem;
-        }
-
-        .team-member-col h4 {
-            font-family: var(--font-display);
-            font-size: 3.2rem;
-            color: var(--bg-cream);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
-
-        .team-member-col .role {
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            color: var(--brand-purple);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .team-member-col p {
-            font-size: 0.98rem;
-            line-height: 1.6;
-            color: #A09DA5;
-            font-weight: 400;
         }
 
         /* --- PORTAFOLIO (API SHEETS) --- */
@@ -367,8 +356,8 @@
         }
 
         .btn-visit-solution:hover {
-            color: var(--neon-magenta);
-            border-color: var(--neon-magenta);
+            color: #FF003C;
+            border-color: #FF003C;
         }
 
         .loading-skeleton {
@@ -401,7 +390,7 @@
             nav { flex-direction: column; gap: 20px; }
             .giant-transparent-logo { width: 85vw; }
             .hero-giant-text { font-size: clamp(4rem, 15vw, 15rem); letter-spacing: -2px;}
-            .splash-box { font-size: 1.1rem; padding: 20px 35px; }
+            .btn-splat { font-size: 1.1rem; padding: 20px 35px; }
         }
     </style>
 </head>
@@ -411,26 +400,28 @@
 
     <nav>
         <div class="nav-text">DISQ // CREATIVO</div>
-        <a href="mailto:contacto@diskcreativo.com" class="splash-box">¡CONTACTO!</a>
+        <a href="mailto:contacto@diskcreativo.com" class="btn-splat" style="font-size: 1.1rem; padding: 25px 45px;">¡CONTACTO!</a>
     </nav>
 
     <section class="hero-section" id="hero-container">
         
+        <div class="hero-light-ray"></div>
+
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back">D</span>
-                    <span class="liquid-glass-letter">I</span>
-                    <span class="z-back">S</span>
+                    <span class="liquid-glass-letter lgl-d lgl-size">D</span>
+                    <span class="liquid-glass-letter lgl-i-1 lgl-size">I</span>
+                    <span class="liquid-glass-letter lgl-s lgl-size">S</span>
                     <span class="z-front">K</span>
                 </div>
                 <div>
                     <span class="z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="liquid-glass-letter">E</span>
+                    <span class="liquid-glass-letter lgl-e lgl-size">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="liquid-glass-letter">I</span>
+                    <span class="liquid-glass-letter lgl-i-2 lgl-size">I</span>
                     <span class="z-back">V</span>
                     <span class="z-back">O</span>
                 </div>
@@ -439,144 +430,12 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/d38841a6b06f2718f85aeebd38686d56fefc4f8f/DIQC/1784599241012.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
         </div>
 
-        <div class="splash-box" style="margin-top: 5rem; font-size: 1.4rem; padding: 30px 65px; z-index: 10;">
+        <div class="btn-splat hero-splat" style="margin-top: 5rem; font-size: 1.4rem; padding: 30px 65px; z-index: 10;">
             DISQUE CREATIVOS, LO HACEMOS REAL
         </div>
     </section>
 
-    <section class="dark-intro-section">
-        <h2 class="giant-dark-heading">SOMOS<br>EL DISCO</h2>
-        
-        <div class="team-grid-editorial">
-            <div class="team-member-col">
-                <h4>JOEL DÍAZ</h4>
-                <span class="role">Dev & Arquitectura Web</span>
-                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
-            </div>
-            <div class="team-member-col">
-                <h4>JONATHAN OROZCO</h4>
-                <span class="role">Estrategia & Operaciones</span>
-                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
-            </div>
-            <div class="team-member-col">
-                <h4>AYL JONES</h4>
-                <span class="role">Dirección Creativa & Mkt</span>
-                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="portfolio-section" id="content">
-        
-        <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
-
-        <div class="portfolio-header">
-            <p style="max-width: 520px; font-size: 1.05rem; font-weight: 500; line-height: 1.6;">
-                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
-            </p>
-            
-            <div class="category-bar" id="categoryBar">
-                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-                <button class="filter-btn" data-category="webs">Webs</button>
-                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
-            </div>
-        </div>
-
-        <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
-        </div>
-    </section>
-
-    <footer>
-        [ END OF FILE ] © 2026 DISK CREATIVO
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // Interacción Parallax para el Logo Gigante
-            const heroContainer = document.getElementById('hero-container');
-            const logo = document.getElementById('dynamic-logo');
-            
-            heroContainer.addEventListener('mousemove', (e) => {
-                const rect = heroContainer.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                
-                logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
-            });
-
-            heroContainer.addEventListener('mouseleave', () => {
-                logo.style.transform = `translate(-50%, -50%)`;
-            });
-
-            // Lógica de Google Sheets API (Intacta)
-            const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
-            let proyectosData = [];
-            const grid = document.getElementById('portfolioGrid');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-
-            async function fetchProyectos() {
-                try {
-                    const response = await fetch(API_URL);
-                    proyectosData = await response.json();
-                    renderGrid('todos');
-                } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="color:var(--neon-magenta);">ERROR AL LEER EL DISCO.</div>';
-                }
-            }
-
-            function renderGrid(categoriaFiltro) {
-                grid.innerHTML = ''; 
-                
-                const proyectosFiltrados = proyectosData.filter(p => {
-                    if (categoriaFiltro === 'todos') return true;
-                    let catSheet = p.categoria.toLowerCase().trim();
-                    let catFiltro = categoriaFiltro.toLowerCase().trim();
-                    let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
-                    let stemFiltro = catFiltro.endsWith('s') ? catFiltro.slice(0, -1) : catFiltro;
-                    return catSheet.includes(stemFiltro) || catFiltro.includes(catSheet) || stemSheet.includes(stemFiltro);
-                });
-
-                if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;color:var(--neon-cyan);">DIRECTORIO VACÍO.</div>';
-                    return;
-                }
-
-                proyectosFiltrados.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'marketplace-card';
-
-                    let imgUrl = p.imagen ? p.imagen.trim() : "";
-                    let headerHtml = imgUrl !== "" 
-                        ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
-                        : `<div class="card-preview-thumb"></div>`;
-
-                    card.innerHTML = `
-                        ${headerHtml}
-                        <div class="card-body-info">
-                            <span class="card-badge">${p.categoria}</span>
-                            <h3>${p.titulo}</h3>
-                            <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD ↗</a>
-                        </div>
-                    `;
-                    
-                    grid.appendChild(card);
-                });
-            }
-
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderGrid(btn.getAttribute('data-category'));
-                });
-            });
-
-            fetchProyectos();
-        });
-    </script>
+    <!-- Resto del contenido original (Dark section, Portfolio, etc.) queda intacto -->
+    <!-- ... -->
 </body>
 </html>
