@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Disk Creativo | Playground de Empresas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,13 @@
         /* Desplazamiento suave para los anclajes de la cámara */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* CONTROL ESTRICTO DE DESBORDAMIENTO: Evita la línea blanca y el zoom lateral */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
         :root {
@@ -35,7 +42,6 @@
             background-color: var(--bg-cream);
             color: var(--text-dark);
             font-family: var(--font-body);
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             padding-bottom: 120px; 
         }
@@ -50,7 +56,7 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION (FONDO CORREGIDO Y CENTRADO PERFECTO) --- */
+        /* --- HERO SECTION (FONDO CENTRADO PERFECTO) --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
@@ -61,10 +67,9 @@
             padding: 2vw; 
             overflow: hidden;
             
-            /* NUEVO FONDO RETRO ARCOÍRIS RECORTADO Y CENTRADO */
             background-color: var(--bg-cream); 
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dcfbcbca31014c3127a2976ff1db6938a7f325ba/DIQC/39964286_1784665770068788(1)(1).jpg');
-            background-position: center center; /* Ahora sí se clava el centro */
+            background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
         }
@@ -100,41 +105,39 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS RESTAURADO (VERSIÓN PURE TEXT REFRACTION QUE TE GUSTÓ) --- */
+        /* --- LIQUID GLASS OPTIMIZADO (Menos Blur, ceñido al texto) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Gradiente iridiscente translúcido original aplicado AL TEXTO */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.6) 0%, 
+                rgba(255, 255, 255, 0.8) 0%, 
                 rgba(0, 240, 255, 0.5) 20%, 
                 rgba(255, 255, 255, 0.1) 40%, 
                 rgba(255, 255, 255, 0.1) 60%, 
                 rgba(255, 0, 60, 0.4) 80%,  
-                rgba(255, 255, 255, 0.6) 100%
+                rgba(255, 255, 255, 0.8) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             
-            /* Base translúcida */
-            color: rgba(255, 255, 255, 0.1);
+            /* Fill color semi-transparente para anular los bloques de navegadores móviles */
+            color: transparent;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             
-            /* Trazos y sombras para simular cristal volumétrico (sin bordes de bloque feos) */
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             text-shadow: 
                 0px 5px 15px rgba(0, 0, 0, 0.2), 
                 0px 0px 20px rgba(255, 255, 255, 0.3); 
             
-            /* Efecto de refracción real en navegadores modernos */
-            backdrop-filter: blur(8px) saturate(180%);
-            -webkit-backdrop-filter: blur(8px) saturate(180%);
+            /* BLUR REDUCIDO (4px) para que el CD se aprecie más detallado detrás */
+            backdrop-filter: blur(4px) saturate(150%);
+            -webkit-backdrop-filter: blur(4px) saturate(150%);
             
             position: relative;
             z-index: 20; 
 
-            /* Eliminados los bordes, paddings y box-shadows de bloque de la versión errónea V8 */
             border: none;
             border-radius: 0;
             padding: 0;
@@ -168,13 +171,14 @@
             position: relative;
         }
 
-        /* Layout Rígido 2 Columnas (Dashboard Mantenido en Móvil) */
+        /* Layout Rígido 2 Columnas CORREGIDO: fr units evitan desbordamiento de %. */
         .playground-container {
             display: grid;
-            grid-template-columns: 55% 45%; 
+            grid-template-columns: 1.2fr 1fr; /* Reemplaza el 55/45% que causaba el fallo matemático */
             gap: 3rem;
             align-items: center;
             margin-bottom: 6rem;
+            width: 100%;
         }
 
         .playground-text h2 {
@@ -212,10 +216,11 @@
             align-items: center;
         }
 
+        /* Control estricto de la maqueta para no desbordar */
         .playground-image img {
             width: 100%;
             height: auto;
-            max-width: 650px;
+            max-width: 100%; /* Obliga a respetar su caja flex/grid */
             filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
             transform: scale(1.05); 
             transition: transform 0.5s ease;
@@ -459,13 +464,13 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR) --- */
+        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR Y ANTI-OVERFLOW) --- */
         @media (max-width: 768px) {
             .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); }
             
-            /* Mantiene la vista Dashboard (Texto a la izquierda, Diorama a la derecha) SIEMPRE */
+            /* Corrección final matemática para celulares */
             .playground-container {
-                grid-template-columns: 55% 45%;
+                grid-template-columns: 1.2fr 1fr; /* fr absorbe el espacio restante */
                 gap: 15px;
             }
             .playground-text h2 {
@@ -478,7 +483,10 @@
                 margin-bottom: 0.6rem;
             }
             .playground-text .cta-text { margin-top: 1rem; }
-            .playground-image img { transform: scale(1.1); }
+            .playground-image img { 
+                transform: scale(1.1); 
+                max-width: 100%; /* Bloquea el zoom lateral desbordante */
+            }
             
             body { padding-bottom: 120px; }
             footer { padding-bottom: 120px; }
