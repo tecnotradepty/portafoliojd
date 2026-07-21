@@ -38,7 +38,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             /* Espacio extra masivo abajo para la cámara gigante */
-            padding-bottom: 350px; 
+            padding-bottom: 380px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -81,7 +81,6 @@
             background-color: transparent;
             background-position: center;
             background-repeat: no-repeat;
-            /* FORZAMOS EL ESTIRAMIENTO DE LA IMAGEN */
             background-size: 100% 100%; 
             transition: transform 0.3s ease, filter 0.3s ease;
         }
@@ -89,8 +88,8 @@
         /* Splat Corto (Botón de Contacto) */
         .splat-short {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000006bd881f58f53c6ff8407c2f9.png');
-            width: 280px;  /* MUCHO más ancho que el texto */
-            height: 100px; /* MUCHO más alto que el texto */
+            width: 280px;  
+            height: 100px; 
             font-size: 1.15rem;
             padding-bottom: 8px; 
             filter: drop-shadow(0px 6px 10px rgba(107,0,255,0.3));
@@ -99,10 +98,10 @@
         /* Splat Largo (Status inferior) */
         .splat-long {
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/1784603721693.png');
-            width: clamp(450px, 95vw, 1000px); /* Extremo a extremo casi */
-            height: 180px; /* Altura masiva para envolver */
+            width: clamp(450px, 95vw, 1000px); 
+            height: 180px; 
             font-size: clamp(1.2rem, 2vw, 1.5rem); 
-            padding-bottom: 10px; /* Ajuste fino al centro de la mancha */
+            padding-bottom: 10px; 
             margin-top: 2rem; 
             filter: drop-shadow(0px 8px 12px rgba(107,0,255,0.3));
             z-index: 10;
@@ -385,18 +384,19 @@
             50% { opacity: 0.4; }
         }
 
-        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - FORCE WRAP) --- */
+        /* --- BARRA DE NAVEGACIÓN INFERIOR (CÁMARA UI - ALTURA CORREGIDA) --- */
         .camera-nav-bar {
             position: fixed;
             bottom: -5px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%; 
-            max-width: 1100px; /* Tamaño máximo enorme */
-            height: 300px; /* Altura masiva forzada */
+            max-width: 1100px; 
+            
+            /* ALTURA AUMENTADA para recuperar proporción */
+            height: 350px; 
             
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0939461ed2df0b42d97d5188222a512a36b28c53/DIQC/file_000000009d70820c862da0c8c90eab1d.png');
-            /* ESTIRAMIENTO FORZADO para garantizar cobertura total */
             background-size: 100% 100%; 
             background-position: center bottom; 
             background-repeat: no-repeat;
@@ -405,8 +405,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 4%; /* Gap muy cerrado para que el texto se concentre en el medio de la cámara */
-            padding-top: 130px; /* Empuja el texto hacia la base negra ancha de la cámara */
+            gap: 4%; 
+            
+            /* PADDING REDUCIDO: Esto "sube" los textos para que se asienten dentro de la cámara, y no por debajo */
+            padding-top: 90px; 
+            
             filter: drop-shadow(0px -5px 25px rgba(0,0,0,0.4));
         }
 
@@ -414,7 +417,7 @@
             color: #FFFFFF;
             text-decoration: none;
             font-family: var(--font-body);
-            font-size: 0.95rem; /* Letras un poco más grandes ahora que hay espacio */
+            font-size: 0.95rem; 
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -455,7 +458,7 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 300px; 
+            padding-bottom: 350px; /* Margen vital para la cámara PC */
         }
 
         /* --- MEDIA QUERIES (OPTIMIZACIÓN MÓVIL EXTREMA) --- */
@@ -468,11 +471,11 @@
                 letter-spacing: -2px;
             }
 
-            /* BARRA CÁMARA MÓVIL FORZADA */
+            /* BARRA CÁMARA MÓVIL FORZADA Y ALINEADA */
             .camera-nav-bar { 
-                height: 180px; /* Altura masiva en móvil para envolver texto */
-                gap: 2%; /* Súper pegados */
-                padding-top: 80px; /* Texto bajado forzosamente */
+                height: 190px; /* Recupera su proporción natural en móvil */
+                gap: 2%; 
+                padding-top: 50px; /* Empujamos los textos hacia ARRIBA reduciendo el padding */
                 max-width: 100vw;
             }
             .camera-nav-link { font-size: 0.65rem; }
@@ -483,7 +486,11 @@
                 width: 98vw; 
                 height: 140px; 
                 font-size: 0.95rem; 
-                padding-bottom: 10px; /* Forzar el texto arriba de las colas de la mancha */
+                padding-bottom: 10px; 
+            }
+            
+            footer {
+                padding-bottom: 220px; /* Margen adaptado a la cámara móvil */
             }
         }
     </style>
@@ -593,6 +600,7 @@
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
                     logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
                 });
 
