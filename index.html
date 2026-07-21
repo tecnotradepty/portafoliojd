@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disk Creativo | Agencia Digital</title>
+    <title>Disk Creativo | Editorial UI</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Paleta Editorial Disk Creativo */
-            --bg-cream: #F4F3EF;       /* Fondo crema elegante */
-            --brand-purple: #4A00E0;   /* Morado profundo principal */
-            --light-purple: #E2D9F3;   /* Lila para bloques de contraste */
-            --text-dark: #221F2D;      /* Texto oscuro (no es negro puro) */
+            --bg-cream: #F4F3EF;       /* Fondo hueso/crema principal */
+            --brand-purple: #4A00E0;   /* Morado principal vibrante */
+            --brand-red: #D91A1A;      /* Acento rojo extraído de tu referencia */
+            --dark-slate: #110E17;     /* Pizarra/Morado muy oscuro (Evitando negro puro) */
+            --text-dark: #1A1A1A;
             
             --font-display: 'Bebas Neue', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
@@ -35,193 +36,154 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- EFECTO DE RUIDO (NOISE) PARA TODA LA WEB --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* --- NAVEGACIÓN MINIMALISTA --- */
         nav {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 2rem 4vw;
+            padding: 1.5rem 3vw;
             position: absolute;
             width: 100%;
             z-index: 100;
         }
 
-        .logo-text {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--brand-purple);
-            letter-spacing: 1px;
-            line-height: 1;
-        }
-
-        .nav-links {
+        .nav-text {
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: var(--brand-purple);
         }
 
-        /* --- SECCIÓN 1: HERO (Inspirado en el bloque superior) --- */
+        /* --- HERO SECTION (Estilo TV CRT / Aaron Loeb Referencia) --- */
         .hero-section {
-            background-color: var(--light-purple);
-            padding: 15vh 4vw 5vh 4vw;
+            padding: 10vh 3vw 5vh 3vw;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tv-container {
+            width: 100%;
+            height: 80vh;
+            background-color: #E8E5DF; /* Crema ligeramente más oscuro para contrastar */
+            border-radius: 40px; /* Borde curvo tipo TV */
             position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            min-height: 70vh;
+            justify-content: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
         }
 
-        .giant-heading {
+        .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 20vw, 18rem);
-            line-height: 0.8;
+            font-size: clamp(8rem, 25vw, 22rem);
+            line-height: 0.75;
             color: var(--brand-purple);
+            text-align: center;
             margin: 0;
-            position: relative;
-            z-index: 2;
+            z-index: 1;
+            letter-spacing: -2px;
         }
 
-        .hero-subtitle {
-            font-size: 1.1rem;
-            font-weight: 600;
-            max-width: 600px;
-            margin-top: 2rem;
-            color: var(--brand-purple);
-            text-transform: uppercase;
+        /* LOGO INTERACTIVO Y ANIMADO */
+        .interactive-logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(250px, 35vw, 450px);
+            z-index: 2;
+            pointer-events: none; /* Para que el mouse atraviese si es necesario */
+        }
+
+        .disk-logo {
+            width: 100%;
+            height: auto;
+            mix-blend-mode: multiply; /* Elimina el fondo blanco del JPG mágicamente */
+            animation: floatLogo 6s ease-in-out infinite;
+            filter: contrast(1.1) saturate(1.2);
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(2deg) scale(1.02); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        /* --- SECCIÓN DARK (INTRODUCCIÓN DEL EQUIPO) --- */
+        .dark-intro-section {
+            background-color: var(--dark-slate);
+            padding: 8rem 4vw;
+            color: var(--bg-cream);
+            position: relative;
+        }
+
+        .giant-dark-heading {
+            font-family: var(--font-display);
+            font-size: clamp(6rem, 20vw, 20rem);
+            line-height: 0.75;
+            color: var(--brand-purple); /* Contraste profundo */
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .team-grid-editorial {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid rgba(244, 243, 239, 0.2);
+            padding-top: 3rem;
+        }
+
+        .team-member-col h4 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--bg-cream);
+            margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
-        /* Scribbles decorativos simulados con CSS */
-        .scribble {
-            position: absolute;
-            color: var(--brand-purple);
-            opacity: 0.2;
-            font-family: 'Times New Roman', serif;
-            font-size: 15rem;
-            font-style: italic;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .scribble-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
-        .scribble-2 { bottom: 10%; right: 10%; transform: rotate(15deg); }
-
-        /* --- SECCIÓN 2: NOSOTROS (Inspirado en bloque "WHO I AM") --- */
-        .about-section {
-            background-color: var(--bg-cream);
-            padding: 8rem 4vw;
-            position: relative;
-        }
-
-        .about-heading {
-            font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 15rem);
-            line-height: 0.8;
-            color: var(--brand-purple);
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: -4rem; /* Superpone la grid con el título gigante */
-            position: relative;
-            z-index: 2;
-        }
-
-        .team-member {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(74, 0, 224, 0.05);
-        }
-
-        .team-member h3 {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            color: var(--brand-purple);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .team-role {
+        .team-member-col .role {
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
-            color: #888;
+            color: var(--brand-purple);
             margin-bottom: 1.5rem;
             display: block;
         }
 
-        .team-member p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-dark);
-        }
-
-        /* --- SECCIÓN 3: HABILIDADES (Inspirado en bloque verde inferior) --- */
-        .skills-section {
-            background-color: var(--brand-purple);
-            padding: 8rem 4vw;
-            color: var(--bg-cream);
-            position: relative;
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 6rem;
-        }
-
-        .skill-box {
-            background-color: var(--bg-cream);
-            color: var(--brand-purple);
-            padding: 3rem 1.5rem;
-            border-radius: 30px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            aspect-ratio: 1 / 1; /* Cuadrados perfectos redondeados */
-        }
-
-        .skills-text-center {
-            padding: 0 2rem;
-        }
-
-        .skills-text-center h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .skills-text-center p {
+        .team-member-col p {
             font-size: 0.95rem;
             line-height: 1.6;
-            opacity: 0.9;
+            color: #A09DA5;
         }
 
-        .skills-bottom-text {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 12rem);
-            line-height: 0.8;
-            text-align: center;
-            color: var(--bg-cream);
-            margin: 0;
-        }
-
-        /* --- SECCIÓN 4: PORTAFOLIO (API SHEETS) --- */
+        /* --- SECCIÓN BLANCA (PORTAFOLIO "HELLO I'M AARON" VIBE) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
             padding: 8rem 4vw;
+        }
+
+        .portfolio-massive-title {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 15vw, 15rem);
+            line-height: 0.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
         }
 
         .portfolio-header {
@@ -231,73 +193,67 @@
             margin-bottom: 4rem;
             flex-wrap: wrap;
             gap: 2rem;
+            border-bottom: 2px solid var(--text-dark);
+            padding-bottom: 2rem;
         }
 
-        .portfolio-heading {
-            font-family: var(--font-display);
-            font-size: 6rem;
-            color: var(--brand-purple);
-            line-height: 0.8;
-        }
-
+        /* Filtros estilo píldora minimalista */
         .category-bar {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .filter-btn {
             background: transparent;
             color: var(--text-dark);
-            border: 1px solid #ccc;
-            border-radius: 30px;
-            padding: 8px 20px;
+            border: 1px solid var(--text-dark);
+            border-radius: 50px;
+            padding: 8px 24px;
             font-family: var(--font-body);
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--brand-purple);
+            background: var(--text-dark);
             color: var(--bg-cream);
-            border-color: var(--brand-purple);
         }
 
+        /* Grid de Proyectos */
         .grid-portfolio {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        /* Tarjetas de Portafolio estilo editorial */
         .marketplace-card {
-            background-color: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
+            background-color: transparent;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
-
-        .marketplace-card:hover {
-            transform: translateY(-10px);
+            group: hover;
+            cursor: pointer;
         }
 
         .card-preview-thumb {
             width: 100%;
-            height: 250px;
-            background-color: var(--light-purple);
+            height: 350px; /* Más alto, estilo retrato fotográfico */
+            background-color: #dcd9d0;
+            border-radius: 15px; /* Bordes redondeados sutiles */
             background-size: cover;
             background-position: center;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .marketplace-card:hover .card-preview-thumb {
+            transform: scale(1.02);
         }
 
         .card-body-info {
-            padding: 2rem;
-            flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
@@ -307,133 +263,126 @@
             font-weight: 700;
             color: var(--brand-purple);
             text-transform: uppercase;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
         }
 
         .card-body-info h3 {
             font-family: var(--font-display);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--text-dark);
             line-height: 1;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .card-body-info p {
             font-size: 0.95rem;
             line-height: 1.5;
-            color: #666;
-            margin-bottom: 2rem;
+            color: #555;
+            margin-bottom: 1.5rem;
         }
 
         .btn-visit-solution {
-            margin-top: auto;
-            color: var(--brand-purple);
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--text-dark);
+            align-self: flex-start;
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
         }
 
-        .btn-visit-solution::after {
-            content: '→';
-            font-size: 1.2rem;
-            transition: transform 0.2s;
-        }
-
-        .btn-visit-solution:hover::after {
-            transform: translateX(5px);
+        .btn-visit-solution:hover {
+            color: var(--brand-purple);
+            border-color: var(--brand-purple);
         }
 
         .loading-skeleton {
             grid-column: 1 / -1;
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 4rem;
             color: var(--brand-purple);
-            text-align: center;
+            text-align: left;
             padding: 4rem 0;
+            animation: pulse 1.5s infinite;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-            .skills-text-center {
-                order: -1;
-                margin-bottom: 2rem;
-                padding: 0;
-            }
-            .skill-box {
-                aspect-ratio: auto;
-                padding: 2rem;
-            }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-top: 1px solid #ddd;
+        }
+
     </style>
 </head>
 <body>
 
+    <div class="noise-overlay"></div>
+
     <nav>
-        <div class="logo-text">DISK CREATIVO</div>
-        <div class="nav-links">AGENCIA DIGITAL</div>
+        <div class="nav-text">2026 © DISK CREATIVO</div>
+        <div class="nav-text">PANAMÁ</div>
     </nav>
 
     <section class="hero-section">
-        <div class="scribble scribble-1">*</div>
-        <div class="scribble scribble-2">#</div>
-        
-        <h1 class="giant-heading">DISK<br>CREATIVO</h1>
-        <p class="hero-subtitle">Sí, somos *disque* creativos. Unidad de almacenamiento y ejecución de ideas visuales y código.</p>
+        <div class="tv-container" id="hero-container">
+            
+            <h1 class="hero-giant-text">
+                DISK<br>CREATIVO
+            </h1>
+
+            <div class="interactive-logo-container" id="logo-container">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f2a73097d15793f020ec2de1532853e64a340521/DIQC/IMG-20260715-WA0022(1)(1).jpg" alt="Disk Creativo Logo" class="disk-logo">
+            </div>
+            
+            <div style="position: absolute; bottom: 2rem; text-align: center; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple);">
+                Disque creativo, lo hacemos real.
+            </div>
+        </div>
     </section>
 
-    <section class="about-section">
-        <h2 class="about-heading">QUIÉNES<br>SOMOS</h2>
+    <section class="dark-intro-section">
+        <h2 class="giant-dark-heading">SOMOS<br>EL DISCO</h2>
         
-        <div class="team-grid">
-            <div class="team-member">
-                <h3>JOEL DÍAZ</h3>
-                <span class="team-role">Dev & Arquitectura Web</span>
+        <div class="team-grid-editorial">
+            <div class="team-member-col">
+                <h4>JOEL DÍAZ</h4>
+                <span class="role">Dev & Arquitectura Web</span>
                 <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
-
-            <div class="team-member">
-                <h3>JONATHAN OROZCO</h3>
-                <span class="team-role">Estrategia & Operaciones</span>
-                <p>El puente entre el código y el mercado. Marketing para Tecnotrade & Mobile Hub, y asistencia táctica para escalar proyectos sin fricción.</p>
+            <div class="team-member-col">
+                <h4>JONATHAN OROZCO</h4>
+                <span class="role">Estrategia & Operaciones</span>
+                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
             </div>
-
-            <div class="team-member">
-                <h3>AYL JONES</h3>
-                <span class="team-role">Dirección Creativa & Mkt</span>
-                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al marketing de Disk Creativo.</p>
+            <div class="team-member-col">
+                <h4>AYL JONES</h4>
+                <span class="role">Dirección Creativa & Mkt</span>
+                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
             </div>
         </div>
-    </section>
-
-    <section class="skills-section">
-        <div class="skills-container">
-            <div class="skill-box">DESARROLLO<br>WEB & APPS</div>
-            
-            <div class="skills-text-center">
-                <h4>LO QUE TRAEMOS A LA MESA</h4>
-                <p>Dominamos el ecosistema digital. No hay límite técnico que nos detenga: lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero para tu empresa.</p>
-            </div>
-
-            <div class="skill-box">BRANDING &<br>MARKETING</div>
-        </div>
-
-        <h2 class="skills-bottom-text">NUESTRO DISCO</h2>
     </section>
 
     <section class="portfolio-section" id="content">
+        
+        <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
+
         <div class="portfolio-header">
-            <h2 class="portfolio-heading">ARCHIVOS<br>PROCESADOS</h2>
+            <p style="max-width: 400px; font-size: 0.95rem; font-weight: 500; line-height: 1.5;">
+                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero. Explora los sectores del disco.
+            </p>
             
             <div class="category-bar" id="categoryBar">
-                <button class="filter-btn active" data-category="todos">Todos</button>
+                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
                 <button class="filter-btn" data-category="webs">Webs</button>
                 <button class="filter-btn" data-category="producción de contenido">Contenido</button>
                 <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
@@ -441,12 +390,35 @@
         </div>
 
         <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">CARGANDO BASE DE DATOS...</div>
+            <div class="loading-skeleton">EXTRAYENDO DATA...</div>
         </div>
     </section>
 
+    <footer>
+        FIN DEL ARCHIVO
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // Efecto Parallax en el logo con el movimiento del mouse
+            const heroContainer = document.getElementById('hero-container');
+            const logo = document.getElementById('logo-container');
+            
+            heroContainer.addEventListener('mousemove', (e) => {
+                const rect = heroContainer.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                
+                // Mueve el logo sutilmente en dirección opuesta al mouse
+                logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
+            });
+
+            heroContainer.addEventListener('mouseleave', () => {
+                logo.style.transform = `translate(-50%, -50%)`;
+            });
+
+            // --- LÓGICA DE GOOGLE SHEETS (Intacta) ---
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -458,7 +430,7 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL CONECTAR CON EL DISCO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
                 }
             }
 
@@ -475,7 +447,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton">NO HAY ARCHIVOS EN ESTA CATEGORÍA.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">NO HAY ARCHIVOS EN ESTE DIRECTORIO.</div>';
                     return;
                 }
 
@@ -494,7 +466,7 @@
                             <span class="card-badge">${p.categoria}</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ver Proyecto</a>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar Proyecto</a>
                         </div>
                     `;
                     
