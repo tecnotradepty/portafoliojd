@@ -16,7 +16,7 @@
         }
 
         :root {
-            /* Paleta Editorial Disk Creativo - Sampeld del PNG file_...927.png */
+            /* Crema Hueso de tu imagen */
             --bg-cream: #F2F1EC;       
             --brand-purple: #6B00FF;   
             --dark-slate: #110E17;     
@@ -39,8 +39,8 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            /* Padding inferior masivo universal para que el Dock de la cámara no cubra contenido final */
-            padding-bottom: 300px; 
+            /* Padding inferior para la cámara fija */
+            padding-bottom: 250px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -53,12 +53,12 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- NAVEGACIÓN SUPERIOR CON SALUDO CREATIVO (CENTRADOR) --- */
+        /* --- NAVEGACIÓN SUPERIOR (SALUDO REDUCIDO Y BALANCEADO) --- */
         header {
             display: flex;
-            justify-content: center; /* Centrado absoluto */
+            justify-content: center; 
             align-items: center;
-            padding: 2.5rem 4vw;
+            padding: 2.5rem 4vw 0 4vw;
             position: absolute;
             width: 100%;
             z-index: 100;
@@ -66,32 +66,38 @@
 
         .header-greeting-text {
             font-family: var(--font-creative-greeting);
-            font-size: clamp(1.2rem, 3.5vw, 2rem); /* Escala perfecta del saludo */
+            /* Tamaño reducido drásticamente para no robar protagonismo */
+            font-size: clamp(0.7rem, 1.5vw, 1.2rem); 
             color: var(--dark-slate); 
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.5;
             text-transform: uppercase;
             letter-spacing: 1px;
             max-width: 90vw;
+            opacity: 0.85; /* Sutil transparencia para balancear */
         }
 
-        /* --- HERO SECTION (SECCIÓN 1 - DISK CREATIVO) CON FONDO MORADO --- */
+        /* --- HERO SECTION (SECCIÓN 1 - DISK CREATIVO) --- */
         .hero-section {
             position: relative;
-            min-height: 100vh; 
+            /* Altura automática: evita abismos en Z Fold 6 y móviles */
+            min-height: auto; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 18vh 2vw 2vh 2vw; 
+            justify-content: flex-start;
+            /* Padding forzado para separar del splash inferior */
+            padding: 22vh 2vw 25vh 2vw; 
             overflow: hidden;
             
-            /* PNG MORADO COMO FONDO DE LA SECCIÓN 1 */
+            /* TRUCO CSS: Gradiente para fundir el borde de la imagen con el color crema */
             background-color: var(--bg-cream); 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f92a3f6eb547d9f9c4199787a7c58e11b1b6c213/DIQC/file_000000006760820c9cba8a53520e4d63.png');
-            background-position: center bottom; /* Manchas emergiendo desde abajo */
-            background-repeat: no-repeat;
-            background-size: 100% auto; 
+            background-image: 
+                linear-gradient(to bottom, var(--bg-cream) 40%, rgba(242, 241, 236, 0) 80%),
+                url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
+            background-position: center top, center bottom; 
+            background-repeat: no-repeat, no-repeat;
+            background-size: 100% 100%, 100% auto; 
         }
 
         .hero-sandwich {
@@ -105,7 +111,7 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(8rem, 30vw, 25rem);
+            font-size: clamp(6.5rem, 25vw, 25rem);
             line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
@@ -125,37 +131,44 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- ESTILO LIQUID GLASS ESTÁTICO Y PRISMÁTICO (E, I, I) --- */
+        /* --- LIQUID GLASS CORREGIDO (CERO BUGS DE CAJA BLANCA) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
+            
+            /* Gradiente interno prismático */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.6) 0%, 
-                rgba(0, 240, 255, 0.5) 20%, 
-                rgba(255, 255, 255, 0.1) 40%, 
-                rgba(255, 255, 255, 0.1) 60%, 
-                rgba(255, 0, 60, 0.4) 80%,  
-                rgba(255, 255, 255, 0.6) 100%
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(0, 240, 255, 0.6) 30%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 0, 60, 0.5) 80%,  
+                rgba(255, 255, 255, 0.8) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
-            color: rgba(255, 255, 255, 0.1);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            
+            /* Color base transparente */
+            color: transparent;
+            
+            /* Trazos y sombras para simular cristal volumétrico sin backdrop-filter */
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
             text-shadow: 
-                0px 5px 15px rgba(0, 0, 0, 0.2), 
-                0px 0px 20px rgba(255, 255, 255, 0.3); 
+                0px 8px 20px rgba(0, 0, 0, 0.15), /* Sombra física de caída */
+                0px 0px 15px rgba(255, 255, 255, 0.4); /* Brillo interno simulado */
             
             position: relative;
             z-index: 20; 
+            /* Se ha eliminado el 'backdrop-filter' problemático */
         }
 
         .giant-transparent-logo {
             position: absolute;
-            top: 50%;
+            /* Subimos el logo ligeramente para que jamás toque el piso morado */
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(350px, 55vw, 800px); 
+            width: clamp(300px, 50vw, 800px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
@@ -363,44 +376,34 @@
             text-transform: uppercase;
             background-color: var(--dark-slate);
             color: var(--bg-cream);
-            padding-bottom: 250px; 
+            padding-bottom: 200px; 
         }
 
         /* =========================================================
-           SISTEMA DE DOCK INDEPENDIENTE (SÓLO CÁMARA FÍSICA AL RAS)
+           SISTEMA DE DOCK (CÁMARA FÍSICA AL RAS - UNIVERSAL)
            ========================================================= */
         
-        .dock-system {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100vw;
-            z-index: 1000;
-            pointer-events: none; /* Deja pasar los clics hacia el fondo si no tocan la cámara */
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 0px;
-        }
-
-        /* Capa Frente: Contenedor Físico de la Cámara, Proporcionado y Optimizado Universales */
         .camera-container {
-            position: relative;
+            /* Anclaje fijo absoluto al fondo universal */
+            position: fixed;
+            bottom: -5px; 
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
-            /* MODIFICACIÓN UNIVERSAL: Ocupa todo el ancho siempre, replicando el video */
             max-width: 100vw; 
-            pointer-events: auto; /* Reactiva los clics sobre la cámara */
-            /* SIN FONDO MORADO AQUÍ. Sólo la cámara. */
+            z-index: 1000;
+            pointer-events: none; 
         }
 
         .camera-img {
             width: 100%;
             height: auto;
             display: block;
+            pointer-events: auto; 
             filter: drop-shadow(0px -5px 20px rgba(0,0,0,0.4));
         }
 
-        /* Hitboxes invisibles calibradas sobre los botones de la cámara recortada */
+        /* Hitboxes invisibles calibradas */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -409,27 +412,34 @@
             z-index: 1010;
             cursor: pointer;
             
-            /* SOLUCIÓN DE SELECCIÓN: Remueve el resaltado azul y el outline en móviles y escritorio */
+            /* Solución al recuadro azul de selección en móviles */
             -webkit-tap-highlight-color: transparent;
             outline: none;
             user-select: none;
         }
 
-        /* Coordenadas horizontales (X) en porcentajes adaptados al PNG recortado */
+        /* Coordenadas X */
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (MÓVIL) --- */
+        /* --- MEDIA QUERIES EXTREMA COMPACTACIÓN (MÓVILES COMO Z FOLD) --- */
         @media (max-width: 900px) {
-            .giant-transparent-logo { width: 80vw; }
-            .hero-giant-text { font-size: clamp(6.5rem, 25vw, 22rem); letter-spacing: -2px; }
+            header { padding: 1.5rem 4vw 0 4vw; }
             
-            /* Ajuste para que la cámara llegue de borde a borde en el móvil (ya es universal) */
+            /* Ajuste de compresión para pantallas estrechas */
+            .hero-section {
+                padding-top: 15vh;
+                padding-bottom: 25vh; /* Evita que choque con el dock */
+                /* En móvil reducimos la invasión vertical de la mancha */
+                background-size: 100% 100%, 100% 35vh; 
+            }
+
+            .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); letter-spacing: -2px; }
+            
             .camera-container { max-width: 100vw; }
-            
-            body { padding-bottom: 150px; }
+            body { padding-bottom: 120px; }
             footer { padding-bottom: 150px; }
         }
     </style>
@@ -516,15 +526,13 @@
         [ END OF FILE ] © 2026 DISK CREATIVO
     </footer>
 
-    <div class="dock-system">
-        <div class="camera-container">
-            <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784610614803.png" alt="Barra de Navegación Cámara">
-            
-            <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
-            <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
-            <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
-            <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
-        </div>
+    <div class="camera-container">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784610614803.png" alt="Barra de Navegación Cámara">
+        
+        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
     </div>
 
     <script>
