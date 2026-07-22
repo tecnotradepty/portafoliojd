@@ -316,76 +316,19 @@
             font-weight: 400;
         }
 
-        /* =========================================================
-           SECCIÓN PUENTE: PARALLAX CÁMARA GIGANTE
-           ========================================================= */
-
-        .purple-cloud-bridge {
-            width: 100%;
-            height: 30vh;
-            background-color: var(--bg-cream);
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
-            background-size: cover;
-            background-position: center top;
-            margin-bottom: -5vh; 
-            position: relative;
-            z-index: 5;
-        }
-
-        .parallax-camera-bridge {
-            position: relative;
-            height: 150vh; 
-            background-color: var(--bg-cream);
-        }
-
-        .sticky-camera-bg {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            z-index: 1;
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-        }
-
-        .sticky-camera-bg img {
-            width: 100%;
-            min-width: 1200px;
-            height: auto;
-            opacity: 0.25; 
-            transform: scale(1.5) translateY(10%); 
-        }
-
-        .parallax-text-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 150vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .massive-parallax-title {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 20vw, 20rem);
-            color: var(--brand-purple);
-            line-height: 0.8;
-            text-transform: uppercase;
-            text-shadow: 0px 20px 40px rgba(0,0,0,0.15);
-            margin-top: -20vh; 
-        }
-
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
             padding: 2rem 4vw 4rem 4vw; 
-            position: relative;
-            z-index: 10; 
+        }
+
+        .portfolio-massive-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 10rem);
+            line-height: 0.8;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem; 
+            text-transform: uppercase;
         }
 
         .portfolio-header {
@@ -568,7 +511,7 @@
             <div class="team-member-col">
                 <h4>JOEL DÍAZ</h4>
                 <span class="role">Dev & Arquitectura Web</span>
-                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformasempresariales de alto rendimiento.</p>
             </div>
             <div class="team-member-col">
                 <h4>JONATHAN OROZCO</h4>
@@ -587,7 +530,7 @@
     
     <section class="parallax-camera-bridge" id="proyectos">
         <div class="sticky-camera-bg">
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/8ec49fed1b4f0cb9c29657df9ab5d115632d179c/DIQC/1784701242339(1).png" alt="Giant Camera Lens">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/31c352fa4511a2b385ba345c84bb307de312fbdb/DIQC/1784703137305.png" alt="Giant Camera Lens">
         </div>
         <div class="parallax-text-container">
             <h2 class="massive-parallax-title">PROYECTOS</h2>
@@ -617,7 +560,7 @@
     </footer>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/8ec49fed1b4f0cb9c29657df9ab5d115632d179c/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara con Mano">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/31c352fa4511a2b385ba345c84bb307de312fbdb/DIQC/1784703137305.png" alt="Barra de Navegación Cámara con Mano">
         
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
