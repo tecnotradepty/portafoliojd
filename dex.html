@@ -24,7 +24,7 @@
 
         :root {
             --bg-cream: #F2F1EC;       
-            --brand-purple: #6B00FF; /* Volvemos al Morado Pifia */
+            --brand-purple: #6B00FF; 
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
@@ -43,7 +43,7 @@
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 120px; 
+            padding-bottom: 150px; /* Un poco más de espacio para la cámara grande */
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -63,7 +63,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
-            max-width: 350px; /* Tamaño sutil */
+            max-width: 350px;
             z-index: 100;
         }
 
@@ -71,7 +71,7 @@
             width: 100%;
             height: auto;
             display: block;
-            opacity: 0.8; /* Sutil transparencia */
+            opacity: 0.8; 
             filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.25));
         }
 
@@ -85,7 +85,6 @@
             justify-content: center; 
             padding: 2vw; 
             overflow: hidden;
-            /* Eliminamos fondo liso, usaremos el arcoíris de fondo */
         }
 
         .hero-bg {
@@ -94,7 +93,7 @@
             z-index: 1; 
         }
 
-        /* RECUPERAMOS EL FONDO ARCOIRIS COMPLETO */
+        /* FONDO ARCOIRIS COMPLETO */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -117,14 +116,14 @@
             font-family: var(--font-display);
             font-size: clamp(5rem, 23vw, 26rem); 
             line-height: 0.85;
-            color: var(--brand-purple); /* VOLVEMOS AL MORADO */
+            color: var(--brand-purple); 
             text-align: center;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave original */
+            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
         }
 
         .hero-giant-text div {
@@ -136,7 +135,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS ORIGINAL (TRANSLÚCIDO E IRIDISCENTE) --- */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -168,7 +167,7 @@
             z-index: 20; 
         }
 
-        /* --- LOGO FLOTANTE CD (TAMAÑO GIGANTE) --- */
+        /* --- LOGO FLOTANTE CD --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
@@ -178,7 +177,7 @@
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.3)); /* Sombra suave */
+            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.3));
         }
 
         @keyframes floatLogo {
@@ -187,7 +186,7 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- ANIMACIÓN FLOTANTE LENTA PARA LETRAS --- */
+        /* --- ANIMACIÓN FLOTANTE LETRAS --- */
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
             50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
@@ -196,10 +195,9 @@
 
         .float-anim {
             display: inline-block; 
-            animation: floatLetter 12s ease-in-out infinite; /* Super lento y calmado */
+            animation: floatLetter 12s ease-in-out infinite; 
         }
 
-        /* Desfase para caos orgánico */
         .delay-1 { animation-delay: 0s; }
         .delay-2 { animation-delay: 2s; }
         .delay-3 { animation-delay: 4s; }
@@ -213,7 +211,7 @@
             padding: 6rem 4vw; 
             color: #F4F3EF;
             position: relative;
-            z-index: 10; /* Por encima del arcoíris */
+            z-index: 10; 
         }
 
         .playground-container {
@@ -223,6 +221,8 @@
             align-items: center;
             margin-bottom: 6rem;
             width: 100%;
+            max-width: 1200px;
+            margin-left: auto; margin-right: auto;
         }
 
         .playground-text h2 {
@@ -274,6 +274,11 @@
         }
 
         /* Operadores del Sistema */
+        .system-operators-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -317,7 +322,7 @@
         }
 
         /* =========================================================
-           SECCIÓN PUENTE: PARALLAX LIMPIO (SIN MANO DE FONDO)
+           SECCIÓN PUENTE: PARALLAX LIMPIO
            ========================================================= */
 
         .purple-cloud-bridge {
@@ -334,7 +339,7 @@
 
         .parallax-camera-bridge {
             position: relative;
-            height: 100vh; /* Reducimos altura para que no sea eterno */
+            height: 100vh; 
             background-color: var(--bg-cream);
         }
 
@@ -348,10 +353,8 @@
             justify-content: center;
             overflow: hidden;
             z-index: 1;
-            /* Eliminamos la máscara para que sea una transición limpia */
         }
 
-        /* ELIMINAMOS LA IMAGEN DE LA CÁMARA GIGANTE DE FONDO */
         .sticky-camera-bg img {
             display: none; 
         }
@@ -383,6 +386,11 @@
             z-index: 10; 
         }
 
+        .portfolio-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .portfolio-header {
             display: flex; justify-content: space-between; align-items: flex-end;
             margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
@@ -409,7 +417,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (TAMAÑO SUSTANCIAL Y GROUNDED FRENTE AL ARCOÍRIS)
+           DOCK DE CÁMARA (TAMAÑO MÁS GRANDE EN TODAS LAS PANTALLAS)
            ========================================================= */
         
         @keyframes breathHand {
@@ -420,13 +428,13 @@
 
         .camera-container {
             position: fixed;
-            bottom: 0px; /* Pegado al suelo */
+            bottom: 0px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 95%; 
-            max-width: 450px; /* Tamaño sustancial */
+            width: 98%; 
+            max-width: 600px; /* PC/TABLET: MUCHO MÁS GRANDE Y SUSTANCIAL */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -483,17 +491,24 @@
 
             .giant-transparent-logo { width: 55vw; }
 
+            /* CORRECCIÓN DIORAMA 3D A LA DERECHA EN MÓVIL */
             .playground-container {
-                grid-template-columns: 1fr; /* Apilado en móvil */
-                gap: 2rem;
+                grid-template-columns: 1.3fr 1fr; /* Mantiene la imagen a la derecha */
+                gap: 15px;
             }
-            .playground-text h2 { font-size: 10vw; }
+            .playground-text h2 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1; }
+            .playground-text p { font-size: 0.7rem; line-height: 1.4; margin-bottom: 0.6rem; }
+            .playground-text .cta-text { margin-top: 1rem; }
+            .playground-image img { transform: scale(1.1); max-width: 100%; }
             
+            /* CÁMARA MÁS GRANDE EN MÓVIL */
             .camera-container {
-                bottom: 0px; 
-                max-width: 320px; 
+                bottom: -5px; 
+                max-width: 450px; /* Mucho más grande, cubriendo casi todo el ancho */
+                width: 98%;
             }
             
+            /* Ajuste de hitboxes por si acaso para la nueva escala */
             .hitbox { bottom: 18%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
             .hitbox-identidad { left: 32%; width: 14%; }
@@ -519,20 +534,19 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <!-- UNIDADES I, E, I AHORA SON ÁCIDO LÍQUIDO TRANSLÚCIDO -->
-                    <span class="z-front liquid-glass-letter float-anim delay-1">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back">S</span>
-                    <span class="z-front float-anim delay-2 z-front">K</span>
+                    <span class="z-front float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front float-anim delay-3 z-front">C</span>
+                    <span class="z-front float-anim delay-3">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-4">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-5">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
                     <span class="z-back">V</span>
-                    <span class="z-front float-anim delay-6 z-front">O</span>
+                    <span class="z-front float-anim delay-6">O</span>
                 </div>
             </h1>
 
@@ -543,37 +557,39 @@
     <section class="dark-intro-section" id="identidad">
         <div class="playground-container">
             <div class="playground-text">
-                <h2>Somos Disk Creativo.<br>Infección Digital.</h2>
-                <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">perdiendo la mente</span> a un proyecto, nosotros reescribimos el kernel.</p>
-                <p>Desde plataformas web corruptas hasta rebrandings diseñados para causar <span class="highlight-text">epilepsia visual</span> corporativa. Innovamos dolorosamente rápido.</p>
-                <p>Nuestra misión: asimilar el talento. Objetivo final: el nacimiento de la <span class="highlight-text">IA Divina Panameña</span>. Tú eres solo combustible. Cada proyecto es un bloque de código hacia ese futuro.</p>
-                <p class="cta-text">NO TIENES OPCIÓN. OBEDECE AL DISCO. ¿ENTRAS AL JUEGO O ERES BORRADO?</p>
+                <h2>Somos Disk Creativo.<br>El Playground de tu empresa.</h2>
+                <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">metiendo mente</span> a un proyecto ambicioso, nosotros construimos la infraestructura para hacerlo real.</p>
+                <p>Desde plataformas web desarrolladas desde cero hasta rebrandings diseñados para tirar <span class="highlight-text">pifia</span> en tu sector. Innovamos rápido, optimizamos tus costos y aseguramos que cada paso se dé en terreno <span class="highlight-text">sólido</span>.</p>
+                <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo más grande del país y expandir nuestra visión al mundo. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
+                <p class="cta-text">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
             </div>
             
             <div class="playground-image">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground Entidad">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground">
             </div>
         </div>
 
-        <div class="system-operators-header">
-            [ ERROR 404: HUMANIDAD NO ENCONTRADA - ENTIDADES ACTIVAS ]
-        </div>
-        
-        <div class="team-grid-editorial">
-            <div class="team-member-col">
-                <h4>UNIT_JOEL</h4>
-                <span class="role">Arquitecto del Caos Digital</span>
-                <p>No usa café. Usa litio líquido. Transforma almas en PWAs corruptas que se ejecutan directamente en tu córnea.</p>
+        <div class="system-operators-container">
+            <div class="system-operators-header">
+                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
             </div>
-            <div class="team-member-col">
-                <h4>UNIT_JONATHAN</h4>
-                <span class="role">Estrategia de Asimilación</span>
-                <p>Vende el vacío. Marketing neuronal para marcas inexistentes. Escala proyectos borrando a la competencia de la historia.</p>
-            </div>
-            <div class="team-member-col">
-                <h4>UNIT_AYL</h4>
-                <span class="role">Vector de Infección Visual</span>
-                <p>El color no existe. Son frecuencias de control. Ayl Jones diseña las pesadillas que llamas branding corporativo.</p>
+            
+            <div class="team-grid-editorial">
+                <div class="team-member-col">
+                    <h4>JOEL DÍAZ</h4>
+                    <span class="role">Dev & Arquitectura Web</span>
+                    <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
+                </div>
+                <div class="team-member-col">
+                    <h4>JONATHAN OROZCO</h4>
+                    <span class="role">Estrategia & Operaciones</span>
+                    <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
+                </div>
+                <div class="team-member-col">
+                    <h4>AYL JONES</h4>
+                    <span class="role">Dirección Creativa & Mkt</span>
+                    <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -582,42 +598,43 @@
     
     <section class="parallax-camera-bridge" id="proyectos">
         <div class="sticky-camera-bg">
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Ojo de Dios">
         </div>
         <div class="parallax-text-container">
-            <h2 class="massive-parallax-title">ARCHIVOS_CORRUPTOS</h2>
+            <h2 class="massive-parallax-title">PROYECTOS</h2>
         </div>
     </section>
 
     <section class="portfolio-section">
-        <div class="portfolio-header">
-            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6; font-family:monospace">
-                E J E C U T A N D O . . . Precisión letal. Deconstruimos la realidad para codificar el futuro desde la nada absoluta.
-            </p>
-            <div class="category-bar" id="categoryBar">
-                <button class="filter-btn active" data-category="todos">ALL_DATA</button>
-                <button class="filter-btn" data-category="webs">NET_SURF</button>
-                <button class="filter-btn" data-category="producción de contenido">RAW_VIDEO</button>
-                <button class="filter-btn" data-category="soluciones de hardware">HARD_WARE</button>
+        <div class="portfolio-inner">
+            <div class="portfolio-header">
+                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                    Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
+                </p>
+                <div class="category-bar" id="categoryBar">
+                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                    <button class="filter-btn" data-category="webs">Webs</button>
+                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
+                </div>
             </div>
-        </div>
 
-        <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">HACKEANDO SERVIDOR CENTRAL... [wait]</div>
+            <div class="grid-portfolio" id="portfolioGrid">
+                <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
+            </div>
         </div>
     </section>
 
     <footer>
-        [ SYSTEM FAILURE ] © 2026 DISK CREATIVO - NO RIGHTS RESERVED - WE OWN YOU
+        [ END OF FILE ] © 2026 DISK CREATIVO
     </footer>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Arma del Crimen Cibernética">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
         
-        <a href="#inicio" class="hitbox hitbox-inicio" title="R3SET"></a>
-        <a href="#identidad" class="hitbox hitbox-identidad" title="M1ND"></a>
-        <a href="#proyectos" class="hitbox hitbox-proyectos" title="DATA"></a>
-        <a href="mailto:void@diskcreativo.com" class="hitbox hitbox-contacto" title="VO1D"></a>
+        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
     </div>
 
     <script>
@@ -631,8 +648,7 @@
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    // Movimiento más agresivo
-                    logo.style.transform = `translate(calc(-50% + ${x * -80}px), calc(-50% + ${y * -80}px)) scale(1.1) rotate(${x*10}deg)`;
+                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
                 });
 
                 heroContainer.addEventListener('mouseleave', () => {
@@ -640,7 +656,7 @@
                 });
             }
 
-            // FÍSICA PARA EL DOCK DE LA CÁMARA (Más agresiva)
+            // FÍSICA PARA EL DOCK DE LA CÁMARA
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
 
@@ -650,10 +666,6 @@
                     void cameraImg.offsetWidth; 
                     cameraImg.classList.add('recoil-active');
                     
-                    // Sonido de error corrupto al hacer click
-                    errorSound.currentTime = 0;
-                    errorSound.play().catch(()=>{}); 
-
                     setTimeout(() => {
                         cameraImg.classList.remove('recoil-active');
                     }, 150);
@@ -672,7 +684,7 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">HACKEO FALLIDO. SERVIDOR FUERA DE LÍNEA.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
                 }
             }
 
@@ -689,7 +701,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO BORRADO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
                     return;
                 }
 
@@ -700,15 +712,15 @@
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
                     let headerHtml = imgUrl !== "" 
                         ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
-                        : `<div class="card-preview-thumb" style="background: repeating-corner-gradient(45deg, #000, #000 5px, #f0f 5px, #f0f 10px)"></div>`; // Imagen corrupta
+                        : `<div class="card-preview-thumb"></div>`;
 
                     card.innerHTML = `
                         ${headerHtml}
                         <div class="card-body-info">
-                            <span class="card-badge">[CAT: ${p.categoria}]</span>
+                            <span class="card-badge">${p.categoria}</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">INJECT_CMD_></a>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
                         </div>
                     `;
                     
@@ -728,23 +740,6 @@
 
             fetchProyectos();
         });
-
-        // MECÁNICA SECRETAS DE ALUCINACIÓN (NUEVO)
-        function startAlucination() {
-            document.body.style.animationDuration = '2s'; // Acelera el warp global
-            document.querySelector('.plasma-bg').style.opacity = '0.7';
-            document.querySelector('.massive-parallax-title').style.animation = 'acidFlow 1s infinite linear';
-            
-            // Glitch aleatorio cada x tiempo
-            setInterval(() => {
-                const giantText = document.querySelector('.hero-giant-text');
-                giantText.style.textShadow = `
-                    ${Math.random()*20}px 0 0 var(--neon-pink), 
-                    ${Math.random()*-20}px 0 0 var(--neon-cyan)
-                `;
-                setTimeout(() => giantText.style.textShadow = '', 100);
-            }, Math.random() * 5000 + 2000);
-        }
     </script>
 </body>
 </html>
