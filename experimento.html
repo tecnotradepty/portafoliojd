@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Disk Creativo | LAB EXPERIMENTAL</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Desplazamiento suave para los anclajes de la cámara */
+        html { scroll-behavior: smooth; }
+
+        /* CONTROL ESTRICTO DE DESBORDAMIENTO */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        :root {
+            --bg-cream: #F2F1EC;       
+            --brand-purple: #6B00FF; 
+            --dark-slate: #110E17;     
+            --text-dark: #1A1A1A;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 150px; 
+        }
+
+        /* --- EFECTO DE RUIDO (NOISE) --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            position: relative;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            padding: 2vw; 
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; 
+        }
+
+        /* FONDO ARCOIRIS COMPLETO */
+        .hero-bg-base {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
+            background-position: center center; 
+            background-repeat: no-repeat;
+            background-size: cover; 
+        }
+
+        /* --- LUCES COLGANTES CON PARALLAX --- */
+        .image-nav-container {
+            position: absolute;
+            top: 0px; 
+            left: 50%;
+            /* El transform inicial se define aquí, pero JS lo alterará */
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 350px;
+            z-index: 100;
+            will-change: transform; /* Optimiza el parallax */
+        }
+
+        .nav-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.9; 
+            filter: drop-shadow(0px 5px 12px rgba(0,0,0,0.4)); /* Sombra para darles relieve */
+            position: relative;
+            z-index: 2;
+        }
+
+        /* FX 1: HAZ DE LUZ VOLUMÉTRICO (SPOTLIGHT CONE) */
+        .spotlight-cone {
+            position: absolute;
+            top: 50%; /* Nace desde el medio de las lámparas */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250vw; /* Súper ancho para bañar todo el texto */
+            height: 120vh;
+            /* Gradiente radial que simula la caída de luz */
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 40%, transparent 70%);
+            pointer-events: none; /* Que no estorbe los clics */
+            mix-blend-mode: overlay; /* Se mezcla mágicamente con el morado y el arcoíris */
+            z-index: 1; /* Detrás de las lámparas físicas, pero sobre el texto */
+        }
+
+        .hero-sandwich {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            z-index: 10; 
+            margin-top: 10vh; /* CORRECCIÓN: Empuja el texto hacia abajo para no chocar con luces */
+        }
+
+        /* CORRECCIÓN: TAMAÑO REDUCIDO DEL TEXTO PARA QUE RESPIRE */
+        .hero-giant-text {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 17vw, 19rem); /* Max size bajó drásticamente */
+            line-height: 0.85;
+            color: var(--brand-purple); 
+            text-align: center;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            display: flex;
+            flex-direction: column;
+            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+        }
+
+        .hero-giant-text div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .z-back { z-index: 1; position: relative; }
+        .z-front { z-index: 10; position: relative; }
+        
+        /* --- LIQUID GLASS --- */
+        .liquid-glass-letter {
+            font-family: var(--font-display);
+            display: inline-block;
+            
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(0, 240, 255, 0.5) 20%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.4) 80%,  
+                rgba(255, 255, 255, 0.8) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            
+            color: transparent;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            
+            text-shadow: 
+                0px 5px 15px rgba(255, 255, 255, 0.2),
+                0px 10px 20px rgba(0, 0, 0, 0.1);
+            
+            backdrop-filter: blur(4px) saturate(150%);
+            -webkit-backdrop-filter: blur(4px) saturate(150%);
+            
+            position: relative;
+            z-index: 20; 
+        }
+
+        /* --- LOGO FLOTANTE CD (TAMAÑO MÁS PEQUEÑO Y PROPORCIONAL) --- */
+        .giant-transparent-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(220px, 32vw, 550px); /* CORRECCIÓN: Bajó la escala máxima */
+            z-index: 5; 
+            animation: floatLogo 8s ease-in-out infinite; 
+            pointer-events: none;
+            filter: drop-shadow(0px 30px 25px rgba(0, 0, 0, 0.3)); 
+            will-change: transform;
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
+
+        /* --- ANIMACIÓN FLOTANTE LETRAS --- */
+        @keyframes floatLetter {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        .float-anim {
+            display: inline-block; 
+            animation: floatLetter 12s ease-in-out infinite; 
+        }
+
+        .delay-1 { animation-delay: 0s; }
+        .delay-2 { animation-delay: 2s; }
+        .delay-3 { animation-delay: 4s; }
+        .delay-4 { animation-delay: 6s; }
+        .delay-5 { animation-delay: 8s; }
+        .delay-6 { animation-delay: 10s; }
+
+        /* =========================================================
+           DOCK DE CÁMARA (CORRECCIÓN: HUNDIDO PARA OCULTAR LA MUÑECA)
+           ========================================================= */
+        
+        @keyframes breathHand {
+            0% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(4px); } 
+            100% { transform: translateX(-50%) translateY(0px); }
+        }
+
+        .camera-container {
+            position: fixed;
+            /* EL SECRETO MAGICO: Posicionamiento negativo para enterrar la muñeca cortada */
+            bottom: -45px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            animation: breathHand 6s ease-in-out infinite;
+            animation-delay: 2.5s; 
+            width: 95%; 
+            max-width: 480px; /* Tamaño elegante y proporcional para PC */
+            z-index: 1000;
+            pointer-events: none; 
+        }
+
+        .camera-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain; 
+            display: block;
+            pointer-events: auto; 
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
+            transform-origin: center center;
+        }
+
+        @keyframes recoilClick {
+            0% { transform: rotate(0deg) translateY(0px); }
+            50% { transform: rotate(-1.5deg) translateY(3px); } 
+            100% { transform: rotate(0deg) translateY(0px); }
+        }
+
+        .recoil-active {
+            animation: recoilClick 0.15s ease-out forwards;
+        }
+
+        /* Hitboxes calibradas (Las subi ligeramente porque el dock está más hundido) */
+        .hitbox {
+            position: absolute;
+            pointer-events: auto;
+            bottom: 22%; /* Subió por el hundimiento */
+            height: 33%; 
+            z-index: 1010;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            user-select: none;
+        }
+
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
+
+        /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
+        @media (max-width: 768px) {
+            .hero-sandwich { margin-top: 5vh; }
+            .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
+            .giant-transparent-logo { width: 50vw; }
+            
+            .camera-container {
+                bottom: -35px; /* Menos hundido en móvil para no perder info */
+                max-width: 360px; /* Ancho ajustado a pantallas chicas */
+            }
+            .hitbox { bottom: 20%; height: 35%; } 
+            .hitbox-inicio { left: 19%; width: 14%; }
+            .hitbox-identidad { left: 32%; width: 14%; }
+            .hitbox-proyectos { left: 46%; width: 14%; }
+            .hitbox-contacto { left: 60%; width: 14%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <section class="hero-section" id="inicio">
+        
+        <div class="hero-bg">
+            <div class="hero-bg-base"></div>
+        </div>
+
+        <!-- CONTENEDOR DE LUCES CON FX DE HAZ DE LUZ VOLUMÉTRICO -->
+        <nav class="image-nav-container" id="dynamic-lights">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes" class="nav-image">
+            <div class="spotlight-cone"></div>
+        </nav>
+
+        <div class="hero-sandwich">
+            <h1 class="hero-giant-text">
+                <div>
+                    <span class="z-back">D</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
+                    <span class="z-back">S</span>
+                    <span class="z-front float-anim delay-2">K</span>
+                </div>
+                <div>
+                    <span class="z-front float-anim delay-3">C</span>
+                    <span class="z-back">R</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
+                    <span class="z-back">A</span>
+                    <span class="z-back">T</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
+                    <span class="z-back">V</span>
+                    <span class="z-front float-anim delay-6">O</span>
+                </div>
+            </h1>
+
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
+        </div>
+    </section>
+
+    <!-- DOCK DE CÁMARA (DIMENSIONES Y POSICIONAMIENTO PERFECTOS) -->
+    <div class="camera-container">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
+        
+        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const heroContainer = document.getElementById('inicio');
+            const logo = document.getElementById('dynamic-logo');
+            const lights = document.getElementById('dynamic-lights'); // NUEVO: Capturamos las luces
+            
+            if(heroContainer && logo && lights) {
+                heroContainer.addEventListener('mousemove', (e) => {
+                    const rect = heroContainer.getBoundingClientRect();
+                    // Normalizamos la posición del mouse de -0.5 a 0.5
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    // 1. Movimiento del CD (Igual que antes, hacia el lado contrario del mouse)
+                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
+                    
+                    // 2. PARALLAX DE TECHO (LUCES): Se mueven a diferente velocidad y dirección para crear ilusión de profundidad
+                    lights.style.transform = `translate(calc(-50% + ${x * 15}px), ${y * 10}px)`;
+                });
+
+                heroContainer.addEventListener('mouseleave', () => {
+                    logo.style.transform = ''; 
+                    lights.style.transform = 'translateX(-50%)'; // Reset a su posición natural
+                });
+            }
+
+            // FÍSICA PARA EL DOCK DE LA CÁMARA
+            const hitboxes = document.querySelectorAll('.hitbox');
+            const cameraImg = document.querySelector('.camera-img');
+
+            hitboxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    cameraImg.classList.remove('recoil-active');
+                    void cameraImg.offsetWidth; 
+                    cameraImg.classList.add('recoil-active');
+                    
+                    setTimeout(() => {
+                        cameraImg.classList.remove('recoil-active');
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
