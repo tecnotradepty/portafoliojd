@@ -194,6 +194,24 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
+        /* --- ANIMACIÓN FLOTANTE PARA LETRAS --- */
+        @keyframes floatLetter {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-12px) rotate(3deg) scale(1.02); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        /* Clase maestra para animar letras sin romper la posición */
+        .float-anim {
+            display: inline-block; 
+            animation: floatLetter 6s ease-in-out infinite;
+        }
+
+        /* Desfases de tiempo para que floten orgánicamente */
+        .delay-1 { animation-delay: 0s; }
+        .delay-2 { animation-delay: 1.5s; }
+        .delay-3 { animation-delay: 3s; }
+
         /* --- SECCIÓN DARK (IDENTIDAD Y PLAYGROUND) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
@@ -505,7 +523,7 @@
             }
 
             .giant-transparent-logo {
-                width: 55vw; /* DVD reducido para móvil */
+                width: 55vw; 
             }
 
             .playground-container {
@@ -536,7 +554,6 @@
 
     <div class="noise-overlay"></div>
 
-    <!-- BARRA SUPERIOR -->
     <nav class="image-nav-container">
         <img src="https://dummyimage.com/1200x80/110E17/F2F1EC.png&text=+REEMPLAZA+CON+TU+FOTO+DE+LA+BARRA+" alt="Menú Superior" class="nav-image">
     </nav>
@@ -551,19 +568,19 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back">S</span>
-                    <span class="z-front">K</span>
+                    <span class="z-front float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front">C</span>
+                    <span class="z-front float-anim delay-3">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front liquid-glass-letter" data-letter="E">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="E">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-2" data-letter="I">I</span>
                     <span class="z-back">V</span>
-                    <span class="z-back">O</span>
+                    <span class="z-front float-anim delay-3">O</span>
                 </div>
             </h1>
 
