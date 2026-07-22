@@ -11,7 +11,9 @@
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
@@ -25,11 +27,16 @@
             --brand-purple: #6B00FF;   
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
+            
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             background-color: var(--bg-cream);
@@ -81,6 +88,7 @@
             background-color: var(--bg-cream); 
         }
 
+        /* Capa base del fondo (Con la imagen restaurada, SIN glitch) */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -90,6 +98,7 @@
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
+            /* IMAGEN RESTAURADA ESTÁTICA */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
             background-position: center center; 
             background-repeat: no-repeat;
@@ -132,24 +141,46 @@
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(0, 240, 255, 0.5) 20%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 0, 60, 0.4) 80%, rgba(255, 255, 255, 0.8) 100%);
+            
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(0, 240, 255, 0.5) 20%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.4) 80%,  
+                rgba(255, 255, 255, 0.8) 100%
+            );
             -webkit-background-clip: text;
             background-clip: text;
+            
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-            text-shadow: 0px 30px 35px rgba(0, 0, 0, 0.4), 0px 0px 20px rgba(255, 255, 255, 0.3); 
+            
+            text-shadow: 
+                0px 30px 35px rgba(0, 0, 0, 0.4), 
+                0px 0px 20px rgba(255, 255, 255, 0.3); 
+            
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
+            
             position: relative;
             z-index: 20; 
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
         }
 
+        /* --- LOGO REDUCIDO Y CON SOMBRA --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            /* TAMAÑO AJUSTADO: Compacto para no tapar el texto */
             width: clamp(200px, 30vw, 450px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
@@ -162,6 +193,24 @@
             50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
+
+        /* --- ANIMACIÓN FLOTANTE PARA LETRAS --- */
+        @keyframes floatLetter {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-12px) rotate(3deg) scale(1.02); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        /* Clase maestra para animar letras sin romper la posición */
+        .float-anim {
+            display: inline-block; 
+            animation: floatLetter 6s ease-in-out infinite;
+        }
+
+        /* Desfases de tiempo para que floten orgánicamente */
+        .delay-1 { animation-delay: 0s; }
+        .delay-2 { animation-delay: 1.5s; }
+        .delay-3 { animation-delay: 3s; }
 
         /* --- SECCIÓN DARK (IDENTIDAD Y PLAYGROUND) --- */
         .dark-intro-section {
@@ -197,8 +246,16 @@
             font-weight: 400;
         }
 
-        .playground-text .highlight-text { color: #F4F3EF; font-weight: 700; }
-        .playground-text .cta-text { margin-top: 1.5rem; font-weight: 700; color: var(--brand-purple); }
+        .playground-text .highlight-text {
+            color: #F4F3EF;
+            font-weight: 700;
+        }
+
+        .playground-text .cta-text {
+            margin-top: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-purple);
+        }
 
         .playground-image {
             width: 100%;
@@ -208,135 +265,246 @@
         }
 
         .playground-image img {
-            width: 100%; height: auto; max-width: 100%; 
+            width: 100%;
+            height: auto;
+            max-width: 100%; 
             filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7));
-            transform: scale(1.05); transition: transform 0.5s ease;
+            transform: scale(1.05); 
+            transition: transform 0.5s ease;
         }
-        .playground-image img:hover { transform: scale(1.08) translateY(-10px); }
 
+        .playground-image img:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        /* Operadores del Sistema */
         .system-operators-header {
             font-family: var(--font-body);
-            font-size: 0.9rem; color: var(--brand-purple); text-transform: uppercase;
-            letter-spacing: 2px; font-weight: 700; margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(244, 243, 239, 0.1); padding-bottom: 10px;
-        }
-
-        .team-grid-editorial { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .team-member-col h4 { font-family: var(--font-display); font-size: 2.5rem; color: #F4F3EF; margin-bottom: 0.2rem; letter-spacing: 1px; }
-        .team-member-col .role { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple); margin-bottom: 1rem; display: block; }
-        .team-member-col p { font-size: 0.95rem; line-height: 1.5; color: #A09DA5; font-weight: 400; }
-
-        /* =========================================================
-           NUEVO: TRANSICIÓN Y PARALLAX DE LA CÁMARA GIGANTE
-           ========================================================= */
-
-        /* 1. La Mancha Morada de Transición */
-        .purple-cloud-bridge {
-            width: 100%;
-            height: 30vh;
-            background-color: var(--bg-cream);
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
-            background-size: cover;
-            background-position: center top;
-            margin-bottom: -5vh; /* Fusiona visualmente */
-            position: relative;
-            z-index: 5;
-        }
-
-        /* 2. El Puente Parallax (Anclaje) */
-        .parallax-camera-bridge {
-            position: relative;
-            height: 150vh; /* Altura extra para permitir que el texto haga scroll mientras la cámara se congela */
-            background-color: var(--bg-cream);
-        }
-
-        /* 3. La Cámara Congelada en el Fondo */
-        .sticky-camera-bg {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            z-index: 1;
-            /* Máscara de degradado para fusionarlo con el color crema de los proyectos */
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-        }
-
-        .sticky-camera-bg img {
-            width: 100%;
-            min-width: 1200px;
-            height: auto;
-            opacity: 0.25; /* Transparencia estilo "marca de agua" gigante */
-            transform: scale(1.5) translateY(10%); /* Posiciona el lente en el centro */
-        }
-
-        /* 4. El Texto que Flota sobre la Cámara */
-        .parallax-text-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 150vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .massive-parallax-title {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 20vw, 20rem);
+            font-size: 0.9rem;
             color: var(--brand-purple);
-            line-height: 0.8;
             text-transform: uppercase;
-            text-shadow: 0px 20px 40px rgba(0,0,0,0.15);
-            margin-top: -20vh; /* Ajuste óptico */
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(244, 243, 239, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .team-grid-editorial {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; 
+        }
+
+        .team-member-col h4 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: #F4F3EF;
+            margin-bottom: 0.2rem;
+            letter-spacing: 1px;
+        }
+
+        .team-member-col .role {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--brand-purple);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .team-member-col p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #A09DA5;
+            font-weight: 400;
         }
 
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
-            padding: 2rem 4vw 4rem 4vw; 
-            position: relative;
-            z-index: 10; /* Se monta sobre el fin del parallax */
+            padding: 4rem 4vw; 
+        }
+
+        .portfolio-massive-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 10rem);
+            line-height: 0.8;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem; 
+            text-transform: uppercase;
         }
 
         .portfolio-header {
-            display: flex; justify-content: space-between; align-items: flex-end;
-            margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
-            border-bottom: 2px solid var(--brand-purple); padding-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem; 
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-bottom: 2px solid var(--brand-purple);
+            padding-bottom: 1.5rem;
         }
 
-        .category-bar { display: flex; gap: 8px; flex-wrap: wrap; }
-        .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 6px 20px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
-        .filter-btn:hover, .filter-btn.active { background: var(--brand-purple); color: var(--bg-cream); border-color: var(--brand-purple); }
+        .category-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
 
-        .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; }
-        .card-preview-thumb { width: 100%; height: 250px; background-color: #e5e3db; background-size: cover; background-position: center; margin-bottom: 1rem; border: 2px solid transparent; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease; }
-        .marketplace-card:hover .card-preview-thumb { transform: translateY(-5px); border-color: var(--brand-purple); }
-        .card-body-info h3 { font-family: var(--font-display); font-size: 2rem; color: var(--text-dark); line-height: 1; margin-bottom: 0.5rem; }
-        .card-badge { font-size: 0.7rem; font-weight: 700; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
-        .card-body-info p { font-size: 0.9rem; line-height: 1.5; color: #555; margin-bottom: 1rem; }
-        .btn-visit-solution { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; text-decoration: none; color: var(--brand-purple); border-bottom: 2px solid var(--brand-purple); align-self: flex-start; padding-bottom: 2px; transition: all 0.3s; }
-        .btn-visit-solution:hover { color: var(--neon-magenta); border-color: var(--neon-magenta); }
+        .filter-btn {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            padding: 6px 20px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-        .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-display); font-size: 2.5rem; color: var(--brand-purple); text-align: left; padding: 2rem 0; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--brand-purple);
+            color: var(--bg-cream);
+            border-color: var(--brand-purple);
+        }
 
-        footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
+        .grid-portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem; 
+        }
+
+        .marketplace-card {
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card-preview-thumb {
+            width: 100%;
+            height: 250px; 
+            background-color: #e5e3db;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 1rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .marketplace-card:hover .card-preview-thumb {
+            transform: translateY(-5px);
+            border-color: var(--brand-purple);
+        }
+
+        .card-body-info h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-body-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .btn-visit-solution {
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--brand-purple);
+            border-bottom: 2px solid var(--brand-purple);
+            align-self: flex-start;
+            padding-bottom: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-visit-solution:hover {
+            color: var(--neon-magenta);
+            border-color: var(--neon-magenta);
+        }
+
+        .loading-skeleton {
+            grid-column: 1 / -1;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--brand-purple);
+            text-align: left;
+            padding: 2rem 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            background-color: var(--dark-slate);
+            color: var(--bg-cream);
+            padding-bottom: 150px; 
+        }
 
         /* =========================================================
-           DOCK DE CÁMARA (GADGET)
+           DOCK DE CÁMARA 
            ========================================================= */
+        
         .camera-container {
-            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 500px; z-index: 1000; pointer-events: none; 
+            position: fixed;
+            bottom: 15px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%; 
+            max-width: 500px; 
+            z-index: 1000;
+            pointer-events: none; 
         }
-        .camera-img { width: 100%; height: auto; display: block; pointer-events: auto; filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6)); border-radius: 20px; }
-        .hitbox { position: absolute; pointer-events: auto; bottom: 18%; height: 35%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
+
+        .camera-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: auto; 
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            border-radius: 20px; 
+        }
+
+        .hitbox {
+            position: absolute;
+            pointer-events: auto;
+            bottom: 18%; 
+            height: 35%; 
+            z-index: 1010;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            user-select: none;
+        }
+
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
@@ -344,17 +512,38 @@
 
         /* --- CORRECCIÓN MÓVIL --- */
         @media (max-width: 768px) {
-            .image-nav-container { top: 15px; width: 92%; }
-            .hero-giant-text { font-size: 24vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
-            .giant-transparent-logo { width: 55vw; }
             
-            .playground-container { grid-template-columns: 1.2fr 1fr; gap: 15px; }
-            .playground-text h2 { font-size: 1.2rem; margin-bottom: 0.8rem; }
-            .playground-text p { font-size: 0.65rem; line-height: 1.4; margin-bottom: 0.6rem; }
-            .playground-image img { transform: scale(1.1); max-width: 100%; }
+            .image-nav-container { top: 15px; width: 92%; }
 
-            /* Escala de la cámara en Parallax para móviles */
-            .sticky-camera-bg img { transform: scale(3.5) translateY(5%); opacity: 0.15; }
+            .hero-giant-text { 
+                font-size: 24vw; 
+                line-height: 0.85; 
+                gap: 0; 
+                letter-spacing: -2px;
+            }
+
+            .giant-transparent-logo {
+                width: 55vw; 
+            }
+
+            .playground-container {
+                grid-template-columns: 1.2fr 1fr; 
+                gap: 15px;
+            }
+            .playground-text h2 {
+                font-size: 1.2rem; 
+                margin-bottom: 0.8rem;
+            }
+            .playground-text p {
+                font-size: 0.65rem; 
+                line-height: 1.4;
+                margin-bottom: 0.6rem;
+            }
+            .playground-text .cta-text { margin-top: 1rem; }
+            .playground-image img { 
+                transform: scale(1.1); 
+                max-width: 100%; 
+            }
             
             body { padding-bottom: 120px; }
             footer { padding-bottom: 120px; }
@@ -370,33 +559,37 @@
     </nav>
 
     <section class="hero-section" id="inicio">
+        
         <div class="hero-bg">
             <div class="hero-bg-base"></div>
         </div>
+
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back">S</span>
-                    <span class="z-front">K</span>
+                    <span class="z-front float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front">C</span>
+                    <span class="z-front float-anim delay-3">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front liquid-glass-letter" data-letter="E">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="E">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-2" data-letter="I">I</span>
                     <span class="z-back">V</span>
-                    <span class="z-back">O</span>
+                    <span class="z-front float-anim delay-3">O</span>
                 </div>
             </h1>
+
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
         </div>
     </section>
 
     <section class="dark-intro-section" id="identidad">
+        
         <div class="playground-container">
             <div class="playground-text">
                 <h2>Somos Disk Creativo.<br>El Playground de tu empresa.</h2>
@@ -405,6 +598,7 @@
                 <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo más grande del país y expandir nuestra visión al mundo. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
                 <p class="cta-text">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
             </div>
+            
             <div class="playground-image">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground">
             </div>
@@ -433,18 +627,8 @@
         </div>
     </section>
 
-    <div class="purple-cloud-bridge"></div>
-    
-    <section class="parallax-camera-bridge" id="proyectos">
-        <div class="sticky-camera-bg">
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784610614803.png" alt="Giant Camera Lens">
-        </div>
-        <div class="parallax-text-container">
-            <h2 class="massive-parallax-title">PROYECTOS</h2>
-        </div>
-    </section>
-
-    <section class="portfolio-section">
+    <section class="portfolio-section" id="proyectos">
+        <h2 class="portfolio-massive-title">ARCHIVOS<br>PROCESADOS</h2>
         <div class="portfolio-header">
             <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
                 Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
