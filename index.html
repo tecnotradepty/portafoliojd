@@ -15,7 +15,7 @@
             scroll-behavior: smooth;
         }
 
-        /* CONTROL ESTRICTO DE DESBORDAMIENTO: Evita la línea blanca y el zoom lateral */
+        /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
             overflow-x: hidden;
             width: 100%;
@@ -56,7 +56,26 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION Y SISTEMA GLITCH --- */
+        /* --- BARRA SUPERIOR DE IMAGEN --- */
+        .image-nav-container {
+            position: absolute;
+            top: 15px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            z-index: 100;
+        }
+
+        .nav-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px; 
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.35)); 
+        }
+
+        /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
@@ -69,64 +88,21 @@
             background-color: var(--bg-cream); 
         }
 
-        /* Capa base del fondo (aislada para el glitch) */
+        /* Capa base del fondo (Con la imagen restaurada, SIN glitch) */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; /* Detrás del título y logo */
+            z-index: 1; 
         }
 
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* NUEVO FONDO ARCOIRIS */
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c87fab9594529df0d9f4cee9bade387e552031aa/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
+            /* IMAGEN RESTAURADA ESTÁTICA */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
-        }
-
-        /* Capas fantasmas para el desgarro (Glitch Effect) */
-        .hero-bg-base::before,
-        .hero-bg-base::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: inherit;
-            background-position: inherit;
-            background-repeat: inherit;
-            background-size: inherit;
-            opacity: 0;
-            z-index: 2;
-        }
-
-        .hero-bg-base::before {
-            left: 5px;
-            filter: hue-rotate(90deg) saturate(1.5) contrast(1.2);
-            animation: glitch-slice 4s infinite linear alternate-reverse;
-        }
-
-        .hero-bg-base::after {
-            left: -5px;
-            filter: hue-rotate(-90deg) saturate(1.5) contrast(1.2);
-            animation: glitch-slice-2 5s infinite linear alternate-reverse;
-        }
-
-        /* Animaciones del VHS Tracking / Cortocircuito */
-        @keyframes glitch-slice {
-            0%, 90% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } /* Reposo absoluto */
-            91% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-10px); }
-            93% { clip-path: inset(80% 0 5% 0); opacity: 1; transform: translateX(10px); }
-            95% { clip-path: inset(30% 0 40% 0); opacity: 1; transform: translateX(-5px); }
-            97%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
-        }
-
-        @keyframes glitch-slice-2 {
-            0%, 92% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } /* Reposo absoluto */
-            93% { clip-path: inset(50% 0 30% 0); opacity: 1; transform: translateX(12px); }
-            95% { clip-path: inset(15% 0 70% 0); opacity: 1; transform: translateX(-12px); }
-            97% { clip-path: inset(70% 0 10% 0); opacity: 1; transform: translateX(6px); }
-            99%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
         }
 
         .hero-sandwich {
@@ -135,12 +111,12 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            z-index: 10; /* Frente a la animación */
+            z-index: 10; 
         }
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 22vw, 25rem);
+            font-size: clamp(5rem, 23vw, 26rem); 
             line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
@@ -149,6 +125,7 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
+            text-shadow: 0px 35px 35px rgba(0, 0, 0, 0.45);
         }
 
         .hero-giant-text div {
@@ -160,7 +137,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS (Menos Blur, ceñido al texto) --- */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -177,22 +154,19 @@
             -webkit-background-clip: text;
             background-clip: text;
             
-            /* Fill color semi-transparente para anular los bloques de navegadores móviles */
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
-            
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            
             text-shadow: 
-                0px 5px 15px rgba(0, 0, 0, 0.2), 
+                0px 30px 35px rgba(0, 0, 0, 0.4), 
                 0px 0px 20px rgba(255, 255, 255, 0.3); 
             
-            /* BLUR REDUCIDO (4px) para nitidez */
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
             
             position: relative;
             z-index: 20; 
-
             border: none;
             border-radius: 0;
             padding: 0;
@@ -200,16 +174,18 @@
             box-shadow: none;
         }
 
+        /* --- LOGO REDUCIDO Y CON SOMBRA --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 45vw, 800px); 
+            /* TAMAÑO AJUSTADO: Compacto para no tapar el texto */
+            width: clamp(200px, 30vw, 450px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
-            filter: drop-shadow(0px 20px 30px rgba(107, 0, 255, 0.4));
+            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
         }
 
         @keyframes floatLogo {
@@ -226,7 +202,6 @@
             position: relative;
         }
 
-        /* Layout Rígido 2 Columnas CORREGIDO (Sin desbordamiento) */
         .playground-container {
             display: grid;
             grid-template-columns: 1.2fr 1fr; 
@@ -271,12 +246,11 @@
             align-items: center;
         }
 
-        /* Control estricto de la maqueta para no desbordar */
         .playground-image img {
             width: 100%;
             height: auto;
             max-width: 100%; 
-            filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7));
             transform: scale(1.05); 
             transition: transform 0.5s ease;
         }
@@ -285,7 +259,7 @@
             transform: scale(1.08) translateY(-10px);
         }
 
-        /* Operadores del Sistema (Equipo) */
+        /* Operadores del Sistema */
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -478,7 +452,7 @@
         }
 
         /* =========================================================
-           DOCK DE CÁMARA (MODO GADGET: COMPACTO Y CENTRADO)
+           DOCK DE CÁMARA 
            ========================================================= */
         
         .camera-container {
@@ -501,7 +475,6 @@
             border-radius: 20px; 
         }
 
-        /* Hitboxes invisibles */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -519,10 +492,22 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MEDIA QUERIES (COMPACTACIÓN DE CELULAR) --- */
+        /* --- CORRECCIÓN MÓVIL --- */
         @media (max-width: 768px) {
-            .hero-giant-text { font-size: clamp(4.5rem, 20vw, 8rem); }
             
+            .image-nav-container { top: 15px; width: 92%; }
+
+            .hero-giant-text { 
+                font-size: 24vw; 
+                line-height: 0.85; 
+                gap: 0; 
+                letter-spacing: -2px;
+            }
+
+            .giant-transparent-logo {
+                width: 55vw; /* DVD reducido para móvil */
+            }
+
             .playground-container {
                 grid-template-columns: 1.2fr 1fr; 
                 gap: 15px;
@@ -550,6 +535,11 @@
 <body>
 
     <div class="noise-overlay"></div>
+
+    <!-- BARRA SUPERIOR -->
+    <nav class="image-nav-container">
+        <img src="https://dummyimage.com/1200x80/110E17/F2F1EC.png&text=+REEMPLAZA+CON+TU+FOTO+DE+LA+BARRA+" alt="Menú Superior" class="nav-image">
+    </nav>
 
     <section class="hero-section" id="inicio">
         
