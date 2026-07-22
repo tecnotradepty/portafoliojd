@@ -43,7 +43,8 @@
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 120px; 
+            /* Margen inferior para no tapar el contenido con el dock de la mano */
+            padding-bottom: 140px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -88,7 +89,6 @@
             background-color: var(--bg-cream); 
         }
 
-        /* Capa base del fondo */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -173,7 +173,7 @@
             box-shadow: none;
         }
 
-        /* --- LOGO REDUCIDO Y CON SOMBRA --- */
+        /* --- LOGO FLOTANTE --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
@@ -181,15 +181,8 @@
             transform: translate(-50%, -50%);
             width: clamp(200px, 30vw, 450px); 
             z-index: 5; 
-            animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
             filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
-        }
-
-        @keyframes floatLogo {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
         /* --- ANIMACIÓN FLOTANTE PARA LETRAS --- */
@@ -316,19 +309,76 @@
             font-weight: 400;
         }
 
+        /* =========================================================
+           SECCIÓN PUENTE: PARALLAX CÁMARA GIGANTE
+           ========================================================= */
+
+        .purple-cloud-bridge {
+            width: 100%;
+            height: 30vh;
+            background-color: var(--bg-cream);
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
+            background-size: cover;
+            background-position: center top;
+            margin-bottom: -5vh; 
+            position: relative;
+            z-index: 5;
+        }
+
+        .parallax-camera-bridge {
+            position: relative;
+            height: 150vh; 
+            background-color: var(--bg-cream);
+        }
+
+        .sticky-camera-bg {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+
+        .sticky-camera-bg img {
+            width: 100%;
+            min-width: 1200px;
+            height: auto;
+            opacity: 0.25; 
+            transform: scale(1.5) translateY(10%); 
+        }
+
+        .parallax-text-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 150vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .massive-parallax-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 20vw, 20rem);
+            color: var(--brand-purple);
+            line-height: 0.8;
+            text-transform: uppercase;
+            text-shadow: 0px 20px 40px rgba(0,0,0,0.15);
+            margin-top: -20vh; 
+        }
+
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
             padding: 2rem 4vw 4rem 4vw; 
-        }
-
-        .portfolio-massive-title {
-            font-family: var(--font-display);
-            font-size: clamp(3.5rem, 10vw, 10rem);
-            line-height: 0.8;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem; 
-            text-transform: uppercase;
+            position: relative;
+            z-index: 10; 
         }
 
         .portfolio-header {
@@ -357,25 +407,24 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (NUEVO CON MANO Y FÍSICAS)
+           DOCK DE CÁMARA (NUEVO CON MANO, ANTI-DEFORMACIÓN Y FÍSICAS)
            ========================================================= */
         
-        /* 1. Respiración / Pulso de la cámara (Container entero) */
+        /* Pulso / Respiración */
         @keyframes breathHand {
             0% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(4px); } /* Sutil descenso */
+            50% { transform: translateX(-50%) translateY(4px); } 
             100% { transform: translateX(-50%) translateY(0px); }
         }
 
         .camera-container {
             position: fixed;
-            bottom: 15px; 
+            bottom: -5px; /* Pegado abajo para que la mano corte natural y no flote en el aire */
             left: 50%;
-            /* El transform estático se reemplaza por la animación que ya incluye el translateX */
             animation: breathHand 6s ease-in-out infinite;
-            animation-delay: 2.5s; /* Desfase total de las letras para ser orgánico */
+            animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 500px; 
+            max-width: 550px; /* Suficiente para lucir en desktop sin exagerar */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -383,17 +432,17 @@
         .camera-img {
             width: 100%;
             height: auto;
+            object-fit: contain; /* 🔒 ESCUDO ANTI-DEFORMACIÓN: Jamás se estirará feo */
             display: block;
             pointer-events: auto; 
             filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
-            border-radius: 20px; 
             transform-origin: center center;
         }
 
-        /* 2. Física de presión (Bamboleo) */
+        /* Física de presión (Bamboleo) */
         @keyframes recoilClick {
             0% { transform: rotate(0deg) translateY(0px); }
-            50% { transform: rotate(-1.5deg) translateY(3px); } /* Se inclina por la presión del dedo */
+            50% { transform: rotate(-1.5deg) translateY(3px); } 
             100% { transform: rotate(0deg) translateY(0px); }
         }
 
@@ -401,12 +450,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes invisibles calibradas */
+        /* Hitboxes invisibles recalibradas a la nueva imagen recortada */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 18%; 
-            height: 35%; 
+            bottom: 20%; /* Ajuste vertical para la mano recortada */
+            height: 45%; /* Más alto, más fácil de tocar en celular */
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -414,38 +463,25 @@
             user-select: none;
         }
 
-        /* Nota: Si la mano añade ancho a la imagen, los % podrían requerir microajuste. */
-        .hitbox-inicio { left: 21%; width: 13%; }
-        .hitbox-identidad { left: 35%; width: 13%; }
-        .hitbox-proyectos { left: 51%; width: 13%; }
-        .hitbox-contacto { left: 66.5%; width: 13%; }
+        .hitbox-inicio { left: 20%; width: 14%; }
+        .hitbox-identidad { left: 35%; width: 14%; }
+        .hitbox-proyectos { left: 50%; width: 14%; }
+        .hitbox-contacto { left: 65%; width: 14%; }
 
-        /* --- CORRECCIÓN MÓVIL --- */
+        /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
-            
             .image-nav-container { top: 15px; width: 92%; }
-
-            .hero-giant-text { 
-                font-size: 24vw; 
-                line-height: 0.85; 
-                gap: 0; 
-                letter-spacing: -2px;
-            }
-
+            .hero-giant-text { font-size: 24vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
             .giant-transparent-logo { width: 55vw; }
-
-            .playground-container {
-                grid-template-columns: 1.2fr 1fr; 
-                gap: 15px;
-            }
+            
+            .playground-container { grid-template-columns: 1.2fr 1fr; gap: 15px; }
             .playground-text h2 { font-size: 1.2rem; margin-bottom: 0.8rem; }
             .playground-text p { font-size: 0.65rem; line-height: 1.4; margin-bottom: 0.6rem; }
             .playground-text .cta-text { margin-top: 1rem; }
             .playground-image img { transform: scale(1.1); max-width: 100%; }
             
-            /* Ajustar altura para que la cámara no tape contenido vital en móvil */
-            body { padding-bottom: 150px; }
-            footer { padding-bottom: 150px; }
+            body { padding-bottom: 140px; }
+            footer { padding-bottom: 140px; }
         }
     </style>
 </head>
@@ -458,7 +494,6 @@
     </nav>
 
     <section class="hero-section" id="inicio">
-        
         <div class="hero-bg">
             <div class="hero-bg-base"></div>
         </div>
@@ -511,7 +546,7 @@
             <div class="team-member-col">
                 <h4>JOEL DÍAZ</h4>
                 <span class="role">Dev & Arquitectura Web</span>
-                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformasempresariales de alto rendimiento.</p>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
             <div class="team-member-col">
                 <h4>JONATHAN OROZCO</h4>
@@ -587,20 +622,16 @@
                 });
             }
 
-            // LÓGICA DE FÍSICA PARA EL DOCK DE LA CÁMARA
+            // FÍSICA PARA EL DOCK DE LA CÁMARA
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
 
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
-                    // Reiniciar la animación si ya estaba corriendo
                     cameraImg.classList.remove('recoil-active');
-                    void cameraImg.offsetWidth; // Forzar reflow al navegador
-                    
-                    // Aplicar el bamboleo
+                    void cameraImg.offsetWidth; 
                     cameraImg.classList.add('recoil-active');
                     
-                    // Quitar la clase justo cuando acaba la animación CSS (150ms)
                     setTimeout(() => {
                         cameraImg.classList.remove('recoil-active');
                     }, 150);
