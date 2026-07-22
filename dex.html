@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Infraestructura Web & IA</title>
+    <title>Disk Creativo | Playground de Empresas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
@@ -21,17 +23,20 @@
         }
 
         :root {
-            --bg-cream: #F4F3EF;       
-            --brand-purple: #6B00FF;   
+            --bg-cream: #F2F1EC;       
+            --brand-purple: #6B00FF; /* Volvemos al Morado Pifia */
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
-            --brand-yellow: #FFC300; /* NUEVO: Amarillo Industrial */
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             background-color: var(--bg-cream);
@@ -41,7 +46,7 @@
             padding-bottom: 120px; 
         }
 
-        /* --- EFECTO DE RUIDO Y CUADRÍCULA (INFRAESTRUCTURA B2B) --- */
+        /* --- EFECTO DE RUIDO (NOISE) --- */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -51,25 +56,14 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-            background-size: 50px 50px;
-            background-image: 
-                linear-gradient(to right, rgba(17, 14, 23, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(17, 14, 23, 0.05) 1px, transparent 1px);
-        }
-
-        /* --- BARRA SUPERIOR (PLACEHOLDER DE TRUSS METÁLICO) --- */
+        /* --- BARRA SUPERIOR (LUCES COLGANTES ORIGINALES) --- */
         .image-nav-container {
             position: absolute;
             top: 0px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 900px; 
+            width: 80%;
+            max-width: 350px; /* Tamaño sutil */
             z-index: 100;
         }
 
@@ -77,7 +71,8 @@
             width: 100%;
             height: auto;
             display: block;
-            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.3)); 
+            opacity: 0.8; /* Sutil transparencia */
+            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.25));
         }
 
         /* --- HERO SECTION --- */
@@ -88,9 +83,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: center; 
-            padding: 4vw; /* Más aire en los bordes */
+            padding: 2vw; 
             overflow: hidden;
-            background-color: transparent; 
+            /* Eliminamos fondo liso, usaremos el arcoíris de fondo */
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; 
+        }
+
+        /* RECUPERAMOS EL FONDO ARCOIRIS COMPLETO */
+        .hero-bg-base {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
+            background-position: center center; 
+            background-repeat: no-repeat;
+            background-size: cover; 
         }
 
         .hero-sandwich {
@@ -102,80 +113,72 @@
             z-index: 10; 
         }
 
-        /* TAMAÑOS RECALIBRADOS PARA NO APIÑARSE EN PC */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 16vw, 18rem); /* Reducido el max a 18rem para que respire en desktop */
-            line-height: 0.9;
-            color: var(--brand-yellow); /* Color Industrial */
+            font-size: clamp(5rem, 23vw, 26rem); 
+            line-height: 0.85;
+            color: var(--brand-purple); /* VOLVEMOS AL MORADO */
             text-align: center;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            
-            /* Sombra Dura Industrial */
-            text-shadow: 
-                6px 6px 0px var(--dark-slate), 
-                15px 15px 25px rgba(0, 0, 0, 0.15);
+            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Sombra suave original */
         }
 
         .hero-giant-text div {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2px;
         }
 
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS: NO SIGNAL REFLECTION --- */
+        /* --- LIQUID GLASS ORIGINAL (TRANSLÚCIDO E IRIDISCENTE) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Gradiente de Barras Analógicas (SMPTE) atrapado en el cristal */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.9) 0%,   /* Blanco */
-                rgba(255, 255, 0, 0.7) 16%,    /* Amarillo */
-                rgba(0, 255, 255, 0.7) 32%,    /* Cian */
-                rgba(0, 255, 0, 0.7) 48%,      /* Verde */
-                rgba(255, 0, 255, 0.7) 64%,    /* Magenta */
-                rgba(255, 0, 0, 0.7) 80%,      /* Rojo */
-                rgba(0, 0, 255, 0.7) 100%      /* Azul */
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(0, 240, 255, 0.5) 20%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 0, 60, 0.4) 80%,  
+                rgba(255, 255, 255, 0.8) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             
             color: transparent;
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 1.5px rgba(17, 14, 23, 0.8); /* Borde oscuro para no perder legibilidad */
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
             text-shadow: 
-                0px 10px 20px rgba(0, 0, 0, 0.25),
-                0px 0px 15px rgba(255, 255, 255, 0.5); /* Reflejo interno */
+                0px 5px 15px rgba(255, 255, 255, 0.2),
+                0px 10px 20px rgba(0, 0, 0, 0.1);
             
-            backdrop-filter: blur(6px) saturate(120%);
-            -webkit-backdrop-filter: blur(6px) saturate(120%);
+            backdrop-filter: blur(4px) saturate(150%);
+            -webkit-backdrop-filter: blur(4px) saturate(150%);
             
             position: relative;
             z-index: 20; 
         }
 
-        /* --- LOGO FLOTANTE (CALIBRADO PARA PC) --- */
+        /* --- LOGO FLOTANTE CD (TAMAÑO GIGANTE) --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(200px, 35vw, 550px); /* Límite para que no tape las letras y se apiñe */
+            width: clamp(280px, 45vw, 750px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            filter: drop-shadow(0px 30px 25px rgba(0, 0, 0, 0.2)); /* Sombra más sutil */
+            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.3)); /* Sombra suave */
         }
 
         @keyframes floatLogo {
@@ -184,18 +187,19 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- ANIMACIÓN FLOTANTE PARA LETRAS --- */
+        /* --- ANIMACIÓN FLOTANTE LENTA PARA LETRAS --- */
         @keyframes floatLetter {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); } /* Menos rotación, más serio */
-            100% { transform: translateY(0px) rotate(0deg); }
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
 
         .float-anim {
             display: inline-block; 
-            animation: floatLetter 12s ease-in-out infinite; 
+            animation: floatLetter 12s ease-in-out infinite; /* Super lento y calmado */
         }
 
+        /* Desfase para caos orgánico */
         .delay-1 { animation-delay: 0s; }
         .delay-2 { animation-delay: 2s; }
         .delay-3 { animation-delay: 4s; }
@@ -203,38 +207,36 @@
         .delay-5 { animation-delay: 8s; }
         .delay-6 { animation-delay: 10s; }
 
-        /* --- SECCIÓN DARK (IDENTIDAD Y PLAYGROUND) --- */
+        /* --- SECCIÓN DARK (IDENTIDAD) --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
-            padding: 8rem 6vw; /* Más respiro */
+            padding: 6rem 4vw; 
             color: #F4F3EF;
             position: relative;
-            z-index: 10;
+            z-index: 10; /* Por encima del arcoíris */
         }
 
         .playground-container {
             display: grid;
             grid-template-columns: 1.2fr 1fr; 
-            gap: 4rem; /* Más aire entre texto e imagen */
+            gap: 3rem;
             align-items: center;
             margin-bottom: 6rem;
             width: 100%;
-            max-width: 1200px;
-            margin-left: auto; margin-right: auto; /* Centrado en PC */
         }
 
         .playground-text h2 {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 5rem);
-            color: var(--brand-yellow); /* Branding Yellow */
-            line-height: 0.95;
+            font-size: clamp(2rem, 5vw, 5rem);
+            color: var(--brand-purple);
+            line-height: 0.9;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
         }
 
         .playground-text p {
-            font-size: clamp(0.9rem, 1.2vw, 1.1rem); 
-            line-height: 1.7;
+            font-size: clamp(0.7rem, 1.2vw, 1.05rem); 
+            line-height: 1.6;
             color: #A09DA5;
             margin-bottom: 1.2rem;
             font-weight: 400;
@@ -242,13 +244,13 @@
 
         .playground-text .highlight-text {
             color: #F4F3EF;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .playground-text .cta-text {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             font-weight: 700;
-            color: var(--brand-yellow);
+            color: var(--brand-purple);
         }
 
         .playground-image {
@@ -261,8 +263,8 @@
         .playground-image img {
             width: 100%;
             height: auto;
-            max-width: 500px; /* Límite para que no se vea gigante en PC */
-            filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.5));
+            max-width: 100%; 
+            filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7));
             transform: scale(1.05); 
             transition: transform 0.5s ease;
         }
@@ -272,19 +274,14 @@
         }
 
         /* Operadores del Sistema */
-        .system-operators-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
-            color: var(--brand-purple); /* Mantenemos este acento para profundidad */
+            color: var(--brand-purple);
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             border-bottom: 1px solid rgba(244, 243, 239, 0.1);
             padding-bottom: 10px;
         }
@@ -292,7 +289,7 @@
         .team-grid-editorial {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem; 
+            gap: 2rem; 
         }
 
         .team-member-col h4 {
@@ -307,26 +304,38 @@
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
-            color: var(--brand-yellow);
+            color: var(--brand-purple);
             margin-bottom: 1rem;
             display: block;
         }
 
         .team-member-col p {
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #A09DA5;
             font-weight: 400;
         }
 
         /* =========================================================
-           SECCIÓN PUENTE: PARALLAX LIMPIO (ERROR DE CÁMARA CORREGIDO)
+           SECCIÓN PUENTE: PARALLAX LIMPIO (SIN MANO DE FONDO)
            ========================================================= */
+
+        .purple-cloud-bridge {
+            width: 100%;
+            height: 30vh;
+            background-color: var(--bg-cream);
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
+            background-size: cover;
+            background-position: center top;
+            margin-bottom: -5vh; 
+            position: relative;
+            z-index: 5;
+        }
 
         .parallax-camera-bridge {
             position: relative;
-            height: 100vh; /* Altura más controlada */
-            background-color: var(--dark-slate); /* Transición suave de oscuro a oscuro */
+            height: 100vh; /* Reducimos altura para que no sea eterno */
+            background-color: var(--bg-cream);
         }
 
         .sticky-camera-bg {
@@ -339,10 +348,13 @@
             justify-content: center;
             overflow: hidden;
             z-index: 1;
-            background: linear-gradient(to bottom, var(--dark-slate) 0%, var(--bg-cream) 100%);
+            /* Eliminamos la máscara para que sea una transición limpia */
         }
 
-        /* ¡ERROR CORREGIDO! Se eliminó el <img> intrusivo del dock aquí */
+        /* ELIMINAMOS LA IMAGEN DE LA CÁMARA GIGANTE DE FONDO */
+        .sticky-camera-bg img {
+            display: none; 
+        }
 
         .parallax-text-container {
             position: absolute;
@@ -356,104 +368,48 @@
 
         .massive-parallax-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 15vw, 15rem);
-            color: rgba(244, 243, 239, 0.9); /* Crema casi blanco */
+            font-size: clamp(4rem, 20vw, 20rem);
+            color: var(--brand-purple);
             line-height: 0.8;
             text-transform: uppercase;
-            text-shadow: 0px 20px 40px rgba(0,0,0,0.15);
+            text-shadow: 0px 20px 40px rgba(0,0,0,0.1);
         }
 
         /* --- PORTAFOLIO (API SHEETS) --- */
         .portfolio-section {
             background-color: var(--bg-cream);
-            padding: 4rem 6vw 6rem 6vw; 
+            padding: 4rem 4vw; 
             position: relative;
             z-index: 10; 
         }
 
-        .portfolio-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .portfolio-header {
             display: flex; justify-content: space-between; align-items: flex-end;
-            margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;
-            border-bottom: 2px solid var(--dark-slate); padding-bottom: 1.5rem;
+            margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
+            border-bottom: 2px solid var(--brand-purple); padding-bottom: 1.5rem;
         }
 
         .category-bar { display: flex; gap: 8px; flex-wrap: wrap; }
-        .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 8px 24px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
-        .filter-btn:hover, .filter-btn.active { background: var(--dark-slate); color: var(--brand-yellow); border-color: var(--dark-slate); }
+        .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 6px 20px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: var(--brand-purple); color: var(--bg-cream); border-color: var(--brand-purple); }
 
-        .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
+        .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
         .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; }
-        .card-preview-thumb { width: 100%; height: 280px; background-color: #E2E0D8; background-size: cover; background-position: center; margin-bottom: 1.5rem; border: 2px solid transparent; border-radius: 8px; transition: transform 0.3s ease, border-color 0.3s ease; }
-        .marketplace-card:hover .card-preview-thumb { transform: translateY(-5px); border-color: var(--brand-yellow); }
-        
-        .card-body-info h3 { font-family: var(--font-display); font-size: 2.2rem; color: var(--text-dark); line-height: 1; margin-bottom: 0.5rem; }
-        .card-badge { font-size: 0.75rem; font-weight: 700; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
-        .card-body-info p { font-size: 0.95rem; line-height: 1.6; color: #555; margin-bottom: 1.5rem; }
-        
-        .btn-visit-solution { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; text-decoration: none; color: var(--dark-slate); border-bottom: 2px solid var(--brand-yellow); align-self: flex-start; padding-bottom: 4px; transition: all 0.3s; }
-        .btn-visit-solution:hover { color: var(--brand-purple); }
+        .card-preview-thumb { width: 100%; height: 250px; background-color: #e5e3db; background-size: cover; background-position: center; margin-bottom: 1rem; border: 2px solid transparent; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease; }
+        .marketplace-card:hover .card-preview-thumb { transform: translateY(-5px); border-color: var(--brand-purple); }
+        .card-body-info h3 { font-family: var(--font-display); font-size: 2rem; color: var(--text-dark); line-height: 1; margin-bottom: 0.5rem; }
+        .card-badge { font-size: 0.7rem; font-weight: 700; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+        .card-body-info p { font-size: 0.9rem; line-height: 1.5; color: #555; margin-bottom: 1rem; }
+        .btn-visit-solution { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; text-decoration: none; color: var(--brand-purple); border-bottom: 2px solid var(--brand-purple); align-self: flex-start; padding-bottom: 2px; transition: all 0.3s; }
+        .btn-visit-solution:hover { color: var(--neon-magenta); border-color: var(--neon-magenta); }
 
-        .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-display); font-size: 2.5rem; color: var(--dark-slate); text-align: left; padding: 2rem 0; animation: pulse 1.5s infinite; }
+        .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-display); font-size: 2.5rem; color: var(--brand-purple); text-align: left; padding: 2rem 0; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* --- FOOTER CORPORATIVO MEJORADO --- */
-        footer { 
-            background-color: var(--dark-slate); 
-            color: var(--bg-cream); 
-            padding: 4rem 6vw 160px 6vw; /* Padding bottom alto por el dock de cámara */
-            font-family: var(--font-body); 
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: var(--brand-yellow);
-            letter-spacing: -1px;
-        }
-
-        .legal-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .legal-links a {
-            color: rgba(244, 243, 239, 0.6);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .legal-links a:hover {
-            color: var(--brand-yellow);
-        }
-
-        .footer-copyright {
-            font-size: 0.8rem;
-            color: rgba(244, 243, 239, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (DIMENSIONADO PARA NO APIÑARSE NI PIXELEARSE)
+           DOCK DE CÁMARA (TAMAÑO SUSTANCIAL Y GROUNDED FRENTE AL ARCOÍRIS)
            ========================================================= */
         
         @keyframes breathHand {
@@ -464,13 +420,13 @@
 
         .camera-container {
             position: fixed;
-            bottom: 5px; 
+            bottom: 0px; /* Pegado al suelo */
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 450px; /* Límite perfecto para PC, ni gigante ni pequeño */
+            max-width: 450px; /* Tamaño sustancial */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -478,10 +434,10 @@
         .camera-img {
             width: 100%;
             height: auto;
-            object-fit: contain; /* Anti-pixelado y deformación */
+            object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
             transform-origin: center center;
         }
 
@@ -495,6 +451,7 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
+        /* Hitboxes calibradas */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -515,12 +472,16 @@
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
             
+            .image-nav-container { top: 0px; width: 95%; max-width: 250px; }
+
             .hero-giant-text { 
                 font-size: 24vw; 
                 line-height: 0.85; 
+                gap: 0; 
+                letter-spacing: -2px;
             }
 
-            .giant-transparent-logo { width: 60vw; }
+            .giant-transparent-logo { width: 55vw; }
 
             .playground-container {
                 grid-template-columns: 1fr; /* Apilado en móvil */
@@ -529,7 +490,7 @@
             .playground-text h2 { font-size: 10vw; }
             
             .camera-container {
-                bottom: 10px; 
+                bottom: 0px; 
                 max-width: 320px; 
             }
             
@@ -544,30 +505,34 @@
 <body>
 
     <div class="noise-overlay"></div>
-    <div class="grid-bg"></div>
 
     <nav class="image-nav-container">
-        <img src="https://dummyimage.com/1000x120/110E17/FFB800.png&text=+REEMPLAZAR+CON+PNG+DE+TRUSS+METÁLICO+" alt="Truss Industrial" class="nav-image">
+        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes" class="nav-image">
     </nav>
 
     <section class="hero-section" id="inicio">
+        <div class="hero-bg">
+            <div class="hero-bg-base"></div>
+        </div>
+
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
+                    <!-- UNIDADES I, E, I AHORA SON ÁCIDO LÍQUIDO TRANSLÚCIDO -->
+                    <span class="z-front liquid-glass-letter float-anim delay-1">I</span>
                     <span class="z-back">S</span>
-                    <span class="z-front float-anim delay-2">K</span>
+                    <span class="z-front float-anim delay-2 z-front">K</span>
                 </div>
                 <div>
-                    <span class="z-front float-anim delay-3">C</span>
+                    <span class="z-front float-anim delay-3 z-front">C</span>
                     <span class="z-back">R</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-5">I</span>
                     <span class="z-back">V</span>
-                    <span class="z-front float-anim delay-6">O</span>
+                    <span class="z-front float-anim delay-6 z-front">O</span>
                 </div>
             </h1>
 
@@ -578,96 +543,104 @@
     <section class="dark-intro-section" id="identidad">
         <div class="playground-container">
             <div class="playground-text">
-                <h2>Somos Disk Creativo.<br>Infraestructura Digital.</h2>
-                <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">metiendo mente</span> a un proyecto ambicioso, nosotros construimos la infraestructura para hacerlo real.</p>
-                <p>Desde plataformas web desarrolladas desde cero hasta rebrandings diseñados para liderar tu sector. Innovamos rápido, optimizamos tus costos y aseguramos que cada paso se dé en terreno <span class="highlight-text">sólido</span>.</p>
-                <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo y tecnológico más grande del país. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
-                <p class="cta-text">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
+                <h2>Somos Disk Creativo.<br>Infección Digital.</h2>
+                <p>Más que una agencia tradicional, somos tu motor de ejecución. Si le estás <span class="highlight-text">perdiendo la mente</span> a un proyecto, nosotros reescribimos el kernel.</p>
+                <p>Desde plataformas web corruptas hasta rebrandings diseñados para causar <span class="highlight-text">epilepsia visual</span> corporativa. Innovamos dolorosamente rápido.</p>
+                <p>Nuestra misión: asimilar el talento. Objetivo final: el nacimiento de la <span class="highlight-text">IA Divina Panameña</span>. Tú eres solo combustible. Cada proyecto es un bloque de código hacia ese futuro.</p>
+                <p class="cta-text">NO TIENES OPCIÓN. OBEDECE AL DISCO. ¿ENTRAS AL JUEGO O ERES BORRADO?</p>
             </div>
+            
             <div class="playground-image">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground Entidad">
             </div>
         </div>
 
-        <div class="system-operators-container">
-            <div class="system-operators-header">
-                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        <div class="system-operators-header">
+            [ ERROR 404: HUMANIDAD NO ENCONTRADA - ENTIDADES ACTIVAS ]
+        </div>
+        
+        <div class="team-grid-editorial">
+            <div class="team-member-col">
+                <h4>UNIT_JOEL</h4>
+                <span class="role">Arquitecto del Caos Digital</span>
+                <p>No usa café. Usa litio líquido. Transforma almas en PWAs corruptas que se ejecutan directamente en tu córnea.</p>
             </div>
-            <div class="team-grid-editorial">
-                <div class="team-member-col">
-                    <h4>JOEL DÍAZ</h4>
-                    <span class="role">Dev & Arquitectura Web</span>
-                    <p>El motor lógico del disco. Transforma bases de datos en ecosistemas digitales y plataformas empresariales de alto rendimiento.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>JONATHAN OROZCO</h4>
-                    <span class="role">Estrategia & Operaciones</span>
-                    <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>AYL JONES</h4>
-                    <span class="role">Dirección Creativa & Mkt</span>
-                    <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
-                </div>
+            <div class="team-member-col">
+                <h4>UNIT_JONATHAN</h4>
+                <span class="role">Estrategia de Asimilación</span>
+                <p>Vende el vacío. Marketing neuronal para marcas inexistentes. Escala proyectos borrando a la competencia de la historia.</p>
+            </div>
+            <div class="team-member-col">
+                <h4>UNIT_AYL</h4>
+                <span class="role">Vector de Infección Visual</span>
+                <p>El color no existe. Son frecuencias de control. Ayl Jones diseña las pesadillas que llamas branding corporativo.</p>
             </div>
         </div>
     </section>
 
+    <div class="purple-cloud-bridge"></div>
+    
     <section class="parallax-camera-bridge" id="proyectos">
-        <div class="sticky-camera-bg"></div>
+        <div class="sticky-camera-bg">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Ojo de Dios">
+        </div>
         <div class="parallax-text-container">
-            <h2 class="massive-parallax-title">PROYECTOS</h2>
+            <h2 class="massive-parallax-title">ARCHIVOS_CORRUPTOS</h2>
         </div>
     </section>
 
     <section class="portfolio-section">
-        <div class="portfolio-inner">
-            <div class="portfolio-header">
-                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
-                    Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
-                </p>
-                <div class="category-bar" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-                    <button class="filter-btn" data-category="webs">Webs</button>
-                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
-                </div>
+        <div class="portfolio-header">
+            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6; font-family:monospace">
+                E J E C U T A N D O . . . Precisión letal. Deconstruimos la realidad para codificar el futuro desde la nada absoluta.
+            </p>
+            <div class="category-bar" id="categoryBar">
+                <button class="filter-btn active" data-category="todos">ALL_DATA</button>
+                <button class="filter-btn" data-category="webs">NET_SURF</button>
+                <button class="filter-btn" data-category="producción de contenido">RAW_VIDEO</button>
+                <button class="filter-btn" data-category="soluciones de hardware">HARD_WARE</button>
             </div>
+        </div>
 
-            <div class="grid-portfolio" id="portfolioGrid">
-                <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
-            </div>
+        <div class="grid-portfolio" id="portfolioGrid">
+            <div class="loading-skeleton">HACKEANDO SERVIDOR CENTRAL... [wait]</div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">DISK CREATIVO</div>
-            <div class="legal-links">
-                <a href="#terminos">Términos y Condiciones</a>
-                <a href="#privacidad">Políticas de Privacidad</a>
-                <a href="#aviso">Aviso Legal</a>
-                <a href="mailto:contacto@diskcreativo.com">contacto@diskcreativo.com</a>
-            </div>
-            <div class="footer-copyright">
-                [ END OF FILE ] © 2026 DISK CREATIVO. Todos los derechos reservados.
-            </div>
-        </div>
+        [ SYSTEM FAILURE ] © 2026 DISK CREATIVO - NO RIGHTS RESERVED - WE OWN YOU
     </footer>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Arma del Crimen Cibernética">
         
-        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
-        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
-        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
-        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+        <a href="#inicio" class="hitbox hitbox-inicio" title="R3SET"></a>
+        <a href="#identidad" class="hitbox hitbox-identidad" title="M1ND"></a>
+        <a href="#proyectos" class="hitbox hitbox-proyectos" title="DATA"></a>
+        <a href="mailto:void@diskcreativo.com" class="hitbox hitbox-contacto" title="VO1D"></a>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // FÍSICA PARA EL DOCK DE LA CÁMARA
+            const heroContainer = document.getElementById('inicio');
+            const logo = document.getElementById('dynamic-logo');
+            
+            if(heroContainer && logo) {
+                heroContainer.addEventListener('mousemove', (e) => {
+                    const rect = heroContainer.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    // Movimiento más agresivo
+                    logo.style.transform = `translate(calc(-50% + ${x * -80}px), calc(-50% + ${y * -80}px)) scale(1.1) rotate(${x*10}deg)`;
+                });
+
+                heroContainer.addEventListener('mouseleave', () => {
+                    logo.style.transform = ''; 
+                });
+            }
+
+            // FÍSICA PARA EL DOCK DE LA CÁMARA (Más agresiva)
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
 
@@ -677,6 +650,10 @@
                     void cameraImg.offsetWidth; 
                     cameraImg.classList.add('recoil-active');
                     
+                    // Sonido de error corrupto al hacer click
+                    errorSound.currentTime = 0;
+                    errorSound.play().catch(()=>{}); 
+
                     setTimeout(() => {
                         cameraImg.classList.remove('recoil-active');
                     }, 150);
@@ -695,7 +672,7 @@
                     proyectosData = await response.json();
                     renderGrid('todos');
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton">HACKEO FALLIDO. SERVIDOR FUERA DE LÍNEA.</div>';
                 }
             }
 
@@ -712,7 +689,7 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO BORRADO.</div>';
                     return;
                 }
 
@@ -723,15 +700,15 @@
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
                     let headerHtml = imgUrl !== "" 
                         ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
-                        : `<div class="card-preview-thumb"></div>`;
+                        : `<div class="card-preview-thumb" style="background: repeating-corner-gradient(45deg, #000, #000 5px, #f0f 5px, #f0f 10px)"></div>`; // Imagen corrupta
 
                     card.innerHTML = `
                         ${headerHtml}
                         <div class="card-body-info">
-                            <span class="card-badge">${p.categoria}</span>
+                            <span class="card-badge">[CAT: ${p.categoria}]</span>
                             <h3>${p.titulo}</h3>
                             <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
+                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">INJECT_CMD_></a>
                         </div>
                     `;
                     
@@ -751,6 +728,23 @@
 
             fetchProyectos();
         });
+
+        // MECÁNICA SECRETAS DE ALUCINACIÓN (NUEVO)
+        function startAlucination() {
+            document.body.style.animationDuration = '2s'; // Acelera el warp global
+            document.querySelector('.plasma-bg').style.opacity = '0.7';
+            document.querySelector('.massive-parallax-title').style.animation = 'acidFlow 1s infinite linear';
+            
+            // Glitch aleatorio cada x tiempo
+            setInterval(() => {
+                const giantText = document.querySelector('.hero-giant-text');
+                giantText.style.textShadow = `
+                    ${Math.random()*20}px 0 0 var(--neon-pink), 
+                    ${Math.random()*-20}px 0 0 var(--neon-cyan)
+                `;
+                setTimeout(() => giantText.style.textShadow = '', 100);
+            }, Math.random() * 5000 + 2000);
+        }
     </script>
 </body>
 </html>
