@@ -56,14 +56,14 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- BARRA SUPERIOR (LUCES COLGANTES PEQUEÑAS) --- */
+        /* --- BARRA SUPERIOR (LUCES COLGANTES RECALIBRADAS A SUTILES) --- */
         .image-nav-container {
             position: absolute;
-            top: -5px; 
+            top: 0px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 600px; /* Tamaño reducido para sutileza */
+            width: 80%;
+            max-width: 350px; /* TAMAÑO MUCHO MÁS REDUCIDO PARA SUTILEZA */
             z-index: 100;
         }
 
@@ -71,7 +71,8 @@
             width: 100%;
             height: auto;
             display: block;
-            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.35)); 
+            opacity: 0.8; /* Sutil transparencia */
+            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.25)); /* Sombra súper suave */
         }
 
         /* --- HERO SECTION --- */
@@ -171,13 +172,13 @@
             box-shadow: none;
         }
 
-        /* --- LOGO FLOTANTE (RESTAURADO EL TAMAÑO GIGANTE) --- */
+        /* --- LOGO FLOTANTE (TAMAÑO GIGANTE MANTENIDO) --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 45vw, 750px); /* Tamaño recuperado */
+            width: clamp(280px, 45vw, 750px); /* Tamaño gigante para presencia de CD/DVD */
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
@@ -190,7 +191,7 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- ANIMACIÓN FLOTANTE LENTA PARA LETRAS --- */
+        /* --- ANIMACIÓN FLOTANTE LENTA PARA LETRAS (MANTENIDA) --- */
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
             50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } /* Movimiento muy sutil */
@@ -416,7 +417,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (PEQUEÑO Y CON ENLACE CORRECTO)
+           DOCK DE CÁMARA (TAMAÑO RESTAURADO A SUSTANCIAL Y GROUNDED)
            ========================================================= */
         
         @keyframes breathHand {
@@ -427,13 +428,13 @@
 
         .camera-container {
             position: fixed;
-            bottom: -5px; 
+            bottom: 5px; /* REEMPLAZADO: Posicionamiento positivo para visible y grounded */
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 280px; /* TAMAÑO PEQUEÑO PARA MATCH CON LA REFERENCIA */
+            max-width: 450px; /* TAMAÑO SUSTANCIAL RESTAURADO: Coincide con la referencia de brazo real */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -441,10 +442,11 @@
         .camera-img {
             width: 100%;
             height: auto;
-            object-fit: contain; 
+            object-fit: contain; /* Anti-deformación */
             display: block;
             pointer-events: auto; 
             filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            border-radius: 20px; 
             transform-origin: center center;
         }
 
@@ -458,12 +460,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas */
+        /* Hitboxes calibradas para la imagen alta y grounded */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 22%; 
-            height: 38%; 
+            bottom: 18%; /* Ajuste vertical para la mano recortada */
+            height: 35%; /* Más alto, más fácil de tocar en celular */
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -479,7 +481,7 @@
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
             
-            .image-nav-container { top: 0px; width: 95%; max-width: 100%; }
+            .image-nav-container { top: 0px; width: 95%; max-width: 250px; } /* Luces aún más sutiles en móvil */
 
             .hero-giant-text { 
                 font-size: 24vw; 
@@ -488,7 +490,7 @@
                 letter-spacing: -2px;
             }
 
-            .giant-transparent-logo { width: 65vw; } /* Ligeramente más grande en celular */
+            .giant-transparent-logo { width: 55vw; }
 
             .playground-container {
                 grid-template-columns: 1.2fr 1fr; 
@@ -500,9 +502,16 @@
             .playground-image img { transform: scale(1.1); max-width: 100%; }
             
             .camera-container {
-                bottom: -10px;
-                max-width: 220px; /* Aún más pequeña en celular para no tapar contenido */
+                bottom: 10px; /* REEMPLAZADO: Visible y grounded en móvil */
+                max-width: 320px; /* Tamaño móvil sustancial, no tapará el contenido vital */
             }
+            
+            /* REAJUSTE DE HITBOXES MÓVILES PARA EL TAMAÑO SUSTANCIAL */
+            .hitbox { bottom: 18%; height: 35%; } /* Percentajes mantenidos, pero revisa si Inicio tapar contacto */
+            .hitbox-inicio { left: 19%; width: 14%; } /* Ligeramente más afuera y ancho */
+            .hitbox-identidad { left: 32%; width: 14%; } /* Ligeramente más afuera y ancho */
+            .hitbox-proyectos { left: 46%; width: 14%; } /* Ligeramente más afuera y ancho */
+            .hitbox-contacto { left: 60%; width: 14%; } /* Ligeramente más afuera y ancho */
 
             body { padding-bottom: 120px; }
             footer { padding-bottom: 120px; }
@@ -514,7 +523,7 @@
     <div class="noise-overlay"></div>
 
     <nav class="image-nav-container">
-        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes" class="nav-image">
+        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes Sutiles" class="nav-image">
     </nav>
 
     <section class="hero-section" id="inicio">
@@ -620,7 +629,7 @@
     </footer>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara con Mano">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara con Mano Coherente">
         
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
