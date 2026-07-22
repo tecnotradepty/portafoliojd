@@ -79,7 +79,7 @@
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* FONDO ARCOIRIS */
+            /* NUEVO FONDO ARCOIRIS */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c87fab9594529df0d9f4cee9bade387e552031aa/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
             background-position: center center; 
             background-repeat: no-repeat;
@@ -112,6 +112,7 @@
             animation: glitch-slice-2 5s infinite linear alternate-reverse;
         }
 
+        /* Animaciones del VHS Tracking / Cortocircuito */
         @keyframes glitch-slice {
             0%, 90% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } 
             91% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-10px); }
@@ -159,7 +160,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS CSS ORIGINAL FUNCIONAL --- */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -279,6 +280,7 @@
             transform: scale(1.08) translateY(-10px);
         }
 
+        /* Operadores del Sistema */
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -439,8 +441,8 @@
         }
 
         .btn-visit-solution:hover {
-            color: #FF003C;
-            border-color: #FF003C;
+            color: var(--neon-magenta);
+            border-color: var(--neon-magenta);
         }
 
         .loading-skeleton {
@@ -511,40 +513,37 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- LA CORRECCIÓN MÓVIL EXACTA APLICADA AQUÍ --- */
+        /* --- CORRECCIÓN EXACTA PARA MÓVIL --- */
         @media (max-width: 768px) {
             
-            .hero-section {
-                padding: 10vh 2vw; /* Asegura espacio vertical */
-            }
-
+            /* HERO TEXT: Junto, masivo y de borde a borde */
             .hero-giant-text { 
-                font-size: 16vw; /* El texto llena mejor el ancho */
-                gap: 28vh; /* EL HUECO GIGANTE PARA EL DVD */
-                line-height: 1;
-                letter-spacing: -1px;
+                font-size: 24vw; /* Texto GIGANTE para ocupar el ancho */
+                line-height: 0.85; /* Asegura que DISK y CREATIVO queden bien pegados */
+                gap: 0; /* Cero separación */
             }
 
             .giant-transparent-logo {
-                width: 85vw; /* Reproductor grande pero sin tapar letras */
+                width: 90vw; /* Ajustado al máximo ancho sin desbordar */
             }
 
+            /* PLAYGROUND: Restaurado a tus 2 columnas originales */
             .playground-container {
-                grid-template-columns: 1fr; /* Colapsado mejor a 1 columna */
-                gap: 20px;
+                grid-template-columns: 1.2fr 1fr; 
+                gap: 15px;
             }
             .playground-text h2 {
-                font-size: 2rem; 
+                font-size: 1.2rem; 
                 margin-bottom: 0.8rem;
             }
             .playground-text p {
-                font-size: 0.95rem; 
-                line-height: 1.5;
-                margin-bottom: 0.8rem;
+                font-size: 0.65rem; 
+                line-height: 1.4;
+                margin-bottom: 0.6rem;
             }
             .playground-text .cta-text { margin-top: 1rem; }
             .playground-image img { 
-                transform: scale(1.05); 
+                transform: scale(1.1); 
                 max-width: 100%; 
             }
             
@@ -587,7 +586,6 @@
         </div>
     </section>
 
-    <!-- Resto del contenido funcional (Dark section, Portfolio, etc.) queda intacto -->
     <section class="dark-intro-section" id="identidad">
         
         <div class="playground-container">
