@@ -123,7 +123,11 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            text-shadow: 0px 35px 35px rgba(0, 0, 0, 0.45);
+            /* 1. ILUMINACIÓN REALISTA: Resplandor cálido crema encima + Sombra física oscura difuminada debajo */
+            text-shadow: 
+                0px 5px 10px rgba(242, 241, 236, 0.4), /* Highlight superior (Luz de set) */
+                0px 35px 35px rgba(0, 0, 0, 0.45),      /* Sombra proyectada difuminada (3D) */
+                0px 10px 15px rgba(0, 0, 0, 0.2);       /* Sombra de contorno sutil */
         }
 
         .hero-giant-text div {
@@ -156,9 +160,11 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
+            /* 2. ILUMINACIÓN REALISTA EN CRISTAL: Halo de luz cálida superior + Sombra difuminada oscura */
             text-shadow: 
-                0px 30px 35px rgba(0, 0, 0, 0.4), 
-                0px 0px 20px rgba(255, 255, 255, 0.3); 
+                0px 8px 15px rgba(242, 241, 236, 0.3), /* Highlight de cristal (Refracción) */
+                0px 30px 35px rgba(0, 0, 0, 0.4),       /* Sombra difuminada oscuro (3D) */
+                0px 0px 20px rgba(255, 255, 255, 0.3);  /* Glow de cristal sutil */
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -417,7 +423,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (TAMAÑO RESTAURADO A SUSTANCIAL Y GROUNDED)
+           DOCK DE CÁMARA (LINK CORRECTO, TAMAÑO SUSTANCIAL Y GROUNDED)
            ========================================================= */
         
         @keyframes breathHand {
@@ -507,11 +513,11 @@
             }
             
             /* REAJUSTE DE HITBOXES MÓVILES PARA EL TAMAÑO SUSTANCIAL */
-            .hitbox { bottom: 18%; height: 35%; } /* Percentajes mantenidos, pero revisa si Inicio tapar contacto */
-            .hitbox-inicio { left: 19%; width: 14%; } /* Ligeramente más afuera y ancho */
-            .hitbox-identidad { left: 32%; width: 14%; } /* Ligeramente más afuera y ancho */
-            .hitbox-proyectos { left: 46%; width: 14%; } /* Ligeramente más afuera y ancho */
-            .hitbox-contacto { left: 60%; width: 14%; } /* Ligeramente más afuera y ancho */
+            .hitbox { bottom: 18%; height: 35%; } 
+            .hitbox-inicio { left: 19%; width: 14%; }
+            .hitbox-identidad { left: 32%; width: 14%; }
+            .hitbox-proyectos { left: 46%; width: 14%; }
+            .hitbox-contacto { left: 60%; width: 14%; }
 
             body { padding-bottom: 120px; }
             footer { padding-bottom: 120px; }
