@@ -11,9 +11,7 @@
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
@@ -32,18 +30,15 @@
             --font-body: 'Space Grotesk', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-cream);
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 150px; /* Un poco más de espacio para la cámara grande */
+            /* Espacio para la cámara hundida */
+            padding-bottom: 120px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -110,11 +105,14 @@
             align-items: center;
             width: 100%;
             z-index: 10; 
+            /* Empujamos ligeramente hacia abajo el texto para que respire con las luces superiores */
+            margin-top: 5vh; 
         }
 
+        /* AJUSTE: TAMAÑO REDUCIDO DEL TEXTO PARA PC Y TABLET */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 23vw, 26rem); 
+            font-size: clamp(4rem, 18vw, 20rem); /* Reducido drásticamente el tamaño máximo */
             line-height: 0.85;
             color: var(--brand-purple); 
             text-align: center;
@@ -167,13 +165,13 @@
             z-index: 20; 
         }
 
-        /* --- LOGO FLOTANTE CD --- */
+        /* AJUSTE: LOGO CD REDUCIDO Y PROPORCIONAL */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 45vw, 750px); 
+            width: clamp(220px, 35vw, 600px); /* Reducido para no tapar tanto el texto */
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
@@ -221,8 +219,6 @@
             align-items: center;
             margin-bottom: 6rem;
             width: 100%;
-            max-width: 1200px;
-            margin-left: auto; margin-right: auto;
         }
 
         .playground-text h2 {
@@ -274,11 +270,6 @@
         }
 
         /* Operadores del Sistema */
-        .system-operators-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -386,11 +377,6 @@
             z-index: 10; 
         }
 
-        .portfolio-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .portfolio-header {
             display: flex; justify-content: space-between; align-items: flex-end;
             margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
@@ -417,7 +403,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (TAMAÑO MÁS GRANDE EN TODAS LAS PANTALLAS)
+           DOCK DE CÁMARA (CORRECCIÓN: Z Zone Safe y Posicionamiento)
            ========================================================= */
         
         @keyframes breathHand {
@@ -428,13 +414,15 @@
 
         .camera-container {
             position: fixed;
-            bottom: 0px; 
+            /* AJUSTE: Hundido para ocultar la muñeca cortada */
+            bottom: -45px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 98%; 
-            max-width: 600px; /* PC/TABLET: MUCHO MÁS GRANDE Y SUSTANCIAL */
+            width: 95%; 
+            /* AJUSTE: Ancho máximo reducido para PC/Tablet para que no sea invasivo */
+            max-width: 480px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -459,12 +447,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas */
+        /* Hitboxes calibradas (Las subi ligeramente porque el dock está más hundido) */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 18%; 
-            height: 35%; 
+            bottom: 22%; /* Subió por el hundimiento */
+            height: 33%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -479,37 +467,15 @@
 
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
+            .hero-sandwich { margin-top: 5vh; }
+            .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
+            .giant-transparent-logo { width: 50vw; }
             
-            .image-nav-container { top: 0px; width: 95%; max-width: 250px; }
-
-            .hero-giant-text { 
-                font-size: 24vw; 
-                line-height: 0.85; 
-                gap: 0; 
-                letter-spacing: -2px;
-            }
-
-            .giant-transparent-logo { width: 55vw; }
-
-            /* CORRECCIÓN DIORAMA 3D A LA DERECHA EN MÓVIL */
-            .playground-container {
-                grid-template-columns: 1.3fr 1fr; /* Mantiene la imagen a la derecha */
-                gap: 15px;
-            }
-            .playground-text h2 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1; }
-            .playground-text p { font-size: 0.7rem; line-height: 1.4; margin-bottom: 0.6rem; }
-            .playground-text .cta-text { margin-top: 1rem; }
-            .playground-image img { transform: scale(1.1); max-width: 100%; }
-            
-            /* CÁMARA MÁS GRANDE EN MÓVIL */
             .camera-container {
-                bottom: -5px; 
-                max-width: 450px; /* Mucho más grande, cubriendo casi todo el ancho */
-                width: 98%;
+                bottom: -35px; /* Menos hundido en móvil */
+                max-width: 360px; /* Ancho ajustado */
             }
-            
-            /* Ajuste de hitboxes por si acaso para la nueva escala */
-            .hitbox { bottom: 18%; height: 35%; } 
+            .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
             .hitbox-identidad { left: 32%; width: 14%; }
             .hitbox-proyectos { left: 46%; width: 14%; }
@@ -569,27 +535,25 @@
             </div>
         </div>
 
-        <div class="system-operators-container">
-            <div class="system-operators-header">
-                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        <div class="system-operators-header">
+            [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        </div>
+        
+        <div class="team-grid-editorial">
+            <div class="team-member-col">
+                <h4>JOEL DÍAZ</h4>
+                <span class="role">Dev & Arquitectura Web</span>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
-            
-            <div class="team-grid-editorial">
-                <div class="team-member-col">
-                    <h4>JOEL DÍAZ</h4>
-                    <span class="role">Dev & Arquitectura Web</span>
-                    <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>JONATHAN OROZCO</h4>
-                    <span class="role">Estrategia & Operaciones</span>
-                    <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>AYL JONES</h4>
-                    <span class="role">Dirección Creativa & Mkt</span>
-                    <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
-                </div>
+            <div class="team-member-col">
+                <h4>JONATHAN OROZCO</h4>
+                <span class="role">Estrategia & Operaciones</span>
+                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
+            </div>
+            <div class="team-member-col">
+                <h4>AYL JONES</h4>
+                <span class="role">Dirección Creativa & Mkt</span>
+                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
             </div>
         </div>
     </section>
