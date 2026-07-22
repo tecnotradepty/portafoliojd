@@ -7,8 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- NUEVA FUENTE: Archivo Black para el título masivo y extendido -->
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
@@ -29,8 +28,7 @@
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
-            /* Cambiamos la fuente display a la nueva */
-            --font-display: 'Archivo Black', sans-serif;
+            --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
         }
 
@@ -56,6 +54,25 @@
             z-index: 9999;
             opacity: 0.04;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* --- BARRA SUPERIOR DE IMAGEN (NUEVO) --- */
+        .image-nav-container {
+            position: absolute;
+            top: 15px; /* Distancia desde arriba */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            z-index: 100;
+        }
+
+        .nav-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px; /* Bordes redondeados si la foto lo requiere */
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.35)); /* Sombra para que flote */
         }
 
         /* --- HERO SECTION Y SISTEMA GLITCH --- */
@@ -140,16 +157,17 @@
 
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 20vw, 22rem); /* Ligeramente ajustado para la nueva fuente */
-            line-height: 0.9;
+            font-size: clamp(5rem, 23vw, 26rem); 
+            line-height: 0.85;
             color: var(--brand-purple);
             text-align: center;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -4px; /* Las letras se aprietan */
-            transform: scaleX(1.15); /* ESTO HACE LA FUENTE MÁS EXTENDIDA/ANCHA como en tu foto */
+            letter-spacing: -2px;
             display: flex;
             flex-direction: column;
+            /* SOMBRA FUERTE HACIA ABAJO PARA EL TEXTO SÓLIDO */
+            text-shadow: 0px 35px 35px rgba(0, 0, 0, 0.45);
         }
 
         .hero-giant-text div {
@@ -181,8 +199,10 @@
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            
+            /* SOMBRA HACIA ABAJO PARA EL TEXTO DE VIDRIO */
             text-shadow: 
-                0px 5px 15px rgba(0, 0, 0, 0.2), 
+                0px 30px 35px rgba(0, 0, 0, 0.4), 
                 0px 0px 20px rgba(255, 255, 255, 0.3); 
             
             backdrop-filter: blur(4px) saturate(150%);
@@ -190,7 +210,6 @@
             
             position: relative;
             z-index: 20; 
-
             border: none;
             border-radius: 0;
             padding: 0;
@@ -198,18 +217,18 @@
             box-shadow: none;
         }
 
-        /* --- LOGO REDUCIDO --- */
+        /* --- LOGO MASIVO CON SOMBRA INFERIOR --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* Tamaño reducido: de max 800px a 500px para que destaque el texto */
-            width: clamp(240px, 35vw, 500px); 
+            width: clamp(280px, 45vw, 800px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
-            filter: drop-shadow(0px 15px 25px rgba(107, 0, 255, 0.4));
+            /* SOMBRA 3D FUERTE HACIA ABAJO */
+            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
         }
 
         @keyframes floatLogo {
@@ -239,11 +258,9 @@
             font-family: var(--font-display);
             font-size: clamp(2rem, 5vw, 5rem);
             color: var(--brand-purple);
-            line-height: 1;
+            line-height: 0.9;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-            transform: scaleX(1.1); /* Ligero estiramiento también aquí */
-            transform-origin: left;
         }
 
         .playground-text p {
@@ -276,7 +293,7 @@
             width: 100%;
             height: auto;
             max-width: 100%; 
-            filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7));
             transform: scale(1.05); 
             transition: transform 0.5s ease;
         }
@@ -309,9 +326,7 @@
             font-size: 2.5rem;
             color: #F4F3EF;
             margin-bottom: 0.2rem;
-            letter-spacing: 0px;
-            transform: scaleX(1.1);
-            transform-origin: left;
+            letter-spacing: 1px;
         }
 
         .team-member-col .role {
@@ -338,13 +353,11 @@
 
         .portfolio-massive-title {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 9vw, 9rem);
-            line-height: 0.9;
+            font-size: clamp(3.5rem, 10vw, 10rem);
+            line-height: 0.8;
             color: var(--text-dark);
-            margin-bottom: 1rem; 
+            margin-bottom: 0.5rem; 
             text-transform: uppercase;
-            transform: scaleX(1.1);
-            transform-origin: left;
         }
 
         .portfolio-header {
@@ -415,12 +428,10 @@
 
         .card-body-info h3 {
             font-family: var(--font-display);
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--text-dark);
             line-height: 1;
             margin-bottom: 0.5rem;
-            transform: scaleX(1.05);
-            transform-origin: left;
         }
 
         .card-badge {
@@ -527,15 +538,17 @@
         /* --- CORRECCIÓN EXACTA PARA MÓVIL --- */
         @media (max-width: 768px) {
             
+            .image-nav-container { top: 15px; width: 92%; }
+
             .hero-giant-text { 
-                font-size: 21vw; 
-                line-height: 0.9; 
+                font-size: 24vw; 
+                line-height: 0.85; 
                 gap: 0; 
                 letter-spacing: -2px;
             }
 
             .giant-transparent-logo {
-                width: 65vw; /* Logo mucho más pequeño en móvil */
+                width: 90vw; 
             }
 
             .playground-container {
@@ -543,7 +556,7 @@
                 gap: 15px;
             }
             .playground-text h2 {
-                font-size: 1.4rem; 
+                font-size: 1.2rem; 
                 margin-bottom: 0.8rem;
             }
             .playground-text p {
@@ -565,6 +578,11 @@
 <body>
 
     <div class="noise-overlay"></div>
+
+    <!-- NUEVA BARRA SUPERIOR (REEMPLAZA EL SRC CON TU IMAGEN) -->
+    <nav class="image-nav-container">
+        <img src="https://dummyimage.com/1200x80/110E17/F2F1EC.png&text=+REEMPLAZA+CON+TU+FOTO+DE+LA+BARRA+" alt="Menú Superior" class="nav-image">
+    </nav>
 
     <section class="hero-section" id="inicio">
         
