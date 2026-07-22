@@ -56,10 +56,10 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- BARRA SUPERIOR DE IMAGEN (NUEVO) --- */
+        /* --- BARRA SUPERIOR DE IMAGEN --- */
         .image-nav-container {
             position: absolute;
-            top: 15px; /* Distancia desde arriba */
+            top: 15px; 
             left: 50%;
             transform: translateX(-50%);
             width: 95%;
@@ -71,11 +71,11 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 12px; /* Bordes redondeados si la foto lo requiere */
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.35)); /* Sombra para que flote */
+            border-radius: 12px; 
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.35)); 
         }
 
-        /* --- HERO SECTION Y SISTEMA GLITCH --- */
+        /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
@@ -88,7 +88,7 @@
             background-color: var(--bg-cream); 
         }
 
-        /* Capa base del fondo (aislada para el glitch) */
+        /* Capa base del fondo (Limpia, sin glitch ni barras) */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -98,52 +98,7 @@
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c87fab9594529df0d9f4cee9bade387e552031aa/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
-            background-position: center center; 
-            background-repeat: no-repeat;
-            background-size: cover; 
-        }
-
-        /* Capas fantasmas para el desgarro (Glitch Effect) */
-        .hero-bg-base::before,
-        .hero-bg-base::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: inherit;
-            background-position: inherit;
-            background-repeat: inherit;
-            background-size: inherit;
-            opacity: 0;
-            z-index: 2;
-        }
-
-        .hero-bg-base::before {
-            left: 5px;
-            filter: hue-rotate(90deg) saturate(1.5) contrast(1.2);
-            animation: glitch-slice 4s infinite linear alternate-reverse;
-        }
-
-        .hero-bg-base::after {
-            left: -5px;
-            filter: hue-rotate(-90deg) saturate(1.5) contrast(1.2);
-            animation: glitch-slice-2 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-slice {
-            0%, 90% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } 
-            91% { clip-path: inset(10% 0 60% 0); opacity: 1; transform: translateX(-10px); }
-            93% { clip-path: inset(80% 0 5% 0); opacity: 1; transform: translateX(10px); }
-            95% { clip-path: inset(30% 0 40% 0); opacity: 1; transform: translateX(-5px); }
-            97%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
-        }
-
-        @keyframes glitch-slice-2 {
-            0%, 92% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); } 
-            93% { clip-path: inset(50% 0 30% 0); opacity: 1; transform: translateX(12px); }
-            95% { clip-path: inset(15% 0 70% 0); opacity: 1; transform: translateX(-12px); }
-            97% { clip-path: inset(70% 0 10% 0); opacity: 1; transform: translateX(6px); }
-            99%, 100% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateX(0); }
+            /* Se eliminó la imagen de arcoiris para dejar el crema sólido */
         }
 
         .hero-sandwich {
@@ -166,7 +121,6 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            /* SOMBRA FUERTE HACIA ABAJO PARA EL TEXTO SÓLIDO */
             text-shadow: 0px 35px 35px rgba(0, 0, 0, 0.45);
         }
 
@@ -200,7 +154,6 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
-            /* SOMBRA HACIA ABAJO PARA EL TEXTO DE VIDRIO */
             text-shadow: 
                 0px 30px 35px rgba(0, 0, 0, 0.4), 
                 0px 0px 20px rgba(255, 255, 255, 0.3); 
@@ -217,17 +170,17 @@
             box-shadow: none;
         }
 
-        /* --- LOGO MASIVO CON SOMBRA INFERIOR --- */
+        /* --- LOGO REDUCIDO Y CON SOMBRA --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 45vw, 800px); 
+            /* TAMAÑO AJUSTADO: Mucho más compacto para no tapar el texto */
+            width: clamp(200px, 30vw, 450px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite;
             pointer-events: none;
-            /* SOMBRA 3D FUERTE HACIA ABAJO */
             filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
         }
 
@@ -535,7 +488,7 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- CORRECCIÓN EXACTA PARA MÓVIL --- */
+        /* --- CORRECCIÓN MÓVIL --- */
         @media (max-width: 768px) {
             
             .image-nav-container { top: 15px; width: 92%; }
@@ -548,7 +501,7 @@
             }
 
             .giant-transparent-logo {
-                width: 90vw; 
+                width: 55vw; /* DVD mucho más ajustado para la vista móvil */
             }
 
             .playground-container {
@@ -579,7 +532,7 @@
 
     <div class="noise-overlay"></div>
 
-    <!-- NUEVA BARRA SUPERIOR (REEMPLAZA EL SRC CON TU IMAGEN) -->
+    <!-- BARRA SUPERIOR -->
     <nav class="image-nav-container">
         <img src="https://dummyimage.com/1200x80/110E17/F2F1EC.png&text=+REEMPLAZA+CON+TU+FOTO+DE+LA+BARRA+" alt="Menú Superior" class="nav-image">
     </nav>
