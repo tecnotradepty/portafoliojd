@@ -43,7 +43,7 @@
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            /* Margen inferior ajustado para la cámara más alta */
+            /* Margen inferior ajustado para la cámara alta */
             padding-bottom: 160px; 
         }
 
@@ -173,7 +173,7 @@
             box-shadow: none;
         }
 
-        /* --- LOGO FLOTANTE --- */
+        /* --- LOGO FLOTANTE (RESTAURADO) --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
@@ -181,8 +181,15 @@
             transform: translate(-50%, -50%);
             width: clamp(200px, 30vw, 450px); 
             z-index: 5; 
+            animation: floatLogo 8s ease-in-out infinite; /* <-- RESTAURADO */
             pointer-events: none;
             filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
         /* --- ANIMACIÓN FLOTANTE PARA LETRAS --- */
@@ -407,21 +414,19 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (VERSIÓN ALTA RESTAURADA Y SIN BUG)
+           DOCK DE CÁMARA (VERSIÓN ALTA)
            ========================================================= */
         
         @keyframes breathHand {
             0% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(6px); } /* Sutil descenso */
+            50% { transform: translateX(-50%) translateY(6px); } 
             100% { transform: translateX(-50%) translateY(0px); }
         }
 
         .camera-container {
             position: fixed;
-            /* 1. Lo empujamos más abajo para que la mano/corte desaparezca de la pantalla */
             bottom: -25px; 
             left: 50%;
-            /* 2. EL BUG FIX: Forzamos la posición original ANTES de que inicie la animación */
             transform: translateX(-50%); 
             
             animation: breathHand 6s ease-in-out infinite;
@@ -435,7 +440,7 @@
         .camera-img {
             width: 100%;
             height: auto;
-            object-fit: contain; /* Anti-deformación */
+            object-fit: contain; 
             display: block;
             pointer-events: auto; 
             filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
@@ -452,11 +457,10 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas para la imagen alta */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 22%; /* Un poco más arriba debido al largo de la mano */
+            bottom: 22%; 
             height: 38%; 
             z-index: 1010;
             cursor: pointer;
@@ -494,7 +498,6 @@
             .playground-image img { transform: scale(1.1); max-width: 100%; }
             
             .camera-container {
-                /* Lo empujamos aún más abajo en celulares */
                 bottom: -35px;
                 max-width: 100vw;
             }
@@ -638,7 +641,8 @@
                 });
 
                 heroContainer.addEventListener('mouseleave', () => {
-                    logo.style.transform = `translate(-50%, -50%)`;
+                    // El JS ahora limpia el estilo en línea para que la animación CSS retome el control
+                    logo.style.transform = ''; 
                 });
             }
 
