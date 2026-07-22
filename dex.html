@@ -25,7 +25,7 @@
         :root {
             --bg-cream: #F2F1EC;       
             --brand-purple: #6B00FF;   
-            --dark-slate: #110E17; /* Se usará para contraste óptimo en texto */    
+            --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
             --font-display: 'Anton', sans-serif;
@@ -56,14 +56,14 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- BARRA SUPERIOR (LUCES COLGANTES) --- */
+        /* --- BARRA SUPERIOR (LUCES COLGANTES PEQUEÑAS) --- */
         .image-nav-container {
             position: absolute;
-            top: 15px; 
+            top: -5px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
-            max-width: 1200px;
+            width: 90%;
+            max-width: 600px; /* Tamaño reducido para sutileza */
             z-index: 100;
         }
 
@@ -71,9 +71,7 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 12px; 
-            /* Sombra suave para despegar las luces del arcoíris */
-            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.25)); 
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.35)); 
         }
 
         /* --- HERO SECTION --- */
@@ -117,8 +115,7 @@
             font-family: var(--font-display);
             font-size: clamp(5rem, 23vw, 26rem); 
             line-height: 0.85;
-            /* 1. MEJORA DE CONTRASTE ÓPTIMA: Color oscuro para contraste máximo en las letras sólidas */
-            color: var(--dark-slate); 
+            color: var(--dark-slate); /* Letras sólidas oscuras para contraste óptimo */
             text-align: center;
             margin: 0;
             text-transform: uppercase;
@@ -174,16 +171,15 @@
             box-shadow: none;
         }
 
-        /* --- LOGO FLOTANTE (ESCALA AUMENTADA) --- */
+        /* --- LOGO FLOTANTE (RESTAURADO EL TAMAÑO GIGANTE) --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* 2. ESCALA: Aumentada base y máxima para recuperar presencia */
-            width: clamp(280px, 45vw, 650px); 
+            width: clamp(280px, 45vw, 750px); /* Tamaño recuperado */
             z-index: 5; 
-            animation: floatLogo 8s ease-in-out infinite;
+            animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
             filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.55));
         }
@@ -194,21 +190,19 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- ANIMACIÓN FLOTANTE PARA LETRAS (MÁS LENTA Y CALMADA) --- */
+        /* --- ANIMACIÓN FLOTANTE LENTA PARA LETRAS --- */
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            /* 3. CALMA: Reducido translateY a 10px para un movimiento más sutil */
-            50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
+            50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } /* Movimiento muy sutil */
             100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
 
         .float-anim {
             display: inline-block; 
-            /* 4. VELOCIDAD: Ralentizado a 12s, mucho más lento que el CD (8s) */
-            animation: floatLetter 12s ease-in-out infinite; 
+            animation: floatLetter 12s ease-in-out infinite; /* Super lento y calmado */
         }
 
-        /* 5. DESCOORDINACIÓN (El caos orgánico): Espaciados a 2s para descoordinación máxima entre C E I I K O */
+        /* Desfase para caos orgánico */
         .delay-1 { animation-delay: 0s; }
         .delay-2 { animation-delay: 2s; }
         .delay-3 { animation-delay: 4s; }
@@ -422,7 +416,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (INTACTO COMO ANTES)
+           DOCK DE CÁMARA (PEQUEÑO Y CON ENLACE CORRECTO)
            ========================================================= */
         
         @keyframes breathHand {
@@ -433,12 +427,13 @@
 
         .camera-container {
             position: fixed;
-            bottom: 15px; 
+            bottom: -5px; 
             left: 50%;
+            transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 500px; 
+            max-width: 280px; /* TAMAÑO PEQUEÑO PARA MATCH CON LA REFERENCIA */
             z-index: 1000;
             pointer-events: none; 
         }
@@ -450,7 +445,6 @@
             display: block;
             pointer-events: auto; 
             filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
-            border-radius: 20px; 
             transform-origin: center center;
         }
 
@@ -464,11 +458,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
+        /* Hitboxes calibradas */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 18%; 
-            height: 35%; 
+            bottom: 22%; 
+            height: 38%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -484,7 +479,7 @@
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
             
-            .image-nav-container { top: 15px; width: 92%; }
+            .image-nav-container { top: 0px; width: 95%; max-width: 100%; }
 
             .hero-giant-text { 
                 font-size: 24vw; 
@@ -493,7 +488,7 @@
                 letter-spacing: -2px;
             }
 
-            .giant-transparent-logo { width: 55vw; }
+            .giant-transparent-logo { width: 65vw; } /* Ligeramente más grande en celular */
 
             .playground-container {
                 grid-template-columns: 1.2fr 1fr; 
@@ -504,6 +499,11 @@
             .playground-text .cta-text { margin-top: 1rem; }
             .playground-image img { transform: scale(1.1); max-width: 100%; }
             
+            .camera-container {
+                bottom: -10px;
+                max-width: 220px; /* Aún más pequeña en celular para no tapar contenido */
+            }
+
             body { padding-bottom: 120px; }
             footer { padding-bottom: 120px; }
         }
@@ -527,17 +527,17 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back">D</span>
-                    <span class="liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back">S</span>
                     <span class="z-front float-anim delay-2">K</span>
                 </div>
                 <div>
                     <span class="z-front float-anim delay-3">C</span>
                     <span class="z-back">R</span>
-                    <span class="liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
                     <span class="z-back">A</span>
                     <span class="z-back">T</span>
-                    <span class="liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
                     <span class="z-back">V</span>
                     <span class="z-front float-anim delay-6">O</span>
                 </div>
@@ -590,7 +590,7 @@
     
     <section class="parallax-camera-bridge" id="proyectos">
         <div class="sticky-camera-bg">
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/31c352fa4511a2b385ba345c84bb307de312fbdb/DIQC/1784703137305.png" alt="Giant Camera Lens">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Giant Camera Lens">
         </div>
         <div class="parallax-text-container">
             <h2 class="massive-parallax-title">PROYECTOS</h2>
@@ -620,7 +620,7 @@
     </footer>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/31c352fa4511a2b385ba345c84bb307de312fbdb/DIQC/1784703137305.png" alt="Barra de Navegación Cámara con Mano">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara con Mano">
         
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
@@ -643,7 +643,7 @@
                 });
 
                 heroContainer.addEventListener('mouseleave', () => {
-                    logo.style.transform = `translate(-50%, -50%)`;
+                    logo.style.transform = ''; 
                 });
             }
 
