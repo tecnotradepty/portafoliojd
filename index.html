@@ -49,6 +49,22 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
+        /* --- NAVBAR SIMPLE (BOTÓN MENÚ) --- */
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 2rem 4vw;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; pointer-events: none;
+        }
+        
+        .menu-trigger {
+            pointer-events: auto; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); color: #fff;
+            padding: 10px 20px; font-family: var(--font-tech); font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            backdrop-filter: blur(5px); border-radius: 4px; transition: all 0.3s;
+        }
+        .menu-trigger:hover { background: var(--brand-purple); border-color: var(--brand-purple); }
+
         /* --- HERO SECTION --- */
         .hero-section { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; overflow: hidden; background-color: var(--bg-cream); }
         .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png'); background-position: center center; background-repeat: no-repeat; background-size: cover; animation: fadeInBg 0.8s ease-in-out forwards; }
@@ -117,7 +133,7 @@
         .team-member-col .role { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple); margin-bottom: 1rem; display: block; }
         .team-member-col p { font-size: 0.95rem; line-height: 1.5; color: #A09DA5; font-weight: 400; }
 
-        /* --- FADE TRANSITION --- */
+        /* --- FADE TRANSITION OFICIAL --- */
         .fade-transition {
             width: 100%; height: 25vh;
             background: linear-gradient(to bottom, var(--dark-slate) 0%, var(--visor-bg) 100%);
@@ -174,7 +190,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-tech); font-size: 0.85rem; text-transform: uppercase; background-color: var(--visor-bg); color: rgba(255,255,255,0.3); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA & MENÚ LATERAL
+           DOCK DE CÁMARA (LIMPIO) Y MENÚ LATERAL
            ========================================================= */
         .camera-container {
             position: fixed; bottom: -75px; left: 50%; transform: translateX(-50%); 
@@ -188,14 +204,6 @@
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
-        
-        /* Hitbox MENÚ con el ícono ≡ centrado */
-        .hitbox-menu { 
-            left: 5%; width: 12%; bottom: 15%; height: 50%; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center;
-        }
-        .menu-icon { font-size: 2.5rem; color: rgba(255, 255, 255, 0.75); margin-top: -5px; transition: color 0.3s; }
-        .hitbox-menu:hover .menu-icon { color: var(--brand-purple); }
 
         /* Menú Lateral OS Vibe */
         .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
@@ -211,6 +219,10 @@
         .menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
         .menu-link { color: #EAE9E4; text-decoration: none; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 15px; transition: all 0.3s ease; }
         .menu-link span.index { font-size: 0.8rem; color: var(--brand-purple); font-weight: bold; }
+        
+        /* Enlace activo para index */
+        .menu-link.active-link { color: var(--brand-purple); }
+        
         .menu-link:hover { color: var(--brand-purple); padding-left: 10px; }
         .menu-footer { margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; }
 
@@ -223,14 +235,19 @@
             .camera-container { bottom: -55px; max-width: 520px; }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; } .hitbox-identidad { left: 32%; width: 14%; } .hitbox-proyectos { left: 46%; width: 14%; } .hitbox-contacto { left: 60%; width: 14%; }
-            .hitbox-menu { left: 3%; width: 14%; }
-            .menu-icon { font-size: 2rem; }
+            .top-nav { padding: 1.5rem 4vw; }
         }
     </style>
 </head>
 <body>
 
     <div class="noise-overlay"></div>
+
+    <div class="top-nav">
+        <button class="menu-trigger" id="openMenuBtn">
+            <span style="font-size: 1.2rem;">&equiv;</span> SYSTEM.MENU
+        </button>
+    </div>
 
     <div class="side-menu-overlay" id="menuOverlay"></div>
     <nav class="side-menu" id="sideMenu">
@@ -239,7 +256,7 @@
             <button class="close-menu-btn" id="closeMenuBtn">[ X ]</button>
         </div>
         <div class="menu-links">
-            <a href="#inicio" class="menu-link menu-item-link"><span class="index">[01]</span> INICIO</a>
+            <a href="#inicio" class="menu-link menu-item-link active-link"><span class="index">[01]</span> INICIO</a>
             <a href="dex.html" class="menu-link menu-item-link"><span class="index">[02]</span> CREA TU PROYECTO</a>
             <a href="modulo.html" class="menu-link menu-item-link"><span class="index">[03]</span> MÓDULOS DE SISTEMA</a>
             <a href="log.html" class="menu-link menu-item-link"><span class="index">[04]</span> SYSTEM LOG</a>
@@ -351,10 +368,6 @@
     <div class="camera-container">
         <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
         
-        <div class="hitbox hitbox-menu" id="openMenuBtn" title="Menú del Sistema">
-            <span class="menu-icon">&equiv;</span>
-        </div>
-        
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
         <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
@@ -389,7 +402,7 @@
             });
 
             // --- ANIMACIÓN HITBOXES ---
-            const hitboxes = document.querySelectorAll('.hitbox:not(.hitbox-menu)');
+            const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
