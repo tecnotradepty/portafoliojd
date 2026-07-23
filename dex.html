@@ -102,10 +102,10 @@
             z-index: 10; 
         }
 
-        /* TÍTULO CON SOMBRA INTENSA PROYECTADA AL SUELO */
+        /* TÍTULO CON VOLUMEN 3D E INTENSA SOMBRA PROYECTADA AL SUELO */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 18vw, 21rem); 
+            font-size: clamp(6rem, 25vw, 26rem); /* AJUSTE: Escalado imponente aumentado */
             line-height: 0.85;
             color: var(--brand-purple); 
             text-align: center;
@@ -115,7 +115,7 @@
             display: flex;
             flex-direction: column;
             
-            /* Extrusión 3D + Sombra cayendo directo al piso */
+            /* Extrusión 3D + Sombra Cayendo mucho más abajo (Suelo) */
             text-shadow: 
                 0px 1px 0px #4A00B3,
                 0px 2px 0px #4A00B3,
@@ -136,7 +136,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS CON SOMBRA AL SUELO --- */
+        /* --- LIQUID GLASS (Agrandado proporcionalmente) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -157,7 +157,7 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
             
-            /* Highlight + Sombra profunda en suelo */
+            /* Highlight interno + Sombra profunda en suelo */
             text-shadow: 
                 0px -2px 10px rgba(255, 255, 255, 0.2),
                 0px 2px 0px rgba(255, 255, 255, 0.3),
@@ -171,13 +171,13 @@
             z-index: 20; 
         }
 
-        /* LOGO CD CON SOMBRA PROYECTADA AL SUELO */
+        /* LOGO CD AGRANDADO Y CON SOMBRA PROYECTADA AL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(220px, 35vw, 550px); 
+            width: clamp(300px, 45vw, 800px); /* AJUSTE: Escalado imponente aumentado */
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
@@ -422,7 +422,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (TAMAÑO MÁS PEQUEÑO Y HITBOXES PRECISAS)
+           DOCK DE CÁMARA (DIMENSIONES MASIVAS, MANO OCULTA PROFUNDAMENTE)
            ========================================================= */
         
         @keyframes breathHand {
@@ -433,15 +433,15 @@
 
         .camera-container {
             position: fixed;
-            /* Ligeramente hundido para tapar el corte del brazo */
-            bottom: -40px; 
+            /* AJUSTE: Hundido sustancialmente más profundo para ocultar la mano cortada */
+            bottom: -70px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 90%; 
-            /* Reducido a 500px para no abrumar la pantalla */
-            max-width: 500px; 
+            width: 95%; 
+            /* AJUSTE: Agrandado agresivamente de 650px a 800px para ser prominente */
+            max-width: 800px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -452,7 +452,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 12px 20px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
             transform-origin: center center;
         }
 
@@ -466,26 +466,25 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* HITBOXES RECALIBRADAS CON PRECISIÓN SOBRE LOS BOTONES DE LA CÁMARA */
+        /* HITBOXES RECALIBRADAS CON PRECISIÓN PARA LA NUEVA ESCALA Y PROFUNDIDAD */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 20%; 
-            height: 42%; 
+            bottom: 22%; /* Sigue alineado con el cuerpo de la cámara */
+            height: 33%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
             outline: none;
             user-select: none;
-            border-radius: 6px;
         }
 
-        .hitbox-inicio { left: 19%; width: 14%; }
-        .hitbox-identidad { left: 34%; width: 14%; }
-        .hitbox-proyectos { left: 49%; width: 14%; }
-        .hitbox-contacto { left: 64%; width: 14%; }
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MÓVIL Y TABLET --- */
+        /* --- MÓVIL Y TABLET RE-CALIBRADO --- */
         @media (max-width: 768px) {
             .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
             .giant-transparent-logo { width: 50vw; }
@@ -496,14 +495,16 @@
             }
 
             .camera-container {
-                bottom: -25px;
-                max-width: 360px; 
+                /* También hundido más profundo en móvil */
+                bottom: -50px;
+                /* Agrandado agresivamente de 420px a 500px en móvil */
+                max-width: 500px; 
             }
-            .hitbox { bottom: 20%; height: 42%; } 
-            .hitbox-inicio { left: 18%; width: 15%; }
-            .hitbox-identidad { left: 33%; width: 15%; }
-            .hitbox-proyectos { left: 48%; width: 15%; }
-            .hitbox-contacto { left: 63%; width: 15%; }
+            .hitbox { bottom: 20%; height: 35%; } 
+            .hitbox-inicio { left: 19%; width: 14%; }
+            .hitbox-identidad { left: 32%; width: 14%; }
+            .hitbox-proyectos { left: 46%; width: 14%; }
+            .hitbox-contacto { left: 60%; width: 14%; }
         }
     </style>
 </head>
