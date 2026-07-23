@@ -81,7 +81,7 @@
             background-color: var(--bg-cream); 
         }
 
-        /* FONDO B2B PREMIUM (Con animación de entrada) */
+        /* FONDO B2B PREMIUM */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -106,10 +106,10 @@
             z-index: 10; 
         }
 
-        /* TÍTULO GIGANTE CON VOLUMEN 3D IMPOPANTE */
+        /* TÍTULO GIGANTE */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 25vw, 26rem); 
+            font-size: clamp(5.5rem, 23vw, 24rem); 
             line-height: 0.85;
             text-align: center;
             margin: 0;
@@ -125,7 +125,7 @@
             align-items: center;
         }
 
-        /* LETRAS MORADAS SÓLIDAS CON TEXTURA RECORTADA Y VOLUMEN PUFF */
+        /* LETRAS MORADAS CON TEXTURA Y VOLUMEN PUFF 3D REAL (FILTER STACKING) */
         .textured-purple-letter {
             background-image: var(--purple-texture-url);
             background-size: cover;
@@ -136,22 +136,21 @@
             display: inline-block;
             position: relative;
             
-            /* NUEVO EFECTO DE VOLUMEN "PUFF" INCHADITO CON EXTRUSIÓN APILADA SUAVE Y PROFUNDA */
-            text-shadow: 
-                0px -4px 10px rgba(255, 255, 255, 0.1),
-                0px 1px 0px rgba(107, 0, 255, 0.9),
-                0px 2px 0px rgba(107, 0, 255, 0.8),
-                0px 3px 0px rgba(107, 0, 255, 0.7),
-                0px 4px 0px rgba(107, 0, 255, 0.6),
-                0px 5px 0px rgba(107, 0, 255, 0.5),
-                0px 8px 10px rgba(0, 0, 0, 0.3),
-                0px 85px 35px rgba(0, 0, 0, 0.45); 
+            /* Trazo y bisel 3D para darle el cuerpo "hinchadito" */
+            -webkit-text-stroke: 1.5px rgba(74, 0, 179, 0.7);
+            
+            /* Filtros encadenados para la extrusión de volumen + Sombra al suelo */
+            filter: 
+                drop-shadow(0px 2px 0px #4A00B3)
+                drop-shadow(0px 4px 0px #35008B)
+                drop-shadow(0px 6px 2px rgba(0, 0, 0, 0.3))
+                drop-shadow(0px 55px 20px rgba(0, 0, 0, 0.45));
         }
 
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS CON SOMBRA AL SUELO (Mismo volumen profundo) --- */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -170,18 +169,13 @@
             
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7);
             
-            /* Highlight interno + Volumen de cristal apilado + Sombra profunda en suelo */
-            text-shadow: 
-                0px -2px 10px rgba(255, 255, 255, 0.2),
-                0px 1px 0px rgba(255, 255, 255, 0.4),
-                0px 2px 0px rgba(255, 255, 255, 0.3),
-                0px 3px 0px rgba(255, 255, 255, 0.2),
-                0px 4px 0px rgba(255, 255, 255, 0.1),
-                0px 5px 0px rgba(255, 255, 255, 0.05),
-                0px 65px 20px rgba(0, 0, 0, 0.45),
-                0px 85px 35px rgba(0, 0, 0, 0.3);
+            /* Filtros de relieve para el cristal + Sombra al suelo */
+            filter: 
+                drop-shadow(0px 2px 0px rgba(255, 255, 255, 0.4))
+                drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.2))
+                drop-shadow(0px 55px 20px rgba(0, 0, 0, 0.45));
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -190,30 +184,29 @@
             z-index: 20; 
         }
 
-        /* CONFIGURACIÓN ESPECIAL: T SUPERPUESTA SOBRE I (T Glass, I Morada texturizada) */
+        /* SUPERPOSICIÓN: T Glass sobre I Morada */
         .overlap-t {
-            z-index: 25 !important; /* Por encima del resto */
+            z-index: 25 !important;
             position: relative;
         }
 
         .overlap-i-behind {
-            z-index: 15 !important; /* Detrás de la T */
+            z-index: 15 !important;
             position: relative;
-            margin-left: -0.25em; /* Desplazamiento preciso hacia la izquierda para quedar debajo de la barra de la T */
+            margin-left: -0.22em; /* La I entra debajo de la barra de la T */
         }
 
-        /* LOGO CD AGRANDADO Y CON SOMBRA PROYECTADA AL SUELO */
+        /* LOGO CD CON SOMBRA PROYECTADA AL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(300px, 45vw, 800px); 
+            width: clamp(260px, 40vw, 700px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            /* Sombra profunda directo al suelo */
-            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.55));
+            filter: drop-shadow(0px 65px 25px rgba(0, 0, 0, 0.5));
         }
 
         @keyframes floatLogo {
@@ -453,7 +446,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (IMPOPANTE, MANO OCULTA PROFUNDAMENTE)
+           DOCK DE CÁMARA (DIMENSIONADO Y GROUNDED)
            ========================================================= */
         
         @keyframes breathHand {
@@ -464,15 +457,13 @@
 
         .camera-container {
             position: fixed;
-            /* AJUSTE: Hundido sustancialmente más profundo para ocultar la mano cortada */
-            bottom: -70px; 
+            bottom: -55px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 95%; 
-            /* AJUSTE: Creció agresivamente de 650px a 800px para ser prominente */
-            max-width: 800px; 
+            width: 92%; 
+            max-width: 600px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -483,7 +474,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
             transform-origin: center center;
         }
 
@@ -497,12 +488,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* HITBOXES RECALIBRADAS CON PRECISIÓN PARA LA NUEVA ESCALA Y PROFUNDIDAD */
+        /* HITBOXES RECALIBRADAS CON PRECISIÓN SOBRE LOS BOTONES DE LA CÁMARA */
         .hitbox {
             position: absolute;
             pointer-events: auto;
             bottom: 22%; 
-            height: 33%; 
+            height: 38%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -510,30 +501,30 @@
             user-select: none;
         }
 
-        .hitbox-inicio { left: 21%; width: 13%; }
-        .hitbox-identidad { left: 35%; width: 13%; }
-        .hitbox-proyectos { left: 51%; width: 13%; }
-        .hitbox-contacto { left: 66.5%; width: 13%; }
+        .hitbox-inicio { left: 20%; width: 13.5%; }
+        .hitbox-identidad { left: 34.5%; width: 13.5%; }
+        .hitbox-proyectos { left: 50%; width: 13.5%; }
+        .hitbox-contacto { left: 65.5%; width: 13.5%; }
 
-        /* --- MÓVIL Y TABLET RE-CALIBRADO --- */
+        /* --- MÓVIL Y TABLET --- */
         @media (max-width: 768px) {
             .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
-            .giant-transparent-logo { width: 50vw; }
+            .giant-transparent-logo { width: 55vw; }
             
             .playground-container {
-                grid-template-columns: 1.3fr 1fr; /* Diorama a la derecha */
+                grid-template-columns: 1.3fr 1fr; 
                 gap: 15px;
             }
 
             .camera-container {
-                bottom: -50px;
-                max-width: 500px; 
+                bottom: -35px;
+                max-width: 420px; 
             }
-            .hitbox { bottom: 20%; height: 35%; } 
+            .hitbox { bottom: 20%; height: 38%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
-            .hitbox-identidad { left: 32%; width: 14%; }
-            .hitbox-proyectos { left: 46%; width: 14%; }
-            .hitbox-contacto { left: 60%; width: 14%; }
+            .hitbox-identidad { left: 33%; width: 14%; }
+            .hitbox-proyectos { left: 47%; width: 14%; }
+            .hitbox-contacto { left: 61%; width: 14%; }
         }
     </style>
 </head>
@@ -549,19 +540,20 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back textured-purple-letter delay-1">D</span>
+                    <span class="z-back textured-purple-letter">D</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back textured-purple-letter">S</span>
-                    <span class="z-back textured-purple-letter delay-2">K</span>
-                    <span class="z-back textured-purple-letter delay-3">C</span>
-                    <span class="z-back textured-purple-letter delay-4">R</span>
+                    <span class="z-front textured-purple-letter float-anim delay-2">K</span>
                 </div>
                 <div>
+                    <span class="z-front textured-purple-letter float-anim delay-3">C</span>
+                    <span class="z-back textured-purple-letter">R</span>
                     <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
                     <span class="z-back textured-purple-letter">A</span>
                     <span class="z-front liquid-glass-letter overlap-t float-anim delay-5" data-letter="T">T</span>
                     <span class="z-back textured-purple-letter overlap-i-behind">I</span>
                     <span class="z-back textured-purple-letter">V</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-6" data-letter="O">O</span>
+                    <span class="z-front textured-purple-letter float-anim delay-6">O</span>
                 </div>
             </h1>
 
