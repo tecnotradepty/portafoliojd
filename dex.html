@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
+
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
         html {
@@ -23,7 +25,7 @@
         }
 
         :root {
-            --bg-cream: #F2F1EC;       
+            --bg-cream: #EAE9E4; /* Ajustado al tono del nuevo fondo */      
             --brand-purple: #6B00FF; 
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
@@ -72,9 +74,10 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; 
+            background-color: var(--bg-cream); /* Color de respaldo mientras carga */
         }
 
-        /* NUEVO FONDO B2B PREMIUM */
+        /* FONDO B2B PREMIUM (Con animación de entrada para ocultar el cargado lento) */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -82,6 +85,12 @@
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
+            animation: fadeInBg 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInBg {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .hero-sandwich {
@@ -93,7 +102,7 @@
             z-index: 10; 
         }
 
-        /* TÍTULO CON SOMBRAS CENITALES (HACIA ABAJO) */
+        /* TÍTULO CON VOLUMEN 3D (Sombra Extruida hacia el suelo) */
         .hero-giant-text {
             font-family: var(--font-display);
             font-size: clamp(4rem, 18vw, 21rem); 
@@ -105,10 +114,18 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            /* Sombras proyectadas 100% hacia abajo */
+            
+            /* Extrusión 3D (Múltiples sombras sólidas) + Sombra de suelo (Difuminada) */
             text-shadow: 
-                0px 35px 25px rgba(0, 0, 0, 0.35),
-                0px 15px 10px rgba(0, 0, 0, 0.2); 
+                0px 1px 0px #4A00B3,
+                0px 2px 0px #4A00B3,
+                0px 3px 0px #4A00B3,
+                0px 4px 0px #4A00B3,
+                0px 5px 0px #4A00B3,
+                0px 6px 0px #4A00B3,
+                0px 7px 0px #4A00B3,
+                0px 8px 0px #4A00B3,
+                0px 45px 25px rgba(0, 0, 0, 0.4); 
         }
 
         .hero-giant-text div {
@@ -120,7 +137,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS --- */
+        /* --- LIQUID GLASS (Con Volumen 3D) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -141,10 +158,15 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
-            /* Highlight interno + Sombra cenital proyectada hacia abajo */
+            /* Highlight interno + Extrusión de cristal + Sombra de suelo */
             text-shadow: 
-                0px 5px 15px rgba(255, 255, 255, 0.2),
-                0px 35px 25px rgba(0, 0, 0, 0.35);
+                0px -2px 10px rgba(255, 255, 255, 0.2),
+                0px 1px 0px rgba(255, 255, 255, 0.4),
+                0px 2px 0px rgba(255, 255, 255, 0.3),
+                0px 3px 0px rgba(255, 255, 255, 0.2),
+                0px 4px 0px rgba(255, 255, 255, 0.1),
+                0px 5px 0px rgba(255, 255, 255, 0.05),
+                0px 45px 25px rgba(0, 0, 0, 0.4);
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -153,7 +175,7 @@
             z-index: 20; 
         }
 
-        /* LOGO CD REDUCIDO Y CON SOMBRA CENITAL */
+        /* LOGO CD REDUCIDO Y CON SOMBRA HACIA EL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
@@ -163,8 +185,8 @@
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            /* Sombra hacia abajo */
-            filter: drop-shadow(0px 40px 30px rgba(0, 0, 0, 0.4));
+            /* Sombra profunda */
+            filter: drop-shadow(0px 40px 20px rgba(0, 0, 0, 0.45));
         }
 
         @keyframes floatLogo {
@@ -309,7 +331,7 @@
             width: 100%;
             height: 30vh;
             background-color: var(--bg-cream);
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png'); /* Usando el bg anterior para la nube, aunque podemos quitarlo si lo deseas */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
             background-size: cover;
             background-position: center top;
             margin-bottom: -5vh; 
@@ -392,7 +414,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (HUNDIDO PARA OCULTAR LA MUÑECA)
+           DOCK DE CÁMARA (DIMENSIONES MASIVAS, MANTENIENDO EL OCULTAMIENTO)
            ========================================================= */
         
         @keyframes breathHand {
@@ -403,13 +425,15 @@
 
         .camera-container {
             position: fixed;
-            bottom: -45px; 
+            /* AJUSTE: Hundido más profundo porque la imagen es más grande */
+            bottom: -65px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 480px; 
+            /* AJUSTE: Creció de 480px a 650px para ser prominente en PC/Tablet */
+            max-width: 650px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -420,7 +444,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
             transform-origin: center center;
         }
 
@@ -434,7 +458,7 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas */
+        /* Hitboxes calibradas basadas en porcentajes (se adaptan solas al nuevo tamaño) */
         .hitbox {
             position: absolute;
             pointer-events: auto;
@@ -458,8 +482,9 @@
             .giant-transparent-logo { width: 50vw; }
             
             .camera-container {
-                bottom: -35px;
-                max-width: 360px; 
+                bottom: -40px;
+                /* Creció de 360px a 420px para ser prominente en móvil */
+                max-width: 420px; 
             }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
