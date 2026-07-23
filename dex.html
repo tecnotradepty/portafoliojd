@@ -10,15 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
-    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/7f923321cb1cdd00b20fb4a9850d2d8b2a0c674f/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/5e31439da2b5e9b33618cef887c2d46a6b909875/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
 
     <style>
-        /* Desplazamiento suave */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
             overflow-x: hidden;
             width: 100%;
@@ -31,18 +27,14 @@
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
+            /* NUEVA TEXTURA RAW DE GITHUB */
+            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/5e31439da2b5e9b33618cef887c2d46a6b909875/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
+            
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
-            
-            /* URL RAW DE LA TEXTURA EN GITHUB */
-            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/7f923321cb1cdd00b20fb4a9850d2d8b2a0c674f/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-cream);
@@ -52,7 +44,6 @@
             padding-bottom: 120px; 
         }
 
-        /* --- EFECTO DE RUIDO (NOISE) --- */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -62,7 +53,6 @@
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* --- HERO SECTION --- */
         .hero-section {
             position: relative;
             min-height: 100vh; 
@@ -81,7 +71,6 @@
             background-color: var(--bg-cream); 
         }
 
-        /* FONDO B2B PREMIUM (Con animación de entrada) */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -106,26 +95,26 @@
             z-index: 10; 
         }
 
-        /* TÍTULO GIGANTE */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5.5rem, 23vw, 24rem); 
+            font-size: clamp(5rem, 20vw, 24rem); 
             line-height: 0.85;
             text-align: center;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -2px;
             display: flex;
             flex-direction: column;
+            gap: 1vh; 
         }
 
         .hero-giant-text div {
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 0.8vw; 
         }
 
-        /* LETRAS MORADAS CON TEXTURA Y VOLUMEN PUFF 3D REAL (CORREGIDO CON TEXT-SHADOW) */
+        /* --- LETRAS TEXTURIZADAS (BORDES REDONDOS Y LIMPIOS) --- */
         .textured-purple-letter {
             background-image: var(--purple-texture-url);
             background-size: cover;
@@ -136,83 +125,56 @@
             display: inline-block;
             position: relative;
             
-            /* Usamos text-shadow robusto para el volumen y la sombra cayendo al suelo */
-            text-shadow: 
-                0px 1px 0px #4A00B3,
-                0px 2px 0px #4A00B3,
-                0px 3px 0px #4A00B3,
-                0px 4px 0px #4A00B3,
-                0px 5px 0px #4A00B3,
-                0px 6px 0px #4A00B3,
-                0px 65px 20px rgba(0, 0, 0, 0.45),
-                0px 85px 35px rgba(0, 0, 0, 0.3);
+            /* Sombra limpia sin recortar los bordes de la fuente */
+            filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.4));
         }
 
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS --- */
+        /* --- LIQUID GLASS (MUCHO MÁS TRANSPARENTE) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
+            /* Opacidades muy bajas para máxima transparencia */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.85) 0%, 
-                rgba(0, 240, 255, 0.5) 20%, 
-                rgba(255, 255, 255, 0.15) 40%, 
-                rgba(255, 255, 255, 0.15) 60%, 
-                rgba(255, 0, 60, 0.4) 80%,  
-                rgba(255, 255, 255, 0.85) 100%
+                rgba(255, 255, 255, 0.3) 0%, 
+                rgba(0, 240, 255, 0.1) 20%, 
+                rgba(255, 255, 255, 0.0) 40%, 
+                rgba(255, 255, 255, 0.0) 60%, 
+                rgba(255, 0, 60, 0.1) 80%,  
+                rgba(255, 255, 255, 0.3) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
-            
             color: transparent;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
             
-            /* Highlight interno + Sombra profunda en suelo */
-            text-shadow: 
-                0px -2px 10px rgba(255, 255, 255, 0.2),
-                0px 1px 0px rgba(255, 255, 255, 0.4),
-                0px 2px 0px rgba(255, 255, 255, 0.3),
-                0px 3px 0px rgba(255, 255, 255, 0.2),
-                0px 4px 0px rgba(255, 255, 255, 0.1),
-                0px 5px 0px rgba(255, 255, 255, 0.05),
-                0px 65px 20px rgba(0, 0, 0, 0.45),
-                0px 85px 35px rgba(0, 0, 0, 0.3);
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.1);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
             
-            backdrop-filter: blur(4px) saturate(150%);
-            -webkit-backdrop-filter: blur(4px) saturate(150%);
+            filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.3));
+            
+            /* Blur reducido a 2px para que el CD detrás se vea casi nítido */
+            backdrop-filter: blur(2px) saturate(120%);
+            -webkit-backdrop-filter: blur(2px) saturate(120%);
             
             position: relative;
             z-index: 20; 
         }
 
-        /* SUPERPOSICIÓN: T Glass sobre I Morada */
-        .overlap-t {
-            z-index: 25 !important;
-            position: relative;
-        }
-
-        .overlap-i-behind {
-            z-index: 15 !important;
-            position: relative;
-            margin-left: -0.22em; /* La I entra debajo de la barra de la T */
-        }
-
-        /* LOGO CD AGRANDADO Y CON SOMBRA PROYECTADA AL SUELO */
+        /* --- LOGO CD --- */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: clamp(260px, 40vw, 700px); 
-            z-index: 5; 
+            z-index: 5; /* Detrás del texto */
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            filter: drop-shadow(0px 65px 25px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0px 45px 20px rgba(0, 0, 0, 0.45));
         }
 
         @keyframes floatLogo {
@@ -221,7 +183,6 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* --- ANIMACIÓN FLOTANTE LETRAS --- */
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
             50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
@@ -240,7 +201,7 @@
         .delay-5 { animation-delay: 8s; }
         .delay-6 { animation-delay: 10s; }
 
-        /* --- SECCIÓN DARK (IDENTIDAD) --- */
+        /* --- RESTO DE SECCIONES... --- */
         .dark-intro-section {
             background-color: var(--dark-slate);
             padding: 6rem 4vw; 
@@ -260,182 +221,34 @@
             margin-left: auto; margin-right: auto;
         }
 
-        .playground-text h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 5rem);
-            color: var(--brand-purple);
-            line-height: 0.9;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
+        .playground-text h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 5rem); color: var(--brand-purple); line-height: 0.9; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .playground-text p { font-size: clamp(0.7rem, 1.2vw, 1.05rem); line-height: 1.6; color: #A09DA5; margin-bottom: 1.2rem; font-weight: 400; }
+        .playground-text .highlight-text { color: #F4F3EF; font-weight: 700; }
+        .playground-text .cta-text { margin-top: 1.5rem; font-weight: 700; color: var(--brand-purple); }
+        .playground-image { width: 100%; display: flex; justify-content: center; align-items: center; }
+        .playground-image img { width: 100%; height: auto; max-width: 100%; filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7)); transform: scale(1.05); transition: transform 0.5s ease; }
+        .playground-image img:hover { transform: scale(1.08) translateY(-10px); }
 
-        .playground-text p {
-            font-size: clamp(0.7rem, 1.2vw, 1.05rem); 
-            line-height: 1.6;
-            color: #A09DA5;
-            margin-bottom: 1.2rem;
-            font-weight: 400;
-        }
+        .system-operators-container { max-width: 1200px; margin: 0 auto; }
+        .system-operators-header { font-family: var(--font-body); font-size: 0.9rem; color: var(--brand-purple); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid rgba(244, 243, 239, 0.1); padding-bottom: 10px; }
+        .team-grid-editorial { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .team-member-col h4 { font-family: var(--font-display); font-size: 2.5rem; color: #F4F3EF; margin-bottom: 0.2rem; letter-spacing: 1px; }
+        .team-member-col .role { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple); margin-bottom: 1rem; display: block; }
+        .team-member-col p { font-size: 0.95rem; line-height: 1.5; color: #A09DA5; font-weight: 400; }
 
-        .playground-text .highlight-text {
-            color: #F4F3EF;
-            font-weight: 700;
-        }
+        .purple-cloud-bridge { width: 100%; height: 30vh; background-color: var(--bg-cream); background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png'); background-size: cover; background-position: center top; margin-bottom: -5vh; position: relative; z-index: 5; }
+        .parallax-camera-bridge { position: relative; height: 100vh; background-color: var(--bg-cream); }
+        .sticky-camera-bg { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+        .sticky-camera-bg img { display: none; }
+        .parallax-text-container { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none; }
+        .massive-parallax-title { font-family: var(--font-display); font-size: clamp(4rem, 20vw, 20rem); color: var(--brand-purple); line-height: 0.8; text-transform: uppercase; text-shadow: 0px 20px 40px rgba(0,0,0,0.1); }
 
-        .playground-text .cta-text {
-            margin-top: 1.5rem;
-            font-weight: 700;
-            color: var(--brand-purple);
-        }
-
-        .playground-image {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .playground-image img {
-            width: 100%;
-            height: auto;
-            max-width: 100%; 
-            filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7));
-            transform: scale(1.05); 
-            transition: transform 0.5s ease;
-        }
-
-        .playground-image img:hover {
-            transform: scale(1.08) translateY(-10px);
-        }
-
-        /* Operadores del Sistema */
-        .system-operators-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .system-operators-header {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            color: var(--brand-purple);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(244, 243, 239, 0.1);
-            padding-bottom: 10px;
-        }
-
-        .team-grid-editorial {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem; 
-        }
-
-        .team-member-col h4 {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            color: #F4F3EF;
-            margin-bottom: 0.2rem;
-            letter-spacing: 1px;
-        }
-
-        .team-member-col .role {
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--brand-purple);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .team-member-col p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #A09DA5;
-            font-weight: 400;
-        }
-
-        /* =========================================================
-           SECCIÓN PUENTE: PARALLAX LIMPIO
-           ========================================================= */
-
-        .purple-cloud-bridge {
-            width: 100%;
-            height: 30vh;
-            background-color: var(--bg-cream);
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
-            background-size: cover;
-            background-position: center top;
-            margin-bottom: -5vh; 
-            position: relative;
-            z-index: 5;
-        }
-
-        .parallax-camera-bridge {
-            position: relative;
-            height: 100vh; 
-            background-color: var(--bg-cream);
-        }
-
-        .sticky-camera-bg {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .sticky-camera-bg img {
-            display: none; 
-        }
-
-        .parallax-text-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .massive-parallax-title {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 20vw, 20rem);
-            color: var(--brand-purple);
-            line-height: 0.8;
-            text-transform: uppercase;
-            text-shadow: 0px 20px 40px rgba(0,0,0,0.1);
-        }
-
-        /* --- PORTAFOLIO (API SHEETS) --- */
-        .portfolio-section {
-            background-color: var(--bg-cream);
-            padding: 4rem 4vw; 
-            position: relative;
-            z-index: 10; 
-        }
-
-        .portfolio-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .portfolio-header {
-            display: flex; justify-content: space-between; align-items: flex-end;
-            margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
-            border-bottom: 2px solid var(--brand-purple); padding-bottom: 1.5rem;
-        }
-
+        .portfolio-section { background-color: var(--bg-cream); padding: 4rem 4vw; position: relative; z-index: 10; }
+        .portfolio-inner { max-width: 1200px; margin: 0 auto; }
+        .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem; border-bottom: 2px solid var(--brand-purple); padding-bottom: 1.5rem; }
         .category-bar { display: flex; gap: 8px; flex-wrap: wrap; }
         .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 6px 20px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
         .filter-btn:hover, .filter-btn.active { background: var(--brand-purple); color: var(--bg-cream); border-color: var(--brand-purple); }
-
         .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
         .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; }
         .card-preview-thumb { width: 100%; height: 250px; background-color: #e5e3db; background-size: cover; background-position: center; margin-bottom: 1rem; border: 2px solid transparent; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease; }
@@ -445,16 +258,11 @@
         .card-body-info p { font-size: 0.9rem; line-height: 1.5; color: #555; margin-bottom: 1rem; }
         .btn-visit-solution { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; text-decoration: none; color: var(--brand-purple); border-bottom: 2px solid var(--brand-purple); align-self: flex-start; padding-bottom: 2px; transition: all 0.3s; }
         .btn-visit-solution:hover { color: var(--neon-magenta); border-color: var(--neon-magenta); }
-
         .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-display); font-size: 2.5rem; color: var(--brand-purple); text-align: left; padding: 2rem 0; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
-        /* =========================================================
-           DOCK DE CÁMARA (DIMENSIONADO Y GROUNDED)
-           ========================================================= */
-        
+        /* --- DOCK CÁMARA --- */
         @keyframes breathHand {
             0% { transform: translateX(-50%) translateY(0px); }
             50% { transform: translateX(-50%) translateY(4px); } 
@@ -463,13 +271,13 @@
 
         .camera-container {
             position: fixed;
-            bottom: -70px; 
+            bottom: -75px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            max-width: 800px; 
+            max-width: 850px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -489,43 +297,20 @@
             50% { transform: rotate(-1.5deg) translateY(3px); } 
             100% { transform: rotate(0deg) translateY(0px); }
         }
+        .recoil-active { animation: recoilClick 0.15s ease-out forwards; }
 
-        .recoil-active {
-            animation: recoilClick 0.15s ease-out forwards;
-        }
-
-        /* HITBOXES RECALIBRADAS */
-        .hitbox {
-            position: absolute;
-            pointer-events: auto;
-            bottom: 22%; 
-            height: 33%; 
-            z-index: 1010;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            outline: none;
-            user-select: none;
-        }
-
+        .hitbox { position: absolute; pointer-events: auto; bottom: 22%; height: 33%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MÓVIL Y TABLET RE-CALIBRADO --- */
         @media (max-width: 768px) {
-            .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
+            .hero-giant-text { font-size: 20vw; gap: 1vw; } 
+            .hero-giant-text div { gap: 1.5vw; }
             .giant-transparent-logo { width: 50vw; }
-            
-            .playground-container {
-                grid-template-columns: 1.3fr 1fr; /* Diorama a la derecha */
-                gap: 15px;
-            }
-
-            .camera-container {
-                bottom: -50px;
-                max-width: 480px; 
-            }
+            .playground-container { grid-template-columns: 1.3fr 1fr; gap: 15px; }
+            .camera-container { bottom: -55px; max-width: 520px; }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
             .hitbox-identidad { left: 32%; width: 14%; }
@@ -547,19 +332,19 @@
             <h1 class="hero-giant-text">
                 <div>
                     <span class="z-back textured-purple-letter delay-1">D</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1">I</span>
                     <span class="z-back textured-purple-letter">S</span>
                     <span class="z-front textured-purple-letter float-anim delay-2">K</span>
                 </div>
                 <div>
                     <span class="z-front textured-purple-letter delay-3">C</span>
                     <span class="z-back textured-purple-letter delay-4">R</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4">E</span>
                     <span class="z-back textured-purple-letter delay-5">A</span>
-                    <span class="z-front liquid-glass-letter overlap-t float-anim delay-5" data-letter="T">T</span>
-                    <span class="z-back textured-purple-letter overlap-i-behind">I</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-5">T</span>
+                    <span class="z-back liquid-glass-letter float-anim delay-6">I</span>
                     <span class="z-back textured-purple-letter delay-6">V</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-6" data-letter="O">O</span>
+                    <span class="z-front textured-purple-letter float-anim delay-6">O</span>
                 </div>
             </h1>
 
@@ -669,7 +454,6 @@
                 });
             }
 
-            // FÍSICA PARA EL DOCK DE LA CÁMARA
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
 
@@ -685,7 +469,6 @@
                 });
             });
 
-            // API DE GOOGLE SHEETS
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
