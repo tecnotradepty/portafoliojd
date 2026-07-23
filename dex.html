@@ -10,11 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
-    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/3c189286b475bf1942a7abab00418d264a136591/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/753e6acec21578f49bfc4b97928963ca173de232/DIQC/Texturaclara.jpg">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/753e6acec21578f49bfc4b97928963ca173de232/DIQC/7ffe6b95a9a1824877cb30e8547e9865(1).jpg">
 
     <style>
         html { scroll-behavior: smooth; }
-        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
 
         :root {
             --bg-cream: #EAE9E4;       
@@ -22,8 +28,9 @@
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
-            /* TEXTURA ACTUALIZADA (Enlace Solicitado) */
-            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/3c189286b475bf1942a7abab00418d264a136591/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
+            /* TEXTURAS RAW DESDE GITHUB */
+            --purple-texture-light: url("https://raw.githubusercontent.com/tecnotradepty/portafoliojd/753e6acec21578f49bfc4b97928963ca173de232/DIQC/Texturaclara.jpg");
+            --purple-texture-dark: url("https://raw.githubusercontent.com/tecnotradepty/portafoliojd/753e6acec21578f49bfc4b97928963ca173de232/DIQC/7ffe6b95a9a1824877cb30e8547e9865(1).jpg");
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
@@ -76,7 +83,10 @@
             animation: fadeInBg 0.8s ease-in-out forwards;
         }
 
-        @keyframes fadeInBg { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fadeInBg {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
         .hero-sandwich {
             position: relative;
@@ -106,51 +116,87 @@
             gap: 0.8vw; 
         }
 
-        /* --- LETRAS TEXTURIZADAS --- */
+        /* =========================================================
+           INGENIERÍA CSS: LETRAS CON DOBLE TEXTURA (CARA Y VOLUMEN)
+           ========================================================= */
         .textured-purple-letter {
-            background-image: var(--purple-texture-url);
+            position: relative;
+            display: inline-block;
+            
+            /* CARA FRONTAL (Textura Clara) */
+            background-image: var(--purple-texture-light);
             background-size: cover;
             background-position: center;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: inline-block;
-            position: relative;
-            /* Sombra suave y profunda (Grounded) */
-            filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.4));
+            
+            /* Sombra profunda proyectada al suelo desde el bloque entero */
+            filter: drop-shadow(0px 45px 20px rgba(0, 0, 0, 0.45));
+        }
+
+        /* VOLUMEN 3D (Textura Oscura desplazada hacia abajo) */
+        .textured-purple-letter::after {
+            content: attr(data-letter);
+            position: absolute;
+            left: 0;
+            top: 0.05em; /* Nivel de hundimiento/grosor del 3D */
+            z-index: -1; /* Se coloca por detrás de la cara clara */
+            
+            background-image: var(--purple-texture-dark);
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS --- */
+        /* --- LIQUID GLASS (EXTREMADAMENTE TRANSPARENTE) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
+            /* Gradiente casi invisible */
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.3) 0%, 
-                rgba(0, 240, 255, 0.1) 20%, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(0, 240, 255, 0.05) 20%, 
                 rgba(255, 255, 255, 0.0) 40%, 
                 rgba(255, 255, 255, 0.0) 60%, 
-                rgba(255, 0, 60, 0.1) 80%,  
-                rgba(255, 255, 255, 0.3) 100%
+                rgba(255, 0, 60, 0.05) 80%,  
+                rgba(255, 255, 255, 0.15) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.1);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.05);
+            /* Borde ligeramente más notorio para que no se pierda la letra al ser tan transparente */
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
             
             filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.3));
             
-            backdrop-filter: blur(2px) saturate(120%);
-            -webkit-backdrop-filter: blur(2px) saturate(120%);
+            /* Blur al mínimo para ver el CD perfecto detrás */
+            backdrop-filter: blur(1px) saturate(110%);
+            -webkit-backdrop-filter: blur(1px) saturate(110%);
             
             position: relative;
             z-index: 20; 
+        }
+
+        /* CONFIGURACIÓN ESPECIAL: T Glass sobre I Morada */
+        .overlap-t {
+            z-index: 25 !important;
+            position: relative;
+        }
+
+        .overlap-i-behind {
+            z-index: 15 !important;
+            position: relative;
+            margin-left: -0.08em; /* Superposición calibrada */
         }
 
         /* --- LOGO CD --- */
@@ -174,17 +220,17 @@
 
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-12px) rotate(3deg) scale(1.02); } /* Levita un poco más alto */
+            50% { transform: translateY(-12px) rotate(3deg) scale(1.02); } 
             100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
 
         .float-anim {
             display: inline-block; 
-            /* VELOCIDAD AUMENTADA: De 12s a 9s */
+            /* VELOCIDAD AJUSTADA (9 SEGUNDOS) */
             animation: floatLetter 9s ease-in-out infinite; 
         }
 
-        /* Retrasos calibrados para la nueva velocidad */
+        /* Retrasos calibrados */
         .delay-1 { animation-delay: 0s; }
         .delay-2 { animation-delay: 1.5s; }
         .delay-3 { animation-delay: 3s; }
@@ -192,7 +238,7 @@
         .delay-5 { animation-delay: 6s; }
         .delay-6 { animation-delay: 7.5s; }
 
-        /* --- RESTO DE SECCIONES (Identidad, Bridge, etc.) --- */
+        /* --- RESTO DE SECCIONES --- */
         .dark-intro-section { background-color: var(--dark-slate); padding: 6rem 4vw; color: #F4F3EF; position: relative; z-index: 10; }
         .playground-container { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; margin-bottom: 6rem; width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; }
         .playground-text h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 5rem); color: var(--brand-purple); line-height: 0.9; margin-bottom: 1.5rem; text-transform: uppercase; }
@@ -295,20 +341,20 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back textured-purple-letter delay-1">D</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-1">I</span>
-                    <span class="z-back textured-purple-letter">S</span>
-                    <span class="z-front textured-purple-letter float-anim delay-2">K</span>
+                    <span class="z-back textured-purple-letter delay-1" data-letter="D">D</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
+                    <span class="z-back textured-purple-letter" data-letter="S">S</span>
+                    <span class="z-front textured-purple-letter float-anim delay-2" data-letter="K">K</span>
                 </div>
                 <div>
-                    <span class="z-front textured-purple-letter float-anim delay-3">C</span>
-                    <span class="z-back textured-purple-letter delay-4">R</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-4">E</span>
-                    <span class="z-back textured-purple-letter delay-5">A</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-5">T</span>
-                    <span class="z-back liquid-glass-letter float-anim delay-6">I</span>
-                    <span class="z-back textured-purple-letter delay-6">V</span>
-                    <span class="z-front textured-purple-letter float-anim delay-6">O</span>
+                    <span class="z-front textured-purple-letter float-anim delay-3" data-letter="C">C</span>
+                    <span class="z-back textured-purple-letter delay-4" data-letter="R">R</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
+                    <span class="z-back textured-purple-letter delay-5" data-letter="A">A</span>
+                    <span class="z-front liquid-glass-letter overlap-t float-anim delay-5" data-letter="T">T</span>
+                    <span class="z-back textured-purple-letter overlap-i-behind" data-letter="I">I</span>
+                    <span class="z-back textured-purple-letter delay-6" data-letter="V">V</span>
+                    <span class="z-front textured-purple-letter float-anim delay-6" data-letter="O">O</span>
                 </div>
             </h1>
 
@@ -431,7 +477,7 @@
                 });
             });
 
-            // LOGICA CORREGIDA API GOOGLE SHEETS
+            // LOGICA API GOOGLE SHEETS
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -458,7 +504,7 @@
                 
                 const proyectosFiltrados = proyectosData.filter(p => {
                     if (categoriaFiltro === 'todos') return true;
-                    // Lógica de filtrado flexibe
+                    // Lógica de filtrado flexible
                     let catSheet = (p.categoria || "").toLowerCase().trim();
                     let catFiltro = categoriaFiltro.toLowerCase().trim();
                     let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
@@ -472,7 +518,6 @@
                 }
 
                 proyectosFiltrados.forEach(p => {
-                    // Creamos el elemento 'a' para que la tarjeta entera sea un enlace clickeable
                     const card = document.createElement('a');
                     card.className = 'marketplace-card';
                     card.href = p.enlace || "#";
