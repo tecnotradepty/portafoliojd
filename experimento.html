@@ -3,64 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Experimental Lab (Visor)</title>
+    <title>Disk Creativo | Playground de Empresas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
 
     <style>
         html { scroll-behavior: smooth; }
-        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; background-color: #050505; }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
 
         :root {
             --bg-cream: #EAE9E4;       
             --brand-purple: #6B00FF; 
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
-            --visor-bg: #050505;
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
-            --font-tech: 'Share Tech Mono', monospace; /* Fuente técnica para el visor */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
+            background-color: var(--bg-cream);
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
             padding-bottom: 120px; 
         }
 
+        /* --- EFECTO DE RUIDO (NOISE) --- */
         .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
         /* --- HERO SECTION --- */
-        .hero-section { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; overflow: hidden; background-color: var(--bg-cream); }
-        .hero-bg-base { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png'); background-position: center center; background-repeat: no-repeat; background-size: cover; animation: fadeInBg 0.8s ease-in-out forwards; }
+        .hero-section {
+            position: relative;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            padding: 2vw; 
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; 
+            background-color: var(--bg-cream); 
+        }
+
+        .hero-bg-base {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
+            background-position: center center; 
+            background-repeat: no-repeat;
+            background-size: cover; 
+            animation: fadeInBg 0.8s ease-in-out forwards;
+        }
+
         @keyframes fadeInBg { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-        .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; z-index: 10; }
-        .hero-giant-text { font-family: var(--font-display); font-size: clamp(5rem, 20vw, 24rem); line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase; display: flex; flex-direction: column; gap: 1vh; }
+        .hero-sandwich {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            z-index: 10; 
+        }
+
+        .hero-giant-text {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 20vw, 24rem); 
+            line-height: 0.85;
+            text-align: center;
+            margin: 0;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            gap: 1vh; 
+        }
+
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; }
 
-        /* LETRAS SÓLIDAS LIMPIAS */
+        /* --- LETRAS MORADAS --- */
         .solid-purple-letter {
-            color: var(--brand-purple); display: inline-block; position: relative;
-            text-shadow: 0px 1px 0px #4A00B3, 0px 2px 0px #4A00B3, 0px 3px 0px #4A00B3, 0px 4px 0px #4A00B3, 0px 5px 0px #4A00B3, 0px 6px 0px #35008B, 0px 7px 0px #35008B, 0px 15px 15px rgba(0, 0, 0, 0.2), 0px 75px 25px rgba(0, 0, 0, 0.45);
+            color: var(--brand-purple);
+            display: inline-block;
+            position: relative;
+            text-shadow: 
+                0px 1px 0px #4A00B3, 0px 2px 0px #4A00B3, 0px 3px 0px #4A00B3, 0px 4px 0px #4A00B3, 
+                0px 5px 0px #4A00B3, 0px 6px 0px #35008B, 0px 7px 0px #35008B, 
+                0px 15px 15px rgba(0, 0, 0, 0.2), 0px 75px 25px rgba(0, 0, 0, 0.45);
         }
+
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* LIQUID GLASS */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
-            font-family: var(--font-display); display: inline-block;
+            font-family: var(--font-display);
+            display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, rgba(255, 255, 255, 0.0) 40%, rgba(255, 255, 255, 0.0) 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
@@ -68,10 +129,17 @@
             backdrop-filter: blur(1px) saturate(110%); -webkit-backdrop-filter: blur(1px) saturate(110%);
             position: relative; z-index: 20; 
         }
+
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
-        .giant-transparent-logo { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: clamp(260px, 40vw, 700px); z-index: 5; animation: floatLogo 8s ease-in-out infinite; pointer-events: none; filter: drop-shadow(0px 85px 30px rgba(0, 0, 0, 0.55)); }
+        /* --- LOGO CD --- */
+        .giant-transparent-logo {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: clamp(260px, 40vw, 700px); z-index: 5; animation: floatLogo 8s ease-in-out infinite; pointer-events: none;
+            filter: drop-shadow(0px 85px 30px rgba(0, 0, 0, 0.55));
+        }
+
         @keyframes floatLogo { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } 50% { transform: translate(-50%, -54%) rotate(3deg) scale(1.02); } 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } }
         @keyframes floatLetter { 0% { transform: translateY(0px) rotate(0deg) scale(1); } 50% { transform: translateY(-12px) rotate(3deg) scale(1.02); } 100% { transform: translateY(0px) rotate(0deg) scale(1); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
@@ -88,132 +156,43 @@
         .playground-image img { width: 100%; height: auto; max-width: 100%; filter: drop-shadow(0px 30px 40px rgba(0,0,0,0.7)); transform: scale(1.05); transition: transform 0.5s ease; }
         .playground-image img:hover { transform: scale(1.08) translateY(-10px); }
 
-        .system-operators-container { max-width: 1200px; margin: 0 auto; padding-bottom: 4rem; }
+        .system-operators-container { max-width: 1200px; margin: 0 auto; }
         .system-operators-header { font-family: var(--font-body); font-size: 0.9rem; color: var(--brand-purple); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid rgba(244, 243, 239, 0.1); padding-bottom: 10px; }
         .team-grid-editorial { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .team-member-col h4 { font-family: var(--font-display); font-size: 2.5rem; color: #F4F3EF; margin-bottom: 0.2rem; letter-spacing: 1px; }
         .team-member-col .role { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--brand-purple); margin-bottom: 1rem; display: block; }
         .team-member-col p { font-size: 0.95rem; line-height: 1.5; color: #A09DA5; font-weight: 400; }
 
-        /* =========================================================
-           NUEVO: DIFUMINADO DE TRANSICIÓN (FADE)
-           ========================================================= */
-        .fade-transition {
-            width: 100%;
-            height: 25vh;
-            background: linear-gradient(to bottom, var(--dark-slate) 0%, var(--visor-bg) 100%);
-            position: relative;
-            z-index: 5;
-        }
+        .purple-cloud-bridge { width: 100%; height: 30vh; background-color: var(--bg-cream); background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png'); background-size: cover; background-position: center top; margin-bottom: -5vh; position: relative; z-index: 5; }
+        .parallax-camera-bridge { position: relative; height: 100vh; background-color: var(--bg-cream); }
+        .sticky-camera-bg { position: sticky; top: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+        .sticky-camera-bg img { display: none; }
+        .parallax-text-container { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none; }
+        .massive-parallax-title { font-family: var(--font-display); font-size: clamp(4rem, 20vw, 20rem); color: var(--brand-purple); line-height: 0.8; text-transform: uppercase; text-shadow: 0px 20px 40px rgba(0,0,0,0.1); }
+
+        /* --- PORTAFOLIO --- */
+        .portfolio-section { background-color: var(--bg-cream); padding: 4rem 4vw; position: relative; z-index: 10; }
+        .portfolio-inner { max-width: 1200px; margin: 0 auto; }
+        .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem; border-bottom: 2px solid var(--brand-purple); padding-bottom: 1.5rem; }
+        .category-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+        .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 6px 20px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: var(--brand-purple); color: var(--bg-cream); border-color: var(--brand-purple); }
+        .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; }
+        .card-preview-thumb { width: 100%; height: 250px; background-color: #e5e3db; background-size: cover; background-position: center; margin-bottom: 1rem; border: 2px solid transparent; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease; }
+        .marketplace-card:hover .card-preview-thumb { transform: translateY(-5px); border-color: var(--brand-purple); }
+        .card-body-info h3 { font-family: var(--font-display); font-size: 2rem; color: var(--text-dark); line-height: 1; margin-bottom: 0.5rem; }
+        .card-badge { font-size: 0.7rem; font-weight: 700; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+        .card-body-info p { font-size: 0.9rem; line-height: 1.5; color: #555; margin-bottom: 1rem; }
+        .btn-visit-solution { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; text-decoration: none; color: var(--brand-purple); border-bottom: 2px solid var(--brand-purple); align-self: flex-start; padding-bottom: 2px; transition: all 0.3s; }
+        .btn-visit-solution:hover { color: var(--neon-magenta); border-color: var(--neon-magenta); }
+        .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-display); font-size: 2.5rem; color: var(--brand-purple); text-align: left; padding: 2rem 0; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           NUEVO: SECCIÓN PORTAFOLIO - EL VISOR DE CÁMARA
+           DOCK DE CÁMARA & NUEVO MENÚ HITBOX
            ========================================================= */
-        .portfolio-section {
-            background-color: var(--visor-bg);
-            padding: 2rem 4vw 6rem 4vw; 
-            position: relative;
-            z-index: 10; 
-            color: #fff;
-        }
-
-        .portfolio-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-
-        /* HUD - OVERLAY DE LENTE DE CÁMARA */
-        .hud-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            pointer-events: none; z-index: 1; overflow: hidden;
-        }
-        
-        /* Marcas de recorte esquinas */
-        .hud-corner { position: absolute; width: 30px; height: 30px; border: 2px solid rgba(255,255,255,0.15); }
-        .hud-corner.tl { top: 2vw; left: 2vw; border-right: none; border-bottom: none; }
-        .hud-corner.tr { top: 2vw; right: 2vw; border-left: none; border-bottom: none; }
-        .hud-corner.bl { bottom: 2vw; left: 2vw; border-right: none; border-top: none; }
-        .hud-corner.br { bottom: 2vw; right: 2vw; border-left: none; border-top: none; }
-
-        /* Cruz de Enfoque Central */
-        .hud-center-cross { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); opacity: 0.15; }
-        .hud-center-cross::before { content: ''; position: absolute; top: -15px; left: 0; width: 1px; height: 30px; background: white; }
-        .hud-center-cross::after { content: ''; position: absolute; left: -15px; top: 0; width: 30px; height: 1px; background: white; }
-
-        /* Panel Superior HUD */
-        .hud-top-bar {
-            position: absolute; top: 2vw; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 30px; font-family: var(--font-tech); font-size: 0.85rem; color: rgba(255,255,255,0.4);
-            letter-spacing: 1px;
-        }
-        .hud-rec { color: #ff3b3b; display: flex; align-items: center; gap: 6px; font-weight: bold; }
-        .red-dot { width: 8px; height: 8px; background: #ff3b3b; border-radius: 50%; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* Cabecera y Filtros (Estilo Dial Digital) */
-        .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; position: relative; z-index: 10; }
-        .visor-title { font-family: var(--font-display); font-size: 3rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
-        .visor-subtitle { font-family: var(--font-tech); color: rgba(255,255,255,0.5); font-size: 0.9rem; }
-
-        .category-bar { display: flex; gap: 5px; flex-wrap: wrap; background: rgba(255,255,255,0.05); padding: 5px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-        .filter-btn { background: transparent; color: rgba(255,255,255,0.4); border: none; padding: 8px 16px; font-family: var(--font-tech); font-size: 0.85rem; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 2px; }
-        .filter-btn:hover { color: #fff; }
-        .filter-btn.active { background: var(--brand-purple); color: #fff; box-shadow: 0 0 15px rgba(107, 0, 255, 0.4); }
-
-        /* TARJETAS - EFECTO ENFOQUE Y FLASH */
-        .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem; position: relative; z-index: 10; }
-        .marketplace-card { 
-            background-color: transparent; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; 
-            position: relative;
-        }
-        
-        /* Contenedor de Imagen de la Tarjeta */
-        .card-img-container {
-            width: 100%; height: 260px; overflow: hidden; border-radius: 4px; margin-bottom: 1.2rem;
-            position: relative; background: #111;
-            /* Marco estilo negativo/diapositiva */
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-        }
-
-        .card-preview-thumb { 
-            width: 100%; height: 100%; background-size: cover; background-position: center; 
-            /* Estado Inicial: Fuera de foco y opaco */
-            filter: blur(6px) brightness(0.7) grayscale(30%); 
-            transform: scale(1.05);
-            transition: filter 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); 
-        }
-
-        /* Flash de luz al hacer Hover */
-        .card-flash {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; opacity: 0; pointer-events: none;
-            transition: opacity 0.1s;
-        }
-
-        .marketplace-card:hover .card-preview-thumb { 
-            /* Estado Hover: Enfocado, brillante y nítido */
-            filter: blur(0px) brightness(1.1) grayscale(0%); 
-            transform: scale(1);
-        }
-        .marketplace-card:hover .card-flash {
-            animation: cameraFlash 0.5s ease-out forwards;
-        }
-
-        @keyframes cameraFlash {
-            0% { opacity: 0.8; }
-            100% { opacity: 0; }
-        }
-
-        .card-body-info h3 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: 1px; }
-        .card-badge { font-size: 0.7rem; font-family: var(--font-tech); font-weight: bold; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.8rem; display: inline-block; border: 1px solid var(--brand-purple); padding: 3px 8px; border-radius: 20px;}
-        .card-body-info p { font-size: 0.9rem; line-height: 1.5; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
-        .btn-visit-solution { font-family: var(--font-tech); font-size: 0.8rem; text-transform: uppercase; color: #fff; display: flex; align-items: center; gap: 5px; opacity: 0.5; transition: opacity 0.3s; }
-        .marketplace-card:hover .btn-visit-solution { opacity: 1; color: var(--brand-purple); }
-        .btn-visit-solution::before { content: '>'; color: var(--brand-purple); font-weight: bold; }
-
-        .loading-skeleton { grid-column: 1 / -1; font-family: var(--font-tech); font-size: 1.5rem; color: rgba(255,255,255,0.4); text-align: center; padding: 4rem 0; animation: pulse 1.5s infinite; }
-        
-        footer { text-align: center; padding: 3rem; font-family: var(--font-tech); font-size: 0.85rem; text-transform: uppercase; background-color: var(--visor-bg); color: rgba(255,255,255,0.3); padding-bottom: 150px; }
-
-        /* --- DOCK CÁMARA IMPONENTE --- */
         .camera-container {
             position: fixed; bottom: -75px; left: 50%; transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite; animation-delay: 2.5s; 
@@ -221,21 +200,64 @@
         }
         .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6)); transform-origin: center center; }
 
+        @keyframes recoilClick { 0% { transform: rotate(0deg) translateY(0px); } 50% { transform: rotate(-1.5deg) translateY(3px); } 100% { transform: rotate(0deg) translateY(0px); } }
+        .recoil-active { animation: recoilClick 0.15s ease-out forwards; }
+
         .hitbox { position: absolute; pointer-events: auto; bottom: 22%; height: 33%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
+        
+        /* Hitboxes de Navegación Existentes */
         .hitbox-inicio { left: 21%; width: 13%; }
         .hitbox-identidad { left: 35%; width: 13%; }
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
+        
+        /* NUEVO: Hitbox del Menú (El botón físico de la rueda dentada izquierda) */
+        .hitbox-menu { left: 5%; width: 12%; bottom: 15%; height: 50%; border-radius: 50%; z-index: 1010; cursor: pointer; pointer-events: auto; }
+
+        /* =========================================================
+           SISTEMA DE MENÚ LATERAL (OS/TERMINAL VIBE)
+           ========================================================= */
+        .side-menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
+            z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .side-menu-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .side-menu {
+            position: fixed; top: 0; left: -400px; width: 350px; max-width: 85vw; height: 100vh;
+            background: rgba(17, 14, 23, 0.85); /* --dark-slate con transparencia */
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 9999; display: flex; flex-direction: column; padding: 4rem 2rem;
+            transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+        }
+        .side-menu.active { left: 0; }
+
+        .menu-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 3rem; }
+        .menu-title { font-family: var(--font-display); font-size: 1.5rem; color: #fff; letter-spacing: 1px; }
+        .close-menu-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.2rem; cursor: pointer; font-family: var(--font-body); font-weight: bold; transition: color 0.3s; }
+        .close-menu-btn:hover { color: var(--brand-purple); }
+
+        .menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
+        .menu-link { 
+            color: #EAE9E4; text-decoration: none; font-size: 1.2rem; font-weight: 600; 
+            display: flex; align-items: center; gap: 15px; transition: all 0.3s ease;
+        }
+        .menu-link span.index { font-size: 0.8rem; color: var(--brand-purple); font-weight: bold; }
+        .menu-link:hover { color: var(--brand-purple); padding-left: 10px; }
+
+        .menu-footer { margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; }
 
         @media (max-width: 768px) {
             .hero-giant-text { font-size: 20vw; gap: 1vw; } .hero-giant-text div { gap: 1.5vw; } .giant-transparent-logo { width: 50vw; }
-            .playground-container { grid-template-columns: 1fr; gap: 2rem; }
-            .fade-transition { height: 15vh; }
-            .hud-top-bar { width: 90%; justify-content: space-between; gap: 0; font-size: 0.7rem; }
-            .visor-title { font-size: 2.2rem; }
+            .playground-container { grid-template-columns: 1.3fr 1fr; gap: 15px; }
             .camera-container { bottom: -55px; max-width: 520px; }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; } .hitbox-identidad { left: 32%; width: 14%; } .hitbox-proyectos { left: 46%; width: 14%; } .hitbox-contacto { left: 60%; width: 14%; }
+            /* Ajuste Hitbox menú móvil */
+            .hitbox-menu { left: 3%; width: 14%; }
         }
     </style>
 </head>
@@ -243,10 +265,25 @@
 
     <div class="noise-overlay"></div>
 
-    <section class="hero-section" id="inicio">
-        <div class="hero-bg">
-            <div class="hero-bg-base"></div>
+    <div class="side-menu-overlay" id="menuOverlay"></div>
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <span class="menu-title">SYSTEM.MENU</span>
+            <button class="close-menu-btn" id="closeMenuBtn">[ X ]</button>
         </div>
+        <div class="menu-links">
+            <a href="#inicio" class="menu-link menu-item-link"><span class="index">[01]</span> INICIO</a>
+            <a href="crear-proyecto.html" class="menu-link menu-item-link"><span class="index">[02]</span> CREA TU PROYECTO</a>
+            <a href="servicios.html" class="menu-link menu-item-link"><span class="index">[03]</span> MÓDULOS DE SISTEMA</a>
+            <a href="historia.html" class="menu-link menu-item-link"><span class="index">[04]</span> SYSTEM LOG / HISTORIA</a>
+        </div>
+        <div class="menu-footer">
+            DISK CREATIVO OS v1.0<br>Panamá, PT.
+        </div>
+    </nav>
+
+    <section class="hero-section" id="inicio">
+        <div class="hero-bg"><div class="hero-bg-base"></div></div>
 
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
@@ -281,82 +318,56 @@
                 <p>Nuestra misión es clara: almacenar el mejor talento para consolidarnos como el hub creativo más grande del país y expandir nuestra visión al mundo. Pero no nos detenemos ahí: nuestro objetivo definitivo es el desarrollo de la primera Inteligencia Artificial 100% panameña. Cada proyecto que procesamos es un bloque de código hacia ese futuro.</p>
                 <p class="cta-text">No trabajamos con simples clientes, nos unimos a aliados estratégicos para ir a romperla. ¿Te sumas al juego?</p>
             </div>
-            
-            <div class="playground-image">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground">
-            </div>
+            <div class="playground-image"><img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground"></div>
         </div>
 
         <div class="system-operators-container">
-            <div class="system-operators-header">
-                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
-            </div>
-            
+            <div class="system-operators-header">[ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]</div>
             <div class="team-grid-editorial">
                 <div class="team-member-col">
-                    <h4>JOEL DÍAZ</h4>
-                    <span class="role">Dev & Arquitectura Web</span>
+                    <h4>JOEL DÍAZ</h4><span class="role">Dev & Arquitectura Web</span>
                     <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
                 </div>
                 <div class="team-member-col">
-                    <h4>JONATHAN OROZCO</h4>
-                    <span class="role">Estrategia & Operaciones</span>
+                    <h4>JONATHAN OROZCO</h4><span class="role">Estrategia & Operaciones</span>
                     <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
                 </div>
                 <div class="team-member-col">
-                    <h4>AYL JONES</h4>
-                    <span class="role">Dirección Creativa & Mkt</span>
+                    <h4>AYL JONES</h4><span class="role">Dirección Creativa & Mkt</span>
                     <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="fade-transition"></div>
+    <div class="purple-cloud-bridge"></div>
+    
+    <section class="parallax-camera-bridge" id="proyectos">
+        <div class="sticky-camera-bg"></div>
+        <div class="parallax-text-container"><h2 class="massive-parallax-title">PROYECTOS</h2></div>
+    </section>
 
-    <section class="portfolio-section" id="proyectos">
-        <div class="hud-overlay">
-            <div class="hud-corner tl"></div>
-            <div class="hud-corner tr"></div>
-            <div class="hud-corner bl"></div>
-            <div class="hud-corner br"></div>
-            
-            <div class="hud-top-bar">
-                <div class="hud-rec"><div class="red-dot"></div> REC</div>
-                <div>ISO 800</div>
-                <div>F/1.4</div>
-                <div>RAW+JPG</div>
-            </div>
-            
-            <div class="hud-center-cross"></div>
-        </div>
-
+    <section class="portfolio-section">
         <div class="portfolio-inner">
             <div class="portfolio-header">
-                <div>
-                    <h2 class="visor-title">Directorio</h2>
-                    <p class="visor-subtitle">[ LEYENDO DATOS DEL DISCO... ]</p>
-                </div>
+                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.</p>
                 <div class="category-bar" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">MODO: RAW</button>
-                    <button class="filter-btn" data-category="webs">WEB</button>
-                    <button class="filter-btn" data-category="producción de contenido">MEDIA</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">HARDWARE</button>
+                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                    <button class="filter-btn" data-category="webs">Webs</button>
+                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
                 </div>
             </div>
-
-            <div class="grid-portfolio" id="portfolioGrid">
-                <div class="loading-skeleton">ESTABLECIENDO CONEXIÓN...</div>
-            </div>
+            <div class="grid-portfolio" id="portfolioGrid"><div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div></div>
         </div>
     </section>
 
-    <footer>
-        [ END OF FILE ] © 2026 DISK CREATIVO
-    </footer>
+    <footer>[ END OF FILE ] © 2026 DISK CREATIVO</footer>
 
     <div class="camera-container">
         <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
+        
+        <div class="hitbox hitbox-menu" id="openMenuBtn" title="Menú del Sistema"></div>
         
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
@@ -367,27 +378,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Efecto Parallax CD
-            const heroContainer = document.getElementById('inicio');
-            const logo = document.getElementById('dynamic-logo');
-            
-            if(heroContainer && logo) {
-                heroContainer.addEventListener('mousemove', (e) => {
-                    const rect = heroContainer.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
-                });
+            // --- MENÚ LATERAL LOGIC ---
+            const openMenuBtn = document.getElementById('openMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuLinks = document.querySelectorAll('.menu-item-link');
 
-                heroContainer.addEventListener('mouseleave', () => {
-                    logo.style.transform = ''; 
-                });
+            function toggleMenu() {
+                sideMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
             }
 
-            // Animación Hitboxes Cámara
-            const hitboxes = document.querySelectorAll('.hitbox');
-            const cameraImg = document.querySelector('.camera-img');
+            openMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+            
+            // Cerrar menú al hacer click en un enlace interno
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(link.getAttribute('href').startsWith('#')) {
+                        toggleMenu();
+                    }
+                });
+            });
 
+            // --- ANIMACIÓN HITBOXES ---
+            const hitboxes = document.querySelectorAll('.hitbox:not(.hitbox-menu)');
+            const cameraImg = document.querySelector('.camera-img');
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
                     cameraImg.classList.remove('recoil-active');
@@ -397,7 +415,20 @@
                 });
             });
 
-            // LOGICA API GOOGLE SHEETS
+            // --- EFECTO PARALLAX CD ---
+            const heroContainer = document.getElementById('inicio');
+            const logo = document.getElementById('dynamic-logo');
+            if(heroContainer && logo) {
+                heroContainer.addEventListener('mousemove', (e) => {
+                    const rect = heroContainer.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    logo.style.transform = `translate(calc(-50% + ${x * -35}px), calc(-50% + ${y * -35}px))`;
+                });
+                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = ''; });
+            }
+
+            // --- API GOOGLE SHEETS ---
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -407,21 +438,16 @@
                 try {
                     const response = await fetch(API_URL);
                     proyectosData = await response.json();
-                    
-                    if (proyectosData && proyectosData.length > 0) {
-                        renderGrid('todos');
-                    } else {
-                        grid.innerHTML = '<div class="loading-skeleton">DISCO VACÍO O SIN PERMISOS.</div>';
-                    }
+                    if (proyectosData && proyectosData.length > 0) { renderGrid('todos'); } 
+                    else { grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">DISCO VACÍO O SIN PERMISOS.</div>'; }
                 } catch (error) {
                     console.error("Error al cargar Google Sheets:", error);
-                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">ERROR AL LEER EL DISCO. Revisa la URL de la API.</div>';
                 }
             }
 
             function renderGrid(categoriaFiltro) {
                 grid.innerHTML = ''; 
-                
                 const proyectosFiltrados = proyectosData.filter(p => {
                     if (categoriaFiltro === 'todos') return true;
                     let catSheet = (p.categoria || "").toLowerCase().trim();
@@ -432,31 +458,15 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton">NO HAY PROYECTOS EN ESTA RUTA.</div>';
-                    return;
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">NO HAY PROYECTOS EN ESTA RUTA.</div>'; return;
                 }
 
                 proyectosFiltrados.forEach(p => {
                     const card = document.createElement('a');
-                    card.className = 'marketplace-card';
-                    card.href = p.enlace || "#";
-                    card.target = "_blank";
-
+                    card.className = 'marketplace-card'; card.href = p.enlace || "#"; card.target = "_blank";
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
-                    let headerHtml = imgUrl !== "" 
-                        ? `<div class="card-img-container"><div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div><div class="card-flash"></div></div>` 
-                        : `<div class="card-img-container"><div class="card-preview-thumb" style="display:flex; align-items:center; justify-content:center; color:#888;">[ NO IMG ]</div><div class="card-flash"></div></div>`;
-
-                    card.innerHTML = `
-                        ${headerHtml}
-                        <div class="card-body-info">
-                            <span class="card-badge">${p.categoria || "N/A"}</span>
-                            <h3>${p.titulo || "Archivo Corrupto"}</h3>
-                            <p>${p.descripcion || "..."}</p>
-                            <span class="btn-visit-solution">Leer Archivo</span>
-                        </div>
-                    `;
-                    
+                    let headerHtml = imgUrl !== "" ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` : `<div class="card-preview-thumb" style="display:flex; align-items:center; justify-content:center; color:#888;">[ NO IMG ]</div>`;
+                    card.innerHTML = `${headerHtml}<div class="card-body-info"><span class="card-badge">${p.categoria || "N/A"}</span><h3>${p.titulo || "Archivo Corrupto"}</h3><p>${p.descripcion || "..."}</p><span class="btn-visit-solution">Ejecutar CMD</span></div>`;
                     grid.appendChild(card);
                 });
             }
@@ -465,12 +475,10 @@
                 filterButtons.forEach(btn => {
                     btn.addEventListener('click', () => {
                         filterButtons.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        renderGrid(btn.getAttribute('data-category'));
+                        btn.classList.add('active'); renderGrid(btn.getAttribute('data-category'));
                     });
                 });
             }
-
             fetchProyectos();
         });
     </script>
