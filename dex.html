@@ -11,7 +11,9 @@
     
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         /* CONTROL ESTRICTO DE DESBORDAMIENTO */
         html, body {
@@ -30,14 +32,17 @@
             --font-body: 'Space Grotesk', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             background-color: var(--bg-cream);
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            /* Espacio para la cámara hundida */
             padding-bottom: 120px; 
         }
 
@@ -49,25 +54,6 @@
             z-index: 9999;
             opacity: 0.04;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-        }
-
-        /* --- BARRA SUPERIOR (LUCES COLGANTES ORIGINALES) --- */
-        .image-nav-container {
-            position: absolute;
-            top: 0px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 350px;
-            z-index: 100;
-        }
-
-        .nav-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.8; 
-            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.25));
         }
 
         /* --- HERO SECTION --- */
@@ -88,11 +74,11 @@
             z-index: 1; 
         }
 
-        /* FONDO ARCOIRIS COMPLETO */
+        /* NUEVO FONDO B2B PREMIUM */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
@@ -105,14 +91,12 @@
             align-items: center;
             width: 100%;
             z-index: 10; 
-            /* Empujamos ligeramente hacia abajo el texto para que respire con las luces superiores */
-            margin-top: 5vh; 
         }
 
-        /* AJUSTE: TAMAÑO REDUCIDO DEL TEXTO PARA PC Y TABLET */
+        /* TÍTULO CON SOMBRAS CENITALES (HACIA ABAJO) */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 18vw, 20rem); /* Reducido drásticamente el tamaño máximo */
+            font-size: clamp(4rem, 18vw, 21rem); 
             line-height: 0.85;
             color: var(--brand-purple); 
             text-align: center;
@@ -121,7 +105,10 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+            /* Sombras proyectadas 100% hacia abajo */
+            text-shadow: 
+                0px 35px 25px rgba(0, 0, 0, 0.35),
+                0px 15px 10px rgba(0, 0, 0, 0.2); 
         }
 
         .hero-giant-text div {
@@ -154,9 +141,10 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
+            /* Highlight interno + Sombra cenital proyectada hacia abajo */
             text-shadow: 
                 0px 5px 15px rgba(255, 255, 255, 0.2),
-                0px 10px 20px rgba(0, 0, 0, 0.1);
+                0px 35px 25px rgba(0, 0, 0, 0.35);
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -165,17 +153,18 @@
             z-index: 20; 
         }
 
-        /* AJUSTE: LOGO CD REDUCIDO Y PROPORCIONAL */
+        /* LOGO CD REDUCIDO Y CON SOMBRA CENITAL */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(220px, 35vw, 600px); /* Reducido para no tapar tanto el texto */
+            width: clamp(220px, 35vw, 600px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.3));
+            /* Sombra hacia abajo */
+            filter: drop-shadow(0px 40px 30px rgba(0, 0, 0, 0.4));
         }
 
         @keyframes floatLogo {
@@ -320,7 +309,7 @@
             width: 100%;
             height: 30vh;
             background-color: var(--bg-cream);
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png');
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0a56277ebe7da12431deb010cd74b4fe0e8e57ff/DIQC/file_0000000037fc81f591d2ecf2f0bdb927.png'); /* Usando el bg anterior para la nube, aunque podemos quitarlo si lo deseas */
             background-size: cover;
             background-position: center top;
             margin-bottom: -5vh; 
@@ -403,7 +392,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (CORRECCIÓN: Z Zone Safe y Posicionamiento)
+           DOCK DE CÁMARA (HUNDIDO PARA OCULTAR LA MUÑECA)
            ========================================================= */
         
         @keyframes breathHand {
@@ -414,14 +403,12 @@
 
         .camera-container {
             position: fixed;
-            /* AJUSTE: Hundido para ocultar la muñeca cortada */
             bottom: -45px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            /* AJUSTE: Ancho máximo reducido para PC/Tablet para que no sea invasivo */
             max-width: 480px; 
             z-index: 1000;
             pointer-events: none; 
@@ -447,11 +434,11 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas (Las subi ligeramente porque el dock está más hundido) */
+        /* Hitboxes calibradas */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 22%; /* Subió por el hundimiento */
+            bottom: 22%; 
             height: 33%; 
             z-index: 1010;
             cursor: pointer;
@@ -467,13 +454,12 @@
 
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
-            .hero-sandwich { margin-top: 5vh; }
             .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
             .giant-transparent-logo { width: 50vw; }
             
             .camera-container {
-                bottom: -35px; /* Menos hundido en móvil */
-                max-width: 360px; /* Ancho ajustado */
+                bottom: -35px;
+                max-width: 360px; 
             }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
@@ -486,10 +472,6 @@
 <body>
 
     <div class="noise-overlay"></div>
-
-    <nav class="image-nav-container">
-        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes" class="nav-image">
-    </nav>
 
     <section class="hero-section" id="inicio">
         <div class="hero-bg">
@@ -569,22 +551,20 @@
     </section>
 
     <section class="portfolio-section">
-        <div class="portfolio-inner">
-            <div class="portfolio-header">
-                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
-                    Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
-                </p>
-                <div class="category-bar" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-                    <button class="filter-btn" data-category="webs">Webs</button>
-                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
-                </div>
+        <div class="portfolio-header">
+            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
+            </p>
+            <div class="category-bar" id="categoryBar">
+                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                <button class="filter-btn" data-category="webs">Webs</button>
+                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
             </div>
+        </div>
 
-            <div class="grid-portfolio" id="portfolioGrid">
-                <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
-            </div>
+        <div class="grid-portfolio" id="portfolioGrid">
+            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
         </div>
     </section>
 
