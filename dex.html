@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/7f923321cb1cdd00b20fb4a9850d2d8b2a0c674f/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
 
     <style>
         /* Desplazamiento suave */
@@ -32,6 +33,9 @@
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
+            
+            /* URL RAW DE LA TEXTURA EN GITHUB */
+            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/7f923321cb1cdd00b20fb4a9850d2d8b2a0c674f/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
         }
 
         * {
@@ -77,7 +81,7 @@
             background-color: var(--bg-cream); 
         }
 
-        /* FONDO B2B CON ILUMINACIÓN Y PERCEPCIÓN DE SUELO */
+        /* FONDO B2B PREMIUM (Con animación de entrada) */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -102,29 +106,17 @@
             z-index: 10; 
         }
 
-        /* TÍTULO CON VOLUMEN 3D E INTENSA SOMBRA PROYECTADA AL SUELO */
+        /* TÍTULO GIGANTE CON VOLUMEN 3D IMPOPANTE */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 25vw, 26rem); /* AJUSTE: Escalado imponente aumentado */
+            font-size: clamp(6rem, 25vw, 26rem); 
             line-height: 0.85;
-            color: var(--brand-purple); 
             text-align: center;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            
-            /* Extrusión 3D + Sombra Cayendo mucho más abajo (Suelo) */
-            text-shadow: 
-                0px 1px 0px #4A00B3,
-                0px 2px 0px #4A00B3,
-                0px 3px 0px #4A00B3,
-                0px 4px 0px #4A00B3,
-                0px 5px 0px #4A00B3,
-                0px 6px 0px #4A00B3,
-                0px 65px 20px rgba(0, 0, 0, 0.45),
-                0px 85px 35px rgba(0, 0, 0, 0.3); 
         }
 
         .hero-giant-text div {
@@ -133,10 +125,33 @@
             align-items: center;
         }
 
+        /* LETRAS MORADAS SÓLIDAS CON TEXTURA RECORTADA Y VOLUMEN PUFF */
+        .textured-purple-letter {
+            background-image: var(--purple-texture-url);
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+            
+            /* NUEVO EFECTO DE VOLUMEN "PUFF" INCHADITO CON EXTRUSIÓN APILADA SUAVE Y PROFUNDA */
+            text-shadow: 
+                0px -4px 10px rgba(255, 255, 255, 0.1),
+                0px 1px 0px rgba(107, 0, 255, 0.9),
+                0px 2px 0px rgba(107, 0, 255, 0.8),
+                0px 3px 0px rgba(107, 0, 255, 0.7),
+                0px 4px 0px rgba(107, 0, 255, 0.6),
+                0px 5px 0px rgba(107, 0, 255, 0.5),
+                0px 8px 10px rgba(0, 0, 0, 0.3),
+                0px 85px 35px rgba(0, 0, 0, 0.45); 
+        }
+
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS (Agrandado proporcionalmente) --- */
+        /* --- LIQUID GLASS CON SOMBRA AL SUELO (Mismo volumen profundo) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -157,10 +172,14 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
             
-            /* Highlight interno + Sombra profunda en suelo */
+            /* Highlight interno + Volumen de cristal apilado + Sombra profunda en suelo */
             text-shadow: 
                 0px -2px 10px rgba(255, 255, 255, 0.2),
+                0px 1px 0px rgba(255, 255, 255, 0.4),
                 0px 2px 0px rgba(255, 255, 255, 0.3),
+                0px 3px 0px rgba(255, 255, 255, 0.2),
+                0px 4px 0px rgba(255, 255, 255, 0.1),
+                0px 5px 0px rgba(255, 255, 255, 0.05),
                 0px 65px 20px rgba(0, 0, 0, 0.45),
                 0px 85px 35px rgba(0, 0, 0, 0.3);
             
@@ -171,13 +190,25 @@
             z-index: 20; 
         }
 
+        /* CONFIGURACIÓN ESPECIAL: T SUPERPUESTA SOBRE I (T Glass, I Morada texturizada) */
+        .overlap-t {
+            z-index: 25 !important; /* Por encima del resto */
+            position: relative;
+        }
+
+        .overlap-i-behind {
+            z-index: 15 !important; /* Detrás de la T */
+            position: relative;
+            margin-left: -0.25em; /* Desplazamiento preciso hacia la izquierda para quedar debajo de la barra de la T */
+        }
+
         /* LOGO CD AGRANDADO Y CON SOMBRA PROYECTADA AL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(300px, 45vw, 800px); /* AJUSTE: Escalado imponente aumentado */
+            width: clamp(300px, 45vw, 800px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
@@ -422,7 +453,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (DIMENSIONES MASIVAS, MANO OCULTA PROFUNDAMENTE)
+           DOCK DE CÁMARA (IMPOPANTE, MANO OCULTA PROFUNDAMENTE)
            ========================================================= */
         
         @keyframes breathHand {
@@ -440,7 +471,7 @@
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
             width: 95%; 
-            /* AJUSTE: Agrandado agresivamente de 650px a 800px para ser prominente */
+            /* AJUSTE: Creció agresivamente de 650px a 800px para ser prominente */
             max-width: 800px; 
             z-index: 1000;
             pointer-events: none; 
@@ -470,7 +501,7 @@
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 22%; /* Sigue alineado con el cuerpo de la cámara */
+            bottom: 22%; 
             height: 33%; 
             z-index: 1010;
             cursor: pointer;
@@ -495,9 +526,7 @@
             }
 
             .camera-container {
-                /* También hundido más profundo en móvil */
                 bottom: -50px;
-                /* Agrandado agresivamente de 420px a 500px en móvil */
                 max-width: 500px; 
             }
             .hitbox { bottom: 20%; height: 35%; } 
@@ -520,20 +549,19 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back">D</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
-                    <span class="z-back">S</span>
-                    <span class="z-front float-anim delay-2">K</span>
+                    <span class="z-back textured-purple-letter delay-1">D</span>
+                    <span class="z-back textured-purple-letter">S</span>
+                    <span class="z-back textured-purple-letter delay-2">K</span>
+                    <span class="z-back textured-purple-letter delay-3">C</span>
+                    <span class="z-back textured-purple-letter delay-4">R</span>
                 </div>
                 <div>
-                    <span class="z-front float-anim delay-3">C</span>
-                    <span class="z-back">R</span>
                     <span class="z-front liquid-glass-letter float-anim delay-4" data-letter="E">E</span>
-                    <span class="z-back">A</span>
-                    <span class="z-back">T</span>
-                    <span class="z-front liquid-glass-letter float-anim delay-5" data-letter="I">I</span>
-                    <span class="z-back">V</span>
-                    <span class="z-front float-anim delay-6">O</span>
+                    <span class="z-back textured-purple-letter">A</span>
+                    <span class="z-front liquid-glass-letter overlap-t float-anim delay-5" data-letter="T">T</span>
+                    <span class="z-back textured-purple-letter overlap-i-behind">I</span>
+                    <span class="z-back textured-purple-letter">V</span>
+                    <span class="z-front liquid-glass-letter float-anim delay-6" data-letter="O">O</span>
                 </div>
             </h1>
 
