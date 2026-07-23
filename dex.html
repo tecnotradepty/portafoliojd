@@ -31,11 +31,11 @@
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
-            --font-display: 'Anton', sans-serif;
-            --font-body: 'Space Grotesk', sans-serif;
-            
             /* URL RAW DE LA TEXTURA EN GITHUB */
             --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/7f923321cb1cdd00b20fb4a9850d2d8b2a0c674f/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
+            
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
         }
 
         * {
@@ -109,23 +109,25 @@
         /* TÍTULO GIGANTE */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5.5rem, 23vw, 24rem); 
+            font-size: clamp(5rem, 20vw, 24rem); 
             line-height: 0.85;
             text-align: center;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            /* Eliminado letter-spacing para desapiñar */
             display: flex;
             flex-direction: column;
+            gap: 1vh; /* Ligera separación entre "DISK" y "CREATIVO" */
         }
 
         .hero-giant-text div {
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 0.8vw; /* AJUSTE CRÍTICO: Separa sutilmente las letras para que respiren */
         }
 
-        /* LETRAS MORADAS CON TEXTURA Y VOLUMEN PUFF 3D REAL (FILTER STACKING) */
+        /* LETRAS MORADAS CON TEXTURA Y VOLUMEN PUFF 3D REAL */
         .textured-purple-letter {
             background-image: var(--purple-texture-url);
             background-size: cover;
@@ -136,14 +138,13 @@
             display: inline-block;
             position: relative;
             
-            /* Trazo y bisel 3D para darle el cuerpo "hinchadito" */
-            -webkit-text-stroke: 1.5px rgba(74, 0, 179, 0.7);
+            /* Eliminado -webkit-text-stroke para quitar el borde "dibujado" */
             
-            /* Filtros encadenados para la extrusión de volumen + Sombra al suelo */
+            /* Filtros encadenados para volumen puro y orgánico + Sombra al suelo */
             filter: 
                 drop-shadow(0px 2px 0px #4A00B3)
                 drop-shadow(0px 4px 0px #35008B)
-                drop-shadow(0px 6px 2px rgba(0, 0, 0, 0.3))
+                drop-shadow(0px 6px 2px rgba(0, 0, 0, 0.2))
                 drop-shadow(0px 55px 20px rgba(0, 0, 0, 0.45));
         }
 
@@ -169,9 +170,9 @@
             
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7);
+            /* Borde blanco sutil solo para el cristal, le da realismo */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
-            /* Filtros de relieve para el cristal + Sombra al suelo */
             filter: 
                 drop-shadow(0px 2px 0px rgba(255, 255, 255, 0.4))
                 drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.2))
@@ -193,7 +194,8 @@
         .overlap-i-behind {
             z-index: 15 !important;
             position: relative;
-            margin-left: -0.22em; /* La I entra debajo de la barra de la T */
+            /* Margen drásticamente reducido para que no se coma la I */
+            margin-left: -0.08em; 
         }
 
         /* LOGO CD CON SOMBRA PROYECTADA AL SUELO */
@@ -446,7 +448,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (DIMENSIONADO Y GROUNDED)
+           DOCK DE CÁMARA (AUMENTADO Y PROFUNDIZADO PARA NO MOSTRAR MUÑECA)
            ========================================================= */
         
         @keyframes breathHand {
@@ -457,13 +459,15 @@
 
         .camera-container {
             position: fixed;
-            bottom: -55px; 
+            /* AJUSTE: Más profundo al ser más grande */
+            bottom: -75px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 92%; 
-            max-width: 600px; 
+            width: 95%; 
+            /* AJUSTE: Dock más grande en PC/Tablet */
+            max-width: 850px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -474,7 +478,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
             transform-origin: center center;
         }
 
@@ -488,12 +492,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* HITBOXES RECALIBRADAS CON PRECISIÓN SOBRE LOS BOTONES DE LA CÁMARA */
+        /* HITBOXES RECALIBRADAS */
         .hitbox {
             position: absolute;
             pointer-events: auto;
             bottom: 22%; 
-            height: 38%; 
+            height: 33%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -501,15 +505,16 @@
             user-select: none;
         }
 
-        .hitbox-inicio { left: 20%; width: 13.5%; }
-        .hitbox-identidad { left: 34.5%; width: 13.5%; }
-        .hitbox-proyectos { left: 50%; width: 13.5%; }
-        .hitbox-contacto { left: 65.5%; width: 13.5%; }
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* --- MÓVIL Y TABLET --- */
+        /* --- MÓVIL Y TABLET RE-CALIBRADO --- */
         @media (max-width: 768px) {
-            .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
-            .giant-transparent-logo { width: 55vw; }
+            .hero-giant-text { font-size: 20vw; gap: 1vw; } /* Tamaño ajustado para móvil */
+            .hero-giant-text div { gap: 1.5vw; }
+            .giant-transparent-logo { width: 50vw; }
             
             .playground-container {
                 grid-template-columns: 1.3fr 1fr; 
@@ -517,14 +522,15 @@
             }
 
             .camera-container {
-                bottom: -35px;
-                max-width: 420px; 
+                bottom: -55px;
+                /* Más grande también en móvil */
+                max-width: 520px; 
             }
-            .hitbox { bottom: 20%; height: 38%; } 
+            .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
-            .hitbox-identidad { left: 33%; width: 14%; }
-            .hitbox-proyectos { left: 47%; width: 14%; }
-            .hitbox-contacto { left: 61%; width: 14%; }
+            .hitbox-identidad { left: 32%; width: 14%; }
+            .hitbox-proyectos { left: 46%; width: 14%; }
+            .hitbox-contacto { left: 60%; width: 14%; }
         }
     </style>
 </head>
@@ -540,7 +546,7 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back textured-purple-letter">D</span>
+                    <span class="z-back textured-purple-letter delay-1">D</span>
                     <span class="z-front liquid-glass-letter float-anim delay-1" data-letter="I">I</span>
                     <span class="z-back textured-purple-letter">S</span>
                     <span class="z-front textured-purple-letter float-anim delay-2">K</span>
