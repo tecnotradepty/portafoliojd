@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
+
     <style>
         /* Desplazamiento suave para los anclajes de la cámara */
         html {
@@ -23,7 +25,7 @@
         }
 
         :root {
-            --bg-cream: #F2F1EC;       
+            --bg-cream: #EAE9E4; /* Ajustado al tono del nuevo fondo */      
             --brand-purple: #6B00FF; 
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
@@ -43,7 +45,7 @@
             color: var(--text-dark);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 150px; /* Un poco más de espacio para la cámara grande */
+            padding-bottom: 120px; 
         }
 
         /* --- EFECTO DE RUIDO (NOISE) --- */
@@ -54,25 +56,6 @@
             z-index: 9999;
             opacity: 0.04;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-        }
-
-        /* --- BARRA SUPERIOR (LUCES COLGANTES ORIGINALES) --- */
-        .image-nav-container {
-            position: absolute;
-            top: 0px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            max-width: 350px;
-            z-index: 100;
-        }
-
-        .nav-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.8; 
-            filter: drop-shadow(0px 5px 8px rgba(0,0,0,0.25));
         }
 
         /* --- HERO SECTION --- */
@@ -91,16 +74,23 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; 
+            background-color: var(--bg-cream); /* Color de respaldo mientras carga */
         }
 
-        /* FONDO ARCOIRIS COMPLETO */
+        /* FONDO B2B PREMIUM (Con animación de entrada para ocultar el cargado lento) */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/dfe56dcec437c3a12fabe292cbd1abda1c60760d/DIQC/file_00000000b25c81f7aa8e761c456ed616.png');
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
+            animation: fadeInBg 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInBg {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .hero-sandwich {
@@ -112,9 +102,10 @@
             z-index: 10; 
         }
 
+        /* TÍTULO CON VOLUMEN 3D (Sombra Extruida hacia el suelo) */
         .hero-giant-text {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 23vw, 26rem); 
+            font-size: clamp(4rem, 18vw, 21rem); 
             line-height: 0.85;
             color: var(--brand-purple); 
             text-align: center;
@@ -123,7 +114,18 @@
             letter-spacing: -2px;
             display: flex;
             flex-direction: column;
-            text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+            
+            /* Extrusión 3D (Múltiples sombras sólidas) + Sombra de suelo (Difuminada) */
+            text-shadow: 
+                0px 1px 0px #4A00B3,
+                0px 2px 0px #4A00B3,
+                0px 3px 0px #4A00B3,
+                0px 4px 0px #4A00B3,
+                0px 5px 0px #4A00B3,
+                0px 6px 0px #4A00B3,
+                0px 7px 0px #4A00B3,
+                0px 8px 0px #4A00B3,
+                0px 45px 25px rgba(0, 0, 0, 0.4); 
         }
 
         .hero-giant-text div {
@@ -135,7 +137,7 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS --- */
+        /* --- LIQUID GLASS (Con Volumen 3D) --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
@@ -156,9 +158,15 @@
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
             
+            /* Highlight interno + Extrusión de cristal + Sombra de suelo */
             text-shadow: 
-                0px 5px 15px rgba(255, 255, 255, 0.2),
-                0px 10px 20px rgba(0, 0, 0, 0.1);
+                0px -2px 10px rgba(255, 255, 255, 0.2),
+                0px 1px 0px rgba(255, 255, 255, 0.4),
+                0px 2px 0px rgba(255, 255, 255, 0.3),
+                0px 3px 0px rgba(255, 255, 255, 0.2),
+                0px 4px 0px rgba(255, 255, 255, 0.1),
+                0px 5px 0px rgba(255, 255, 255, 0.05),
+                0px 45px 25px rgba(0, 0, 0, 0.4);
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -167,17 +175,18 @@
             z-index: 20; 
         }
 
-        /* --- LOGO FLOTANTE CD --- */
+        /* LOGO CD REDUCIDO Y CON SOMBRA HACIA EL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(280px, 45vw, 750px); 
+            width: clamp(220px, 35vw, 600px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            filter: drop-shadow(0px 45px 35px rgba(0, 0, 0, 0.3));
+            /* Sombra profunda */
+            filter: drop-shadow(0px 40px 20px rgba(0, 0, 0, 0.45));
         }
 
         @keyframes floatLogo {
@@ -221,8 +230,6 @@
             align-items: center;
             margin-bottom: 6rem;
             width: 100%;
-            max-width: 1200px;
-            margin-left: auto; margin-right: auto;
         }
 
         .playground-text h2 {
@@ -274,11 +281,6 @@
         }
 
         /* Operadores del Sistema */
-        .system-operators-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -386,11 +388,6 @@
             z-index: 10; 
         }
 
-        .portfolio-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
         .portfolio-header {
             display: flex; justify-content: space-between; align-items: flex-end;
             margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
@@ -417,7 +414,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (TAMAÑO MÁS GRANDE EN TODAS LAS PANTALLAS)
+           DOCK DE CÁMARA (DIMENSIONES MASIVAS, MANTENIENDO EL OCULTAMIENTO)
            ========================================================= */
         
         @keyframes breathHand {
@@ -428,13 +425,15 @@
 
         .camera-container {
             position: fixed;
-            bottom: 0px; 
+            /* AJUSTE: Hundido más profundo porque la imagen es más grande */
+            bottom: -65px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 98%; 
-            max-width: 600px; /* PC/TABLET: MUCHO MÁS GRANDE Y SUSTANCIAL */
+            width: 95%; 
+            /* AJUSTE: Creció de 480px a 650px para ser prominente en PC/Tablet */
+            max-width: 650px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -445,7 +444,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
             transform-origin: center center;
         }
 
@@ -459,12 +458,12 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas */
+        /* Hitboxes calibradas basadas en porcentajes (se adaptan solas al nuevo tamaño) */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 18%; 
-            height: 35%; 
+            bottom: 22%; 
+            height: 33%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -479,37 +478,15 @@
 
         /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
         @media (max-width: 768px) {
+            .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
+            .giant-transparent-logo { width: 50vw; }
             
-            .image-nav-container { top: 0px; width: 95%; max-width: 250px; }
-
-            .hero-giant-text { 
-                font-size: 24vw; 
-                line-height: 0.85; 
-                gap: 0; 
-                letter-spacing: -2px;
-            }
-
-            .giant-transparent-logo { width: 55vw; }
-
-            /* CORRECCIÓN DIORAMA 3D A LA DERECHA EN MÓVIL */
-            .playground-container {
-                grid-template-columns: 1.3fr 1fr; /* Mantiene la imagen a la derecha */
-                gap: 15px;
-            }
-            .playground-text h2 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1; }
-            .playground-text p { font-size: 0.7rem; line-height: 1.4; margin-bottom: 0.6rem; }
-            .playground-text .cta-text { margin-top: 1rem; }
-            .playground-image img { transform: scale(1.1); max-width: 100%; }
-            
-            /* CÁMARA MÁS GRANDE EN MÓVIL */
             .camera-container {
-                bottom: -5px; 
-                max-width: 450px; /* Mucho más grande, cubriendo casi todo el ancho */
-                width: 98%;
+                bottom: -40px;
+                /* Creció de 360px a 420px para ser prominente en móvil */
+                max-width: 420px; 
             }
-            
-            /* Ajuste de hitboxes por si acaso para la nueva escala */
-            .hitbox { bottom: 18%; height: 35%; } 
+            .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; }
             .hitbox-identidad { left: 32%; width: 14%; }
             .hitbox-proyectos { left: 46%; width: 14%; }
@@ -520,10 +497,6 @@
 <body>
 
     <div class="noise-overlay"></div>
-
-    <nav class="image-nav-container">
-        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/1eaf4c3d15326f81be3506b401761c900a0ed526/DIQC/1784715127836(1).png" alt="Luces de Estudio Colgantes" class="nav-image">
-    </nav>
 
     <section class="hero-section" id="inicio">
         <div class="hero-bg">
@@ -569,27 +542,25 @@
             </div>
         </div>
 
-        <div class="system-operators-container">
-            <div class="system-operators-header">
-                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        <div class="system-operators-header">
+            [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
+        </div>
+        
+        <div class="team-grid-editorial">
+            <div class="team-member-col">
+                <h4>JOEL DÍAZ</h4>
+                <span class="role">Dev & Arquitectura Web</span>
+                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
             </div>
-            
-            <div class="team-grid-editorial">
-                <div class="team-member-col">
-                    <h4>JOEL DÍAZ</h4>
-                    <span class="role">Dev & Arquitectura Web</span>
-                    <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>JONATHAN OROZCO</h4>
-                    <span class="role">Estrategia & Operaciones</span>
-                    <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
-                </div>
-                <div class="team-member-col">
-                    <h4>AYL JONES</h4>
-                    <span class="role">Dirección Creativa & Mkt</span>
-                    <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
-                </div>
+            <div class="team-member-col">
+                <h4>JONATHAN OROZCO</h4>
+                <span class="role">Estrategia & Operaciones</span>
+                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
+            </div>
+            <div class="team-member-col">
+                <h4>AYL JONES</h4>
+                <span class="role">Dirección Creativa & Mkt</span>
+                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
             </div>
         </div>
     </section>
@@ -605,22 +576,20 @@
     </section>
 
     <section class="portfolio-section">
-        <div class="portfolio-inner">
-            <div class="portfolio-header">
-                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
-                    Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
-                </p>
-                <div class="category-bar" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-                    <button class="filter-btn" data-category="webs">Webs</button>
-                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
-                </div>
+        <div class="portfolio-header">
+            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
+            </p>
+            <div class="category-bar" id="categoryBar">
+                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                <button class="filter-btn" data-category="webs">Webs</button>
+                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
             </div>
+        </div>
 
-            <div class="grid-portfolio" id="portfolioGrid">
-                <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
-            </div>
+        <div class="grid-portfolio" id="portfolioGrid">
+            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
         </div>
     </section>
 
