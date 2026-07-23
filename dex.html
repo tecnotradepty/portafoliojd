@@ -12,7 +12,7 @@
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
 
     <style>
-        /* Desplazamiento suave para los anclajes de la cámara */
+        /* Desplazamiento suave */
         html {
             scroll-behavior: smooth;
         }
@@ -25,7 +25,7 @@
         }
 
         :root {
-            --bg-cream: #EAE9E4; /* Ajustado al tono del nuevo fondo */      
+            --bg-cream: #EAE9E4;       
             --brand-purple: #6B00FF; 
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
@@ -74,10 +74,10 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; 
-            background-color: var(--bg-cream); /* Color de respaldo mientras carga */
+            background-color: var(--bg-cream); 
         }
 
-        /* FONDO B2B PREMIUM (Con animación de entrada para ocultar el cargado lento) */
+        /* FONDO B2B CON ILUMINACIÓN Y PERCEPCIÓN DE SUELO */
         .hero-bg-base {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -85,7 +85,7 @@
             background-position: center center; 
             background-repeat: no-repeat;
             background-size: cover; 
-            animation: fadeInBg 1s ease-in-out forwards;
+            animation: fadeInBg 0.8s ease-in-out forwards;
         }
 
         @keyframes fadeInBg {
@@ -102,7 +102,7 @@
             z-index: 10; 
         }
 
-        /* TÍTULO CON VOLUMEN 3D (Sombra Extruida hacia el suelo) */
+        /* TÍTULO CON SOMBRA INTENSA PROYECTADA AL SUELO */
         .hero-giant-text {
             font-family: var(--font-display);
             font-size: clamp(4rem, 18vw, 21rem); 
@@ -115,7 +115,7 @@
             display: flex;
             flex-direction: column;
             
-            /* Extrusión 3D (Múltiples sombras sólidas) + Sombra de suelo (Difuminada) */
+            /* Extrusión 3D + Sombra cayendo directo al piso */
             text-shadow: 
                 0px 1px 0px #4A00B3,
                 0px 2px 0px #4A00B3,
@@ -123,9 +123,8 @@
                 0px 4px 0px #4A00B3,
                 0px 5px 0px #4A00B3,
                 0px 6px 0px #4A00B3,
-                0px 7px 0px #4A00B3,
-                0px 8px 0px #4A00B3,
-                0px 45px 25px rgba(0, 0, 0, 0.4); 
+                0px 65px 20px rgba(0, 0, 0, 0.45),
+                0px 85px 35px rgba(0, 0, 0, 0.3); 
         }
 
         .hero-giant-text div {
@@ -137,36 +136,33 @@
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS (Con Volumen 3D) --- */
+        /* --- LIQUID GLASS CON SOMBRA AL SUELO --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
             background: linear-gradient(
                 135deg, 
-                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(255, 255, 255, 0.85) 0%, 
                 rgba(0, 240, 255, 0.5) 20%, 
-                rgba(255, 255, 255, 0.1) 40%, 
-                rgba(255, 255, 255, 0.1) 60%, 
+                rgba(255, 255, 255, 0.15) 40%, 
+                rgba(255, 255, 255, 0.15) 60%, 
                 rgba(255, 0, 60, 0.4) 80%,  
-                rgba(255, 255, 255, 0.8) 100%
+                rgba(255, 255, 255, 0.85) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             
             color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.15);
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
             
-            /* Highlight interno + Extrusión de cristal + Sombra de suelo */
+            /* Highlight + Sombra profunda en suelo */
             text-shadow: 
                 0px -2px 10px rgba(255, 255, 255, 0.2),
-                0px 1px 0px rgba(255, 255, 255, 0.4),
                 0px 2px 0px rgba(255, 255, 255, 0.3),
-                0px 3px 0px rgba(255, 255, 255, 0.2),
-                0px 4px 0px rgba(255, 255, 255, 0.1),
-                0px 5px 0px rgba(255, 255, 255, 0.05),
-                0px 45px 25px rgba(0, 0, 0, 0.4);
+                0px 65px 20px rgba(0, 0, 0, 0.45),
+                0px 85px 35px rgba(0, 0, 0, 0.3);
             
             backdrop-filter: blur(4px) saturate(150%);
             -webkit-backdrop-filter: blur(4px) saturate(150%);
@@ -175,18 +171,18 @@
             z-index: 20; 
         }
 
-        /* LOGO CD REDUCIDO Y CON SOMBRA HACIA EL SUELO */
+        /* LOGO CD CON SOMBRA PROYECTADA AL SUELO */
         .giant-transparent-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: clamp(220px, 35vw, 600px); 
+            width: clamp(220px, 35vw, 550px); 
             z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
-            /* Sombra profunda */
-            filter: drop-shadow(0px 40px 20px rgba(0, 0, 0, 0.45));
+            /* Sombra profunda directo al suelo */
+            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.55));
         }
 
         @keyframes floatLogo {
@@ -230,6 +226,8 @@
             align-items: center;
             margin-bottom: 6rem;
             width: 100%;
+            max-width: 1200px;
+            margin-left: auto; margin-right: auto;
         }
 
         .playground-text h2 {
@@ -281,6 +279,11 @@
         }
 
         /* Operadores del Sistema */
+        .system-operators-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .system-operators-header {
             font-family: var(--font-body);
             font-size: 0.9rem;
@@ -388,6 +391,11 @@
             z-index: 10; 
         }
 
+        .portfolio-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .portfolio-header {
             display: flex; justify-content: space-between; align-items: flex-end;
             margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;
@@ -414,7 +422,7 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* =========================================================
-           DOCK DE CÁMARA (DIMENSIONES MASIVAS, MANTENIENDO EL OCULTAMIENTO)
+           DOCK DE CÁMARA (TAMAÑO MÁS PEQUEÑO Y HITBOXES PRECISAS)
            ========================================================= */
         
         @keyframes breathHand {
@@ -425,15 +433,15 @@
 
         .camera-container {
             position: fixed;
-            /* AJUSTE: Hundido más profundo porque la imagen es más grande */
-            bottom: -65px; 
+            /* Ligeramente hundido para tapar el corte del brazo */
+            bottom: -40px; 
             left: 50%;
             transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite;
             animation-delay: 2.5s; 
-            width: 95%; 
-            /* AJUSTE: Creció de 480px a 650px para ser prominente en PC/Tablet */
-            max-width: 650px; 
+            width: 90%; 
+            /* Reducido a 500px para no abrumar la pantalla */
+            max-width: 500px; 
             z-index: 1000;
             pointer-events: none; 
         }
@@ -444,7 +452,7 @@
             object-fit: contain; 
             display: block;
             pointer-events: auto; 
-            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 12px 20px rgba(0,0,0,0.5));
             transform-origin: center center;
         }
 
@@ -458,39 +466,44 @@
             animation: recoilClick 0.15s ease-out forwards;
         }
 
-        /* Hitboxes calibradas basadas en porcentajes (se adaptan solas al nuevo tamaño) */
+        /* HITBOXES RECALIBRADAS CON PRECISIÓN SOBRE LOS BOTONES DE LA CÁMARA */
         .hitbox {
             position: absolute;
             pointer-events: auto;
-            bottom: 22%; 
-            height: 33%; 
+            bottom: 20%; 
+            height: 42%; 
             z-index: 1010;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
             outline: none;
             user-select: none;
+            border-radius: 6px;
         }
 
-        .hitbox-inicio { left: 21%; width: 13%; }
-        .hitbox-identidad { left: 35%; width: 13%; }
-        .hitbox-proyectos { left: 51%; width: 13%; }
-        .hitbox-contacto { left: 66.5%; width: 13%; }
+        .hitbox-inicio { left: 19%; width: 14%; }
+        .hitbox-identidad { left: 34%; width: 14%; }
+        .hitbox-proyectos { left: 49%; width: 14%; }
+        .hitbox-contacto { left: 64%; width: 14%; }
 
-        /* --- CORRECCIÓN MÓVIL ESTRICTA --- */
+        /* --- MÓVIL Y TABLET --- */
         @media (max-width: 768px) {
             .hero-giant-text { font-size: 22vw; line-height: 0.85; gap: 0; letter-spacing: -2px; }
             .giant-transparent-logo { width: 50vw; }
             
-            .camera-container {
-                bottom: -40px;
-                /* Creció de 360px a 420px para ser prominente en móvil */
-                max-width: 420px; 
+            .playground-container {
+                grid-template-columns: 1.3fr 1fr; /* Diorama a la derecha */
+                gap: 15px;
             }
-            .hitbox { bottom: 20%; height: 35%; } 
-            .hitbox-inicio { left: 19%; width: 14%; }
-            .hitbox-identidad { left: 32%; width: 14%; }
-            .hitbox-proyectos { left: 46%; width: 14%; }
-            .hitbox-contacto { left: 60%; width: 14%; }
+
+            .camera-container {
+                bottom: -25px;
+                max-width: 360px; 
+            }
+            .hitbox { bottom: 20%; height: 42%; } 
+            .hitbox-inicio { left: 18%; width: 15%; }
+            .hitbox-identidad { left: 33%; width: 15%; }
+            .hitbox-proyectos { left: 48%; width: 15%; }
+            .hitbox-contacto { left: 63%; width: 15%; }
         }
     </style>
 </head>
@@ -542,25 +555,27 @@
             </div>
         </div>
 
-        <div class="system-operators-header">
-            [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
-        </div>
-        
-        <div class="team-grid-editorial">
-            <div class="team-member-col">
-                <h4>JOEL DÍAZ</h4>
-                <span class="role">Dev & Arquitectura Web</span>
-                <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
+        <div class="system-operators-container">
+            <div class="system-operators-header">
+                [ STATUS: OPERADORES DEL SISTEMA EN LÍNEA ]
             </div>
-            <div class="team-member-col">
-                <h4>JONATHAN OROZCO</h4>
-                <span class="role">Estrategia & Operaciones</span>
-                <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
-            </div>
-            <div class="team-member-col">
-                <h4>AYL JONES</h4>
-                <span class="role">Dirección Creativa & Mkt</span>
-                <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
+            
+            <div class="team-grid-editorial">
+                <div class="team-member-col">
+                    <h4>JOEL DÍAZ</h4>
+                    <span class="role">Dev & Arquitectura Web</span>
+                    <p>El motor lógico del disco. Transforma café y bases de datos en ecosistemas digitales, PWAs y plataformas empresariales de alto rendimiento.</p>
+                </div>
+                <div class="team-member-col">
+                    <h4>JONATHAN OROZCO</h4>
+                    <span class="role">Estrategia & Operaciones</span>
+                    <p>El puente entre el código y el mercado. Marketing táctico para marcas y asistencia para escalar proyectos sin fricción en el mundo real.</p>
+                </div>
+                <div class="team-member-col">
+                    <h4>AYL JONES</h4>
+                    <span class="role">Dirección Creativa & Mkt</span>
+                    <p>La interfaz gráfica y el mensaje. Encargado de inyectarle identidad, narrativa visual y voltaje puro al branding de Disk Creativo.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -576,20 +591,22 @@
     </section>
 
     <section class="portfolio-section">
-        <div class="portfolio-header">
-            <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
-                Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
-            </p>
-            <div class="category-bar" id="categoryBar">
-                <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
-                <button class="filter-btn" data-category="webs">Webs</button>
-                <button class="filter-btn" data-category="producción de contenido">Contenido</button>
-                <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
+        <div class="portfolio-inner">
+            <div class="portfolio-header">
+                <p style="max-width: 500px; font-size: 1rem; font-weight: 500; line-height: 1.6;">
+                    Lo que sabemos, lo ejecutamos con precisión. Lo que no existe aún, lo desarmamos, lo aprendemos y lo codeamos desde cero.
+                </p>
+                <div class="category-bar" id="categoryBar">
+                    <button class="filter-btn active" data-category="todos">ROOT (Todos)</button>
+                    <button class="filter-btn" data-category="webs">Webs</button>
+                    <button class="filter-btn" data-category="producción de contenido">Contenido</button>
+                    <button class="filter-btn" data-category="soluciones de hardware">Hardware</button>
+                </div>
             </div>
-        </div>
 
-        <div class="grid-portfolio" id="portfolioGrid">
-            <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
+            <div class="grid-portfolio" id="portfolioGrid">
+                <div class="loading-skeleton">EXTRAYENDO DATA DEL DISCO...</div>
+            </div>
         </div>
     </section>
 
