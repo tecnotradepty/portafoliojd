@@ -10,16 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png">
-    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/5e31439da2b5e9b33618cef887c2d46a6b909875/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/3c189286b475bf1942a7abab00418d264a136591/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg">
 
     <style>
         html { scroll-behavior: smooth; }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-        }
+        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
 
         :root {
             --bg-cream: #EAE9E4;       
@@ -27,8 +22,8 @@
             --dark-slate: #110E17;     
             --text-dark: #1A1A1A;
             
-            /* NUEVA TEXTURA RAW DE GITHUB */
-            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/5e31439da2b5e9b33618cef887c2d46a6b909875/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
+            /* TEXTURA ACTUALIZADA (Enlace Solicitado) */
+            --purple-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/3c189286b475bf1942a7abab00418d264a136591/DIQC/7ffe6b95a9a1824877cb30e8547e9865.jpg');
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
@@ -81,10 +76,7 @@
             animation: fadeInBg 0.8s ease-in-out forwards;
         }
 
-        @keyframes fadeInBg {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+        @keyframes fadeInBg { 0% { opacity: 0; } 100% { opacity: 1; } }
 
         .hero-sandwich {
             position: relative;
@@ -114,7 +106,7 @@
             gap: 0.8vw; 
         }
 
-        /* --- LETRAS TEXTURIZADAS (BORDES REDONDOS Y LIMPIOS) --- */
+        /* --- LETRAS TEXTURIZADAS --- */
         .textured-purple-letter {
             background-image: var(--purple-texture-url);
             background-size: cover;
@@ -124,20 +116,18 @@
             color: transparent;
             display: inline-block;
             position: relative;
-            
-            /* Sombra limpia sin recortar los bordes de la fuente */
+            /* Sombra suave y profunda (Grounded) */
             filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.4));
         }
 
         .z-back { z-index: 1; position: relative; }
         .z-front { z-index: 10; position: relative; }
         
-        /* --- LIQUID GLASS (MUCHO MÁS TRANSPARENTE) --- */
+        /* --- LIQUID GLASS --- */
         .liquid-glass-letter {
             font-family: var(--font-display);
             display: inline-block;
             
-            /* Opacidades muy bajas para máxima transparencia */
             background: linear-gradient(
                 135deg, 
                 rgba(255, 255, 255, 0.3) 0%, 
@@ -156,7 +146,6 @@
             
             filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.3));
             
-            /* Blur reducido a 2px para que el CD detrás se vea casi nítido */
             backdrop-filter: blur(2px) saturate(120%);
             -webkit-backdrop-filter: blur(2px) saturate(120%);
             
@@ -171,7 +160,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: clamp(260px, 40vw, 700px); 
-            z-index: 5; /* Detrás del texto */
+            z-index: 5; 
             animation: floatLogo 8s ease-in-out infinite; 
             pointer-events: none;
             filter: drop-shadow(0px 45px 20px rgba(0, 0, 0, 0.45));
@@ -185,42 +174,27 @@
 
         @keyframes floatLetter {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-10px) rotate(3deg) scale(1.02); } 
+            50% { transform: translateY(-12px) rotate(3deg) scale(1.02); } /* Levita un poco más alto */
             100% { transform: translateY(0px) rotate(0deg) scale(1); }
         }
 
         .float-anim {
             display: inline-block; 
-            animation: floatLetter 12s ease-in-out infinite; 
+            /* VELOCIDAD AUMENTADA: De 12s a 9s */
+            animation: floatLetter 9s ease-in-out infinite; 
         }
 
+        /* Retrasos calibrados para la nueva velocidad */
         .delay-1 { animation-delay: 0s; }
-        .delay-2 { animation-delay: 2s; }
-        .delay-3 { animation-delay: 4s; }
-        .delay-4 { animation-delay: 6s; }
-        .delay-5 { animation-delay: 8s; }
-        .delay-6 { animation-delay: 10s; }
+        .delay-2 { animation-delay: 1.5s; }
+        .delay-3 { animation-delay: 3s; }
+        .delay-4 { animation-delay: 4.5s; }
+        .delay-5 { animation-delay: 6s; }
+        .delay-6 { animation-delay: 7.5s; }
 
-        /* --- RESTO DE SECCIONES... --- */
-        .dark-intro-section {
-            background-color: var(--dark-slate);
-            padding: 6rem 4vw; 
-            color: #F4F3EF;
-            position: relative;
-            z-index: 10; 
-        }
-
-        .playground-container {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr; 
-            gap: 3rem;
-            align-items: center;
-            margin-bottom: 6rem;
-            width: 100%;
-            max-width: 1200px;
-            margin-left: auto; margin-right: auto;
-        }
-
+        /* --- RESTO DE SECCIONES (Identidad, Bridge, etc.) --- */
+        .dark-intro-section { background-color: var(--dark-slate); padding: 6rem 4vw; color: #F4F3EF; position: relative; z-index: 10; }
+        .playground-container { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; margin-bottom: 6rem; width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; }
         .playground-text h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 5rem); color: var(--brand-purple); line-height: 0.9; margin-bottom: 1.5rem; text-transform: uppercase; }
         .playground-text p { font-size: clamp(0.7rem, 1.2vw, 1.05rem); line-height: 1.6; color: #A09DA5; margin-bottom: 1.2rem; font-weight: 400; }
         .playground-text .highlight-text { color: #F4F3EF; font-weight: 700; }
@@ -250,7 +224,7 @@
         .filter-btn { background: transparent; color: var(--text-dark); border: 2px solid var(--text-dark); padding: 6px 20px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
         .filter-btn:hover, .filter-btn.active { background: var(--brand-purple); color: var(--bg-cream); border-color: var(--brand-purple); }
         .grid-portfolio { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; }
+        .marketplace-card { background-color: transparent; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; }
         .card-preview-thumb { width: 100%; height: 250px; background-color: #e5e3db; background-size: cover; background-position: center; margin-bottom: 1rem; border: 2px solid transparent; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease; }
         .marketplace-card:hover .card-preview-thumb { transform: translateY(-5px); border-color: var(--brand-purple); }
         .card-body-info h3 { font-family: var(--font-display); font-size: 2rem; color: var(--text-dark); line-height: 1; margin-bottom: 0.5rem; }
@@ -263,12 +237,6 @@
         footer { text-align: center; padding: 3rem; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; background-color: var(--dark-slate); color: var(--bg-cream); padding-bottom: 150px; }
 
         /* --- DOCK CÁMARA --- */
-        @keyframes breathHand {
-            0% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(4px); } 
-            100% { transform: translateX(-50%) translateY(0px); }
-        }
-
         .camera-container {
             position: fixed;
             bottom: -75px; 
@@ -292,11 +260,7 @@
             transform-origin: center center;
         }
 
-        @keyframes recoilClick {
-            0% { transform: rotate(0deg) translateY(0px); }
-            50% { transform: rotate(-1.5deg) translateY(3px); } 
-            100% { transform: rotate(0deg) translateY(0px); }
-        }
+        @keyframes recoilClick { 0% { transform: rotate(0deg) translateY(0px); } 50% { transform: rotate(-1.5deg) translateY(3px); } 100% { transform: rotate(0deg) translateY(0px); } }
         .recoil-active { animation: recoilClick 0.15s ease-out forwards; }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 22%; height: 33%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
@@ -337,7 +301,7 @@
                     <span class="z-front textured-purple-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front textured-purple-letter delay-3">C</span>
+                    <span class="z-front textured-purple-letter float-anim delay-3">C</span>
                     <span class="z-back textured-purple-letter delay-4">R</span>
                     <span class="z-front liquid-glass-letter float-anim delay-4">E</span>
                     <span class="z-back textured-purple-letter delay-5">A</span>
@@ -395,8 +359,7 @@
     <div class="purple-cloud-bridge"></div>
     
     <section class="parallax-camera-bridge" id="proyectos">
-        <div class="sticky-camera-bg">
-        </div>
+        <div class="sticky-camera-bg"></div>
         <div class="parallax-text-container">
             <h2 class="massive-parallax-title">PROYECTOS</h2>
         </div>
@@ -438,6 +401,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // Efecto Parallax CD
             const heroContainer = document.getElementById('inicio');
             const logo = document.getElementById('dynamic-logo');
             
@@ -454,6 +418,7 @@
                 });
             }
 
+            // Animación Hitboxes Cámara
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
 
@@ -462,13 +427,11 @@
                     cameraImg.classList.remove('recoil-active');
                     void cameraImg.offsetWidth; 
                     cameraImg.classList.add('recoil-active');
-                    
-                    setTimeout(() => {
-                        cameraImg.classList.remove('recoil-active');
-                    }, 150);
+                    setTimeout(() => { cameraImg.classList.remove('recoil-active'); }, 150);
                 });
             });
 
+            // LOGICA CORREGIDA API GOOGLE SHEETS
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -478,9 +441,15 @@
                 try {
                     const response = await fetch(API_URL);
                     proyectosData = await response.json();
-                    renderGrid('todos');
+                    
+                    if (proyectosData && proyectosData.length > 0) {
+                        renderGrid('todos');
+                    } else {
+                        grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">DISCO VACÍO O SIN PERMISOS.</div>';
+                    }
                 } catch (error) {
-                    grid.innerHTML = '<div class="loading-skeleton">ERROR AL LEER EL DISCO.</div>';
+                    console.error("Error al cargar Google Sheets:", error);
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">ERROR AL LEER EL DISCO. Revisa la URL de la API.</div>';
                 }
             }
 
@@ -489,7 +458,8 @@
                 
                 const proyectosFiltrados = proyectosData.filter(p => {
                     if (categoriaFiltro === 'todos') return true;
-                    let catSheet = p.categoria.toLowerCase().trim();
+                    // Lógica de filtrado flexibe
+                    let catSheet = (p.categoria || "").toLowerCase().trim();
                     let catFiltro = categoriaFiltro.toLowerCase().trim();
                     let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
                     let stemFiltro = catFiltro.endsWith('s') ? catFiltro.slice(0, -1) : catFiltro;
@@ -497,26 +467,29 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:2rem;">DIRECTORIO VACÍO.</div>';
+                    grid.innerHTML = '<div class="loading-skeleton" style="font-size:1.5rem;">NO HAY PROYECTOS EN ESTA RUTA.</div>';
                     return;
                 }
 
                 proyectosFiltrados.forEach(p => {
-                    const card = document.createElement('div');
+                    // Creamos el elemento 'a' para que la tarjeta entera sea un enlace clickeable
+                    const card = document.createElement('a');
                     card.className = 'marketplace-card';
+                    card.href = p.enlace || "#";
+                    card.target = "_blank";
 
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
                     let headerHtml = imgUrl !== "" 
                         ? `<div class="card-preview-thumb" style="background-image: url('${imgUrl}')"></div>` 
-                        : `<div class="card-preview-thumb"></div>`;
+                        : `<div class="card-preview-thumb" style="display:flex; align-items:center; justify-content:center; color:#888;">[ NO IMG ]</div>`;
 
                     card.innerHTML = `
                         ${headerHtml}
                         <div class="card-body-info">
-                            <span class="card-badge">${p.categoria}</span>
-                            <h3>${p.titulo}</h3>
-                            <p>${p.descripcion}</p>
-                            <a href="${p.enlace}" class="btn-visit-solution" target="_blank">Ejecutar CMD</a>
+                            <span class="card-badge">${p.categoria || "N/A"}</span>
+                            <h3>${p.titulo || "Archivo Corrupto"}</h3>
+                            <p>${p.descripcion || "..."}</p>
+                            <span class="btn-visit-solution">Ejecutar CMD</span>
                         </div>
                     `;
                     
@@ -534,6 +507,7 @@
                 });
             }
 
+            // Iniciar llamada a la API
             fetchProyectos();
         });
     </script>
