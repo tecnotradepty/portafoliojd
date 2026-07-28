@@ -11,6 +11,7 @@
 
     <style>
         :root {
+            --bg-primary: #050505;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #FFFFFF;
@@ -21,7 +22,8 @@
             --font-code: 'Share Tech Mono', monospace;
         }
 
-        html { scroll-behavior: smooth; }
+        /* ─── CORRECCIÓN DE MOTOR MÓVIL ─── */
+        html { scroll-behavior: smooth; overflow-x: hidden; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -29,39 +31,47 @@
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            background-color: #050505;
-            padding-bottom: 120px; 
+            background-color: var(--bg-primary);
+            position: relative;
+            min-height: 100%;
         }
 
-        /* ─── LIENZO DE LUZ FIJO (ARCOÍRIS) ─── */
+        /* ─── FIX: LIENZO ARCOÍRIS PERFECTO EN MÓVIL ─── */
         .ambient-canvas {
-            position: fixed; inset: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
-            background-position: center; background-size: cover; background-repeat: no-repeat;
-            z-index: -2; filter: brightness(0.65) saturate(1.2);
-            transform: scale(1.05);
+            background-position: center center; 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            z-index: -2; 
+            filter: brightness(0.8) saturate(1.2);
         }
 
-        /* Ruido Analógico */
         .noise-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: 0.05;
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* ─── NAVBAR SUPERIOR DE ANCHO COMPLETO ─── */
+        /* ─── NAVBAR SUPERIOR DE VENTAS ─── */
         .top-navbar {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 12, 0.4);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 4vw; z-index: 2000;
+            padding: 0 4vw; z-index: 2000; transition: all 0.3s ease;
         }
 
-        .navbar-brand { font-family: var(--font-code); font-size: 1.2rem; font-weight: bold; color: #fff; letter-spacing: 1px; text-decoration: none;}
+        .navbar-brand { 
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-code); font-size: 1.2rem; font-weight: bold; 
+            color: #fff; letter-spacing: 1px; text-decoration: none;
+        }
         .navbar-brand span { color: var(--brand-purple); }
+        .brand-icon { height: 26px; width: auto; object-fit: contain; }
 
-        .navbar-links { display: flex; gap: 2rem; align-items: center; }
+        .navbar-links { display: flex; gap: 2.5rem; align-items: center; }
         .nav-link {
             color: var(--text-main); text-decoration: none; font-family: var(--font-code);
             font-size: 0.85rem; text-transform: uppercase; transition: color 0.3s;
@@ -69,21 +79,24 @@
         .nav-link:hover { color: var(--brand-purple); }
         
         .nav-btn-wa {
-            background: transparent; border: 1px solid var(--accent-neon); color: var(--accent-neon);
+            background: #25D366; color: #050505;
             padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: bold;
-            transition: all 0.3s; text-decoration: none; font-family: var(--font-code); font-size: 0.85rem;
-            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; font-family: var(--font-code); font-size: 0.85rem;
+            display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;
         }
-        .nav-btn-wa:hover { background: var(--accent-neon); color: #000; }
-        .nav-btn-wa::before { content: ''; width: 8px; height: 8px; background: currentColor; border-radius: 50%; animation: pulse 2s infinite; }
+        .nav-btn-wa svg { width: 16px; height: 16px; fill: currentColor; }
+        .nav-btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); } }
+        .mobile-menu-btn {
+            display: none; background: transparent; border: none; color: #fff;
+            font-size: 2rem; cursor: pointer; font-family: var(--font-code);
+        }
 
-        /* ─── SECCIÓN 1: HERO (SANDWICH SÓLIDO) ─── */
+        /* ─── SECCIÓN 1: HERO (SOBRE ARCOÍRIS) ─── */
         .hero-section {
-            position: relative; min-height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 2vw; overflow: hidden;
-            padding-top: 80px; /* Compensa la barra superior */
+            position: relative; height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 2vw;
+            padding-top: 70px; z-index: 10;
         }
         
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; z-index: 10; }
@@ -95,7 +108,6 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; }
 
-        /* Efecto 3D Tipografía */
         .solid-purple-letter {
             color: var(--brand-purple); display: inline-block; position: relative;
             text-shadow: 0px 1px 0px #4A00B3, 0px 2px 0px #4A00B3, 0px 3px 0px #4A00B3, 0px 4px 0px #4A00B3, 0px 5px 0px #4A00B3, 0px 6px 0px #35008B, 0px 7px 0px #35008B, 0px 15px 15px rgba(0, 0, 0, 0.2), 0px 75px 25px rgba(0, 0, 0, 0.45);
@@ -115,7 +127,6 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
-        /* CD Flotante Físico */
         .giant-transparent-logo {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: clamp(260px, 45vw, 750px); z-index: 5;
@@ -128,74 +139,91 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
-        /* ─── SECCIÓN 2: IDENTIDAD (SPLIT LAYOUT) ─── */
-        .identity-section {
-            padding: 8rem 4vw; position: relative; z-index: 10;
-            max-width: 1400px; margin: 0 auto;
+        .hero-tagline {
+            font-family: var(--font-code); font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            color: rgba(255,255,255,0.9); margin-top: 2rem; position: relative; z-index: 20;
+            text-transform: uppercase; letter-spacing: 1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
         }
+
+        /* ─── CORTE CINEMÁTICO (BARRA ESTILO CINE) ─── */
+        .cinematic-cut {
+            width: 100%; height: 3vh; min-height: 20px;
+            background-color: #000;
+            position: relative; z-index: 25;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+        }
+
+        /* ─── FONDO DE INGENIERÍA ─── */
+        .engineering-bg {
+            background-color: var(--bg-primary);
+            position: relative; z-index: 20;
+            padding-bottom: 160px; /* Compensa la cámara inferior */
+        }
+
+        /* ─── SECCIÓN 2: IDENTIDAD ─── */
+        .identity-section { padding: 6rem 4vw; max-width: 1400px; margin: 0 auto; }
 
         .identity-container {
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem;
-            align-items: center; background: rgba(10, 10, 12, 0.4);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
-            padding: 4rem; box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; 
         }
 
-        /* Columna Izquierda: Copywriting & Ventas */
-        .identity-text { display: flex; flex-direction: column; gap: 2rem; }
-        .sys-header { font-family: var(--font-code); color: var(--brand-purple); text-transform: uppercase; font-size: 1rem; letter-spacing: 2px;}
-        .identity-title { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1; color: #fff; letter-spacing: 1px; text-transform: uppercase;}
-        .identity-desc { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
-
-        .module-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;}
+        .identity-text { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sys-header { font-family: var(--font-code); color: var(--brand-purple); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;}
+        .identity-title { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5rem); line-height: 1; color: #fff; letter-spacing: 1px; text-transform: uppercase;}
         
-        .module-item { display: flex; flex-direction: column; gap: 0.5rem; }
-        .module-tag { font-family: var(--font-code); font-size: 0.8rem; color: var(--accent-neon); }
-        .module-item h4 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; letter-spacing: 1px; text-transform: uppercase;}
-        .module-item p { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+        .manifesto-box { border-left: 2px solid var(--brand-purple); padding-left: 1.5rem; margin-top: 1rem;}
+        .identity-desc { font-size: 1.15rem; line-height: 1.6; color: var(--text-muted); }
+        .identity-desc strong { color: #fff; font-weight: normal; }
 
-        /* Columna Derecha: Maqueta 3D */
+        .module-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;}
+        .module-item { display: flex; flex-direction: column; gap: 0.5rem; }
+        .module-tag { font-family: var(--font-code); font-size: 0.8rem; color: #fff; opacity: 0.5;}
+        .module-item h4 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; letter-spacing: 1px; text-transform: uppercase;}
+        .module-item p { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
         .identity-mockup { display: flex; justify-content: center; align-items: center; position: relative; }
         .playground-img { 
-            width: 100%; max-width: 600px; height: auto; 
-            filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6));
-            animation: floatObj 10s ease-in-out infinite;
+            width: 100%; max-width: 650px; height: auto; 
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.8));
+            animation: floatObj 12s ease-in-out infinite;
         }
-        @keyframes floatObj { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes floatObj { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* ─── SECCIÓN 3: PROYECTOS (TARJETAS 3D UI) ─── */
-        .projects-section { padding: 6rem 4vw 10rem 4vw; position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; }
+        /* ─── SECCIÓN 3: PROYECTOS (TARJETAS 3D) ─── */
+        .projects-section { padding: 4rem 4vw; max-width: 1400px; margin: 0 auto; }
         
-        .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 2rem;}
-        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: 1; text-transform: uppercase; margin: 0; }
+        .projects-header { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 4rem; text-align: center; align-items: center;}
+        .projects-title { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1; text-transform: uppercase; margin: 0; }
+        .projects-subtitle { font-family: var(--font-code); font-size: 1.1rem; color: var(--text-muted); }
         
-        /* Contenedor 3D Grid */
         .grid-3d { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 3rem; perspective: 1200px; }
 
         .card-3d-wrapper { width: 100%; height: 450px; perspective: 1200px; }
         .card-3d {
             width: 100%; height: 100%; position: relative; border-radius: 24px;
-            background: linear-gradient(135deg, rgba(40,40,45,0.6) 0%, rgba(15,15,20,0.8) 100%);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(135deg, rgba(30,30,35,1) 0%, rgba(10,10,12,1) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform-style: preserve-3d;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8); display: flex; flex-direction: column;
             text-decoration: none; cursor: pointer;
         }
 
         .card-3d-glass {
             position: absolute; inset: 10px; border-radius: 18px; transform-style: preserve-3d;
-            background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255,255,255,0.08); border-left: 1px solid rgba(255,255,255,0.03);
             transform: translate3d(0px, 0px, 20px); transition: all 0.6s ease;
             display: flex; flex-direction: column; overflow: hidden;
         }
 
         .card-3d-thumb {
             width: 100%; height: 200px; background: #000; transform: translate3d(0,0,30px);
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .card-3d-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.4s; }
+        .card-3d-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.4s, transform 0.6s; }
 
         .card-3d-content { padding: 1.5rem; transform: translate3d(0, 0, 40px); display: flex; flex-direction: column; flex-grow: 1; }
         .card-3d-badge { font-family: var(--font-code); font-size: 0.75rem; color: var(--brand-purple); text-transform: uppercase; margin-bottom: 0.5rem; display: block;}
@@ -206,42 +234,53 @@
             padding: 1rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);
             transform: translate3d(0, 0, 50px); display: flex; justify-content: space-between; align-items: center;
         }
-        .card-3d-exe { font-family: var(--font-code); font-size: 0.8rem; color: var(--accent-neon); }
+        .card-3d-exe { font-family: var(--font-code); font-size: 0.8rem; color: #fff; opacity: 0.5; transition: opacity 0.3s;}
 
         .card-3d-wrapper:hover .card-3d {
             transform: rotate3d(1, -1, 0, 12deg) scale(1.02);
-            box-shadow: 20px 40px 30px rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.2);
+            box-shadow: 20px 40px 30px rgba(0,0,0,0.9); border-color: rgba(255,255,255,0.15);
         }
-        .card-3d-wrapper:hover .card-3d-glass { transform: translate3d(0px, 0px, 30px); background: rgba(255, 255, 255, 0.05); }
-        .card-3d-wrapper:hover .card-3d-thumb img { opacity: 1; filter: contrast(1.1); }
+        .card-3d-wrapper:hover .card-3d-glass { transform: translate3d(0px, 0px, 30px); background: rgba(255, 255, 255, 0.04); }
+        .card-3d-wrapper:hover .card-3d-thumb img { opacity: 1; transform: scale(1.05); }
+        .card-3d-wrapper:hover .card-3d-exe { opacity: 1; color: var(--brand-purple); }
 
-        /* ─── DOCK DE CÁMARA INFERIOR (SIN MANO) ─── */
+        /* ─── DOCK DE CÁMARA INFERIOR ─── */
         .camera-container {
-            position: fixed; bottom: -20px; left: 50%; transform: translateX(-50%); 
-            width: 95%; max-width: 800px; z-index: 2000; pointer-events: none; 
+            position: fixed; bottom: 3vh; left: 50%; transform: translateX(-50%); 
+            width: 95%; max-width: 650px; z-index: 3000; pointer-events: none; 
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px -10px 25px rgba(0,0,0,0.8)); transform-origin: center bottom; }
+        .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.9)); transform-origin: center bottom; }
 
-        /* Hitboxes recalibradas para la nueva imagen */
-        .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 2010; cursor: pointer; outline: none; }
+        .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 3010; cursor: pointer; outline: none; }
         .hitbox-inicio { left: 16%; width: 15%; }
         .hitbox-identidad { left: 34%; width: 15%; }
         .hitbox-proyectos { left: 52%; width: 15%; }
         .hitbox-contacto { left: 70%; width: 15%; }
 
+        /* ─── MENÚ MÓVIL (OVERLAY) ─── */
+        .mobile-nav-overlay {
+            position: fixed; inset: 0; background: var(--bg-primary); z-index: 1999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .mobile-nav-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-nav-link { font-family: var(--font-display); font-size: 3rem; color: #fff; text-decoration: none; text-transform: uppercase; line-height: 1;}
+
         @media (max-width: 900px) {
-            .top-navbar { padding: 1rem 1.5rem; }
-            .navbar-links { display: none; } /* Oculta links extra en móvil para priorizar botón WA */
-            .nav-btn-wa { padding: 0.4rem 1rem; font-size: 0.75rem; }
+            .top-navbar { justify-content: center; padding: 1rem; }
+            .navbar-brand { position: absolute; left: 50%; transform: translateX(-50%); }
+            .navbar-links { display: none; } 
+            .mobile-menu-btn { display: block; position: absolute; right: 1.5rem; }
             
-            .identity-container { grid-template-columns: 1fr; padding: 2.5rem; gap: 3rem; }
-            .identity-mockup { order: -1; } /* Sube la imagen en móviles */
-            .playground-img { max-width: 80%; }
+            .identity-container { grid-template-columns: 1fr; padding: 2rem 0; gap: 3rem; }
+            .identity-mockup { order: -1; }
+            .playground-img { max-width: 85%; }
             
-            .hero-giant-text { font-size: 22vw; gap: 1vw; } .hero-giant-text div { gap: 1.5vw; } .giant-transparent-logo { width: 70vw; }
+            .hero-giant-text { font-size: 22vw; gap: 1vw; } .hero-giant-text div { gap: 1.5vw; } .giant-transparent-logo { width: 75vw; }
+            .hero-tagline { font-size: 1rem; padding: 0 1rem; margin-top: 1rem;}
             
-            .camera-container { bottom: -10px; max-width: 500px; }
+            .camera-container { bottom: 2vh; max-width: 500px; }
             .hitbox { bottom: 22%; height: 35%; }
             .hitbox-inicio { left: 14%; width: 16%; } .hitbox-identidad { left: 32%; width: 16%; } .hitbox-proyectos { left: 50%; width: 16%; } .hitbox-contacto { left: 70%; width: 16%; }
         }
@@ -253,15 +292,26 @@
     <div class="noise-overlay"></div>
 
     <nav class="top-navbar">
-        <a href="#inicio" class="navbar-brand">DISK<span>.</span>CREATIVO</a>
+        <a href="#inicio" class="navbar-brand">
+            DISK<span>.</span>CREATIVO
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/46948a0b43ad27ad2e2994bcc269c9fea0a8382f/DIQC/1785277935413.png" alt="Disk Icon" class="brand-icon">
+        </a>
         <div class="navbar-links">
-            <a href="#inicio" class="nav-link">Inicio</a>
-            <a href="#identidad" class="nav-link">Identidad</a>
-            <a href="#proyectos" class="nav-link">Proyectos</a>
-            <a href="dex.html" class="nav-link">Setup de Proyecto</a>
-            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">WHATSAPP</a>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="dex.html" class="nav-link">Construye tu Proyecto</a>
+            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
         </div>
-        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuToggle">≡</button>
+    </nav>
+
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <a href="index.html" class="mobile-nav-link">Inicio</a>
+        <a href="dex.html" class="mobile-nav-link">Construye tu Proyecto</a>
+        <a href="https://wa.me/50768529324" class="mobile-nav-link" style="color:var(--accent-neon); font-size:2rem; margin-top:2rem;">WhatsApp</a>
+    </div>
 
     <section class="hero-section" id="inicio">
         <div class="hero-sandwich">
@@ -274,50 +324,62 @@
                 </div>
             </h1>
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
+            
+            <p class="hero-tagline">> "Nosotros somos disque creativos, pero le metemos corazón."</p>
         </div>
     </section>
 
-    <section class="identity-section" id="identidad">
-        <div class="identity-container">
-            <div class="identity-text">
-                <div class="sys-header">// Arquitectura de Sistema</div>
-                <h2 class="identity-title">Fábrica de Infraestructura Digital</h2>
-                <p class="identity-desc">
-                    En Disk Creativo almacenamos, procesamos y ejecutamos las ideas de tu empresa. 
-                    No somos una agencia tradicional; construimos el motor lógico y visual de tu negocio. 
-                    Ya sea una fonda, una boutique o una clínica privada, desarrollamos el bloque de código exacto que necesitas.
-                </p>
-                
-                <div class="module-list">
-                    <div class="module-item">
-                        <span class="module-tag">[ DIR_01: DESPLIEGUE RÁPIDO ]</span>
-                        <h4>Pequeños Emprendimientos</h4>
-                        <p>Para fondas, restaurantes y boutiques. Sistemas de inventario, menús QR, y redes locales de comandas sin internet (Air-Gapped) listos en tiempo récord con branding premium.</p>
+    <div class="cinematic-cut"></div>
+
+    <main class="engineering-bg">
+        
+        <section class="identity-section" id="identidad">
+            <div class="identity-container">
+                <div class="identity-text">
+                    <div class="sys-header">// Arquitectura de Operación</div>
+                    <h2 class="identity-title">El Playground de tu Empresa</h2>
+                    
+                    <div class="manifesto-box">
+                        <p class="identity-desc">
+                            Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
+                            Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
+                            Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas. 
+                            Creatividad visual, código pesado que no te dejará regado.
+                        </p>
                     </div>
-                    <br>
-                    <div class="module-item">
-                        <span class="module-tag">[ DIR_02: INGENIERÍA CUSTOM ]</span>
-                        <h4>Marcas Posicionadas</h4>
-                        <p>Para clínicas, discotecas o grandes comercios que exigen más. Desarrollo web a la medida, facturadoras, e-commerce de alto rendimiento y rebrandings corporativos de élite.</p>
+                    
+                    <div class="module-list">
+                        <div class="module-item">
+                            <span class="module-tag">[ DIR_01: DESPLIEGUE ACELERADO ]</span>
+                            <h4>Ecosistemas Pre-Ensamblados</h4>
+                            <p>Menús interactivos, redes operativas aisladas y gestores de inventario. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
+                        </div>
+                        <div class="module-item">
+                            <span class="module-tag">[ DIR_02: INGENIERÍA A LA MEDIDA ]</span>
+                            <h4>Arquitectura Custom</h4>
+                            <p>Desarrollo web corporativo. Construimos facturadoras, e-commerce de alto rendimiento y rebrandings estructurados para operar a la máxima capacidad del mercado.</p>
+                        </div>
                     </div>
                 </div>
+
+                <div class="identity-mockup">
+                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-section" id="proyectos">
+            <div class="projects-header">
+                <h2 class="projects-title">Directorio</h2>
+                <p class="projects-subtitle">Aquí puedes ver un poco de lo que hacemos.</p>
             </div>
 
-            <div class="identity-mockup">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+            <div class="grid-3d" id="portfolioGrid">
+                <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: #fff;">[ ESTABLECIENDO CONEXIÓN AL CLUSTER... ]</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="projects-section" id="proyectos">
-        <div class="projects-header">
-            <h2 class="projects-title">Directorio</h2>
-            </div>
-
-        <div class="grid-3d" id="portfolioGrid">
-            <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: #fff;">[ ESTABLECIENDO CONEXIÓN AL CLUSTER... ]</div>
-        </div>
-    </section>
+    </main>
 
     <div class="camera-container" id="cameraDock">
         <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/9c0995be6202989f4dbd368515ee279cfebc82e0/DIQC/1784610614803.png" alt="Dock Cámara Disk Creativo">
@@ -330,6 +392,23 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // --- MENÚ MÓVIL TOGGLE ---
+            const mobileBtn = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                mobileBtn.textContent = mobileNav.classList.contains('active') ? 'X' : '≡';
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileBtn.textContent = '≡';
+                });
+            });
+
             // --- LÓGICA PARALLAX HERO ---
             const heroContainer = document.getElementById('inicio');
             const logo = document.getElementById('dynamic-logo');
@@ -348,7 +427,7 @@
             const cameraDock = document.getElementById('cameraDock');
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
-                    cameraDock.style.transform = 'translateX(-50%) translateY(10px)';
+                    cameraDock.style.transform = 'translateX(-50%) translateY(8px)';
                     setTimeout(() => { cameraDock.style.transform = 'translateX(-50%) translateY(0)'; }, 150);
                 });
             });
