@@ -3,171 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Y2K OS</title>
+    <title>Disk Creativo | Vision OS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-primary: #0A0A0C;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
-            --text-main: #F4F4F6;
-            --text-dark: #000000;
-            --y2k-silver: #C3C7CB;
+            --text-main: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.6);
             
             --font-display: 'Anton', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --font-code: 'Share Tech Mono', monospace;
+            
+            /* Física del Cristal Premium */
+            --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 1px 0 0 rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
 
         html { scroll-behavior: smooth; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
+            color: var(--text-main);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            background-color: var(--bg-primary);
-            padding-bottom: 150px; /* Espacio para la cámara */
-            /* FONDO ARCOIRIS RESTAURADO COMO WALLPAPER FIJO */
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: #050505;
+            padding-bottom: 120px; 
         }
 
+        /* ─── LIENZO DE LUZ FIJO (ARCOÍRIS) ─── */
+        .ambient-canvas {
+            position: fixed; inset: 0;
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
+            background-position: center; background-size: cover; background-repeat: no-repeat;
+            z-index: -2; filter: brightness(0.7) saturate(1.2);
+            transform: scale(1.05); /* Evita bordes rotos */
+        }
+
+        /* Ruido Analógico */
         .noise-overlay {
-            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
+            position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: 0.06;
             background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
         }
 
-        /* ─── CINTA MARQUESINA Y2K ─── */
-        .marquee-container {
-            position: fixed; top: 0; left: 0; width: 100%; background: var(--accent-neon);
-            color: var(--text-dark); font-family: var(--font-code); font-weight: bold; font-size: 0.85rem;
-            padding: 5px 0; border-bottom: 2px solid var(--text-dark); z-index: 9000;
-            display: flex; overflow: hidden; white-space: nowrap; text-transform: uppercase;
-        }
-        .marquee-content {
-            display: inline-block; animation: marquee 15s linear infinite; padding-left: 100%;
-        }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-
-        /* ─── ARQUITECTURA DE VENTANAS Y2K ─── */
-        .y2k-window {
-            background: var(--bg-primary);
-            border: 3px solid var(--text-main);
-            box-shadow: 10px 10px 0px var(--brand-purple);
-            margin: 2rem auto;
+        /* ─── CLASE MAESTRA: SPATIAL PANEL ─── */
+        .spatial-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(160%);
+            -webkit-backdrop-filter: blur(40px) saturate(160%);
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-highlight);
+            border-radius: 24px;
             position: relative;
-            display: flex; flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
         }
-        .y2k-window:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 12px 12px 0px var(--accent-neon);
-        }
-        .y2k-titlebar {
-            background: var(--text-main);
-            color: var(--bg-primary);
-            padding: 8px 12px;
-            font-family: var(--font-code); font-weight: bold; font-size: 0.9rem;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 3px solid var(--text-main);
-        }
-        .y2k-controls { display: flex; gap: 5px; }
-        .y2k-btn {
-            background: var(--y2k-silver); border: 2px solid #fff; border-bottom-color: #000; border-right-color: #000;
-            width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-            font-size: 10px; font-weight: bold; cursor: pointer; color: #000; font-family: sans-serif;
-        }
-        .y2k-btn:active { border: 2px solid #000; border-bottom-color: #fff; border-right-color: #fff; }
-        .y2k-content { padding: 2rem; color: var(--text-main); }
 
         /* ─── NAVBAR SUPERIOR ─── */
-        .top-nav-btn {
-            position: fixed; top: 45px; left: 2vw; z-index: 1000;
-            background: var(--bg-primary); border: 3px solid var(--accent-neon); color: var(--accent-neon);
-            padding: 10px 20px; font-family: var(--font-code); font-weight: bold; cursor: pointer;
-            box-shadow: 4px 4px 0px var(--text-main); text-transform: uppercase; transition: all 0.2s;
+        .top-bar {
+            position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+            width: 95vw; max-width: 1400px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; z-index: 1000; border-radius: 100px;
         }
-        .top-nav-btn:hover { background: var(--accent-neon); color: var(--text-dark); }
+        .sys-status { font-family: var(--font-code); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+        .menu-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff;
+            font-family: var(--font-code); font-size: 0.85rem; padding: 0.6rem 1.5rem;
+            cursor: pointer; text-transform: uppercase; border-radius: 50px; transition: all 0.3s;
+        }
+        .menu-btn:hover { background: #fff; color: #000; }
 
-        /* ─── HERO SECTION ─── */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 4vw; position: relative; z-index: 10; }
-        .hero-window { width: 100%; max-width: 1200px; text-align: center; }
+        /* ─── HERO SECTION (DISEÑO EDITORIAL ASIMÉTRICO) ─── */
+        .hero {
+            min-height: 100vh; padding: 8rem 2vw 2vw 2vw;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 10;
+        }
         
-        .hero-cd-wrapper {
-            position: relative; width: 100%; max-width: 500px; margin: 0 auto 2rem auto;
-            border: 2px dashed rgba(255,255,255,0.2); padding: 2rem; border-radius: 50%;
+        .hero-bento {
+            width: 100%; max-width: 1400px; height: 75vh; min-height: 600px;
+            display: flex; position: relative;
         }
-        .hero-cd-asset {
-            width: 100%; height: auto; animation: spinY2K 15s linear infinite;
-            filter: drop-shadow(0px 0px 20px rgba(107, 0, 255, 0.8));
+
+        /* Panel Principal de Texto */
+        .hero-text-panel {
+            flex: 0 0 65%; padding: 4rem; display: flex; flex-direction: column; justify-content: flex-end;
+            z-index: 20; /* Por encima del CD */
         }
-        @keyframes spinY2K { 100% { transform: rotate(360deg); } }
 
         .hero-title {
-            font-family: var(--font-display); font-size: clamp(3rem, 12vw, 10rem);
+            font-family: var(--font-display); font-size: clamp(5rem, 12vw, 11rem);
             line-height: 0.85; text-transform: uppercase; margin: 0;
-            color: var(--text-main); text-shadow: 4px 4px 0px var(--brand-purple);
-            letter-spacing: 2px;
+            letter-spacing: -2px; color: #fff;
+        }
+        .hero-subtitle { font-family: var(--font-code); color: var(--text-muted); font-size: 1.2rem; margin-top: 1.5rem; letter-spacing: 1px; max-width: 500px; line-height: 1.5; }
+
+        /* El CD tratado como Arte Editorial (Bleed Effect) */
+        .hero-cd-asset {
+            position: absolute; right: -5%; top: 50%; transform: translateY(-50%);
+            width: clamp(400px, 50vw, 900px); z-index: 10;
+            pointer-events: none; animation: floatSpin 20s linear infinite;
+            filter: drop-shadow(0px 50px 40px rgba(0,0,0,0.8));
         }
 
-        /* ─── IDENTIDAD / ECOSISTEMA ─── */
-        .identity-section { padding: 4rem 4vw; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        
-        .manifesto-title { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; color: var(--accent-neon); margin-bottom: 1.5rem; text-transform: uppercase; }
-        .manifesto-text { font-size: 1.1rem; line-height: 1.6; color: var(--text-main); margin-bottom: 2rem; font-family: var(--font-code); }
-        
-        .eco-dir { display: block; font-family: var(--font-code); color: var(--brand-purple); margin-bottom: 0.5rem; font-weight: bold; }
-        .eco-block { margin-bottom: 2rem; border-left: 2px solid var(--accent-neon); padding-left: 1rem; }
-        .eco-block h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: 1px; }
-        .eco-block p { font-size: 0.95rem; color: #ddd; }
-
-        .playground-asset { width: 100%; height: auto; display: block; border: 2px solid var(--text-main); }
-
-        /* ─── PROYECTOS (DATABASE) ─── */
-        .projects-section { padding: 4rem 4vw; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
-        
-        .filters-y2k { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
-        .filter-btn {
-            background: var(--bg-primary); border: 2px solid var(--text-main); color: var(--text-main);
-            font-family: var(--font-code); padding: 5px 15px; cursor: pointer; text-transform: uppercase;
-            box-shadow: 3px 3px 0px var(--brand-purple); transition: all 0.1s;
+        @keyframes floatSpin { 
+            0% { transform: translateY(-50%) rotate(0deg); } 
+            100% { transform: translateY(-50%) rotate(360deg); } 
         }
-        .filter-btn:active, .filter-btn.active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px var(--brand-purple); background: var(--text-main); color: var(--bg-primary); }
 
-        .grid-y2k { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        /* ─── IDENTIDAD: BENTO GRID ─── */
+        .identity-section { padding: 4rem 2vw; max-width: 1400px; margin: 0 auto; position: relative; z-index: 10; }
         
-        .project-card {
-            background: #fff; border: 3px solid #000; color: #000;
-            box-shadow: 6px 6px 0px #000; text-decoration: none; display: flex; flex-direction: column;
-            transition: transform 0.2s;
-        }
-        .project-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0px var(--accent-neon); }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(300px, auto); gap: 1.5rem; }
+
+        /* Tarjeta 1: Manifiesto (Ocupa 12 cols, estilo banner) */
+        .bento-manifesto { grid-column: span 12; padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+        .sys-header { font-family: var(--font-code); color: var(--brand-purple); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 2rem; font-weight: bold;}
+        .manifesto-text { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.3; font-weight: 600; max-width: 1000px; }
+        .manifesto-text span { color: var(--text-muted); }
+
+        /* Tarjetas 2 y 3: Módulos (Ocupan 4 cols cada una) */
+        .bento-module { grid-column: span 4; padding: 3rem; display: flex; flex-direction: column; }
+        .eco-dir { font-family: var(--font-code); color: var(--accent-neon); margin-bottom: 1rem; font-size: 0.85rem; }
+        .bento-module h3 { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; line-height: 1; }
+        .bento-module p { color: var(--text-muted); line-height: 1.5; font-size: 0.95rem;}
+
+        /* Tarjeta 4: Playground 3D (Ocupa 4 cols, la imagen llena el cristal) */
+        .bento-image { grid-column: span 4; padding: 0; display: flex; align-items: center; justify-content: center; }
+        .playground-asset { width: 100%; height: 100%; object-fit: cover; object-position: center; mix-blend-mode: luminosity; opacity: 0.9; transition: all 0.5s;}
+        .bento-image:hover .playground-asset { mix-blend-mode: normal; opacity: 1; transform: scale(1.05); }
+
+        /* ─── PROYECTOS (DIRECTORIO SPATIAL) ─── */
+        .projects-section { padding: 4rem 2vw; max-width: 1400px; margin: 0 auto; position: relative; z-index: 10; }
         
-        .card-header { background: #000080; color: #fff; padding: 5px; font-family: var(--font-code); font-size: 0.75rem; font-weight: bold; display: flex; justify-content: space-between; }
-        .card-thumb { width: 100%; height: 180px; border-bottom: 3px solid #000; overflow: hidden; background: #c3c7cb; display: flex; align-items: center; justify-content: center; }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) grayscale(0.2); }
-        .card-body { padding: 1rem; }
-        .card-title { font-family: var(--font-display); font-size: 1.8rem; line-height: 1; margin-bottom: 0.5rem; text-transform: uppercase; }
-        .card-desc { font-family: sans-serif; font-size: 0.9rem; line-height: 1.4; color: #333; margin-bottom: 1rem; }
-        .btn-exe { font-family: var(--font-code); font-size: 0.85rem; background: #c3c7cb; border: 2px solid #fff; border-bottom-color: #000; border-right-color: #000; padding: 5px; text-align: center; color: #000; font-weight: bold; }
+        .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 2rem; }
+        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); line-height: 1; text-transform: uppercase; }
+        
+        .category-glass { padding: 8px; display: flex; gap: 8px; border-radius: 100px; flex-wrap: wrap; }
+        .filter-btn { background: transparent; border: none; color: var(--text-muted); font-family: var(--font-code); padding: 0.6rem 1.2rem; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; border-radius: 50px; transition: all 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: #fff; color: #000; }
 
-        .loading-data { grid-column: 1 / -1; font-family: var(--font-code); padding: 4rem 0; color: var(--accent-neon); text-align: center; font-size: 1.2rem; }
+        /* Grid de Proyectos Estricta */
+        .grid-spatial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        
+        .project-card { padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; transition: transform 0.3s, border-color 0.3s; cursor: pointer;}
+        .project-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.4); }
+        
+        .project-thumb { width: 100%; height: 240px; border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; position: relative; background: #000; }
+        .thumb-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(20%); }
+        .project-card:hover .thumb-img { transform: scale(1.08); filter: grayscale(0%); }
+        
+        .project-badge { font-family: var(--font-code); font-size: 0.75rem; color: var(--accent-neon); text-transform: uppercase; margin-bottom: 0.8rem; display: block; }
+        .project-title { font-family: var(--font-display); font-size: 2rem; color: #fff; line-height: 1.1; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .project-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;}
+        .btn-exe { font-family: var(--font-code); font-size: 0.85rem; color: #fff; display: flex; align-items: center; gap: 5px; opacity: 0.6; transition: opacity 0.3s; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .project-card:hover .btn-exe { opacity: 1; color: var(--brand-purple); }
 
-        /* ─── DOCK CÁMARA (ORIGINAL PNG RESTAURADO) ─── */
+        /* ─── MENÚ LATERAL ─── */
+        .side-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        .side-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .side-menu { position: fixed; top: 0; left: -450px; width: 400px; max-width: 85vw; height: 100vh; z-index: 9999; display: flex; flex-direction: column; padding: 4rem 3rem; transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 0 30px 30px 0; border-left: none; }
+        .side-menu.active { left: 0; }
+        .menu-title-side { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 3rem; display: flex; justify-content: space-between; text-transform: uppercase;}
+        .menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
+        .menu-link { color: #fff; text-decoration: none; font-size: 2.8rem; font-family: var(--font-display); text-transform: uppercase; transition: color 0.3s, transform 0.3s; line-height: 1;}
+        .menu-link span { font-size: 1rem; font-family: var(--font-code); color: var(--brand-purple); vertical-align: top; margin-right: 10px; }
+        .menu-link:hover { color: var(--brand-purple); transform: translateX(10px); }
+        .close-btn { background: none; border: none; color: #fff; font-family: var(--font-code); cursor: pointer; font-size: 1.2rem; transition: color 0.3s;}
+        .close-btn:hover { color: var(--accent-neon); }
+
+        /* ─── DOCK DE CÁMARA ─── */
         .camera-container {
             position: fixed; bottom: -75px; left: 50%; transform: translateX(-50%); 
             animation: breathHand 6s ease-in-out infinite; animation-delay: 2.5s; 
             width: 95%; max-width: 850px; z-index: 1000; pointer-events: none; 
         }
         @keyframes breathHand { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
-        .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px -10px 25px rgba(0,0,0,0.8)); transform-origin: center center; }
+        .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px -15px 30px rgba(0,0,0,0.8)); transform-origin: center center; }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 22%; height: 33%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
         .hitbox-inicio { left: 21%; width: 13%; }
@@ -175,15 +195,23 @@
         .hitbox-proyectos { left: 51%; width: 13%; }
         .hitbox-contacto { left: 66.5%; width: 13%; }
 
-        /* ─── MENÚ LATERAL ─── */
-        .side-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-        .side-menu-overlay.active { opacity: 1; pointer-events: auto; }
-        .side-menu { position: fixed; top: 0; left: -450px; width: 400px; max-width: 85vw; height: 100vh; z-index: 9999; display: flex; flex-direction: column; transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .side-menu.active { left: 0; }
-        
-        @media (max-width: 900px) {
-            .identity-section { grid-template-columns: 1fr; }
+        @media (max-width: 1024px) {
+            .bento-manifesto { grid-column: span 12; padding: 3rem 2rem;}
+            .bento-module { grid-column: span 6; padding: 2rem;}
+            .bento-image { grid-column: span 12; height: 300px;}
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 7rem; }
+            .hero-bento { flex-direction: column; height: auto; min-height: auto; }
+            .hero-text-panel { flex: none; width: 100%; padding: 2rem; align-items: center; text-align: center; }
             .hero-title { font-size: 20vw; }
+            .hero-cd-asset { position: relative; right: auto; top: auto; transform: none; width: 80%; max-width: 300px; margin: -2rem auto 2rem auto; animation: spinMobile 20s linear infinite; }
+            @keyframes spinMobile { 100% { transform: rotate(360deg); } }
+            
+            .bento-module { grid-column: span 12; }
+            
+            .top-bar { top: 1rem; width: 92vw; padding: 0.8rem 1.5rem; border-radius: 16px; }
             .camera-container { bottom: -55px; max-width: 520px; }
             .hitbox { bottom: 20%; height: 35%; } 
             .hitbox-inicio { left: 19%; width: 14%; } .hitbox-identidad { left: 32%; width: 14%; } .hitbox-proyectos { left: 46%; width: 14%; } .hitbox-contacto { left: 60%; width: 14%; }
@@ -192,108 +220,88 @@
 </head>
 <body>
 
+    <div class="ambient-canvas"></div>
     <div class="noise-overlay"></div>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            *** DISK CREATIVO OS v1.0 *** CONEXIÓN ESTABLECIDA *** INFRAESTRUCTURA DIGITAL *** EJECUCIÓN A DOS VELOCIDADES *** BLOQUEO DE IA SLOP INICIADO *** ROOT ACCESS GRANTED ***
-        </div>
-    </div>
-
-    <button class="top-nav-btn" id="openMenuBtn">C:\> START MENU</button>
+    <header class="top-bar spatial-panel">
+        <div class="sys-status">DISK_CREATIVO</div>
+        <button class="menu-btn" id="openMenuBtn">SYS.MENU ≡</button>
+    </header>
 
     <div class="side-menu-overlay" id="menuOverlay"></div>
-    <nav class="side-menu y2k-window" id="sideMenu" style="margin:0; border-left:none; height: 100vh;">
-        <div class="y2k-titlebar">
-            <span>C:\SYSTEM\MENU.EXE</span>
-            <div class="y2k-controls">
-                <button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn" id="closeMenuBtn">X</button>
-            </div>
+    <nav class="side-menu spatial-panel" id="sideMenu" style="border-radius: 0 30px 30px 0; border-left: none;">
+        <div class="menu-title-side">
+            <span>Directorio Principal</span>
+            <button class="close-btn" id="closeMenuBtn">[ X ]</button>
         </div>
-        <div class="y2k-content" style="display:flex; flex-direction:column; gap:2rem;">
-            <a href="#inicio" style="color:var(--accent-neon); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 01_INICIO</a>
-            <a href="dex.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 02_SETUP</a>
-            <a href="modulo.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 03_MÓDULOS</a>
-            <a href="log.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 04_SYS_LOG</a>
+        <div class="menu-links">
+            <a href="#inicio" class="menu-link"><span>01</span> Inicio</a>
+            <a href="dex.html" class="menu-link"><span>02</span> Setup</a>
+            <a href="modulo.html" class="menu-link"><span>03</span> Módulos</a>
+            <a href="log.html" class="menu-link"><span>04</span> Sys.Log</a>
         </div>
     </nav>
 
     <section class="hero" id="inicio">
-        <div class="y2k-window hero-window">
-            <div class="y2k-titlebar">
-                <span>D:\DISK_CREATIVO_OS\BOOT.EXE</span>
-                <div class="y2k-controls">
-                    <button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button>
-                </div>
-            </div>
-            <div class="y2k-content">
-                <div class="hero-cd-wrapper">
-                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="hero-cd-asset">
-                </div>
+        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="hero-cd-asset" id="dynamic-logo">
+        
+        <div class="hero-bento">
+            <div class="hero-text-panel spatial-panel">
                 <h1 class="hero-title">DISK<br>CREATIVO</h1>
+                <p class="hero-subtitle">Agencia de infraestructura digital. Construimos la tecnología, codificamos el diseño, ejecutamos tu marca.</p>
             </div>
         </div>
     </section>
 
     <section class="identity-section" id="identidad">
-        <div class="y2k-window">
-            <div class="y2k-titlebar">
-                <span>README.TXT - Notepad</span>
-                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+        <div class="bento-grid">
+            
+            <div class="bento-manifesto spatial-panel">
+                <div class="sys-header">// Arquitectura de Operación</div>
+                <p class="manifesto-text">
+                    En Disk Creativo no vendemos humo, vendemos <span>infraestructura digital real</span>. Operamos bajo un ecosistema escalonado diseñado para la carga técnica de tu negocio.
+                </p>
             </div>
-            <div class="y2k-content">
-                <h2 class="manifesto-title">Fábrica de Infraestructura.</h2>
-                <p class="manifesto-text">En Disk Creativo no vendemos humo. Operamos bajo un ecosistema escalonado diseñado para adaptarse a la carga de tu negocio.</p>
-                
-                <div class="eco-block">
-                    <span class="eco-dir">[ DIR 01 ]</span>
-                    <h3>Despliegue Rápido</h3>
-                    <p>Sistemas pre-ensamblados listos para integrarse con una identidad premium. Operatividad para PYMES.</p>
-                </div>
-                <div class="eco-block">
-                    <span class="eco-dir">[ DIR 02 ]</span>
-                    <h3>Ingeniería Custom</h3>
-                    <p>Construimos tu plataforma desde cero. Arquitectura de bases de datos y dirección de arte absoluta para Enterprise.</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="y2k-window" style="height: fit-content;">
-            <div class="y2k-titlebar">
-                <span>RENDER_VIEWER.EXE</span>
-                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+            <div class="bento-module spatial-panel">
+                <span class="eco-dir">[ DIR 01 ]</span>
+                <h3>Despliegue Rápido</h3>
+                <p>Módulos pre-ensamblados (Comandas, Inventarios, Menús QR) para PYMES. Operatividad tecnológica inmediata con branding premium.</p>
             </div>
-            <div class="y2k-content" style="padding: 0; background: #000;">
-                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-asset">
+
+            <div class="bento-module spatial-panel">
+                <span class="eco-dir">[ DIR 02 ]</span>
+                <h3>Ingeniería Custom</h3>
+                <p>Para marcas posicionadas. Construimos y programamos tu plataforma corporativa desde cero, con arquitectura de software y dirección de arte élite.</p>
             </div>
+
+            <div class="bento-image spatial-panel">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Playground 3D" class="playground-asset">
+            </div>
+
         </div>
     </section>
 
     <section class="projects-section" id="proyectos">
-        <div class="y2k-window">
-            <div class="y2k-titlebar">
-                <span>C:\PORTFOLIO\DATABASE.XLS</span>
-                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+        <div class="projects-header">
+            <h2 class="projects-title">Directorio</h2>
+            <div class="category-glass spatial-panel" id="categoryBar" style="border-radius: 100px;">
+                <button class="filter-btn active" data-category="todos">ROOT /*</button>
+                <button class="filter-btn" data-category="webs">WEB_DEV</button>
+                <button class="filter-btn" data-category="producción de contenido">MEDIA</button>
+                <button class="filter-btn" data-category="soluciones de hardware">HARDWARE</button>
             </div>
-            <div class="y2k-content" style="background: var(--bg-primary);">
-                
-                <div class="filters-y2k" id="categoryBar">
-                    <button class="filter-btn active" data-category="todos">ROOT /*</button>
-                    <button class="filter-btn" data-category="webs">WEB_DEV</button>
-                    <button class="filter-btn" data-category="producción de contenido">MEDIA</button>
-                    <button class="filter-btn" data-category="soluciones de hardware">HARDWARE</button>
-                </div>
+        </div>
 
-                <div class="grid-y2k" id="portfolioGrid">
-                    <div class="loading-data">[ CONECTANDO CON EL SERVIDOR MAINFRAME... ]</div>
-                </div>
-
+        <div class="grid-spatial" id="portfolioGrid">
+            <div class="spatial-panel" style="grid-column: 1 / -1; padding: 4rem; text-align: center; font-family: var(--font-code);">
+                [ LEYENDO DATOS DEL CLUSTER... ]
             </div>
         </div>
     </section>
 
     <div class="camera-container">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Dock Cámara">
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
         <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
@@ -303,7 +311,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // LÓGICA DEL MENÚ LATERAL
+            // Lógica Menú Lateral
             const openMenuBtn = document.getElementById('openMenuBtn');
             const closeMenuBtn = document.getElementById('closeMenuBtn');
             const sideMenu = document.getElementById('sideMenu');
@@ -324,17 +332,32 @@
                 });
             });
 
-            // LÓGICA DE LA CÁMARA
+            // Animación sutil de click en la cámara
             const hitboxes = document.querySelectorAll('.hitbox');
             const cameraImg = document.querySelector('.camera-img');
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
-                    cameraImg.style.transform = 'translateX(-50%) translateY(5px)';
+                    cameraImg.style.transform = 'translateX(-50%) translateY(6px)';
                     setTimeout(() => { cameraImg.style.transform = ''; }, 150);
                 });
             });
 
-            // LÓGICA API GOOGLE SHEETS
+            // Parallax asimétrico en el CD basado en el mouse
+            const heroContainer = document.getElementById('inicio');
+            const logo = document.getElementById('dynamic-logo');
+            if(heroContainer && logo && window.innerWidth > 768) {
+                heroContainer.addEventListener('mousemove', (e) => {
+                    const rect = heroContainer.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    logo.style.transform = `translateY(-50%) translate(${x * -40}px, ${y * -40}px)`;
+                });
+                heroContainer.addEventListener('mouseleave', () => { 
+                    logo.style.transform = 'translateY(-50%)'; 
+                });
+            }
+
+            // Lógica de Google Sheets (Proyectos)
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
@@ -345,10 +368,10 @@
                     const response = await fetch(API_URL);
                     proyectosData = await response.json();
                     if (proyectosData && proyectosData.length > 0) { renderGrid('todos'); } 
-                    else { grid.innerHTML = '<div class="loading-data" style="color:red;">[ ERROR: FATAL EXCEPTION ]</div>'; }
+                    else { grid.innerHTML = '<div class="spatial-panel" style="grid-column: 1/-1; padding: 3rem; text-align:center; color: #FF0055;">[ ERROR: DISCO VACÍO ]</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div class="loading-data" style="color:red;">[ ERROR DE RED ]</div>';
+                    grid.innerHTML = '<div class="spatial-panel" style="grid-column: 1/-1; padding: 3rem; text-align:center; color: #FF0055;">[ ERROR DE CONEXIÓN ]</div>';
                 }
             }
 
@@ -364,31 +387,26 @@
                 });
 
                 if (proyectosFiltrados.length === 0) {
-                    grid.innerHTML = '<div class="loading-data">[ 0 ARCHIVOS ENCONTRADOS ]</div>'; return;
+                    grid.innerHTML = '<div class="spatial-panel" style="grid-column: 1/-1; padding: 3rem; text-align:center;">[ NO SE ENCONTRARON ARCHIVOS EN LA RUTA ]</div>'; return;
                 }
 
                 proyectosFiltrados.forEach(p => {
                     const card = document.createElement('a');
-                    card.className = 'project-card'; 
+                    card.className = 'project-card spatial-panel'; 
                     card.href = p.enlace || "#"; 
                     card.target = "_blank";
                     
                     let imgUrl = p.imagen ? p.imagen.trim() : "";
                     let headerHtml = imgUrl !== "" 
-                        ? `<div class="card-thumb"><img src="${imgUrl}" alt="${p.titulo}"></div>` 
-                        : `<div class="card-thumb"><span style="font-family:monospace;">[MISSING_IMG]</span></div>`;
+                        ? `<div class="project-thumb"><img src="${imgUrl}" alt="${p.titulo}" class="thumb-img"></div>` 
+                        : `<div class="project-thumb" style="display:flex;align-items:center;justify-content:center;color:#555;font-family:var(--font-code);">[ NO MEDIA ]</div>`;
 
                     card.innerHTML = `
-                        <div class="card-header">
-                            <span>FILE: ${p.categoria || "DATA"}</span>
-                            <span>.EXE</span>
-                        </div>
                         ${headerHtml}
-                        <div class="card-body">
-                            <h3 class="card-title">${p.titulo || "NULL"}</h3>
-                            <p class="card-desc">${p.descripcion || "..."}</p>
-                            <div class="btn-exe">>> EJECUTAR ARCHIVO</div>
-                        </div>
+                        <span class="project-badge">${p.categoria || "SISTEMA"}</span>
+                        <h3 class="project-title">${p.titulo || "NULL"}</h3>
+                        <p class="project-desc">${p.descripcion || "..."}</p>
+                        <span class="btn-exe">Visualizar Proyecto -></span>
                     `;
                     grid.appendChild(card);
                 });
