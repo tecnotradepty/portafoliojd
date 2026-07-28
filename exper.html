@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Disk Creativo | Y2K OS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0A0A0C;
+            --brand-purple: #6B00FF;
+            --accent-neon: #00FF66;
+            --text-main: #F4F4F6;
+            --text-dark: #000000;
+            --y2k-silver: #C3C7CB;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-color: var(--bg-primary);
+            padding-bottom: 150px; /* Espacio para la cámara */
+            /* FONDO ARCOIRIS RESTAURADO COMO WALLPAPER FIJO */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* ─── CINTA MARQUESINA Y2K ─── */
+        .marquee-container {
+            position: fixed; top: 0; left: 0; width: 100%; background: var(--accent-neon);
+            color: var(--text-dark); font-family: var(--font-code); font-weight: bold; font-size: 0.85rem;
+            padding: 5px 0; border-bottom: 2px solid var(--text-dark); z-index: 9000;
+            display: flex; overflow: hidden; white-space: nowrap; text-transform: uppercase;
+        }
+        .marquee-content {
+            display: inline-block; animation: marquee 15s linear infinite; padding-left: 100%;
+        }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
+        /* ─── ARQUITECTURA DE VENTANAS Y2K ─── */
+        .y2k-window {
+            background: var(--bg-primary);
+            border: 3px solid var(--text-main);
+            box-shadow: 10px 10px 0px var(--brand-purple);
+            margin: 2rem auto;
+            position: relative;
+            display: flex; flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .y2k-window:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 12px 12px 0px var(--accent-neon);
+        }
+        .y2k-titlebar {
+            background: var(--text-main);
+            color: var(--bg-primary);
+            padding: 8px 12px;
+            font-family: var(--font-code); font-weight: bold; font-size: 0.9rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 3px solid var(--text-main);
+        }
+        .y2k-controls { display: flex; gap: 5px; }
+        .y2k-btn {
+            background: var(--y2k-silver); border: 2px solid #fff; border-bottom-color: #000; border-right-color: #000;
+            width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: bold; cursor: pointer; color: #000; font-family: sans-serif;
+        }
+        .y2k-btn:active { border: 2px solid #000; border-bottom-color: #fff; border-right-color: #fff; }
+        .y2k-content { padding: 2rem; color: var(--text-main); }
+
+        /* ─── NAVBAR SUPERIOR ─── */
+        .top-nav-btn {
+            position: fixed; top: 45px; left: 2vw; z-index: 1000;
+            background: var(--bg-primary); border: 3px solid var(--accent-neon); color: var(--accent-neon);
+            padding: 10px 20px; font-family: var(--font-code); font-weight: bold; cursor: pointer;
+            box-shadow: 4px 4px 0px var(--text-main); text-transform: uppercase; transition: all 0.2s;
+        }
+        .top-nav-btn:hover { background: var(--accent-neon); color: var(--text-dark); }
+
+        /* ─── HERO SECTION ─── */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 6rem 4vw; position: relative; z-index: 10; }
+        .hero-window { width: 100%; max-width: 1200px; text-align: center; }
+        
+        .hero-cd-wrapper {
+            position: relative; width: 100%; max-width: 500px; margin: 0 auto 2rem auto;
+            border: 2px dashed rgba(255,255,255,0.2); padding: 2rem; border-radius: 50%;
+        }
+        .hero-cd-asset {
+            width: 100%; height: auto; animation: spinY2K 15s linear infinite;
+            filter: drop-shadow(0px 0px 20px rgba(107, 0, 255, 0.8));
+        }
+        @keyframes spinY2K { 100% { transform: rotate(360deg); } }
+
+        .hero-title {
+            font-family: var(--font-display); font-size: clamp(3rem, 12vw, 10rem);
+            line-height: 0.85; text-transform: uppercase; margin: 0;
+            color: var(--text-main); text-shadow: 4px 4px 0px var(--brand-purple);
+            letter-spacing: 2px;
+        }
+
+        /* ─── IDENTIDAD / ECOSISTEMA ─── */
+        .identity-section { padding: 4rem 4vw; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        
+        .manifesto-title { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; color: var(--accent-neon); margin-bottom: 1.5rem; text-transform: uppercase; }
+        .manifesto-text { font-size: 1.1rem; line-height: 1.6; color: var(--text-main); margin-bottom: 2rem; font-family: var(--font-code); }
+        
+        .eco-dir { display: block; font-family: var(--font-code); color: var(--brand-purple); margin-bottom: 0.5rem; font-weight: bold; }
+        .eco-block { margin-bottom: 2rem; border-left: 2px solid var(--accent-neon); padding-left: 1rem; }
+        .eco-block h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: 1px; }
+        .eco-block p { font-size: 0.95rem; color: #ddd; }
+
+        .playground-asset { width: 100%; height: auto; display: block; border: 2px solid var(--text-main); }
+
+        /* ─── PROYECTOS (DATABASE) ─── */
+        .projects-section { padding: 4rem 4vw; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+        
+        .filters-y2k { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn {
+            background: var(--bg-primary); border: 2px solid var(--text-main); color: var(--text-main);
+            font-family: var(--font-code); padding: 5px 15px; cursor: pointer; text-transform: uppercase;
+            box-shadow: 3px 3px 0px var(--brand-purple); transition: all 0.1s;
+        }
+        .filter-btn:active, .filter-btn.active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px var(--brand-purple); background: var(--text-main); color: var(--bg-primary); }
+
+        .grid-y2k { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        
+        .project-card {
+            background: #fff; border: 3px solid #000; color: #000;
+            box-shadow: 6px 6px 0px #000; text-decoration: none; display: flex; flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .project-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0px var(--accent-neon); }
+        
+        .card-header { background: #000080; color: #fff; padding: 5px; font-family: var(--font-code); font-size: 0.75rem; font-weight: bold; display: flex; justify-content: space-between; }
+        .card-thumb { width: 100%; height: 180px; border-bottom: 3px solid #000; overflow: hidden; background: #c3c7cb; display: flex; align-items: center; justify-content: center; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) grayscale(0.2); }
+        .card-body { padding: 1rem; }
+        .card-title { font-family: var(--font-display); font-size: 1.8rem; line-height: 1; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .card-desc { font-family: sans-serif; font-size: 0.9rem; line-height: 1.4; color: #333; margin-bottom: 1rem; }
+        .btn-exe { font-family: var(--font-code); font-size: 0.85rem; background: #c3c7cb; border: 2px solid #fff; border-bottom-color: #000; border-right-color: #000; padding: 5px; text-align: center; color: #000; font-weight: bold; }
+
+        .loading-data { grid-column: 1 / -1; font-family: var(--font-code); padding: 4rem 0; color: var(--accent-neon); text-align: center; font-size: 1.2rem; }
+
+        /* ─── DOCK CÁMARA (ORIGINAL PNG RESTAURADO) ─── */
+        .camera-container {
+            position: fixed; bottom: -75px; left: 50%; transform: translateX(-50%); 
+            animation: breathHand 6s ease-in-out infinite; animation-delay: 2.5s; 
+            width: 95%; max-width: 850px; z-index: 1000; pointer-events: none; 
+        }
+        @keyframes breathHand { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+        .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px -10px 25px rgba(0,0,0,0.8)); transform-origin: center center; }
+
+        .hitbox { position: absolute; pointer-events: auto; bottom: 22%; height: 33%; z-index: 1010; cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; user-select: none; }
+        .hitbox-inicio { left: 21%; width: 13%; }
+        .hitbox-identidad { left: 35%; width: 13%; }
+        .hitbox-proyectos { left: 51%; width: 13%; }
+        .hitbox-contacto { left: 66.5%; width: 13%; }
+
+        /* ─── MENÚ LATERAL ─── */
+        .side-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+        .side-menu-overlay.active { opacity: 1; pointer-events: auto; }
+        .side-menu { position: fixed; top: 0; left: -450px; width: 400px; max-width: 85vw; height: 100vh; z-index: 9999; display: flex; flex-direction: column; transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .side-menu.active { left: 0; }
+        
+        @media (max-width: 900px) {
+            .identity-section { grid-template-columns: 1fr; }
+            .hero-title { font-size: 20vw; }
+            .camera-container { bottom: -55px; max-width: 520px; }
+            .hitbox { bottom: 20%; height: 35%; } 
+            .hitbox-inicio { left: 19%; width: 14%; } .hitbox-identidad { left: 32%; width: 14%; } .hitbox-proyectos { left: 46%; width: 14%; } .hitbox-contacto { left: 60%; width: 14%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            *** DISK CREATIVO OS v1.0 *** CONEXIÓN ESTABLECIDA *** INFRAESTRUCTURA DIGITAL *** EJECUCIÓN A DOS VELOCIDADES *** BLOQUEO DE IA SLOP INICIADO *** ROOT ACCESS GRANTED ***
+        </div>
+    </div>
+
+    <button class="top-nav-btn" id="openMenuBtn">C:\> START MENU</button>
+
+    <div class="side-menu-overlay" id="menuOverlay"></div>
+    <nav class="side-menu y2k-window" id="sideMenu" style="margin:0; border-left:none; height: 100vh;">
+        <div class="y2k-titlebar">
+            <span>C:\SYSTEM\MENU.EXE</span>
+            <div class="y2k-controls">
+                <button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn" id="closeMenuBtn">X</button>
+            </div>
+        </div>
+        <div class="y2k-content" style="display:flex; flex-direction:column; gap:2rem;">
+            <a href="#inicio" style="color:var(--accent-neon); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 01_INICIO</a>
+            <a href="dex.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 02_SETUP</a>
+            <a href="modulo.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 03_MÓDULOS</a>
+            <a href="log.html" style="color:var(--text-main); text-decoration:none; font-family:var(--font-display); font-size:2.5rem; text-transform:uppercase;">> 04_SYS_LOG</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="inicio">
+        <div class="y2k-window hero-window">
+            <div class="y2k-titlebar">
+                <span>D:\DISK_CREATIVO_OS\BOOT.EXE</span>
+                <div class="y2k-controls">
+                    <button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button>
+                </div>
+            </div>
+            <div class="y2k-content">
+                <div class="hero-cd-wrapper">
+                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="hero-cd-asset">
+                </div>
+                <h1 class="hero-title">DISK<br>CREATIVO</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-section" id="identidad">
+        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>README.TXT - Notepad</span>
+                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+            </div>
+            <div class="y2k-content">
+                <h2 class="manifesto-title">Fábrica de Infraestructura.</h2>
+                <p class="manifesto-text">En Disk Creativo no vendemos humo. Operamos bajo un ecosistema escalonado diseñado para adaptarse a la carga de tu negocio.</p>
+                
+                <div class="eco-block">
+                    <span class="eco-dir">[ DIR 01 ]</span>
+                    <h3>Despliegue Rápido</h3>
+                    <p>Sistemas pre-ensamblados listos para integrarse con una identidad premium. Operatividad para PYMES.</p>
+                </div>
+                <div class="eco-block">
+                    <span class="eco-dir">[ DIR 02 ]</span>
+                    <h3>Ingeniería Custom</h3>
+                    <p>Construimos tu plataforma desde cero. Arquitectura de bases de datos y dirección de arte absoluta para Enterprise.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="y2k-window" style="height: fit-content;">
+            <div class="y2k-titlebar">
+                <span>RENDER_VIEWER.EXE</span>
+                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+            </div>
+            <div class="y2k-content" style="padding: 0; background: #000;">
+                <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-asset">
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section" id="proyectos">
+        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>C:\PORTFOLIO\DATABASE.XLS</span>
+                <div class="y2k-controls"><button class="y2k-btn">_</button><button class="y2k-btn">□</button><button class="y2k-btn">X</button></div>
+            </div>
+            <div class="y2k-content" style="background: var(--bg-primary);">
+                
+                <div class="filters-y2k" id="categoryBar">
+                    <button class="filter-btn active" data-category="todos">ROOT /*</button>
+                    <button class="filter-btn" data-category="webs">WEB_DEV</button>
+                    <button class="filter-btn" data-category="producción de contenido">MEDIA</button>
+                    <button class="filter-btn" data-category="soluciones de hardware">HARDWARE</button>
+                </div>
+
+                <div class="grid-y2k" id="portfolioGrid">
+                    <div class="loading-data">[ CONECTANDO CON EL SERVIDOR MAINFRAME... ]</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="camera-container">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f9626f661ce5bc3555751ced97cb8272da7ad569/DIQC/1784701242339(1).png" alt="Barra de Navegación Cámara">
+        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
+        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
+        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // LÓGICA DEL MENÚ LATERAL
+            const openMenuBtn = document.getElementById('openMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            function toggleMenu() {
+                sideMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            }
+
+            openMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
+            
+            document.querySelectorAll('.menu-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if(link.getAttribute('href').startsWith('#')) toggleMenu();
+                });
+            });
+
+            // LÓGICA DE LA CÁMARA
+            const hitboxes = document.querySelectorAll('.hitbox');
+            const cameraImg = document.querySelector('.camera-img');
+            hitboxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    cameraImg.style.transform = 'translateX(-50%) translateY(5px)';
+                    setTimeout(() => { cameraImg.style.transform = ''; }, 150);
+                });
+            });
+
+            // LÓGICA API GOOGLE SHEETS
+            const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
+            let proyectosData = [];
+            const grid = document.getElementById('portfolioGrid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            async function fetchProyectos() {
+                try {
+                    const response = await fetch(API_URL);
+                    proyectosData = await response.json();
+                    if (proyectosData && proyectosData.length > 0) { renderGrid('todos'); } 
+                    else { grid.innerHTML = '<div class="loading-data" style="color:red;">[ ERROR: FATAL EXCEPTION ]</div>'; }
+                } catch (error) {
+                    console.error("Error API:", error);
+                    grid.innerHTML = '<div class="loading-data" style="color:red;">[ ERROR DE RED ]</div>';
+                }
+            }
+
+            function renderGrid(categoriaFiltro) {
+                grid.innerHTML = ''; 
+                const proyectosFiltrados = proyectosData.filter(p => {
+                    if (categoriaFiltro === 'todos') return true;
+                    let catSheet = (p.categoria || "").toLowerCase().trim();
+                    let catFiltro = categoriaFiltro.toLowerCase().trim();
+                    let stemSheet = catSheet.endsWith('s') ? catSheet.slice(0, -1) : catSheet;
+                    let stemFiltro = catFiltro.endsWith('s') ? catFiltro.slice(0, -1) : catFiltro;
+                    return catSheet.includes(stemFiltro) || catFiltro.includes(catSheet) || stemSheet.includes(stemFiltro);
+                });
+
+                if (proyectosFiltrados.length === 0) {
+                    grid.innerHTML = '<div class="loading-data">[ 0 ARCHIVOS ENCONTRADOS ]</div>'; return;
+                }
+
+                proyectosFiltrados.forEach(p => {
+                    const card = document.createElement('a');
+                    card.className = 'project-card'; 
+                    card.href = p.enlace || "#"; 
+                    card.target = "_blank";
+                    
+                    let imgUrl = p.imagen ? p.imagen.trim() : "";
+                    let headerHtml = imgUrl !== "" 
+                        ? `<div class="card-thumb"><img src="${imgUrl}" alt="${p.titulo}"></div>` 
+                        : `<div class="card-thumb"><span style="font-family:monospace;">[MISSING_IMG]</span></div>`;
+
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <span>FILE: ${p.categoria || "DATA"}</span>
+                            <span>.EXE</span>
+                        </div>
+                        ${headerHtml}
+                        <div class="card-body">
+                            <h3 class="card-title">${p.titulo || "NULL"}</h3>
+                            <p class="card-desc">${p.descripcion || "..."}</p>
+                            <div class="btn-exe">>> EJECUTAR ARCHIVO</div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            if(filterButtons.length > 0) {
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active'); renderGrid(btn.getAttribute('data-category'));
+                    });
+                });
+            }
+            fetchProyectos();
+        });
+    </script>
+</body>
+</html>
