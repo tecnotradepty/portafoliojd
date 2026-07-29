@@ -23,11 +23,9 @@
             --font-sans: 'Inter', sans-serif;
         }
 
-        /* FIX DE ESCALA: Eliminación absoluta de scroll horizontal */
         html, body {
             overflow-x: hidden !important; 
-            max-width: 100%;
-            width: 100%;
+            max-width: 100%; width: 100%;
         }
 
         html { scroll-behavior: smooth; height: 100%; }
@@ -41,19 +39,21 @@
             position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO ARCOÍRIS FIX MÓVIL ─── */
+        /* ─── LIENZO ARCOÍRIS (NUEVO PARALLAX SMOOTH) ─── */
         .ambient-canvas {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            width: 100vw; height: 100vh;
+            position: fixed; top: -5vh; left: 0; right: 0; 
+            width: 100vw; height: 110vh; /* Altura extra para el parallax */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
             background-position: center center; background-size: cover; background-repeat: no-repeat;
             z-index: -2; filter: brightness(0.7) saturate(1.2);
+            will-change: transform; /* Optimización de GPU para el scroll */
+            transform-origin: center;
         }
 
-        /* ─── NAVBAR SUPERIOR ─── */
+        /* ─── NAVBAR SUPERIOR DE VENTAS (UNIVERSAL MÓVIL/PC) ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(5, 5, 5, 0.4);
+            background: rgba(5, 5, 5, 0.5);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: var(--hairline);
             display: flex; justify-content: space-between; align-items: center;
@@ -81,14 +81,9 @@
             display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
         }
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
-        .nav-btn-wa:hover { background: #fff; color: #000; }
+        .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        .mobile-menu-btn {
-            display: none; background: transparent; border: none; color: #fff;
-            font-size: 2rem; cursor: pointer; font-family: var(--font-sans); font-weight: 300;
-        }
-
-        /* ─── SECCIÓN 1: HERO (HOTFIX ESCALA) ─── */
+        /* ─── SECCIÓN 1: HERO (NUEVA ESCALA Y OFFSET) ─── */
         .hero-section {
             position: relative; height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; padding: 2vw;
@@ -103,10 +98,7 @@
             display: flex; flex-direction: column; gap: 1vh; letter-spacing: -2px;
             width: 100%;
         }
-        .hero-giant-text div { 
-            display: flex; justify-content: center; align-items: center; gap: 0.8vw; 
-            flex-wrap: wrap; /* Fix para no romper pantalla móvil */
-        }
+        .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
         .solid-purple-letter {
             color: var(--brand-purple); display: inline-block; position: relative;
@@ -127,11 +119,15 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
+        /* FIX: CD ESCALADO Y DESPLAZADO (NO TAPA LA LECTURA) */
         .giant-transparent-logo {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: clamp(220px, 40vw, 750px); z-index: 5;
-            animation: floatLogo 8s ease-in-out infinite; pointer-events: none;
-            filter: drop-shadow(0px 85px 30px rgba(0, 0, 0, 0.6));
+            position: absolute; 
+            top: 55%; left: 55%; /* Offset Asimétrico */
+            transform: translate(-50%, -50%);
+            width: clamp(180px, 32vw, 550px); /* Escala reducida */
+            z-index: 5; pointer-events: none;
+            filter: drop-shadow(0px 60px 25px rgba(0, 0, 0, 0.7));
+            animation: floatLogo 8s ease-in-out infinite; 
         }
 
         @keyframes floatLogo { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -54%) rotate(2deg); } }
@@ -140,12 +136,13 @@
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
         .hero-tagline {
-            font-family: var(--font-serif); font-style: italic; font-size: clamp(1.2rem, 2vw, 1.8rem);
-            color: rgba(255,255,255,0.9); margin-top: 2.5rem; position: relative; z-index: 20;
-            letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center; font-weight: 400;
+            font-family: var(--font-code); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+            color: rgba(255,255,255,0.8); margin-top: 2rem; position: relative; z-index: 20;
+            text-transform: uppercase; letter-spacing: 1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
         }
 
-        /* ─── CINTA ANALÓGICA ─── */
+        /* ─── CINTA ANALÓGICA DIVISORA ─── */
         .analog-cut {
             width: 100%; height: 6vh; min-height: 40px;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
@@ -155,14 +152,13 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── FONDO EDITORIAL ─── */
+        /* ─── FONDO EDITORIAL (SALA DE INGENIERÍA) ─── */
         .engineering-bg {
             background-color: var(--bg-primary); position: relative; z-index: 20;
-            padding-bottom: 160px;
-            width: 100%; overflow: hidden; /* Fix contención horizontal */
+            padding-bottom: 160px; width: 100%; overflow: hidden;
         }
 
-        /* ─── SECCIÓN 2: IDENTIDAD ─── */
+        /* ─── SECCIÓN 2: IDENTIDAD (MARCO PLANO) ─── */
         .identity-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
 
         .editorial-frame {
@@ -197,14 +193,13 @@
         }
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* ─── SECCIÓN 3: PROYECTOS (EDITORIAL CARDS) ─── */
+        /* ─── SECCIÓN 3: PROYECTOS ─── */
         .projects-section { padding: 4rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
         
         .projects-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 5rem; text-align: center; align-items: center;}
         .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; text-transform: uppercase; margin: 0; letter-spacing: -1px;}
         .projects-subtitle { font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-muted); font-style: italic;}
         
-        /* FIX ESCALA: minmax ajustado a 280px para móviles pequeños */
         .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
 
         .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
@@ -214,7 +209,6 @@
             background: transparent; border: var(--hairline);
             transform-style: preserve-3d;
             display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
-            /* La transición se manejará vía JS, excepto para sombras/bordes base */
             transition: box-shadow 0.3s, background 0.3s;
         }
 
@@ -235,10 +229,8 @@
         }
         .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
 
-        /* Efectos visuales de activación (combinados con JS transform) */
-        .card-editorial.is-active {
-            box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02);
-        }
+        /* CSS Fallback Hover (Las físicas reales están en el JS) */
+        .card-editorial.is-active { box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02); }
         .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
 
@@ -256,33 +248,33 @@
         .hitbox-proyectos { left: 52%; width: 15%; }
         .hitbox-contacto { left: 70%; width: 15%; }
 
-        /* ─── MENÚ MÓVIL (OVERLAY) ─── */
-        .mobile-nav-overlay {
-            position: fixed; inset: 0; background: var(--bg-primary); z-index: 1999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .mobile-nav-overlay.active { opacity: 1; pointer-events: auto; }
-        .mobile-nav-link { font-family: var(--font-serif); font-size: 3rem; color: #fff; text-decoration: none; font-weight: 400; line-height: 1; font-style: italic;}
-
-        /* ─── HOTFIX RESPONSIVE (MÓVIL) ─── */
+        /* ─── RESPONSIVE MÓVIL UNIVERSAL ─── */
         @media (max-width: 900px) {
-            .top-navbar { justify-content: center; padding: 1rem; }
-            .navbar-brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.9rem;}
-            .navbar-links { display: none; } 
-            .mobile-menu-btn { display: block; position: absolute; right: 1.5rem; }
+            .top-navbar { padding: 0 4vw; height: 60px; }
+            .navbar-brand { font-size: 0.8rem; gap: 6px; }
+            .navbar-brand span { display: none; } /* Oculta ".CREATIVO" en móvil para más espacio */
+            .brand-icon { height: 18px; }
+            
+            .navbar-links { gap: 1rem; }
+            .nav-link { font-size: 0.65rem; }
+            .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
+            .nav-btn-wa svg { width: 12px; height: 12px; }
             
             .hero-giant-text { font-size: 16vw; gap: 0.5vw; } 
-            .giant-transparent-logo { width: 75vw; }
-            .hero-tagline { font-size: 0.95rem; padding: 0 1rem; line-height: 1.4;}
+            
+            /* CD adaptado en Móvil para que no estorbe */
+            .giant-transparent-logo { 
+                width: 55vw; 
+                left: 50%; top: 60%; 
+            }
+            .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4;}
             
             .identity-section { padding: 4rem 4vw; }
             
-            /* HOTFIX 60/40 y Guillotina de Texto */
+            /* HOTFIX 60/40 y Guillotina */
             .editorial-frame { grid-template-columns: 60% 40%; height: auto; width: 100%;}
             .identity-text { 
                 padding: 1.5rem 1rem; gap: 1rem; 
-                /* Reglas para romper palabras extra largas en cajas angostas */
                 word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto;
                 min-width: 0;
             }
@@ -305,11 +297,11 @@
 </head>
 <body>
 
-    <div class="ambient-canvas"></div>
+    <div class="ambient-canvas" id="parallaxBg"></div>
 
     <nav class="top-navbar">
         <a href="#inicio" class="navbar-brand">
-            DISK<span>.</span>CREATIVO
+            DISK<span>.CREATIVO</span>
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/46948a0b43ad27ad2e2994bcc269c9fea0a8382f/DIQC/1785277935413.png" alt="Disk Icon" class="brand-icon">
         </a>
         <div class="navbar-links">
@@ -320,14 +312,7 @@
                 WhatsApp
             </a>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuToggle">≡</button>
     </nav>
-
-    <div class="mobile-nav-overlay" id="mobileNav">
-        <a href="index.html" class="mobile-nav-link">Inicio</a>
-        <a href="dex.html" class="mobile-nav-link">Construye</a>
-        <a href="https://wa.me/50768529324" class="mobile-nav-link" style="color:var(--brand-purple); font-style:normal;">WhatsApp</a>
-    </div>
 
     <section class="hero-section" id="inicio">
         <div class="hero-sandwich">
@@ -341,7 +326,7 @@
             </h1>
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
             
-            <p class="hero-tagline">"Nosotros somos disque creativos, pero le metemos corazón."</p>
+            <p class="hero-tagline">> "Nosotros somos disque creativos, pero le metemos corazón."</p>
         </div>
     </section>
 
@@ -407,24 +392,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Toggle Menú Móvil
-            const mobileBtn = document.getElementById('mobileMenuToggle');
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            // ─── SMOOTH PARALLAX DE FONDO ───
+            const parallaxBg = document.getElementById('parallaxBg');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                // El fondo sube al 25% de la velocidad del scroll normal, creando profundidad
+                if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px) scale(1.05)`;
+            }, { passive: true });
 
-            mobileBtn.addEventListener('click', () => {
-                mobileNav.classList.toggle('active');
-                mobileBtn.textContent = mobileNav.classList.contains('active') ? 'X' : '≡';
-            });
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileNav.classList.remove('active');
-                    mobileBtn.textContent = '≡';
-                });
-            });
-
-            // Parallax Hero
+            // ─── PARALLAX HERO MOUSE ───
             const heroContainer = document.getElementById('inicio');
             const logo = document.getElementById('dynamic-logo');
             if(heroContainer && logo && window.innerWidth > 768) {
@@ -432,9 +408,10 @@
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    // Mantiene el anclaje (-50%, -50%) y le suma el offset del ratón
                     logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
                 });
-                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = ''; });
+                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = 'translate(-50%, -50%)'; });
             }
 
             // Animación Cámara
@@ -447,16 +424,14 @@
                 });
             });
 
-            // ─── MOTOR 3D INTERACTIVO (RATÓN Y MÓVIL TÁCTIL) ───
+            // ─── MOTOR 3D INTERACTIVO (TÁCTIL Y RATÓN) ───
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
                 
                 cards.forEach(wrapper => {
                     const card = wrapper.querySelector('.card-editorial');
                     
-                    // Función unificada para calcular la rotación
                     const handleMove = (e) => {
-                        // Extraer coordenadas ya sea de mouse o de touch
                         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                         
@@ -467,24 +442,20 @@
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
                         
-                        // Mapear posición a grados (Max 15 grados de inclinación)
                         const rotateX = ((y - centerY) / centerY) * -15; 
                         const rotateY = ((x - centerX) / centerX) * 15;
                         
-                        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                        card.style.transform = `rotate3d(1, 0, 0, ${rotateX}deg) rotate3d(0, 1, 0, ${rotateY}deg) scale(1.02)`;
                         card.classList.add('is-active');
                     };
 
                     const handleLeave = () => {
-                        card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+                        card.style.transform = `rotate3d(0, 0, 0, 0deg) scale(1)`;
                         card.classList.remove('is-active');
                     };
 
-                    // Eventos Mouse (PC)
                     wrapper.addEventListener('mousemove', handleMove);
                     wrapper.addEventListener('mouseleave', handleLeave);
-                    
-                    // Eventos Touch (Móvil) usando {passive: true} para no bloquear el scroll de la web
                     wrapper.addEventListener('touchmove', handleMove, { passive: true });
                     wrapper.addEventListener('touchend', handleLeave);
                 });
@@ -501,7 +472,7 @@
                     proyectosData = await response.json();
                     if (proyectosData && proyectosData.length > 0) { 
                         renderGrid(); 
-                        init3DInteractions(); // Iniciar físicas 3D una vez creadas las tarjetas
+                        init3DInteractions(); 
                     } 
                     else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
                 } catch (error) {
