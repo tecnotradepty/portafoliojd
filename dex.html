@@ -3,295 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Inicializar Proyecto</title>
+    <title>Disk Creativo | Setup de Proyecto</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
     <style>
-        html { scroll-behavior: smooth; }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100vh;
-            background-color: var(--dark-slate);
-        }
-
         :root {
-            --bg-cream: #EAE9E4;       
-            --brand-purple: #6B00FF; 
-            --dark-slate: #110E17;     
-            --text-dark: #1A1A1A;
-            --visor-bg: #050505;
+            --bg-primary: #050505;
+            --brand-purple: #6B00FF;
+            --accent-neon: #00FF66;
+            --text-main: #EAE9E4; 
+            --text-muted: rgba(234, 233, 228, 0.6);
+            --hairline: 1px solid rgba(255, 255, 255, 0.15);
             
             --font-display: 'Anton', sans-serif;
-            --font-body: 'Space Grotesk', sans-serif;
-            --font-tech: 'Share Tech Mono', monospace;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
         }
 
+        html, body { overflow-x: hidden !important; max-width: 100%; width: 100%; }
+        html { scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            color: #F4F3EF;
-            font-family: var(--font-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--bg-primary);
+            position: relative; min-height: 100vh;
+            display: flex; flex-direction: column;
         }
 
-        /* --- EFECTO DE RUIDO --- */
-        .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9999; opacity: 0.04;
-            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-        }
-
-        /* --- NAVBAR SIMPLE (BOTÓN MENÚ) --- */
-        .top-nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 2rem 4vw;
+        /* ─── NAVBAR SUPERIOR UNIVERSAL (IDÉNTICO A INDEX) ─── */
+        .top-navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: var(--hairline);
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; pointer-events: none;
+            padding: 0 4vw; z-index: 2000; transition: all 0.3s ease;
         }
+
+        .navbar-brand { 
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
+            color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
+        }
+        .brand-icon { height: 22px; width: auto; object-fit: contain; }
+
+        .navbar-links { display: flex; gap: 3rem; align-items: center; }
+        .nav-link {
+            color: var(--text-main); text-decoration: none; font-family: var(--font-sans);
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
+        }
+        .nav-link:hover { color: var(--brand-purple); }
         
-        .menu-trigger {
-            pointer-events: auto; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); color: #fff;
-            padding: 10px 20px; font-family: var(--font-tech); font-size: 1rem;
-            cursor: pointer; display: flex; align-items: center; gap: 10px;
-            backdrop-filter: blur(5px); border-radius: 4px; transition: all 0.3s;
+        .nav-btn-wa {
+            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400;
+            text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
         }
-        .menu-trigger:hover { background: var(--brand-purple); border-color: var(--brand-purple); }
+        .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
+        .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* =========================================================
-           SISTEMA DE MENÚ LATERAL (COMPARTIDO CON INDEX)
-           ========================================================= */
-        .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-        .side-menu-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        .side-menu { position: fixed; top: 0; left: -400px; width: 350px; max-width: 85vw; height: 100vh; background: rgba(17, 14, 23, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-right: 1px solid rgba(255, 255, 255, 0.1); z-index: 9999; display: flex; flex-direction: column; padding: 4rem 2rem; transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.5); }
-        .side-menu.active { left: 0; }
-
-        .menu-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 3rem; }
-        .menu-title { font-family: var(--font-display); font-size: 1.5rem; color: #fff; letter-spacing: 1px; }
-        .close-menu-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.2rem; cursor: pointer; font-family: var(--font-body); font-weight: bold; transition: color 0.3s; }
-        .close-menu-btn:hover { color: var(--brand-purple); }
-
-        .menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
-        .menu-link { color: #EAE9E4; text-decoration: none; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 15px; transition: all 0.3s ease; }
-        .menu-link span.index { font-size: 0.8rem; color: var(--brand-purple); font-weight: bold; }
-        .menu-link:hover { color: var(--brand-purple); padding-left: 10px; }
-        .menu-footer { margin-top: auto; font-size: 0.75rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* =========================================================
-           SETUP DEL PROYECTO (EL FORMULARIO)
-           ========================================================= */
-        .setup-section {
-            flex-grow: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 8rem 4vw 4rem 4vw; position: relative; z-index: 10;
+        .mobile-menu-btn {
+            display: none; background: transparent; border: none; color: #fff;
+            font-size: 2rem; cursor: pointer; font-family: var(--font-sans); font-weight: 300;
         }
 
+        /* ─── MENÚ MÓVIL (OVERLAY) ─── */
+        .mobile-nav-overlay {
+            position: fixed; inset: 0; background: var(--bg-primary); z-index: 1999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .mobile-nav-overlay.active { opacity: 1; pointer-events: auto; }
+        .mobile-nav-link { font-family: var(--font-serif); font-size: 3rem; color: #fff; text-decoration: none; font-weight: 400; line-height: 1; font-style: italic;}
+
+        /* ─── LAYOUT DEL SETUP (TERMINAL EDITORIAL) ─── */
         .setup-container {
-            width: 100%; max-width: 800px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 3rem; border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-top: 70px; flex-grow: 1;
+            display: grid; grid-template-columns: 40% 60%;
+            width: 100%; border-top: var(--hairline);
         }
 
-        .setup-header { margin-bottom: 2.5rem; text-align: center; }
-        .setup-header h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--brand-purple); letter-spacing: 1px; text-transform: uppercase; line-height: 1; margin-bottom: 0.5rem; }
-        .setup-header p { font-family: var(--font-tech); font-size: 0.95rem; color: rgba(255,255,255,0.5); }
-
-        .form-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-        }
-
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-group.full-width { grid-column: 1 / -1; }
-
-        .form-label { font-family: var(--font-tech); font-size: 0.85rem; color: var(--brand-purple); text-transform: uppercase; letter-spacing: 1px; }
-        
-        .form-control {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff; padding: 1rem; font-family: var(--font-body); font-size: 1rem;
-            border-radius: 4px; outline: none; transition: border-color 0.3s, background 0.3s;
-            width: 100%; appearance: none;
+        /* Columna Izquierda: Contexto y Controles */
+        .setup-sidebar {
+            padding: 6rem 4vw; border-right: var(--hairline);
+            display: flex; flex-direction: column; gap: 2rem;
+            position: relative; background: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png') center/cover;
         }
         
-        .form-control:focus { border-color: var(--brand-purple); background: rgba(0, 0, 0, 0.4); }
-        
-        select.form-control {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B00FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em;
-            cursor: pointer;
+        /* Capa oscura para que el texto sea legible sobre el arcoíris estático */
+        .setup-sidebar::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(5,5,5,0.85); backdrop-filter: blur(10px); z-index: 0;
         }
-        select.form-control option { background: var(--dark-slate); color: #fff; }
 
-        textarea.form-control { resize: vertical; min-height: 120px; }
+        .sidebar-content { position: relative; z-index: 10; display: flex; flex-direction: column; gap: 2rem; }
 
+        .sys-header { font-family: var(--font-sans); color: var(--brand-purple); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px; font-weight: 600;}
+        .setup-title { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 6rem); line-height: 0.9; color: #fff; text-transform: uppercase;}
+        
+        .setup-desc { font-family: var(--font-serif); font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
+        .setup-desc strong { color: var(--text-main); font-weight: 400; font-style: italic; }
+
+        /* Sistema de Tabs (Pestañas) */
+        .tab-controls { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; border-top: var(--hairline); padding-top: 2rem;}
+        
+        .tab-btn {
+            background: transparent; border: none; text-align: left;
+            font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 2px; padding: 1rem 0;
+            cursor: pointer; transition: all 0.3s; border-bottom: 1px solid transparent;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .tab-btn:hover { color: #fff; }
+        .tab-btn.active { color: var(--brand-purple); font-weight: 600; border-bottom: 1px solid var(--brand-purple); }
+        .tab-btn.active::after { content: '●'; font-size: 0.6rem; }
+
+        /* Columna Derecha: Los Formularios */
+        .setup-forms {
+            padding: 6rem 6vw; position: relative;
+            background: var(--bg-primary);
+        }
+
+        .form-module { display: none; flex-direction: column; gap: 3rem; animation: fadeIn 0.5s ease forwards; }
+        .form-module.active { display: flex; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-header { margin-bottom: 1rem; }
+        .form-title { font-family: var(--font-serif); font-size: 2.5rem; color: #fff; font-weight: 400; margin-bottom: 0.5rem;}
+        .form-subtitle { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); font-weight: 300;}
+
+        /* Brutalismo Editorial en Inputs */
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
+        
+        .form-group label {
+            font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--brand-purple); font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; background: transparent; border: none;
+            border-bottom: var(--hairline); color: #fff;
+            font-family: var(--font-serif); font-size: 1.5rem; /* Letra grande y elegante para rellenar */
+            padding: 0.5rem 0; outline: none; transition: border-color 0.3s, color 0.3s;
+            border-radius: 0; appearance: none;
+        }
+        
+        .form-group textarea { resize: vertical; min-height: 60px; font-size: 1.2rem; }
+        .form-group select { cursor: pointer; }
+        .form-group select option { background: var(--bg-primary); color: #fff; font-family: var(--font-sans); font-size: 1rem;}
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-bottom: 1px solid var(--accent-neon);
+        }
+        
+        /* Placeholder styling */
+        ::placeholder { color: rgba(255,255,255,0.2); font-family: var(--font-serif); font-style: italic; }
+
+        /* Botón de Envío */
         .btn-submit {
-            grid-column: 1 / -1; background: var(--brand-purple); color: #fff;
-            border: none; padding: 1.2rem; font-family: var(--font-tech); font-size: 1.1rem;
-            font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; border-radius: 4px; margin-top: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(107, 0, 255, 0.2);
+            align-self: flex-start; margin-top: 2rem;
+            background: #fff; color: #000; border: none;
+            font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 2px;
+            padding: 1.2rem 3rem; cursor: pointer; transition: all 0.3s;
         }
-        .btn-submit:hover {
-            background: #5800d6; box-shadow: 0 0 25px rgba(107, 0, 255, 0.6);
-            transform: translateY(-2px);
-        }
+        .btn-submit:hover { background: var(--brand-purple); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(107, 0, 255, 0.3); }
 
-        /* Pequeño footer */
-        .system-footer {
-            text-align: center; padding: 2rem; font-family: var(--font-tech);
-            font-size: 0.8rem; color: rgba(255,255,255,0.3);
-        }
+        /* ─── RESPONSIVE MÓVIL ─── */
+        @media (max-width: 900px) {
+            .top-navbar { padding: 0 4vw; height: 60px; justify-content: center;}
+            .navbar-brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.9rem;}
+            .navbar-brand span { display: none; }
+            .brand-icon { height: 18px; }
+            .navbar-links { display: none; } 
+            .mobile-menu-btn { display: block; position: absolute; right: 1.5rem; }
 
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .setup-container { padding: 2rem 1.5rem; }
-            .top-nav { padding: 1.5rem 4vw; }
+            .setup-container { grid-template-columns: 1fr; margin-top: 60px;}
+            
+            .setup-sidebar { padding: 4rem 1.5rem; border-right: none; border-bottom: var(--hairline); }
+            .setup-title { font-size: clamp(3rem, 12vw, 4rem); }
+            
+            .setup-forms { padding: 4rem 1.5rem; }
+            .form-title { font-size: 2rem; }
+            .form-group input, .form-group select { font-size: 1.2rem; }
+            .btn-submit { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
-
-    <div class="top-nav">
-        <button class="menu-trigger" id="openMenuBtn">
-            <span style="font-size: 1.2rem;">&equiv;</span> SYSTEM.MENU
-        </button>
-    </div>
-
-    <div class="side-menu-overlay" id="menuOverlay"></div>
-    <nav class="side-menu" id="sideMenu">
-        <div class="menu-header">
-            <span class="menu-title">SYSTEM.MENU</span>
-            <button class="close-menu-btn" id="closeMenuBtn">[ X ]</button>
+    <nav class="top-navbar">
+        <a href="index.html" class="navbar-brand">
+            DISK<span>.CREATIVO</span>
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/46948a0b43ad27ad2e2994bcc269c9fea0a8382f/DIQC/1785277935413.png" alt="Disk Icon" class="brand-icon">
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="dex.html" class="nav-link" style="color:var(--brand-purple);">Construye</a>
+            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
         </div>
-        <div class="menu-links">
-            <a href="index.html#inicio" class="menu-link"><span class="index">[01]</span> INICIO</a>
-            <a href="dex.html" class="menu-link" style="color: var(--brand-purple);"><span class="index">[02]</span> CREA TU PROYECTO</a>
-            <a href="servicios.html" class="menu-link"><span class="index">[03]</span> MÓDULOS DE SISTEMA</a>
-            <a href="historia.html" class="menu-link"><span class="index">[04]</span> SYSTEM LOG / HISTORIA</a>
-        </div>
-        <div class="menu-footer">
-            DISK CREATIVO OS v1.0<br>Panamá, PT.
-        </div>
+        <button class="mobile-menu-btn" id="mobileMenuToggle">≡</button>
     </nav>
 
-    <section class="setup-section">
-        <div class="setup-container">
-            <div class="setup-header">
-                <h1>Inicializar Proyecto</h1>
-                <p>[ COMPLETE LOS PARÁMETROS PARA EJECUTAR LA CONEXIÓN ]</p>
-            </div>
-
-            <form id="projectForm" class="form-grid">
-                
-                <div class="form-group full-width">
-                    <label class="form-label">Identificador (Nombre o Empresa)</label>
-                    <input type="text" id="nombreCliente" class="form-control" placeholder="Ej. TechCorp PTY" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Tipo de Entidad</label>
-                    <select id="tipoEntidad" class="form-control" required>
-                        <option value="" disabled selected>Seleccione...</option>
-                        <option value="Marca Personal">Marca Personal</option>
-                        <option value="Startup / Nuevo Emprendimiento">Startup / Emprendimiento</option>
-                        <option value="PYME">PYME</option>
-                        <option value="Empresa Corporativa">Empresa Corporativa</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Módulo Requerido</label>
-                    <select id="moduloServicio" class="form-control" required>
-                        <option value="" disabled selected>Seleccione...</option>
-                        <option value="Desarrollo Web / App">Desarrollo Web / Plataforma</option>
-                        <option value="Identidad / Rebranding">Identidad Visual / Branding</option>
-                        <option value="Producción de Contenido">Producción de Contenido</option>
-                        <option value="Marketing / Pauta Digital">Pauta Digital & Estrategia</option>
-                        <option value="Solución Integral (Varios)">Múltiples Módulos (Integral)</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width">
-                    <label class="form-label">Estimado de Inversión (Ayuda a ajustar la arquitectura)</label>
-                    <select id="rangoInversion" class="form-control" required>
-                        <option value="" disabled selected>Seleccione un rango estimado...</option>
-                        <option value="Menos de $500 (MVP Básico)">Menos de $500 (MVP Básico)</option>
-                        <option value="$500 - $1,500 (Desarrollo Estándar)">$500 - $1,500 (Desarrollo Estándar)</option>
-                        <option value="$1,500 - $3,000 (Plataforma/Branding Pro)">$1,500 - $3,000 (Plataforma Pro)</option>
-                        <option value="Más de $3,000 (Ecosistema Completo)">Más de $3,000 (Ecosistema Completo)</option>
-                    </select>
-                </div>
-
-                <div class="form-group full-width">
-                    <label class="form-label">Log de Detalles del Proyecto</label>
-                    <textarea id="detallesProyecto" class="form-control" placeholder="Describe brevemente qué tienes en mente, objetivos, referentes o cualquier dato vital para inicializar el disco..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn-submit">Ejecutar Comando >></button>
-            </form>
-        </div>
-    </section>
-
-    <div class="system-footer">
-        [ END OF CONFIGURATION ] © 2026 DISK CREATIVO
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <a href="index.html" class="mobile-nav-link">Inicio</a>
+        <a href="dex.html" class="mobile-nav-link">Construye</a>
+        <a href="https://wa.me/50768529324" class="mobile-nav-link" style="color:var(--brand-purple); font-style:normal;">WhatsApp</a>
     </div>
+
+    <main class="setup-container">
+        
+        <aside class="setup-sidebar">
+            <div class="sidebar-content">
+                <div>
+                    <div class="sys-header">Terminal de Registro</div>
+                    <h1 class="setup-title">Setup</h1>
+                </div>
+                
+                <p class="setup-desc" id="contextDesc">
+                    Selecciona el protocolo de entrada. Puedes solicitar la <strong>ejecución de un proyecto</strong> si ya sabes lo que necesitas, o solicitar un <strong>diagnóstico de operaciones</strong> si buscas detectar fugas de tiempo y dinero en tu empresa.
+                </p>
+
+                <div class="tab-controls">
+                    <button class="tab-btn active" data-target="form-sales">
+                        [ DIR_01 // DESPLIEGUE ] 
+                    </button>
+                    <button class="tab-btn" data-target="form-diag">
+                        [ DIR_02 // DIAGNÓSTICO ]
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="setup-forms">
+
+            <form id="form-sales" class="form-module active" action="#" method="POST">
+                <div class="form-header">
+                    <h2 class="form-title">Construir Sistema</h2>
+                    <p class="form-subtitle">Detalla los requerimientos de tu proyecto y comenzaremos a codificar.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre del Contacto</label>
+                    <input type="text" placeholder="Ej. Carlos Mendoza" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Empresa / Marca</label>
+                    <input type="text" placeholder="Ej. Restaurante La Costa" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Módulo Requerido</label>
+                    <select required>
+                        <option value="" disabled selected>Selecciona una infraestructura...</option>
+                        <option value="qr">Menú Interactivo QR (Despliegue Rápido)</option>
+                        <option value="pos">Red Local / Comandas (Air-Gapped)</option>
+                        <option value="web">Desarrollo Web Custom (Corporativo)</option>
+                        <option value="branding">Rebranding Visual / Dirección de Arte</option>
+                        <option value="other">Otro / Consultoría Mixta</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Presupuesto Estimado</label>
+                    <select required>
+                        <option value="" disabled selected>Rango de inversión...</option>
+                        <option value="basico">$500 - $1,500 (Módulos PYME)</option>
+                        <option value="mid">$1,500 - $4,000 (Arquitectura Estándar)</option>
+                        <option value="high">$4,000+ (Ingeniería Custom)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Especificaciones del Proyecto</label>
+                    <textarea placeholder="Describe brevemente lo que quieres lograr con esta tecnología..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Ejecutar Petición</button>
+            </form>
+
+            <form id="form-diag" class="form-module" action="#" method="POST">
+                <div class="form-header">
+                    <h2 class="form-title">Diagnóstico de Fricción</h2>
+                    <p class="form-subtitle">Cuéntanos dónde está sangrando tu operación. Sin compromisos de venta.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre del Dueño/Gerente</label>
+                    <input type="text" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Local / Negocio</label>
+                    <input type="text" placeholder="Nombre del negocio" required>
+                </div>
+
+                <div class="form-group">
+                    <label>El Cuello de Botella</label>
+                    <textarea placeholder="¿Qué proceso manual (pedidos, inventario, cobros) retrasa más a tu equipo día a día?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Fuga de Capital / Tiempo</label>
+                    <textarea placeholder="¿En qué áreas sientes que el negocio está perdiendo dinero por falta de control o lentitud?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Solicitar Análisis</button>
+            </form>
+
+        </section>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- LÓGICA DEL MENÚ LATERAL ---
-            const openMenuBtn = document.getElementById('openMenuBtn');
-            const closeMenuBtn = document.getElementById('closeMenuBtn');
-            const sideMenu = document.getElementById('sideMenu');
-            const menuOverlay = document.getElementById('menuOverlay');
+            // Toggle Menú Móvil
+            const mobileBtn = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-            function toggleMenu() {
-                sideMenu.classList.toggle('active');
-                menuOverlay.classList.toggle('active');
-            }
-
-            openMenuBtn.addEventListener('click', toggleMenu);
-            closeMenuBtn.addEventListener('click', toggleMenu);
-            menuOverlay.addEventListener('click', toggleMenu);
-
-            // --- LÓGICA DE ENVÍO A WHATSAPP ---
-            const form = document.getElementById('projectForm');
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Evita que la página recargue
-
-                // Recolectar datos
-                const nombre = document.getElementById('nombreCliente').value;
-                const entidad = document.getElementById('tipoEntidad').value;
-                const modulo = document.getElementById('moduloServicio').value;
-                const inversion = document.getElementById('rangoInversion').value;
-                const detalles = document.getElementById('detallesProyecto').value;
-
-                // Formatear el mensaje para WhatsApp
-                const mensaje = `*[ SISTEMA DISK CREATIVO - INIT ]* 💽\n\nHola equipo, he inicializado un nuevo requerimiento en el sistema. Aquí están los parámetros:\n\n*Identificador:* ${nombre}\n*Entidad:* ${entidad}\n*Módulo Solicitado:* ${modulo}\n*Inversión:* ${inversion}\n\n*Log de Detalles:*\n"${detalles}"\n\n_Solicito conexión con un operador._`;
-
-                // Codificar el texto para URL
-                const textoCodificado = encodeURIComponent(mensaje);
-                
-                // Número de WhatsApp (Formato internacional de Panamá +507)
-                const numeroWA = "50768529324";
-                
-                // Crear URL final y abrir en nueva pestaña
-                const urlWhatsApp = `https://wa.me/${numeroWA}?text=${textoCodificado}`;
-                window.open(urlWhatsApp, '_blank');
+            mobileBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                mobileBtn.textContent = mobileNav.classList.contains('active') ? 'X' : '≡';
             });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileBtn.textContent = '≡';
+                });
+            });
+
+            // Lógica del Sistema de Tabs (Pestañas)
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const formModules = document.querySelectorAll('.form-module');
+            const contextDesc = document.getElementById('contextDesc');
+
+            const texts = {
+                'form-sales': "Despliega tu infraestructura digital. Detalla los requerimientos de tu proyecto en el formulario y comenzaremos a <strong>escribir el código</strong> para tu negocio.",
+                'form-diag': "No venimos a venderte nada aún. Queremos entender dónde está la falla técnica de tu local. Llena este reporte rápido para <strong>detectar ineficiencias</strong>."
+            };
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remover activos
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    formModules.forEach(f => f.classList.remove('active'));
+                    
+                    // Activar selección
+                    btn.classList.add('active');
+                    const targetId = btn.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                    
+                    // Actualizar Contexto Narrativo
+                    contextDesc.style.opacity = 0;
+                    setTimeout(() => {
+                        contextDesc.innerHTML = texts[targetId];
+                        contextDesc.style.opacity = 1;
+                    }, 200);
+                });
+            });
+            
+            // Transición suave de opacidad para el texto
+            contextDesc.style.transition = "opacity 0.2s ease";
         });
     </script>
 </body>
