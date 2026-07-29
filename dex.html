@@ -7,16 +7,18 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-primary: #050505;
+            --bg-card: rgba(255, 255, 255, 0.03);
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
             --text-muted: rgba(234, 233, 228, 0.6);
-            --hairline: 1px solid rgba(255, 255, 255, 0.15);
+            --hairline: 1px solid rgba(255, 255, 255, 0.12);
+            --hairline-focus: 1px solid rgba(107, 0, 255, 0.8);
             
             --font-display: 'Anton', sans-serif;
             --font-serif: 'Playfair Display', serif;
@@ -36,7 +38,7 @@
             display: flex; flex-direction: column;
         }
 
-        /* ─── NAVBAR SUPERIOR UNIVERSAL (IDÉNTICO A INDEX) ─── */
+        /* ─── NAVBAR SUPERIOR UNIVERSAL (IGUAL A INDEX) ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.8);
@@ -69,132 +71,145 @@
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        .mobile-menu-btn {
-            display: none; background: transparent; border: none; color: #fff;
-            font-size: 2rem; cursor: pointer; font-family: var(--font-sans); font-weight: 300;
-        }
-
-        /* ─── MENÚ MÓVIL (OVERLAY) ─── */
-        .mobile-nav-overlay {
-            position: fixed; inset: 0; background: var(--bg-primary); z-index: 1999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .mobile-nav-overlay.active { opacity: 1; pointer-events: auto; }
-        .mobile-nav-link { font-family: var(--font-serif); font-size: 3rem; color: #fff; text-decoration: none; font-weight: 400; line-height: 1; font-style: italic;}
-
-        /* ─── LAYOUT DEL SETUP (TERMINAL EDITORIAL) ─── */
+        /* ─── TERMINAL DE CONFIGURACIÓN ─── */
         .setup-container {
             margin-top: 70px; flex-grow: 1;
-            display: grid; grid-template-columns: 40% 60%;
-            width: 100%; border-top: var(--hairline);
+            display: grid; grid-template-columns: 38% 62%;
+            width: 100%; min-height: calc(100vh - 70px);
         }
 
-        /* Columna Izquierda: Contexto y Controles */
+        /* Columna Izquierda: Información de Modo */
         .setup-sidebar {
-            padding: 6rem 4vw; border-right: var(--hairline);
-            display: flex; flex-direction: column; gap: 2rem;
-            position: relative; background: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png') center/cover;
-        }
-        
-        /* Capa oscura para que el texto sea legible sobre el arcoíris estático */
-        .setup-sidebar::before {
-            content: ''; position: absolute; inset: 0;
-            background: rgba(5,5,5,0.85); backdrop-filter: blur(10px); z-index: 0;
-        }
-
-        .sidebar-content { position: relative; z-index: 10; display: flex; flex-direction: column; gap: 2rem; }
-
-        .sys-header { font-family: var(--font-sans); color: var(--brand-purple); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px; font-weight: 600;}
-        .setup-title { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 6rem); line-height: 0.9; color: #fff; text-transform: uppercase;}
-        
-        .setup-desc { font-family: var(--font-serif); font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); }
-        .setup-desc strong { color: var(--text-main); font-weight: 400; font-style: italic; }
-
-        /* Sistema de Tabs (Pestañas) */
-        .tab-controls { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; border-top: var(--hairline); padding-top: 2rem;}
-        
-        .tab-btn {
-            background: transparent; border: none; text-align: left;
-            font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 2px; padding: 1rem 0;
-            cursor: pointer; transition: all 0.3s; border-bottom: 1px solid transparent;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .tab-btn:hover { color: #fff; }
-        .tab-btn.active { color: var(--brand-purple); font-weight: 600; border-bottom: 1px solid var(--brand-purple); }
-        .tab-btn.active::after { content: '●'; font-size: 0.6rem; }
-
-        /* Columna Derecha: Los Formularios */
-        .setup-forms {
-            padding: 6rem 6vw; position: relative;
+            padding: 5rem 4vw; border-right: var(--hairline);
+            display: flex; flex-direction: column; justify-content: space-between;
             background: var(--bg-primary);
         }
 
-        .form-module { display: none; flex-direction: column; gap: 3rem; animation: fadeIn 0.5s ease forwards; }
+        .sidebar-content { display: flex; flex-direction: column; gap: 2rem; }
+
+        .sys-header { 
+            font-family: var(--font-sans); color: var(--brand-purple); 
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;
+        }
+        .setup-title { 
+            font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.5rem); 
+            line-height: 0.95; color: #fff; text-transform: uppercase; letter-spacing: -1px;
+        }
+        
+        .setup-desc { 
+            font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.35rem); 
+            line-height: 1.6; color: var(--text-muted); font-weight: 400;
+        }
+        .setup-desc strong { color: var(--text-main); font-style: italic; font-weight: 400; }
+
+        /* Tabs de Selección Amigables */
+        .tab-controls { 
+            display: flex; flex-direction: column; gap: 1rem; 
+            margin-top: 2rem; border-top: var(--hairline); padding-top: 2.5rem;
+        }
+        
+        .tab-btn {
+            background: var(--bg-card); border: var(--hairline);
+            border-radius: 12px; padding: 1.2rem 1.5rem; text-align: left;
+            font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .tab-btn:hover { 
+            background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.3); 
+        }
+        .tab-btn.active { 
+            background: rgba(107, 0, 255, 0.12); border-color: var(--brand-purple); 
+            color: #fff; font-weight: 600; box-shadow: 0 10px 25px rgba(107, 0, 255, 0.15);
+        }
+        .tab-btn.active .tab-indicator {
+            width: 8px; height: 8px; background: var(--accent-neon); border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-neon);
+        }
+        .tab-indicator {
+            width: 8px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        /* Columna Derecha: Formularios Suaves y Amigables */
+        .setup-forms {
+            padding: 5rem 5vw; position: relative;
+            background: rgba(255,255,255,0.008);
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
+        .form-module { display: none; flex-direction: column; gap: 2.2rem; animation: fadeIn 0.4s ease forwards; max-width: 750px;}
         .form-module.active { display: flex; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .form-header { margin-bottom: 1rem; }
-        .form-title { font-family: var(--font-serif); font-size: 2.5rem; color: #fff; font-weight: 400; margin-bottom: 0.5rem;}
-        .form-subtitle { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); font-weight: 300;}
+        .form-header { margin-bottom: 0.5rem; }
+        .form-title { font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem); color: #fff; font-weight: 400; line-height: 1.1; margin-bottom: 0.8rem;}
+        .form-subtitle { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.5;}
 
-        /* Brutalismo Editorial en Inputs */
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
+        /* UX Amigable en Inputs */
+        .form-group { display: flex; flex-direction: column; gap: 0.6rem; position: relative; }
         
         .form-group label {
-            font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 1.5px; color: var(--brand-purple); font-weight: 600;
+            font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase;
+            letter-spacing: 1.5px; color: rgba(255,255,255,0.7); font-weight: 500;
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .form-group label span { font-size: 0.65rem; color: var(--brand-purple); text-transform: none; letter-spacing: 0;}
+
+        .input-container { position: relative; width: 100%; }
 
         .form-group input, .form-group textarea, .form-group select {
-            width: 100%; background: transparent; border: none;
-            border-bottom: var(--hairline); color: #fff;
-            font-family: var(--font-serif); font-size: 1.5rem; /* Letra grande y elegante para rellenar */
-            padding: 0.5rem 0; outline: none; transition: border-color 0.3s, color 0.3s;
-            border-radius: 0; appearance: none;
+            width: 100%; background: rgba(255, 255, 255, 0.025);
+            border: var(--hairline); border-radius: 10px;
+            color: var(--text-main); font-family: var(--font-sans); font-size: 1rem; font-weight: 400;
+            padding: 1.1rem 1.2rem; outline: none; transition: all 0.3s ease;
+            appearance: none; -webkit-appearance: none;
         }
-        
-        .form-group textarea { resize: vertical; min-height: 60px; font-size: 1.2rem; }
+
+        .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
         .form-group select { cursor: pointer; }
-        .form-group select option { background: var(--bg-primary); color: #fff; font-family: var(--font-sans); font-size: 1rem;}
+        .form-group select option { background: #0F0F12; color: #fff; padding: 10px; }
 
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-bottom: 1px solid var(--accent-neon);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--brand-purple);
+            box-shadow: 0 0 0 3px rgba(107, 0, 255, 0.15);
         }
-        
-        /* Placeholder styling */
-        ::placeholder { color: rgba(255,255,255,0.2); font-family: var(--font-serif); font-style: italic; }
 
-        /* Botón de Envío */
+        ::placeholder { color: rgba(255,255,255,0.25); font-weight: 300; }
+
+        /* Botón de Acción Principal */
         .btn-submit {
-            align-self: flex-start; margin-top: 2rem;
-            background: #fff; color: #000; border: none;
+            align-self: flex-start; margin-top: 1rem;
+            background: #fff; color: #050505; border: none; border-radius: 50px;
             font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600;
             text-transform: uppercase; letter-spacing: 2px;
-            padding: 1.2rem 3rem; cursor: pointer; transition: all 0.3s;
+            padding: 1.1rem 3rem; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 10px;
         }
-        .btn-submit:hover { background: var(--brand-purple); color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(107, 0, 255, 0.3); }
+        .btn-submit:hover { 
+            background: var(--brand-purple); color: #fff; 
+            transform: translateY(-2px); box-shadow: 0 12px 25px rgba(107, 0, 255, 0.35); 
+        }
 
-        /* ─── RESPONSIVE MÓVIL ─── */
+        /* ─── RESPONSIVE MÓVIL Y TABLET ─── */
         @media (max-width: 900px) {
-            .top-navbar { padding: 0 4vw; height: 60px; justify-content: center;}
-            .navbar-brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 0.9rem;}
+            .top-navbar { padding: 0 4vw; height: 60px; }
+            .navbar-brand { font-size: 0.8rem; gap: 6px; }
             .navbar-brand span { display: none; }
             .brand-icon { height: 18px; }
-            .navbar-links { display: none; } 
-            .mobile-menu-btn { display: block; position: absolute; right: 1.5rem; }
+            
+            .navbar-links { gap: 1rem; }
+            .nav-link { font-size: 0.65rem; }
+            .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
+            .nav-btn-wa svg { width: 12px; height: 12px; }
 
             .setup-container { grid-template-columns: 1fr; margin-top: 60px;}
-            
-            .setup-sidebar { padding: 4rem 1.5rem; border-right: none; border-bottom: var(--hairline); }
-            .setup-title { font-size: clamp(3rem, 12vw, 4rem); }
-            
-            .setup-forms { padding: 4rem 1.5rem; }
-            .form-title { font-size: 2rem; }
-            .form-group input, .form-group select { font-size: 1.2rem; }
-            .btn-submit { width: 100%; text-align: center; }
+            .setup-sidebar { padding: 3rem 5vw; border-right: none; border-bottom: var(--hairline); }
+            .setup-forms { padding: 3.5rem 5vw; }
+            .btn-submit { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -213,34 +228,29 @@
                 WhatsApp
             </a>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuToggle">≡</button>
     </nav>
-
-    <div class="mobile-nav-overlay" id="mobileNav">
-        <a href="index.html" class="mobile-nav-link">Inicio</a>
-        <a href="dex.html" class="mobile-nav-link">Construye</a>
-        <a href="https://wa.me/50768529324" class="mobile-nav-link" style="color:var(--brand-purple); font-style:normal;">WhatsApp</a>
-    </div>
 
     <main class="setup-container">
         
         <aside class="setup-sidebar">
             <div class="sidebar-content">
                 <div>
-                    <div class="sys-header">Terminal de Registro</div>
+                    <div class="sys-header">Módulo // Configuración</div>
                     <h1 class="setup-title">Setup</h1>
                 </div>
                 
                 <p class="setup-desc" id="contextDesc">
-                    Selecciona el protocolo de entrada. Puedes solicitar la <strong>ejecución de un proyecto</strong> si ya sabes lo que necesitas, o solicitar un <strong>diagnóstico de operaciones</strong> si buscas detectar fugas de tiempo y dinero en tu empresa.
+                    Selecciona el protocolo de entrada. Puedes solicitar la <strong>ejecución de un proyecto</strong> si buscas cotizar infraestructura, o solicitar un <strong>diagnóstico de operaciones</strong> si deseas detectar cuellos de botella en tu local.
                 </p>
 
                 <div class="tab-controls">
                     <button class="tab-btn active" data-target="form-sales">
-                        [ DIR_01 // DESPLIEGUE ] 
+                        <span>[ DIR_01 // DESPLIEGUE ]</span>
+                        <div class="tab-indicator"></div>
                     </button>
                     <button class="tab-btn" data-target="form-diag">
-                        [ DIR_02 // DIAGNÓSTICO ]
+                        <span>[ DIR_02 // DIAGNÓSTICO ]</span>
+                        <div class="tab-indicator"></div>
                     </button>
                 </div>
             </div>
@@ -248,79 +258,103 @@
 
         <section class="setup-forms">
 
-            <form id="form-sales" class="form-module active" action="#" method="POST">
+            <form id="form-sales" class="form-module active" action="https://formspree.io/f/mqakvoge" method="POST">
                 <div class="form-header">
                     <h2 class="form-title">Construir Sistema</h2>
-                    <p class="form-subtitle">Detalla los requerimientos de tu proyecto y comenzaremos a codificar.</p>
+                    <p class="form-subtitle">Completa los campos con la información de tu proyecto para iniciar el diseño de tu infraestructura.</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Nombre del Contacto</label>
-                    <input type="text" placeholder="Ej. Carlos Mendoza" required>
+                    <label>Nombre y Apellido <span>(Obligatorio)</span></label>
+                    <div class="input-container">
+                        <input type="text" name="nombre" placeholder="Ej. Carlos Mendoza" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Empresa / Marca</label>
-                    <input type="text" placeholder="Ej. Restaurante La Costa" required>
+                    <label>Nombre del Negocio / Empresa</label>
+                    <div class="input-container">
+                        <input type="text" name="empresa" placeholder="Ej. Restaurante La Costa" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Módulo Requerido</label>
-                    <select required>
-                        <option value="" disabled selected>Selecciona una infraestructura...</option>
-                        <option value="qr">Menú Interactivo QR (Despliegue Rápido)</option>
-                        <option value="pos">Red Local / Comandas (Air-Gapped)</option>
-                        <option value="web">Desarrollo Web Custom (Corporativo)</option>
-                        <option value="branding">Rebranding Visual / Dirección de Arte</option>
-                        <option value="other">Otro / Consultoría Mixta</option>
-                    </select>
+                    <label>Tipo de Infraestructura Requerida</label>
+                    <div class="input-container">
+                        <select name="modulo" required>
+                            <option value="" disabled selected>Selecciona la solución que necesitas...</option>
+                            <option value="qr">Menú Interactivo QR (Despliegue Rápido)</option>
+                            <option value="pos">Red Local / Comandas Sin Internet (Air-Gapped)</option>
+                            <option value="web">Sitio Web / Plataforma Custom (Enterprise)</option>
+                            <option value="branding">Identidad Visual & Dirección de Arte</option>
+                            <option value="consultoria">Consultoría Técnica General</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Presupuesto Estimado</label>
-                    <select required>
-                        <option value="" disabled selected>Rango de inversión...</option>
-                        <option value="basico">$500 - $1,500 (Módulos PYME)</option>
-                        <option value="mid">$1,500 - $4,000 (Arquitectura Estándar)</option>
-                        <option value="high">$4,000+ (Ingeniería Custom)</option>
-                    </select>
+                    <label>Presupuesto Estimado de Inversión</label>
+                    <div class="input-container">
+                        <select name="presupuesto" required>
+                            <option value="" disabled selected>Selecciona un rango...</option>
+                            <option value="basico">$500 - $1,500 (Módulos Rápidos)</option>
+                            <option value="mid">$1,500 - $4,000 (Arquitectura Estándar)</option>
+                            <option value="high">$4,000+ (Desarrollo Custom)</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Especificaciones del Proyecto</label>
-                    <textarea placeholder="Describe brevemente lo que quieres lograr con esta tecnología..." required></textarea>
+                    <label>Detalles del Proyecto</label>
+                    <div class="input-container">
+                        <textarea name="detalles" placeholder="Cuéntanos un poco sobre lo que quieres lograr con esta solución..." required></textarea>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit">Ejecutar Petición</button>
+                <button type="submit" class="btn-submit">
+                    Enviar Requerimiento
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
             </form>
 
-            <form id="form-diag" class="form-module" action="#" method="POST">
+            <form id="form-diag" class="form-module" action="https://formspree.io/f/mqakvoge" method="POST">
                 <div class="form-header">
-                    <h2 class="form-title">Diagnóstico de Fricción</h2>
-                    <p class="form-subtitle">Cuéntanos dónde está sangrando tu operación. Sin compromisos de venta.</p>
+                    <h2 class="form-title">Diagnóstico Operativo</h2>
+                    <p class="form-subtitle">Un cuestionario simple de consulta para identificar dónde pierde tiempo o dinero tu negocio.</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Nombre del Dueño/Gerente</label>
-                    <input type="text" placeholder="Tu nombre" required>
+                    <label>Tu Nombre <span>(Persona de contacto)</span></label>
+                    <div class="input-container">
+                        <input type="text" name="contacto_diag" placeholder="Ej. Ana Rodríguez" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Local / Negocio</label>
-                    <input type="text" placeholder="Nombre del negocio" required>
+                    <label>Nombre del Establecimiento</label>
+                    <div class="input-container">
+                        <input type="text" name="local_diag" placeholder="Ej. Boutique Central" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>El Cuello de Botella</label>
-                    <textarea placeholder="¿Qué proceso manual (pedidos, inventario, cobros) retrasa más a tu equipo día a día?" required></textarea>
+                    <label>Cuello de Botella Principal</label>
+                    <div class="input-container">
+                        <textarea name="cuello_botella" placeholder="¿Qué proceso manual (tomar pedidos, inventario, cobros) atrasa más la atención en tu local?" required></textarea>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Fuga de Capital / Tiempo</label>
-                    <textarea placeholder="¿En qué áreas sientes que el negocio está perdiendo dinero por falta de control o lentitud?" required></textarea>
+                    <label>Área de Fuga o Ineficiencia</label>
+                    <div class="input-container">
+                        <textarea name="fuga_capital" placeholder="¿En qué aspecto sientes que tu equipo o negocio pierde dinero o clientes diariamente?" required></textarea>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit">Solicitar Análisis</button>
+                <button type="submit" class="btn-submit">
+                    Solicitar Diagnóstico
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
             </form>
 
         </section>
@@ -328,55 +362,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // Toggle Menú Móvil
-            const mobileBtn = document.getElementById('mobileMenuToggle');
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
-            mobileBtn.addEventListener('click', () => {
-                mobileNav.classList.toggle('active');
-                mobileBtn.textContent = mobileNav.classList.contains('active') ? 'X' : '≡';
-            });
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileNav.classList.remove('active');
-                    mobileBtn.textContent = '≡';
-                });
-            });
-
-            // Lógica del Sistema de Tabs (Pestañas)
+            // Lógica de Tabs
             const tabBtns = document.querySelectorAll('.tab-btn');
             const formModules = document.querySelectorAll('.form-module');
             const contextDesc = document.getElementById('contextDesc');
 
             const texts = {
-                'form-sales': "Despliega tu infraestructura digital. Detalla los requerimientos de tu proyecto en el formulario y comenzaremos a <strong>escribir el código</strong> para tu negocio.",
-                'form-diag': "No venimos a venderte nada aún. Queremos entender dónde está la falla técnica de tu local. Llena este reporte rápido para <strong>detectar ineficiencias</strong>."
+                'form-sales': "Despliega tu infraestructura digital. Detalla los requerimientos de tu proyecto en el formulario y comenzaremos a <strong>diseñar el código</strong> para tu negocio.",
+                'form-diag': "Sin compromisos de venta. Queremos entender dónde está el fallo técnico de tu local. Llena este formulario rápido para <strong>detectar ineficiencias</strong>."
             };
 
             tabBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Remover activos
                     tabBtns.forEach(b => b.classList.remove('active'));
                     formModules.forEach(f => f.classList.remove('active'));
                     
-                    // Activar selección
                     btn.classList.add('active');
                     const targetId = btn.getAttribute('data-target');
                     document.getElementById(targetId).classList.add('active');
                     
-                    // Actualizar Contexto Narrativo
                     contextDesc.style.opacity = 0;
                     setTimeout(() => {
                         contextDesc.innerHTML = texts[targetId];
                         contextDesc.style.opacity = 1;
-                    }, 200);
+                    }, 180);
                 });
             });
             
-            // Transición suave de opacidad para el texto
             contextDesc.style.transition = "opacity 0.2s ease";
         });
     </script>
