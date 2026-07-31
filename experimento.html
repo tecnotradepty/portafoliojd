@@ -45,6 +45,8 @@
             width: 100vw; height: 110vh; 
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c97611b6a556fa85d00e302313fd0dbfab2e3406/DIQC/file_00000000c60481f7b7f5519059d41ed9.png');
             background-position: center center; background-size: cover; background-repeat: no-repeat;
+            /* MODIFICADO: Blindado a FIJO */
+            background-attachment: fixed;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
             will-change: transform; transform-origin: center;
         }
@@ -102,6 +104,7 @@
             font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
             color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
         }
+        /* NUEVO LOGO: Disco independiente sin reproductor */
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
 
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
@@ -277,8 +280,17 @@
             position: fixed; bottom: 3vh; left: 50%; transform: translateX(-50%); 
             width: 95%; max-width: 650px; z-index: 3000; pointer-events: none; 
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            /* NUEVO: Animación sutil de flote */
+            animation: subtleFloatDock 6s infinite ease-in-out;
         }
         .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.9)); transform-origin: center bottom; }
+
+        /* NUEVAS KEYFRAMES: Flote sutil */
+        @keyframes subtleFloatDock {
+            0% { transform: translate(-50%, 0px); }
+            50% { transform: translate(-50%, -5px); }
+            100% { transform: translate(-50%, 0px); }
+        }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 3010; cursor: pointer; outline: none; }
         .hitbox-inicio { left: 16%; width: 15%; }
@@ -345,7 +357,7 @@
     <nav class="top-navbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/aafa581d61097c06dec3bed27d56cd5ea55070fb/DIQC/1785538967768.png" alt="Disk Icon" class="brand-icon">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Icon" class="brand-icon">
         </a>
         <div class="navbar-links">
             <a href="index.html" class="nav-link">Inicio</a>
@@ -435,24 +447,47 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // ─── SMOOTH PARALLAX DE FONDO ───
-            const parallaxBg = document.getElementById('parallaxBg');
+            // ─── ELIMINADO: PARALLAX DE FONDO (ESCENARIO FIJO) ───
+            // Ya no movemos el .ambient-canvas. background-attachment: fixed hace el trabajo.
+
+            // ─── PARALLAX HERO (TÍTULO Y LOGO SUBEN CON SCROLL) ───
+            const heroTitle = document.querySelector('.hero-giant-text');
+            const dynamicLogo = document.getElementById('dynamic-logo');
+
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px) scale(1.05)`;
+                const scrollSpeedFactor = 0.35; // Factor sutil de empuje
+
+                if(heroTitle) {
+                    // Empujamos el título hacia arriba sutilmente
+                    heroTitle.style.transform = `translateY(${scrolled * -scrollSpeedFactor}px)`;
+                }
+
+                if(dynamicLogo && window.innerWidth > 768) {
+                    // Mantenemos el anclaje central calc(-50%), aplicamos mouse y sumamos el scroll lift
+                    dynamicLogo.style.transform = `translate(calc(-50% + ${lastMouseX * -40}px), calc(-50% + ${lastMouseY * -40}px - ${scrolled * scrollSpeedFactor}px))`;
+                }
             }, { passive: true });
 
-            // ─── PARALLAX HERO MOUSE ───
+            // ─── PARALLAX HERO MOUSE (CONSERVAR) ───
             const heroContainer = document.getElementById('inicio');
-            const logo = document.getElementById('dynamic-logo');
-            if(heroContainer && logo && window.innerWidth > 768) {
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+
+            if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
                     const rect = heroContainer.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
+                    lastMouseX = (e.clientX - rect.left) / rect.width - 0.5;
+                    lastMouseY = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    // Solo actualizamos mouse, el scroll handler manejará su parte
+                    dynamicLogo.style.transform = `translate(calc(-50% + ${lastMouseX * -40}px), calc(-50% + ${lastMouseY * -40}px - ${window.scrollY * 0.35}px))`;
                 });
-                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = 'translate(-50%, -50%)'; });
+                
+                heroContainer.addEventListener('mouseleave', () => { 
+                    lastMouseX = 0; lastMouseY = 0;
+                    dynamicLogo.style.transform = `translate(-50%, calc(-50% - ${window.scrollY * 0.35}px))`; 
+                });
             }
 
             // Animación Cámara
@@ -478,7 +513,7 @@
                         
                         const rect = wrapper.getBoundingClientRect();
                         const x = clientX - rect.left;
-                        const y = clientY - rect.top;
+                        const y = clientY - top;
                         
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
