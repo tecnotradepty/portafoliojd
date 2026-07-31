@@ -43,7 +43,6 @@
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
             width: 100vw; height: 110vh; 
-            /* NUEVO ENLACE: Concepto de Vacío Infinito */
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c97611b6a556fa85d00e302313fd0dbfab2e3406/DIQC/file_00000000c60481f7b7f5519059d41ed9.png');
             background-position: center center; background-size: cover; background-repeat: no-repeat;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
@@ -55,20 +54,46 @@
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             z-index: -2; pointer-events: none;
         }
+
+        /* ─── POLVO ESPACIAL (LENTO) ─── */
         .stars-1 {
             position: absolute; width: 1px; height: 1px; background: transparent;
             box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
-            animation: twinkle 4s infinite alternate ease-in-out;
+            /* MODIFICADO: Animación extremadamente lenta (40s) */
+            animation: twinkle 40s infinite alternate ease-in-out;
         }
         .stars-2 {
             position: absolute; width: 2px; height: 2px; background: transparent;
             box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
-            animation: twinkle 6s infinite alternate-reverse ease-in-out;
+            /* MODIFICADO: Animación extremadamente lenta (60s) */
+            animation: twinkle 60s infinite alternate-reverse ease-in-out;
+        }
+
+        /* ─── ESTRELLAS ESTÁTICAS TITILANTES (NUEVO) ─── */
+        .stars-static-twinkle {
+            position: absolute; width: 1px; height: 1px; background: transparent;
+            /* Generar gran cantidad de puntos diminutos a izquierda y derecha */
+            box-shadow: 
+                /* Izquierda vacía */
+                5vw 10vh #AAA, 10vw 30vh #AAA, 3vw 60vh #AAA, 12vw 80vh #AAA, 7vw 90vh #AAA, 2vw 20vh #AAA,
+                /* Derecha vacía */
+                95vw 10vh #AAA, 90vw 30vh #AAA, 97vw 60vh #AAA, 88vw 80vh #AAA, 93vw 90vh #AAA, 98vw 20vh #AAA,
+                /* Relleno sutil central */
+                30vw 5vh #AAA, 70vw 95vh #AAA;
+            /* MODIFICADO: Animación extremadamente sutil y lenta (15s) */
+            animation: breathing 15s infinite alternate ease-in-out;
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.1; transform: scale(0.8); }
-            100% { opacity: 0.7; transform: scale(1.1); }
+            /* MODIFICADO: Opacidad más sutil y escalado mínimo para polvo */
+            0% { opacity: 0.1; transform: scale(0.98); }
+            100% { opacity: 0.4; transform: scale(1.02); }
+        }
+
+        @keyframes breathing {
+            /* MODIFICADO: Opacidad sutil para titileo de estrellas estáticas */
+            0% { opacity: 0.1; }
+            100% { opacity: 0.5; }
         }
 
         /* ─── NAVBAR SUPERIOR DE VENTAS ─── */
@@ -140,11 +165,15 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
+        /* ─── CD ESCALADO Y DESPLAZADO (NO TAPA LA LECTURA) ─── */
         .giant-transparent-logo {
             position: absolute; 
-            top: 55%; left: 55%;
+            top: 55%; 
+            /* MODIFICADO: Movido ligeramente al centro para equilibrar el escritorio */
+            left: 52%; 
             transform: translate(-50%, -50%);
-            width: clamp(180px, 32vw, 550px);
+            /* MODIFICADO: Reducido el tamaño máximo y la proporción para equilibrar */
+            width: clamp(180px, 28vw, 480px);
             z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 60px 25px rgba(0, 0, 0, 0.7));
             animation: floatLogo 8s ease-in-out infinite; 
@@ -318,6 +347,7 @@
 
     <div class="ambient-canvas" id="parallaxBg">
         <div class="stars-container">
+            <div class="stars-static-twinkle"></div>
             <div class="stars-1"></div>
             <div class="stars-2"></div>
         </div>
@@ -378,7 +408,7 @@
                             <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
                         </div>
                         <div class="module-item">
-                            <span class="module-tag">DIR_02 / A LA MEDIDA</span>
+                            <span class="module-tag">DIR_02 / A LA MEDida</span>
                             <h4>Arquitectura Custom</h4>
                             <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
                         </div>
