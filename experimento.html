@@ -39,18 +39,39 @@
             position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO ARCOÍRIS (NUEVO PARALLAX SMOOTH) ─── */
+        /* ─── LIENZO DEL ESTUDIO EN EL VACÍO ─── */
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
-            width: 100vw; height: 110vh; /* Altura extra para el parallax */
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/898fe9138c643947559443d1dd3308d9f68b8371/DIQC/file_00000000a3d8822fb9c9ef28e8378e52.png');
+            width: 100vw; height: 110vh; 
+            /* NUEVO ENLACE: Concepto de Vacío Infinito */
+            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c97611b6a556fa85d00e302313fd0dbfab2e3406/DIQC/file_00000000c60481f7b7f5519059d41ed9.png');
             background-position: center center; background-size: cover; background-repeat: no-repeat;
-            z-index: -2; filter: brightness(0.7) saturate(1.2);
-            will-change: transform; /* Optimización de GPU para el scroll */
-            transform-origin: center;
+            z-index: -3; filter: brightness(0.9) saturate(1.1);
+            will-change: transform; transform-origin: center;
         }
 
-        /* ─── NAVBAR SUPERIOR DE VENTAS (UNIVERSAL MÓVIL/PC) ─── */
+        /* ─── MICRO-ESTRELLAS (CSS PURO) ─── */
+        .stars-container {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -2; pointer-events: none;
+        }
+        .stars-1 {
+            position: absolute; width: 1px; height: 1px; background: transparent;
+            box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
+            animation: twinkle 4s infinite alternate ease-in-out;
+        }
+        .stars-2 {
+            position: absolute; width: 2px; height: 2px; background: transparent;
+            box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
+            animation: twinkle 6s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.8); }
+            100% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* ─── NAVBAR SUPERIOR DE VENTAS ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.5);
@@ -83,7 +104,7 @@
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── SECCIÓN 1: HERO (NUEVA ESCALA Y OFFSET) ─── */
+        /* ─── SECCIÓN 1: HERO ─── */
         .hero-section {
             position: relative; height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; padding: 2vw;
@@ -119,12 +140,11 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
-        /* FIX: CD ESCALADO Y DESPLAZADO (NO TAPA LA LECTURA) */
         .giant-transparent-logo {
             position: absolute; 
-            top: 55%; left: 55%; /* Offset Asimétrico */
+            top: 55%; left: 55%;
             transform: translate(-50%, -50%);
-            width: clamp(180px, 32vw, 550px); /* Escala reducida */
+            width: clamp(180px, 32vw, 550px);
             z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 60px 25px rgba(0, 0, 0, 0.7));
             animation: floatLogo 8s ease-in-out infinite; 
@@ -229,7 +249,7 @@
         }
         .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
 
-        /* CSS Fallback Hover (Las físicas reales están en el JS) */
+        /* CSS Fallback Hover (Físicas JS) */
         .card-editorial.is-active { box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02); }
         .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
@@ -252,7 +272,7 @@
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.8rem; gap: 6px; }
-            .navbar-brand span { display: none; } /* Oculta ".CREATIVO" en móvil para más espacio */
+            .navbar-brand span { display: none; } 
             .brand-icon { height: 18px; }
             
             .navbar-links { gap: 1rem; }
@@ -262,7 +282,6 @@
             
             .hero-giant-text { font-size: 16vw; gap: 0.5vw; } 
             
-            /* CD adaptado en Móvil para que no estorbe */
             .giant-transparent-logo { 
                 width: 55vw; 
                 left: 50%; top: 60%; 
@@ -297,7 +316,12 @@
 </head>
 <body>
 
-    <div class="ambient-canvas" id="parallaxBg"></div>
+    <div class="ambient-canvas" id="parallaxBg">
+        <div class="stars-container">
+            <div class="stars-1"></div>
+            <div class="stars-2"></div>
+        </div>
+    </div>
 
     <nav class="top-navbar">
         <a href="#inicio" class="navbar-brand">
@@ -382,7 +406,7 @@
     </main>
 
     <div class="camera-container" id="cameraDock">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/9c0995be6202989f4dbd368515ee279cfebc82e0/DIQC/1784610614803.png" alt="Dock Cámara Disk Creativo">
+        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Dock Cámara Disk Creativo">
         <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
         <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
         <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
@@ -396,7 +420,6 @@
             const parallaxBg = document.getElementById('parallaxBg');
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                // El fondo sube al 25% de la velocidad del scroll normal, creando profundidad
                 if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px) scale(1.05)`;
             }, { passive: true });
 
@@ -408,7 +431,6 @@
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    // Mantiene el anclaje (-50%, -50%) y le suma el offset del ratón
                     logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
                 });
                 heroContainer.addEventListener('mouseleave', () => { logo.style.transform = 'translate(-50%, -50%)'; });
