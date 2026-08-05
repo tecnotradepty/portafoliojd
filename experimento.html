@@ -17,6 +17,7 @@
             --text-main: #EAE9E4; 
             --text-muted: rgba(234, 233, 228, 0.6);
             --hairline: 1px solid rgba(255, 255, 255, 0.15);
+            --hairline-neon: 1px solid var(--accent-neon);
             
             --font-display: 'Anton', sans-serif;
             --font-serif: 'Playfair Display', serif;
@@ -40,7 +41,7 @@
             position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO DEL ESTUDIO EN EL VACÍO ─── */
+        /* ─── LIENZO DEL ESTUDIO EN EL VACÍO (RESTAURADO) ─── */
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
             width: 100vw; height: 110vh; 
@@ -51,7 +52,7 @@
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
 
-        /* ─── MICRO-ESTRELLAS ─── */
+        /* ─── MICRO-ESTRELLAS ANIMADAS (RESTAURADO) ─── */
         .stars-container {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             z-index: -2; pointer-events: none;
@@ -67,7 +68,6 @@
             box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
             animation: twinkle 60s infinite alternate-reverse ease-in-out;
         }
-
         .stars-static-twinkle {
             position: absolute; width: 1px; height: 1px; background: transparent;
             box-shadow: 
@@ -77,23 +77,17 @@
             animation: breathing 15s infinite alternate ease-in-out;
         }
 
-        @keyframes twinkle { 
-            0% { opacity: 0.1; } 
-            100% { opacity: 0.4; } 
-        }
-        @keyframes breathing { 
-            0% { opacity: 0.1; } 
-            100% { opacity: 0.6; } 
-        }
+        @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
+        @keyframes breathing { 0% { opacity: 0.1; } 100% { opacity: 0.6; } }
 
-        /* ─── NAVBAR SUPERIOR ─── */
+        /* ─── NAVBAR SUPERIOR PREMIUM (RESTAURADO) ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.5);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: var(--hairline);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 4vw; z-index: 2000; transition: all 0.3s ease;
+            padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
 
         .navbar-brand { 
@@ -106,7 +100,7 @@
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
         .nav-link {
             color: var(--text-main); text-decoration: none; 
-            font-family: var(--font-code); font-size: 0.75rem; 
+            font-family: var(--font-sans); font-size: 0.75rem; 
             text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
         }
         .nav-link:hover { color: var(--brand-purple); }
@@ -120,7 +114,7 @@
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── SECCIÓN 1: HERO ─── */
+        /* ─── SECCIÓN 1: HERO Y LETRAS FLOTANTES (RESTAURADO) ─── */
         .hero-section {
             position: relative; height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; padding: 2vw;
@@ -132,8 +126,7 @@
         .hero-giant-text {
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
-            display: flex; flex-direction: column; gap: 1vh; letter-spacing: -2px;
-            width: 100%;
+            display: flex; flex-direction: column; gap: 1vh; letter-spacing: -2px; width: 100%;
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
@@ -156,12 +149,9 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
 
-        /* CD ESCALADO Y DESPLAZADO (ESCRITORIO) */
         .giant-transparent-logo {
-            position: absolute; 
-            top: 55%; left: 49%; 
-            transform: translate(-50%, -50%);
-            width: clamp(150px, 24vw, 420px);
+            position: absolute; top: 55%; left: 52%; 
+            transform: translate(-50%, -50%); width: clamp(150px, 24vw, 420px);
             z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 60px 25px rgba(0, 0, 0, 0.7));
             animation: floatLogo 8s ease-in-out infinite; 
@@ -180,97 +170,99 @@
             text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
         }
 
+        /* BOTÓN ENRUTADOR A DEX.HTML */
+        .btn-mechanical {
+            display: inline-block; text-decoration: none; margin-top: 1.5rem;
+            background: var(--bg-primary); color: var(--accent-neon); border: var(--hairline-neon);
+            padding: 1.2rem 2.5rem; font-family: var(--font-code); font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
+            cursor: pointer; position: relative; z-index: 20; outline: none;
+            box-shadow: 6px 6px 0px var(--accent-neon); transition: all 0.1s linear; 
+        }
+        .btn-mechanical:hover { transform: translate(2px, 2px); box-shadow: 4px 4px 0px var(--accent-neon); background: #111; }
+        .btn-mechanical:active { transform: translate(6px, 6px); box-shadow: 0px 0px 0px var(--accent-neon); }
+
         /* ─── CINTA ANALÓGICA DIVISORA ─── */
         .analog-cut {
             width: 100%; height: 6vh; min-height: 40px;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
             background-size: cover; background-position: center; background-repeat: no-repeat;
-            position: relative; z-index: 25;
-            border-top: var(--hairline); border-bottom: var(--hairline);
+            position: relative; z-index: 25; border-top: var(--hairline); border-bottom: var(--hairline);
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── FONDO EDITORIAL ─── */
-        .engineering-bg {
-            background-color: var(--bg-primary); position: relative; z-index: 20;
-            padding-bottom: 160px; width: 100%; overflow: hidden;
-        }
+        /* ─── NÚCLEO FUSIONADO: IDENTIDAD + PROYECTOS ─── */
+        .engineering-bg { background-color: var(--bg-primary); position: relative; z-index: 20; padding-bottom: 100px; width: 100%; overflow: hidden; }
 
-        /* ─── SECCIÓN 2: IDENTIDAD ─── */
-        .identity-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
+        .system-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
 
         .editorial-frame {
-            border: var(--hairline); display: grid; grid-template-columns: 60% 40%;
-            background: rgba(255,255,255,0.01); width: 100%;
+            border: var(--hairline); display: flex; flex-direction: column;
+            background: rgba(255,255,255,0.01); width: 100%; margin-bottom: 4rem;
         }
 
-        .identity-text { 
-            padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem;
-            border-right: var(--hairline);
-        }
-        
-        .sys-header { font-family: var(--font-sans); color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 300;}
-        
+        .identity-split { display: grid; grid-template-columns: 60% 40%; border-bottom: var(--hairline); width: 100%; }
+
+        .identity-text { padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem; border-right: var(--hairline); }
+        .sys-header { font-family: var(--font-code); color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 400;}
         .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1; color: var(--text-main); font-weight: 400;}
         .identity-title i { color: var(--brand-purple); font-style: italic; }
-        
         .identity-desc { font-family: var(--font-serif); font-size: clamp(1rem, 1.8vw, 1.6rem); line-height: 1.5; color: var(--text-muted); font-weight: 400;}
         .identity-desc strong { color: var(--text-main); font-style: italic; font-weight: 400; }
 
         .module-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; padding-top: 3rem; border-top: var(--hairline);}
         .module-item { display: flex; flex-direction: column; gap: 0.8rem; }
-        .module-tag { font-family: var(--font-sans); font-size: 0.7rem; color: var(--brand-purple); letter-spacing: 1px; font-weight: 600;}
+        .module-tag { font-family: var(--font-code); font-size: 0.7rem; color: var(--brand-purple); letter-spacing: 1px; font-weight: 600;}
         .module-item h4 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); font-weight: 400;}
         .module-item p { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 2rem; overflow: hidden; min-width: 0;}
-        .playground-img { 
-            width: 100%; height: auto; object-fit: contain;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
-            animation: floatEditorial 12s ease-in-out infinite;
-        }
+        .playground-img { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); animation: floatEditorial 12s ease-in-out infinite;}
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* ─── SECCIÓN 3: PROYECTOS ─── */
-        .projects-section { padding: 4rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
-        
-        .projects-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 5rem; text-align: center; align-items: center;}
-        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; text-transform: uppercase; margin: 0; letter-spacing: -1px;}
-        .projects-subtitle { font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-muted); font-style: italic;}
-        
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
+        /* Directorio Integrado */
+        .projects-container { padding: 4rem; width: 100%; }
+        .projects-intro { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-main); font-weight: 400; margin-top: 1rem; margin-bottom: 3rem; font-style: italic;}
 
-        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; perspective: 1200px; width: 100%;}
         
+        .card-wrapper { width: 100%; height: 420px; perspective: 1200px; }
         .card-editorial {
-            width: 100%; height: 100%; position: relative;
-            background: transparent; border: var(--hairline);
-            transform-style: preserve-3d;
-            display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
+            width: 100%; height: 100%; position: relative; background: transparent; border: var(--hairline);
+            transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
             transition: box-shadow 0.3s, background 0.3s;
         }
 
         .card-thumb {
-            width: 100%; height: 220px; background: #000; transform: translate3d(0,0,20px);
+            width: 100%; height: 180px; background: #000; transform: translate3d(0,0,20px);
             position: relative; overflow: hidden; border-bottom: var(--hairline); pointer-events: none;
         }
         .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(50%); transition: all 0.5s ease; }
 
-        .card-content { padding: 1.5rem 2rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none;}
-        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-main); opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; display: block;}
-        .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; font-weight: 400;}
-        .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.5; }
+        .card-content { padding: 1.2rem 1.5rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none; overflow: hidden;}
+        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-main); opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: block;}
+        .card-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; font-weight: 400;}
+        .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
         .card-bottom {
-            padding: 1rem 2rem; border-top: var(--hairline);
-            transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none;
+            padding: 1rem 1.5rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); 
+            display: flex; justify-content: space-between; align-items: center; pointer-events: none;
         }
-        .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
+        .card-exe { font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
 
-        /* Interacción JS Tarjeta */
         .card-editorial.is-active { box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02); }
         .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
+
+        /* ─── FOOTER SUIZO ─── */
+        .site-footer { background-color: var(--bg-primary); border-top: var(--hairline); padding: 4rem 4vw; padding-bottom: 6rem; position: relative; z-index: 20; }
+        .footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; align-items: end; }
+        .footer-brand { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem;}
+        .footer-status { font-family: var(--font-sans); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; font-weight: 600;}
+        .footer-info p { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;}
+        .footer-links { display: flex; flex-direction: column; gap: 1rem; }
+        .footer-link { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-main); text-decoration: none; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .footer-link:hover { color: var(--brand-purple); }
 
         /* ─── DOCK DE CÁMARA ─── */
         .camera-container {
@@ -278,50 +270,36 @@
             width: 95%; max-width: 650px; z-index: 3000; pointer-events: none; 
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .camera-float-wrapper { width: 100%; position: relative; animation: floatDock 6s infinite ease-in-out; }
         .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.9)); transform-origin: center bottom; }
+        @keyframes floatDock { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 3010; cursor: pointer; outline: none; }
         .hitbox-inicio { left: 16%; width: 15%; }
-        .hitbox-identidad { left: 34%; width: 15%; }
-        .hitbox-proyectos { left: 52%; width: 15%; }
+        .hitbox-sistemas { left: 34%; width: 15%; } 
+        .hitbox-proyectos { left: 52%; width: 15%; } 
         .hitbox-contacto { left: 70%; width: 15%; }
 
-        /* ─── RESPONSIVE MÓVIL OPTIMIZADO ─── */
+        /* ─── RESPONSIVE MÓVIL OPTIMIZADO (GRID PEQUEÑO) ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.8rem; gap: 6px; }
             .navbar-brand span { display: none; } 
             .brand-icon { height: 18px; }
-            
             .navbar-links { gap: 1rem; }
             .nav-link { font-size: 0.65rem; }
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            /* LA CORRECCIÓN MAESTRA: Matemáticas de Texto vs Logo en Móvil */
-            .hero-giant-text { 
-                font-size: 19vw; /* Texto masivo para llenar la pantalla */
-                gap: 0vw; 
-                line-height: 0.9;
-            } 
-            
-            .giant-transparent-logo { 
-                width: 32vw; /* Logo ajustado para mantener la proporción elegante */
-                left: 50%; 
-                top: 50%; 
-                transform: translate(-50%, -50%);
-            }
-            
+            .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
+            .giant-transparent-logo { width: 32vw; left: 50%; top: 50%; transform: translate(-50%, -50%);}
             .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4; margin-top: 1.5rem;}
             
-            .identity-section { padding: 4rem 4vw; }
+            .system-section { padding: 3rem 4vw; }
+            .editorial-frame { margin-bottom: 2rem;}
             
-            /* Resto de la estructura de contenido móvil */
-            .editorial-frame { grid-template-columns: 1fr; height: auto; width: 100%;}
-            .identity-text { 
-                padding: 2rem 1.5rem; gap: 1rem; 
-                border-right: none; border-bottom: var(--hairline);
-            }
+            .identity-split { grid-template-columns: 1fr; }
+            .identity-text { padding: 1.5rem 1rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
             .identity-mockup { padding: 1rem; align-items: flex-start; min-width: 0; }
             
             .sys-header { font-size: 0.5rem; letter-spacing: 1px;}
@@ -333,31 +311,50 @@
             .module-item h4 { font-size: 1.1rem; line-height: 1.1;}
             .module-item p { font-size: 0.75rem; line-height: 1.4; }
             
+            /* GRID MÓVIL: 2 COLUMNAS (WIDGETS) */
+            .projects-container { padding: 1.5rem 1rem; }
+            .projects-intro { font-size: 1.2rem; margin-bottom: 1.5rem; }
+            
+            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .card-wrapper { height: 260px; }
+            .card-thumb { height: 90px; }
+            .card-content { padding: 0.8rem; }
+            .card-badge { font-size: 0.5rem; margin-bottom: 0.3rem;}
+            .card-title { font-size: 1rem; margin-bottom: 0.2rem;}
+            .card-desc { font-size: 0.65rem; line-height: 1.3; }
+            .card-bottom { padding: 0.5rem 0.8rem; }
+            .card-exe { font-size: 0.5rem; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .footer-links { flex-direction: row; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+
             .camera-container { bottom: 2vh; max-width: 500px; }
             .hitbox { bottom: 22%; height: 35%; }
-            .hitbox-inicio { left: 14%; width: 16%; } .hitbox-identidad { left: 32%; width: 16%; } .hitbox-proyectos { left: 50%; width: 16%; } .hitbox-contacto { left: 70%; width: 16%; }
+            .hitbox-inicio { left: 14%; width: 16%; } .hitbox-sistemas { left: 32%; width: 16%; } .hitbox-proyectos { left: 50%; width: 16%; } .hitbox-contacto { left: 70%; width: 16%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-canvas" id="parallaxBg">
-        <div class="stars-container">
-            <div class="stars-static-twinkle"></div>
-            <div class="stars-1"></div>
-            <div class="stars-2"></div>
-        </div>
+    <div class="ambient-canvas" id="parallaxBg"></div>
+    <div class="stars-container">
+        <div class="stars-static-twinkle"></div>
+        <div class="stars-1"></div>
+        <div class="stars-2"></div>
     </div>
 
-    <nav class="top-navbar">
+    <nav class="top-navbar" id="topNavbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Icon" class="brand-icon">
         </a>
         <div class="navbar-links">
-            <a href="index.html" class="nav-link">// INICIO</a>
-            <a href="proyecto.html" class="nav-link">// PROYECTOS</a>
-            <a href="dex.html" class="nav-link" style="color:var(--brand-purple);">// SETUP</a>
+            <a href="#inicio" class="nav-link">Inicio</a>
+            <a href="dex.html" class="nav-link">Construye</a>
+            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
         </div>
     </nav>
 
@@ -374,109 +371,158 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
             
             <p class="hero-tagline">> "Los límites de tu proyecto no están en el espacio. Alójate con nosotros."</p>
+            
+            <a href="dex.html" class="btn-mechanical">[ CONSTRUYE TU PROYECTO ]</a>
         </div>
     </section>
 
     <div class="analog-cut"></div>
 
     <main class="engineering-bg">
-        
-        <section class="identity-section" id="identidad">
+        <section class="system-section" id="sistemas">
+            
             <div class="editorial-frame">
                 
-                <div class="identity-text">
-                    <div class="sys-header">Módulo // Operación</div>
-                    <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
-                    
-                    <p class="identity-desc">
-                        Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
-                        Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
-                        Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas.
-                    </p>
-                    
-                    <div class="module-list">
-                        <div class="module-item">
-                            <span class="module-tag">DIR_01 / ACELERADO</span>
-                            <h4>Ecosistemas Pre-Ensamblados</h4>
-                            <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
+                <div class="identity-split">
+                    <div class="identity-text">
+                        <div class="sys-header">Módulo // Operación</div>
+                        <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
+                        
+                        <p class="identity-desc">
+                            Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
+                            Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
+                            Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas.
+                        </p>
+                        
+                        <div class="module-list">
+                            <div class="module-item">
+                                <span class="module-tag">DIR_01 / ACELERADO</span>
+                                <h4>Ecosistemas Pre-Ensamblados</h4>
+                                <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-tag">DIR_02 / A LA MEDIDA</span>
+                                <h4>Arquitectura Custom</h4>
+                                <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
+                            </div>
                         </div>
-                        <div class="module-item">
-                            <span class="module-tag">DIR_02 / A LA MEDIDA</span>
-                            <h4>Arquitectura Custom</h4>
-                            <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
+                    </div>
+
+                    <div class="identity-mockup">
+                        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+                    </div>
+                </div>
+
+                <div class="projects-container">
+                    <div class="sys-header">Módulo // Evidencia Empírica</div>
+                    <h3 class="projects-intro">> "Aquí tienes un poco de lo que construimos."</h3>
+                    
+                    <div class="grid-editorial" id="portfolioGrid">
+                        <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: var(--text-muted);">
+                            > Extrayendo paquetes de la base de datos...
                         </div>
                     </div>
                 </div>
 
-                <div class="identity-mockup">
-                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
-                </div>
-
             </div>
+            
         </section>
-
-        <section class="projects-section" id="proyectos">
-            <div class="projects-header">
-                <h2 class="projects-title">Directorio</h2>
-                <p class="projects-subtitle">"Aquí puedes ver un poco de lo que hacemos."</p>
-            </div>
-
-            <div class="grid-editorial" id="portfolioGrid">
-                <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-sans); font-weight: 300; color: #fff;">Leyendo registro de operaciones...</div>
-            </div>
-        </section>
-
     </main>
 
+    <footer class="site-footer" id="mainFooter">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h2 class="footer-brand">DISK CREATIVO</h2>
+                <span class="footer-status">[ SYS // ONLINE ]</span>
+            </div>
+            <div class="footer-info">
+                <p>Base de Operaciones:<br>Ciudad de Panamá / Casco Antiguo</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">IG -> @diskcreativo</a>
+                <a href="https://wa.me/50768529324" class="footer-link">WA -> Contacto Directo</a>
+            </div>
+        </div>
+    </footer>
+
     <div class="camera-container" id="cameraDock">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Dock Cámara Disk Creativo">
-        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
-        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
-        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
-        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
+        <div class="camera-float-wrapper">
+            <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Dock Cámara">
+            <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+            <a href="#sistemas" class="hitbox hitbox-sistemas" title="Sistemas"></a>
+            <a href="#sistemas" class="hitbox hitbox-proyectos" title="Directorio"></a>
+            <a href="dex.html" class="hitbox hitbox-contacto" title="Setup"></a>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // ─── PARALLAX HERO MOUSE ───
+            const dynamicLogo = document.getElementById('dynamic-logo');
+            const cameraDock = document.getElementById('cameraDock');
+            const footer = document.getElementById('mainFooter');
+            const topNavbar = document.getElementById('topNavbar');
+            const hitboxes = document.querySelectorAll('.hitbox');
+            
+            // Handoff del Navbar y Colisión del Dock
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+
+                if(scrolled > 50) {
+                    topNavbar.style.transform = 'translateY(-100%)';
+                } else {
+                    topNavbar.style.transform = 'translateY(0)';
+                }
+
+                if (footer && cameraDock) {
+                    const footerTop = footer.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (footerTop < windowHeight) {
+                        const pushAmount = windowHeight - footerTop;
+                        cameraDock.style.transform = `translateX(-50%) translateY(-${pushAmount}px)`;
+                    } else {
+                        cameraDock.style.transform = `translateX(-50%) translateY(0px)`;
+                    }
+                }
+            }, { passive: true });
+
+            // Parallax del Ratón
             const heroContainer = document.getElementById('inicio');
-            const logo = document.getElementById('dynamic-logo');
-            if(heroContainer && logo && window.innerWidth > 768) {
+            if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
+                    dynamicLogo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
                 });
-                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = 'translate(-50%, -50%)'; });
+                heroContainer.addEventListener('mouseleave', () => { dynamicLogo.style.transform = 'translate(-50%, -50%)'; });
             }
 
-            // Animación Cámara
-            const hitboxes = document.querySelectorAll('.hitbox');
-            const cameraDock = document.getElementById('cameraDock');
+            // Físicas del Dock
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
-                    cameraDock.style.transform = 'translateX(-50%) translateY(8px)';
-                    setTimeout(() => { cameraDock.style.transform = 'translateX(-50%) translateY(0)'; }, 150);
+                    const wrapper = document.querySelector('.camera-float-wrapper');
+                    wrapper.style.transition = 'transform 0.15s';
+                    wrapper.style.transform = 'translateY(8px)';
+                    setTimeout(() => { 
+                        wrapper.style.transform = ''; 
+                        setTimeout(() => { wrapper.style.transition = ''; }, 150); 
+                    }, 150);
                 });
             });
 
-            // ─── MOTOR 3D INTERACTIVO (TÁCTIL Y RATÓN) ───
+            // Físicas 3D
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
-                
                 cards.forEach(wrapper => {
                     const card = wrapper.querySelector('.card-editorial');
                     
                     const handleMove = (e) => {
                         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                        
                         const rect = wrapper.getBoundingClientRect();
                         const x = clientX - rect.left;
                         const y = clientY - rect.top;
-                        
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
                         
@@ -499,50 +545,46 @@
                 });
             }
 
-            // API Google Sheets
+            // Google Sheets API
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
-            let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
 
             async function fetchProyectos() {
                 try {
                     const response = await fetch(API_URL);
-                    proyectosData = await response.json();
+                    const proyectosData = await response.json();
+                    
                     if (proyectosData && proyectosData.length > 0) { 
-                        renderGrid(); 
+                        grid.innerHTML = ''; 
+                        proyectosData.forEach(p => {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'card-wrapper'; 
+                            
+                            let imgUrl = p.imagen ? p.imagen.trim() : "";
+                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
+
+                            wrapper.innerHTML = `
+                                <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
+                                    <div class="card-thumb">${thumbHtml}</div>
+                                    <div class="card-content">
+                                        <span class="card-badge">${p.categoria || "Sistema"}</span>
+                                        <h3 class="card-title">${p.titulo || "Proyecto_00"}</h3>
+                                        <p class="card-desc">${p.descripcion || "..."}</p>
+                                    </div>
+                                    <div class="card-bottom">
+                                        <span class="card-exe">Ejecutar</span>
+                                    </div>
+                                </a>
+                            `;
+                            grid.appendChild(wrapper);
+                        });
                         init3DInteractions(); 
                     } 
-                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Registro de bases de datos vacío.</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error de red.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Error 503: Falla de conexión con el nodo de origen.</div>';
                 }
-            }
-
-            function renderGrid() {
-                grid.innerHTML = ''; 
-                proyectosData.forEach(p => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'card-wrapper'; 
-                    
-                    let imgUrl = p.imagen ? p.imagen.trim() : "";
-                    let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
-
-                    wrapper.innerHTML = `
-                        <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
-                            <div class="card-thumb">${thumbHtml}</div>
-                            <div class="card-content">
-                                <span class="card-badge">${p.categoria || "Sistema"}</span>
-                                <h3 class="card-title">${p.titulo || "Proyecto_00"}</h3>
-                                <p class="card-desc">${p.descripcion || "..."}</p>
-                            </div>
-                            <div class="card-bottom">
-                                <span class="card-exe">Ejecutar</span>
-                            </div>
-                        </a>
-                    `;
-                    grid.appendChild(wrapper);
-                });
             }
 
             fetchProyectos();
