@@ -38,7 +38,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ─── 01. LIENZO ESPACIAL Y ESTRELLAS (OPTIMIZADO) ─── */
+        /* ─── 01. LIENZO ESPACIAL Y ESTRELLAS ─── */
         .ambient-canvas {
             position: fixed; inset: -5vh 0 0 0; 
             width: 100vw; height: 110vh; 
@@ -106,12 +106,21 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; }
 
-        .solid-purple-letter { color: var(--brand-purple); position: relative; z-index: 1; }
+        .solid-purple-letter { color: var(--brand-purple); position: relative; z-index: 1; text-shadow: 0px 1px 0px #4A00B3, 0px 2px 0px #4A00B3, 0px 3px 0px #4A00B3, 0px 4px 0px #4A00B3, 0px 5px 0px #4A00B3, 0px 6px 0px #35008B, 0px 7px 0px #35008B, 0px 15px 15px rgba(0, 0, 0, 0.2), 0px 75px 25px rgba(0, 0, 0, 0.45); }
         .solid-white-letter { color: #fff; position: relative; z-index: 10; }
+        .liquid-glass-letter {
+            font-family: var(--font-display); display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45));
+            backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
+            position: relative; z-index: 10;
+        }
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.05em; }
 
-        /* LOGO 3D (Renderizado Físico) */
+        /* LOGO 3D */
         .giant-transparent-logo {
             position: absolute; top: 50%; left: 50%; 
             transform: translate(-50%, -50%);
@@ -120,10 +129,9 @@
             filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.8));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
-
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
 
-        /* ─── 04. TELEMETRÍA Y BOTÓN CTA (MECÁNICO) ─── */
+        /* TELEMETRÍA Y BOTÓN CTA (MECÁNICO) */
         .telemetry-data {
             font-family: var(--font-code); font-size: clamp(0.6rem, 1vw, 0.8rem);
             color: var(--text-muted); margin-top: 3rem; text-transform: uppercase; 
@@ -131,7 +139,6 @@
         }
         .telemetry-data span { color: #fff; }
 
-        /* Botón de Enrutamiento */
         .btn-mechanical {
             display: inline-block; text-decoration: none;
             margin-top: 2rem; background: var(--bg-primary);
@@ -143,16 +150,13 @@
             transition: all 0.1s linear; z-index: 20; outline: none;
         }
         .btn-mechanical:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 4px 4px 0px var(--accent-neon);
-            background: #111;
+            transform: translate(2px, 2px); box-shadow: 4px 4px 0px var(--accent-neon); background: #111;
         }
         .btn-mechanical:active {
-            transform: translate(6px, 6px);
-            box-shadow: 0px 0px 0px var(--accent-neon);
+            transform: translate(6px, 6px); box-shadow: 0px 0px 0px var(--accent-neon);
         }
 
-        /* ─── 05. CINTA ANALÓGICA ─── */
+        /* ─── 04. CINTA ANALÓGICA ─── */
         .analog-cut {
             width: 100%; height: 6vh; min-height: 40px;
             background: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg') center/cover no-repeat;
@@ -161,18 +165,23 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── 06. NÚCLEO FUSIONADO (IDENTIDAD + DIRECTORIO) ─── */
+        /* ─── 05. NÚCLEO FUSIONADO (MARCO ÚNICO DE AUTORIDAD) ─── */
         .engineering-bg { background-color: var(--bg-primary); position: relative; z-index: 20; padding-bottom: 100px; width: 100%; overflow: hidden; }
 
         .system-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
 
         .editorial-frame {
-            border: var(--hairline); display: grid; grid-template-columns: 60% 40%;
-            background: rgba(255,255,255,0.01); width: 100%; margin-bottom: 6rem;
+            border: var(--hairline); display: flex; flex-direction: column;
+            background: rgba(255,255,255,0.01); width: 100%; margin-bottom: 4rem;
+        }
+
+        /* Sub-división 60/40 de la Identidad */
+        .identity-split {
+            display: grid; grid-template-columns: 60% 40%; border-bottom: var(--hairline); width: 100%;
         }
 
         .identity-text { padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem; border-right: var(--hairline); }
-        .sys-header { font-family: var(--font-sans); color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 300;}
+        .sys-header { font-family: var(--font-code); color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 400;}
         
         .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1; color: var(--text-main); font-weight: 400;}
         .identity-title i { color: var(--brand-purple); font-style: italic; }
@@ -187,18 +196,17 @@
         .module-item p { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 2rem; overflow: hidden; min-width: 0;}
-        .playground-img { 
-            width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
-            animation: floatEditorial 12s ease-in-out infinite;
-        }
+        .playground-img { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); animation: floatEditorial 12s ease-in-out infinite;}
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* Grid Directo (Evidencia de Identidad) */
-        .directory-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem); line-height: 0.9; text-transform: uppercase; margin-top: 1rem; margin-bottom: 3rem; text-align: left;}
+        /* Sub-división del Directorio Integrado */
+        .projects-container { padding: 4rem; width: 100%; }
+        .projects-intro { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-main); font-weight: 400; margin-top: 1rem; margin-bottom: 3rem; font-style: italic;}
 
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
+        /* Grid de Proyectos */
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; perspective: 1200px; width: 100%;}
         
-        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
+        .card-wrapper { width: 100%; height: 420px; perspective: 1200px; }
         .card-editorial {
             width: 100%; height: 100%; position: relative; background: transparent; border: var(--hairline);
             transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
@@ -206,38 +214,32 @@
         }
 
         .card-thumb {
-            width: 100%; height: 220px; background: #000; transform: translate3d(0,0,20px);
+            width: 100%; height: 180px; background: #000; transform: translate3d(0,0,20px);
             position: relative; overflow: hidden; border-bottom: var(--hairline); pointer-events: none;
         }
         .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(50%); transition: all 0.5s ease; }
 
-        .card-content { padding: 1.5rem 2rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none;}
-        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-main); opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; display: block;}
-        .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; font-weight: 400;}
-        .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.5; }
+        .card-content { padding: 1.2rem 1.5rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none; overflow: hidden;}
+        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-main); opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: block;}
+        .card-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; font-weight: 400;}
+        .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
         .card-bottom {
-            padding: 1rem 2rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); 
+            padding: 1rem 1.5rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); 
             display: flex; justify-content: space-between; align-items: center; pointer-events: none;
         }
-        .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
+        .card-exe { font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
 
         .card-editorial.is-active { box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02); }
         .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
 
         /* ─── 07. FOOTER SUIZO ─── */
-        .site-footer {
-            background-color: var(--bg-primary); border-top: var(--hairline);
-            padding: 4rem 4vw; padding-bottom: 6rem; position: relative; z-index: 20;
-        }
-        .footer-grid {
-            max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; align-items: end;
-        }
+        .site-footer { background-color: var(--bg-primary); border-top: var(--hairline); padding: 4rem 4vw; padding-bottom: 6rem; position: relative; z-index: 20; }
+        .footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; align-items: end; }
         .footer-brand { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem;}
         .footer-status { font-family: var(--font-sans); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; font-weight: 600;}
         .footer-info p { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;}
-        
         .footer-links { display: flex; flex-direction: column; gap: 1rem; }
         .footer-link { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-main); text-decoration: none; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px;}
         .footer-link:hover { color: var(--brand-purple); }
@@ -250,16 +252,15 @@
         }
         .camera-float-wrapper { width: 100%; position: relative; animation: floatDock 6s infinite ease-in-out; }
         .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.9)); transform-origin: center bottom; }
-
         @keyframes floatDock { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 3010; cursor: pointer; outline: none; }
         .hitbox-inicio { left: 16%; width: 15%; }
-        .hitbox-sistemas { left: 34%; width: 15%; } /* Actualizado para la sección unida */
-        .hitbox-proyectos { left: 52%; width: 15%; } /* Redirige al mismo bloque general */
+        .hitbox-sistemas { left: 34%; width: 15%; } 
+        .hitbox-proyectos { left: 52%; width: 15%; } 
         .hitbox-contacto { left: 70%; width: 15%; }
 
-        /* ─── 09. RESPONSIVE MÓVIL (MATEMÁTICA EXACTA) ─── */
+        /* ─── 09. RESPONSIVE MÓVIL (GRID DE 2 COLUMNAS) ─── */
         @media (max-width: 900px) {
             .navbar-links { display: none; }
             .brand-icon { height: 18px; }
@@ -268,9 +269,11 @@
             .giant-transparent-logo { width: 32vw; left: 50%; top: 50%; transform: translate(-50%, -50%);}
             .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4; margin-top: 1.5rem;}
             
-            .system-section { padding: 4rem 4vw; }
-            .editorial-frame { grid-template-columns: 1fr; height: auto; width: 100%; margin-bottom: 4rem;}
-            .identity-text { padding: 2rem 1.5rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
+            .system-section { padding: 3rem 4vw; }
+            .editorial-frame { margin-bottom: 2rem;}
+            
+            .identity-split { grid-template-columns: 1fr; }
+            .identity-text { padding: 1.5rem 1rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
             .identity-mockup { padding: 1rem; align-items: flex-start; min-width: 0; }
             
             .sys-header { font-size: 0.5rem; letter-spacing: 1px;}
@@ -282,6 +285,23 @@
             .module-item h4 { font-size: 1.1rem; line-height: 1.1;}
             .module-item p { font-size: 0.75rem; line-height: 1.4; }
             
+            /* MATEMÁTICA DE COMPRESIÓN MÓVIL (2 COLUMNAS) */
+            .projects-container { padding: 1.5rem 1rem; }
+            .projects-intro { font-size: 1.2rem; margin-bottom: 1.5rem; }
+            
+            .grid-editorial { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 0.8rem; 
+            }
+            .card-wrapper { height: 260px; }
+            .card-thumb { height: 90px; }
+            .card-content { padding: 0.8rem; }
+            .card-badge { font-size: 0.5rem; margin-bottom: 0.3rem;}
+            .card-title { font-size: 1rem; margin-bottom: 0.2rem;}
+            .card-desc { font-size: 0.65rem; line-height: 1.3; }
+            .card-bottom { padding: 0.5rem 0.8rem; }
+            .card-exe { font-size: 0.5rem; }
+
             .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
             .footer-links { flex-direction: row; justify-content: center; gap: 1rem; flex-wrap: wrap;}
 
@@ -316,10 +336,10 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back solid-purple-letter delay-1">D</span><span class="z-front solid-white-letter delay-1">I</span><span class="z-back solid-purple-letter">S</span><span class="z-front solid-purple-letter delay-2">K</span>
+                    <span class="z-back solid-purple-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back solid-purple-letter">S</span><span class="z-front solid-purple-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front solid-purple-letter delay-3">C</span><span class="z-back solid-purple-letter delay-4">R</span><span class="z-front solid-white-letter delay-4">E</span><span class="z-back solid-purple-letter delay-5">A</span><span class="z-front solid-white-letter overlap-t delay-5">T</span><span class="z-back solid-purple-letter overlap-i-behind">I</span><span class="z-back solid-purple-letter delay-6">V</span><span class="z-front solid-purple-letter delay-6">O</span>
+                    <span class="z-front solid-purple-letter float-anim delay-3">C</span><span class="z-back solid-purple-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back solid-purple-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-purple-letter overlap-i-behind">I</span><span class="z-back solid-purple-letter delay-6">V</span><span class="z-front solid-purple-letter float-anim delay-6">O</span>
                 </div>
             </h1>
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
@@ -339,40 +359,48 @@
         <section class="system-section" id="sistemas">
             
             <div class="editorial-frame">
-                <div class="identity-text">
-                    <div class="sys-header">Módulo // Operación</div>
-                    <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
-                    
-                    <p class="identity-desc">
-                        Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
-                        Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
-                        Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas.
-                    </p>
-                    
-                    <div class="module-list">
-                        <div class="module-item">
-                            <span class="module-tag">DIR_01 / ACELERADO</span>
-                            <h4>Ecosistemas Pre-Ensamblados</h4>
-                            <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
+                
+                <div class="identity-split">
+                    <div class="identity-text">
+                        <div class="sys-header">Módulo // Operación</div>
+                        <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
+                        
+                        <p class="identity-desc">
+                            Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
+                            Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
+                            Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas.
+                        </p>
+                        
+                        <div class="module-list">
+                            <div class="module-item">
+                                <span class="module-tag">DIR_01 / ACELERADO</span>
+                                <h4>Ecosistemas Pre-Ensamblados</h4>
+                                <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
+                            </div>
+                            <div class="module-item">
+                                <span class="module-tag">DIR_02 / A LA MEDIDA</span>
+                                <h4>Arquitectura Custom</h4>
+                                <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
+                            </div>
                         </div>
-                        <div class="module-item">
-                            <span class="module-tag">DIR_02 / A LA MEDIDA</span>
-                            <h4>Arquitectura Custom</h4>
-                            <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
+                    </div>
+
+                    <div class="identity-mockup">
+                        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+                    </div>
+                </div>
+
+                <div class="projects-container">
+                    <div class="sys-header">Módulo // Evidencia Empírica</div>
+                    <h3 class="projects-intro">> "Aquí tienes un poco de lo que construimos."</h3>
+                    
+                    <div class="grid-editorial" id="portfolioGrid">
+                        <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: var(--text-muted);">
+                            > Extrayendo paquetes de la base de datos...
                         </div>
                     </div>
                 </div>
 
-                <div class="identity-mockup">
-                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
-                </div>
-            </div>
-
-            <div class="sys-header">Registro // Operaciones Ejecutadas</div>
-            <h3 class="directory-title">Directorio</h3>
-            
-            <div class="grid-editorial" id="portfolioGrid">
-                <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: var(--text-muted);">> Extrayendo paquetes de la base de datos...</div>
             </div>
             
         </section>
@@ -414,22 +442,18 @@
             const topNavbar = document.getElementById('topNavbar');
             const hitboxes = document.querySelectorAll('.hitbox');
             
-            // 1. Motor Unificado de Scroll (Parallax Fondo + Smart Docking + Navbar Handoff)
             const parallaxBg = document.getElementById('parallaxBg');
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
                 
-                // Parallax suave del fondo estelar
                 if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px)`;
 
-                // Handoff del Navbar
                 if(scrolled > 50) {
                     topNavbar.style.transform = 'translateY(-100%)';
                 } else {
                     topNavbar.style.transform = 'translateY(0)';
                 }
 
-                // Lógica de colisión suave del Dock con el Footer
                 if (footer && cameraDock) {
                     const footerTop = footer.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
@@ -442,7 +466,6 @@
                 }
             }, { passive: true });
 
-            // 2. Animación Mecánica de Clic en el Dock
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
                     const wrapper = document.querySelector('.camera-float-wrapper');
@@ -455,7 +478,6 @@
                 });
             });
 
-            // 3. Lógica de Interacción 3D de las Tarjetas
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
                 cards.forEach(wrapper => {
@@ -489,7 +511,6 @@
                 });
             }
 
-            // 4. Motor de Conexión a Base de Datos (Google Sheets API)
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             const grid = document.getElementById('portfolioGrid');
 
@@ -531,7 +552,6 @@
                 }
             }
 
-            // Inicializar la ingesta de datos
             fetchProyectos();
         });
     </script>
