@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
     <style>
+        /* ─── 00. VARIABLES Y RESETEO (BRUTALISMO PURO) ─── */
         :root {
             --bg-primary: #050505;
-            --bg-terminal: #000000;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
@@ -26,146 +26,104 @@
             --font-code: 'Courier New', Courier, monospace;
         }
 
-        html, body {
-            overflow-x: hidden !important; 
-            max-width: 100%; width: 100%;
-        }
-
-        html { scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
+        
+        html, body {
+            overflow-x: clip !important; 
+            max-width: 100%; width: 100%;
+            scroll-behavior: smooth;
+            background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
-            background-color: var(--bg-primary);
-            position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO DEL ESTUDIO EN EL VACÍO ─── */
+        /* ─── 01. LIENZO ESPACIAL Y ESTRELLAS (OPTIMIZADO) ─── */
         .ambient-canvas {
-            position: fixed; top: -5vh; left: 0; right: 0; 
+            position: fixed; inset: -5vh 0 0 0; 
             width: 100vw; height: 110vh; 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c97611b6a556fa85d00e302313fd0dbfab2e3406/DIQC/file_00000000c60481f7b7f5519059d41ed9.png');
-            background-position: center center; background-size: cover; background-repeat: no-repeat;
+            background: var(--bg-primary) url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/c97611b6a556fa85d00e302313fd0dbfab2e3406/DIQC/file_00000000c60481f7b7f5519059d41ed9.png') center/cover no-repeat fixed;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
-            will-change: transform; transform-origin: center;
         }
 
-        /* ─── MICRO-ESTRELLAS ─── */
-        .stars-container {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -2; pointer-events: none;
-        }
-
+        .stars-container { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+        .star-layer { position: absolute; background: transparent; }
+        
         .stars-1 {
-            position: absolute; width: 1px; height: 1px; background: transparent;
+            width: 1px; height: 1px; 
             box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
-            animation: twinkle 40s infinite alternate ease-in-out;
+            animation: pulse-slow 40s infinite alternate ease-in-out;
         }
         .stars-2 {
-            position: absolute; width: 2px; height: 2px; background: transparent;
+            width: 2px; height: 2px;
             box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
-            animation: twinkle 60s infinite alternate-reverse ease-in-out;
+            animation: pulse-slow 60s infinite alternate-reverse ease-in-out;
+        }
+        .stars-static {
+            width: 1px; height: 1px;
+            box-shadow: 5vw 10vh #AAA, 10vw 30vh #AAA, 3vw 60vh #AAA, 12vw 80vh #AAA, 7vw 90vh #AAA, 2vw 20vh #AAA, 95vw 10vh #AAA, 90vw 30vh #AAA, 97vw 60vh #AAA, 88vw 80vh #AAA, 93vw 90vh #AAA, 98vw 20vh #AAA, 30vw 5vh #AAA, 70vw 95vh #AAA;
+            animation: pulse-fast 15s infinite alternate ease-in-out;
         }
 
-        .stars-static-twinkle {
-            position: absolute; width: 1px; height: 1px; background: transparent;
-            box-shadow: 
-                5vw 10vh #AAA, 10vw 30vh #AAA, 3vw 60vh #AAA, 12vw 80vh #AAA, 7vw 90vh #AAA, 2vw 20vh #AAA,
-                95vw 10vh #AAA, 90vw 30vh #AAA, 97vw 60vh #AAA, 88vw 80vh #AAA, 93vw 90vh #AAA, 98vw 20vh #AAA,
-                30vw 5vh #AAA, 70vw 95vh #AAA;
-            animation: breathing 15s infinite alternate ease-in-out;
-        }
+        @keyframes pulse-slow { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
+        @keyframes pulse-fast { 0% { opacity: 0.1; } 100% { opacity: 0.6; } }
 
-        @keyframes twinkle { 0% { opacity: 0.1; transform: scale(0.98); } 100% { opacity: 0.4; transform: scale(1.02); } }
-        @keyframes breathing { 0% { opacity: 0.1; } 100% { opacity: 0.5; } }
-
-        /* ─── NAVBAR SUPERIOR DE VENTAS ─── */
+        /* ─── 02. NAVBAR (GUILLOTINA QUIRÚRGICA) ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(5, 5, 5, 0.5);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: var(--hairline);
+            background: transparent; border-bottom: var(--hairline);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 4vw; z-index: 2000; transition: all 0.3s ease;
+            padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
 
         .navbar-brand { 
             display: flex; align-items: center; gap: 10px;
-            font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
+            font-family: var(--font-code); font-size: 0.85rem; font-weight: 600; 
             color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
         }
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
 
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
         .nav-link {
-            color: var(--text-main); text-decoration: none; font-family: var(--font-sans);
+            color: var(--text-muted); text-decoration: none; font-family: var(--font-code);
             font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
         }
-        .nav-link:hover { color: var(--brand-purple); }
-        
-        .nav-btn-wa {
-            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400;
-            text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
-        }
-        .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
-        .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
+        .nav-link:hover { color: #fff; }
 
-        /* ─── SECCIÓN 1: HERO ─── */
+        /* ─── 03. SECCIÓN HERO (SANDWICH ESTRICTO) ─── */
         .hero-section {
             position: relative; height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 2vw;
-            padding-top: 70px; z-index: 10;
+            align-items: center; justify-content: center; padding: 70px 2vw 0; z-index: 10;
         }
         
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
         .hero-giant-text {
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
-            line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
-            display: flex; flex-direction: column; gap: 1vh; letter-spacing: -2px;
+            line-height: 0.85; text-align: center; text-transform: uppercase;
+            display: flex; flex-direction: column; gap: 0; letter-spacing: -2px; margin: 0;
             width: 100%;
         }
-        .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
+        .hero-giant-text div { display: flex; justify-content: center; align-items: center; }
 
-        .solid-purple-letter {
-            color: var(--brand-purple); display: inline-block; position: relative;
-            text-shadow: 0px 1px 0px #4A00B3, 0px 2px 0px #4A00B3, 0px 3px 0px #4A00B3, 0px 4px 0px #4A00B3, 0px 5px 0px #4A00B3, 0px 6px 0px #35008B, 0px 7px 0px #35008B, 0px 15px 15px rgba(0, 0, 0, 0.2), 0px 75px 25px rgba(0, 0, 0, 0.45);
-        }
-        .liquid-glass-letter {
-            font-family: var(--font-display); display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, rgba(255, 255, 255, 0.0) 40%, rgba(255, 255, 255, 0.0) 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
-            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45));
-            backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
-            position: relative; 
-        }
-
-        .z-back { z-index: 1; position: relative; }
-        .z-front { z-index: 10; position: relative; }
+        .solid-purple-letter { color: var(--brand-purple); position: relative; z-index: 1; }
+        .solid-white-letter { color: #fff; position: relative; z-index: 10; }
         .overlap-t { z-index: 25 !important; position: relative; }
-        .overlap-i-behind { z-index: 15 !important; position: relative; margin-left: -0.08em; }
+        .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.05em; }
 
+        /* LOGO 3D (Renderizado Físico) */
         .giant-transparent-logo {
-            position: absolute; 
-            top: 55%; left: 52%; 
+            position: absolute; top: 50%; left: 50%; 
             transform: translate(-50%, -50%);
-            width: clamp(180px, 28vw, 480px);
+            width: clamp(150px, 25vw, 420px);
             z-index: 5; pointer-events: none;
-            filter: drop-shadow(0px 60px 25px rgba(0, 0, 0, 0.7));
-            animation: floatLogo 8s ease-in-out infinite; 
+            filter: drop-shadow(0px 30px 15px rgba(0, 0, 0, 0.8));
+            animation: mechanicalFloat 10s ease-in-out infinite; 
         }
 
-        @keyframes floatLogo { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -54%) rotate(2deg); } }
-        @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-        .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
-        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
+        @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
 
-        /* ─── NUEVO: TELEMETRÍA Y BOTÓN CTA EN EL HERO ─── */
+        /* ─── 04. TELEMETRÍA Y BOTÓN CTA (MECÁNICO) ─── */
         .telemetry-data {
             font-family: var(--font-code); font-size: clamp(0.6rem, 1vw, 0.8rem);
             color: var(--text-muted); margin-top: 3rem; text-transform: uppercase; 
@@ -173,54 +131,47 @@
         }
         .telemetry-data span { color: #fff; }
 
+        /* Botón de Enrutamiento */
         .btn-mechanical {
+            display: inline-block; text-decoration: none;
             margin-top: 2rem; background: var(--bg-primary);
             color: var(--accent-neon); border: var(--hairline-neon);
-            padding: 1rem 2rem; font-family: var(--font-code); font-size: 0.85rem;
+            padding: 1.2rem 2.5rem; font-family: var(--font-code); font-size: 0.85rem;
             text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
             cursor: pointer; position: relative;
-            box-shadow: 4px 4px 0px var(--accent-neon);
+            box-shadow: 6px 6px 0px var(--accent-neon);
             transition: all 0.1s linear; z-index: 20; outline: none;
         }
         .btn-mechanical:hover {
             transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px var(--accent-neon);
+            box-shadow: 4px 4px 0px var(--accent-neon);
             background: #111;
         }
         .btn-mechanical:active {
-            transform: translate(4px, 4px);
+            transform: translate(6px, 6px);
             box-shadow: 0px 0px 0px var(--accent-neon);
         }
 
-        /* ─── CINTA ANALÓGICA DIVISORA ─── */
+        /* ─── 05. CINTA ANALÓGICA ─── */
         .analog-cut {
             width: 100%; height: 6vh; min-height: 40px;
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
+            background: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg') center/cover no-repeat;
             position: relative; z-index: 25;
             border-top: var(--hairline); border-bottom: var(--hairline);
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── FONDO EDITORIAL ─── */
-        .engineering-bg {
-            background-color: var(--bg-primary); position: relative; z-index: 20;
-            padding-bottom: 160px; width: 100%; overflow: hidden;
-        }
+        /* ─── 06. NÚCLEO FUSIONADO (IDENTIDAD + DIRECTORIO) ─── */
+        .engineering-bg { background-color: var(--bg-primary); position: relative; z-index: 20; padding-bottom: 100px; width: 100%; overflow: hidden; }
 
-        /* ─── SECCIÓN 2: IDENTIDAD ─── */
-        .identity-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
+        .system-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
 
         .editorial-frame {
             border: var(--hairline); display: grid; grid-template-columns: 60% 40%;
-            background: rgba(255,255,255,0.01); width: 100%;
+            background: rgba(255,255,255,0.01); width: 100%; margin-bottom: 6rem;
         }
 
-        .identity-text { 
-            padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem;
-            border-right: var(--hairline);
-        }
-        
+        .identity-text { padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem; border-right: var(--hairline); }
         .sys-header { font-family: var(--font-sans); color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 300;}
         
         .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1; color: var(--text-main); font-weight: 400;}
@@ -231,34 +182,26 @@
 
         .module-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; padding-top: 3rem; border-top: var(--hairline);}
         .module-item { display: flex; flex-direction: column; gap: 0.8rem; }
-        .module-tag { font-family: var(--font-sans); font-size: 0.7rem; color: var(--brand-purple); letter-spacing: 1px; font-weight: 600;}
+        .module-tag { font-family: var(--font-code); font-size: 0.7rem; color: var(--brand-purple); letter-spacing: 1px; font-weight: 600;}
         .module-item h4 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); font-weight: 400;}
         .module-item p { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 2rem; overflow: hidden; min-width: 0;}
         .playground-img { 
-            width: 100%; height: auto; object-fit: contain;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+            width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
             animation: floatEditorial 12s ease-in-out infinite;
         }
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* ─── SECCIÓN 3: PROYECTOS ─── */
-        .projects-section { padding: 4rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
-        
-        .projects-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 5rem; text-align: center; align-items: center;}
-        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; text-transform: uppercase; margin: 0; letter-spacing: -1px;}
-        .projects-subtitle { font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-muted); font-style: italic;}
-        
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
+        /* Grid Directo (Evidencia de Identidad) */
+        .directory-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem); line-height: 0.9; text-transform: uppercase; margin-top: 1rem; margin-bottom: 3rem; text-align: left;}
 
-        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
         
+        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
         .card-editorial {
-            width: 100%; height: 100%; position: relative;
-            background: transparent; border: var(--hairline);
-            transform-style: preserve-3d;
-            display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
+            width: 100%; height: 100%; position: relative; background: transparent; border: var(--hairline);
+            transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
             transition: box-shadow 0.3s, background 0.3s;
         }
 
@@ -274,8 +217,8 @@
         .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.5; }
 
         .card-bottom {
-            padding: 1rem 2rem; border-top: var(--hairline);
-            transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none;
+            padding: 1rem 2rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); 
+            display: flex; justify-content: space-between; align-items: center; pointer-events: none;
         }
         .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
 
@@ -283,117 +226,51 @@
         .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
 
-        /* ─── DOCK DE CÁMARA ─── */
+        /* ─── 07. FOOTER SUIZO ─── */
+        .site-footer {
+            background-color: var(--bg-primary); border-top: var(--hairline);
+            padding: 4rem 4vw; padding-bottom: 6rem; position: relative; z-index: 20;
+        }
+        .footer-grid {
+            max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; align-items: end;
+        }
+        .footer-brand { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem;}
+        .footer-status { font-family: var(--font-sans); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; font-weight: 600;}
+        .footer-info p { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;}
+        
+        .footer-links { display: flex; flex-direction: column; gap: 1rem; }
+        .footer-link { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-main); text-decoration: none; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .footer-link:hover { color: var(--brand-purple); }
+
+        /* ─── 08. DOCK DE CÁMARA FLOTANTE ─── */
         .camera-container {
             position: fixed; bottom: 3vh; left: 50%; transform: translateX(-50%); 
             width: 95%; max-width: 650px; z-index: 3000; pointer-events: none; 
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .camera-float-wrapper { width: 100%; position: relative; animation: floatDock 6s infinite ease-in-out; }
         .camera-img { width: 100%; height: auto; object-fit: contain; display: block; pointer-events: auto; filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.9)); transform-origin: center bottom; }
+
+        @keyframes floatDock { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
 
         .hitbox { position: absolute; pointer-events: auto; bottom: 25%; height: 40%; z-index: 3010; cursor: pointer; outline: none; }
         .hitbox-inicio { left: 16%; width: 15%; }
-        .hitbox-identidad { left: 34%; width: 15%; }
-        .hitbox-proyectos { left: 52%; width: 15%; }
+        .hitbox-sistemas { left: 34%; width: 15%; } /* Actualizado para la sección unida */
+        .hitbox-proyectos { left: 52%; width: 15%; } /* Redirige al mismo bloque general */
         .hitbox-contacto { left: 70%; width: 15%; }
 
-        /* ─── MODAL TERMINAL (CONFIGURADOR) ─── */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(5, 5, 5, 0.95);
-            z-index: 9999; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .modal-overlay.is-active { opacity: 1; pointer-events: auto; }
-
-        .terminal-window {
-            width: 90vw; max-width: 1000px; height: 80vh; max-height: 600px;
-            background: var(--bg-primary); border: var(--hairline);
-            display: flex; flex-direction: column;
-            transform: translateY(20px) scale(0.98); transition: all 0.3s ease;
-        }
-        .modal-overlay.is-active .terminal-window { transform: translateY(0) scale(1); }
-
-        .terminal-header {
-            height: 40px; border-bottom: var(--hairline); background: #0A0A0C;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 1rem;
-        }
-        .window-controls { display: flex; gap: 8px; }
-        .win-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .dot-r { background: #552222; } .dot-y { background: #554422; } .dot-g { background: #225522; } 
-        
-        .terminal-title { font-family: var(--font-code); font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px;}
-        .close-btn { color: var(--text-muted); background: transparent; border: none; font-size: 1.2rem; cursor: pointer; font-family: var(--font-sans);}
-        .close-btn:hover { color: #fff; }
-
-        .terminal-body { display: grid; grid-template-columns: 40% 60%; flex-grow: 1; overflow: hidden; }
-
-        .panel-inputs {
-            border-right: var(--hairline); padding: 2rem; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 2.5rem;
-        }
-        .input-group { display: flex; flex-direction: column; gap: 1rem; }
-        .input-title { font-family: var(--font-code); font-size: 0.75rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; border-bottom: var(--hairline); padding-bottom: 0.5rem;}
-        
-        .radio-label {
-            display: flex; align-items: center; gap: 10px; cursor: pointer;
-            font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);
-            transition: color 0.2s;
-        }
-        .radio-label:hover { color: #fff; }
-        .radio-label input[type="radio"] { appearance: none; width: 14px; height: 14px; border: 1px solid var(--text-muted); background: transparent; cursor: pointer;}
-        .radio-label input[type="radio"]:checked { background: var(--accent-neon); border-color: var(--accent-neon); }
-        .radio-label input[type="radio"]:checked + span { color: #fff; font-weight: 600;}
-
-        .panel-console {
-            background: var(--bg-terminal); padding: 2rem; overflow-y: auto;
-            font-family: var(--font-code); font-size: 0.85rem; color: var(--accent-neon);
-            line-height: 1.6; display: flex; flex-direction: column;
-        }
-        .console-line { margin-bottom: 0.5rem; opacity: 0; animation: typeLine 0.1s forwards; }
-        .console-cursor { display: inline-block; width: 8px; height: 15px; background: var(--accent-neon); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 5px;}
-        
-        @keyframes typeLine { to { opacity: 1; } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .terminal-footer {
-            border-top: var(--hairline); padding: 1rem 2rem; background: #0A0A0C;
-            display: flex; justify-content: flex-end;
-        }
-        .btn-transmit {
-            background: #fff; color: #000; border: none; padding: 0.8rem 1.5rem;
-            font-family: var(--font-code); font-size: 0.75rem; text-transform: uppercase;
-            font-weight: 600; cursor: pointer; transition: background 0.2s;
-        }
-        .btn-transmit:hover { background: var(--accent-neon); }
-
-        /* ─── RESPONSIVE MÓVIL UNIVERSAL ─── */
+        /* ─── 09. RESPONSIVE MÓVIL (MATEMÁTICA EXACTA) ─── */
         @media (max-width: 900px) {
-            .top-navbar { padding: 0 4vw; height: 60px; }
-            .navbar-brand { font-size: 0.8rem; gap: 6px; }
-            .navbar-brand span { display: none; } 
+            .navbar-links { display: none; }
             .brand-icon { height: 18px; }
             
-            .navbar-links { gap: 1rem; }
-            .nav-link { font-size: 0.65rem; }
-            .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
-            .nav-btn-wa svg { width: 12px; height: 12px; }
+            .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
+            .giant-transparent-logo { width: 32vw; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+            .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4; margin-top: 1.5rem;}
             
-            .hero-giant-text { font-size: 16vw; gap: 0.5vw; } 
-            
-            .giant-transparent-logo { 
-                width: 55vw; 
-                left: 50%; top: 50%; 
-            }
-            .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4;}
-            
-            .identity-section { padding: 4rem 4vw; }
-            
-            .editorial-frame { grid-template-columns: 60% 40%; height: auto; width: 100%;}
-            .identity-text { 
-                padding: 1.5rem 1rem; gap: 1rem; 
-                word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto;
-                min-width: 0;
-            }
+            .system-section { padding: 4rem 4vw; }
+            .editorial-frame { grid-template-columns: 1fr; height: auto; width: 100%; margin-bottom: 4rem;}
+            .identity-text { padding: 2rem 1.5rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
             .identity-mockup { padding: 1rem; align-items: flex-start; min-width: 0; }
             
             .sys-header { font-size: 0.5rem; letter-spacing: 1px;}
@@ -405,15 +282,12 @@
             .module-item h4 { font-size: 1.1rem; line-height: 1.1;}
             .module-item p { font-size: 0.75rem; line-height: 1.4; }
             
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .footer-links { flex-direction: row; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+
             .camera-container { bottom: 2vh; max-width: 500px; }
             .hitbox { bottom: 22%; height: 35%; }
-            .hitbox-inicio { left: 14%; width: 16%; } .hitbox-identidad { left: 32%; width: 16%; } .hitbox-proyectos { left: 50%; width: 16%; } .hitbox-contacto { left: 70%; width: 16%; }
-
-            /* Modal Móvil */
-            .terminal-body { grid-template-columns: 1fr; grid-template-rows: auto 200px; overflow-y: auto;}
-            .panel-inputs { border-right: none; border-bottom: var(--hairline); padding: 1.5rem; }
-            .panel-console { padding: 1.5rem; font-size: 0.75rem; }
-            .terminal-window { height: 90vh; max-height: 90vh; }
+            .hitbox-inicio { left: 14%; width: 16%; } .hitbox-sistemas { left: 32%; width: 16%; } .hitbox-proyectos { left: 50%; width: 16%; } .hitbox-contacto { left: 70%; width: 16%; }
         }
     </style>
 </head>
@@ -421,24 +295,20 @@
 
     <div class="ambient-canvas" id="parallaxBg">
         <div class="stars-container">
-            <div class="stars-static-twinkle"></div>
-            <div class="stars-1"></div>
-            <div class="stars-2"></div>
+            <div class="star-layer stars-static-twinkle"></div>
+            <div class="star-layer stars-1"></div>
+            <div class="star-layer stars-2"></div>
         </div>
     </div>
 
-    <nav class="top-navbar">
+    <nav class="top-navbar" id="topNavbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/46948a0b43ad27ad2e2994bcc269c9fea0a8382f/DIQC/1785277935413.png" alt="Disk Icon" class="brand-icon">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Icon" class="brand-icon">
         </a>
         <div class="navbar-links">
-            <a href="index.html" class="nav-link">Inicio</a>
-            <a href="dex.html" class="nav-link">Construye</a>
-            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                WhatsApp
-            </a>
+            <a href="#inicio" class="nav-link">// LA_BASE</a>
+            <a href="#sistemas" class="nav-link">// SISTEMAS</a>
         </div>
     </nav>
 
@@ -446,19 +316,19 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back solid-purple-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back solid-purple-letter">S</span><span class="z-front solid-purple-letter float-anim delay-2">K</span>
+                    <span class="z-back solid-purple-letter delay-1">D</span><span class="z-front solid-white-letter delay-1">I</span><span class="z-back solid-purple-letter">S</span><span class="z-front solid-purple-letter delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front solid-purple-letter float-anim delay-3">C</span><span class="z-back solid-purple-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back solid-purple-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-purple-letter overlap-i-behind">I</span><span class="z-back solid-purple-letter delay-6">V</span><span class="z-front solid-purple-letter float-anim delay-6">O</span>
+                    <span class="z-front solid-purple-letter delay-3">C</span><span class="z-back solid-purple-letter delay-4">R</span><span class="z-front solid-white-letter delay-4">E</span><span class="z-back solid-purple-letter delay-5">A</span><span class="z-front solid-white-letter overlap-t delay-5">T</span><span class="z-back solid-purple-letter overlap-i-behind">I</span><span class="z-back solid-purple-letter delay-6">V</span><span class="z-front solid-purple-letter delay-6">O</span>
                 </div>
             </h1>
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ed7bde104e48f0053fe95b3a44da8543e282ba9f/DIQC/1784652017836.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Creativo Logo" class="giant-transparent-logo" id="dynamic-logo">
             
             <div class="telemetry-data">
                 LOC: 8.9824° N, 79.5199° W // PANAMÁ CITY // ESTADO: <span>LISTO PARA DESPLEGAR</span>
             </div>
 
-            <button class="btn-mechanical" id="btnOpenTerminal">[ INICIAR_DESPLIEGUE ]</button>
+            <a href="dex.html" class="btn-mechanical">[ CONSTRUYE TU PROYECTO ]</a>
         </div>
     </section>
 
@@ -466,9 +336,9 @@
 
     <main class="engineering-bg">
         
-        <section class="identity-section" id="identidad">
+        <section class="system-section" id="sistemas">
+            
             <div class="editorial-frame">
-                
                 <div class="identity-text">
                     <div class="sys-header">Módulo // Operación</div>
                     <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
@@ -486,7 +356,7 @@
                             <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
                         </div>
                         <div class="module-item">
-                            <span class="module-tag">DIR_02 / A LA MEDida</span>
+                            <span class="module-tag">DIR_02 / A LA MEDIDA</span>
                             <h4>Arquitectura Custom</h4>
                             <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
                         </div>
@@ -496,174 +366,101 @@
                 <div class="identity-mockup">
                     <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
                 </div>
-
-            </div>
-        </section>
-
-        <section class="projects-section" id="proyectos">
-            <div class="projects-header">
-                <h2 class="projects-title">Directorio</h2>
-                <p class="projects-subtitle">"Aquí puedes ver un poco de lo que hacemos."</p>
             </div>
 
+            <div class="sys-header">Registro // Operaciones Ejecutadas</div>
+            <h3 class="directory-title">Directorio</h3>
+            
             <div class="grid-editorial" id="portfolioGrid">
-                <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-sans); font-weight: 300; color: #fff;">Leyendo registro de operaciones...</div>
+                <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: var(--text-muted);">> Extrayendo paquetes de la base de datos...</div>
             </div>
+            
         </section>
 
     </main>
 
+    <footer class="site-footer" id="mainFooter">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h2 class="footer-brand">DISK CREATIVO</h2>
+                <span class="footer-status">[ SYS // ONLINE ]</span>
+            </div>
+            <div class="footer-info">
+                <p>Base de Operaciones:<br>Ciudad de Panamá / Casco Antiguo</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">IG -> @diskcreativo</a>
+                <a href="https://wa.me/50768529324" class="footer-link">WA -> Contacto Directo</a>
+            </div>
+        </div>
+    </footer>
+
     <div class="camera-container" id="cameraDock">
-        <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Dock Cámara Disk Creativo">
-        <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
-        <a href="#identidad" class="hitbox hitbox-identidad" title="Identidad"></a>
-        <a href="#proyectos" class="hitbox hitbox-proyectos" title="Proyectos"></a>
-        <a href="mailto:contacto@diskcreativo.com" class="hitbox hitbox-contacto" title="Contacto"></a>
-    </div>
-
-    <div class="modal-overlay" id="terminalOverlay">
-        <div class="terminal-window">
-            
-            <div class="terminal-header">
-                <div class="window-controls">
-                    <div class="win-dot dot-r"></div>
-                    <div class="win-dot dot-y"></div>
-                    <div class="win-dot dot-g"></div>
-                </div>
-                <div class="terminal-title">setup_disk_creativo.exe</div>
-                <button class="close-btn" id="btnCloseTerminal">×</button>
-            </div>
-
-            <div class="terminal-body">
-                
-                <div class="panel-inputs">
-                    <div class="input-group">
-                        <div class="input-title">1. ARQUITECTURA BASE</div>
-                        <label class="radio-label">
-                            <input type="radio" name="arq" value="Landing Page Ágil"> <span>Landing Page Ágil</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="arq" value="E-Commerce Transaccional"> <span>E-Commerce Transaccional</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="arq" value="Sistema Web Custom (Air-Gapped)"> <span>Sistema Web Custom</span>
-                        </label>
-                    </div>
-
-                    <div class="input-group">
-                        <div class="input-title">2. IDENTIDAD CORPORATIVA</div>
-                        <label class="radio-label">
-                            <input type="radio" name="id" value="Tengo Branding"> <span>Manual de Marca Existente</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="id" value="Requiere Rebranding"> <span>Rebranding Absoluto Requerido</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="panel-console" id="consoleOutput">
-                    <div class="console-line">> Inicializando protocolo de lectura... [OK]</div>
-                    <div class="console-line">> Esperando parámetros del usuario...</div>
-                    <div id="cursorAnchor"><span class="console-cursor"></span></div>
-                </div>
-            </div>
-
-            <div class="terminal-footer">
-                <button class="btn-transmit" id="btnTransmit">Transmitir Carga -> WA</button>
-            </div>
-
+        <div class="camera-float-wrapper">
+            <img class="camera-img" src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Dock Cámara">
+            <a href="#inicio" class="hitbox hitbox-inicio" title="Inicio"></a>
+            <a href="#sistemas" class="hitbox hitbox-sistemas" title="Sistemas"></a>
+            <a href="#sistemas" class="hitbox hitbox-proyectos" title="Directorio"></a>
+            <a href="dex.html" class="hitbox hitbox-contacto" title="Setup"></a>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // ─── SMOOTH PARALLAX DE FONDO ───
+            const dynamicLogo = document.getElementById('dynamic-logo');
+            const cameraDock = document.getElementById('cameraDock');
+            const footer = document.getElementById('mainFooter');
+            const topNavbar = document.getElementById('topNavbar');
+            const hitboxes = document.querySelectorAll('.hitbox');
+            
+            // 1. Motor Unificado de Scroll (Parallax Fondo + Smart Docking + Navbar Handoff)
             const parallaxBg = document.getElementById('parallaxBg');
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px) scale(1.05)`;
-            }, { passive: true });
+                
+                // Parallax suave del fondo estelar
+                if(parallaxBg) parallaxBg.style.transform = `translateY(${scrolled * -0.25}px)`;
 
-            // ─── PARALLAX HERO MOUSE ───
-            const heroContainer = document.getElementById('inicio');
-            const logo = document.getElementById('dynamic-logo');
-            if(heroContainer && logo && window.innerWidth > 768) {
-                heroContainer.addEventListener('mousemove', (e) => {
-                    const rect = heroContainer.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / rect.width - 0.5;
-                    const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    logo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
-                });
-                heroContainer.addEventListener('mouseleave', () => { logo.style.transform = 'translate(-50%, -50%)'; });
-            }
-
-            // ─── LÓGICA DEL CONFIGURADOR MODAL ───
-            const btnOpen = document.getElementById('btnOpenTerminal');
-            const btnClose = document.getElementById('btnCloseTerminal');
-            const overlay = document.getElementById('terminalOverlay');
-
-            btnOpen.addEventListener('click', () => { overlay.classList.add('is-active'); });
-            btnClose.addEventListener('click', () => { overlay.classList.remove('is-active'); });
-
-            const radios = document.querySelectorAll('input[type="radio"]');
-            const consoleOutput = document.getElementById('consoleOutput');
-            const cursorAnchor = document.getElementById('cursorAnchor');
-
-            function printToConsole(text) {
-                const newLine = document.createElement('div');
-                newLine.className = 'console-line';
-                newLine.innerText = `> ${text}`;
-                consoleOutput.insertBefore(newLine, cursorAnchor);
-                consoleOutput.scrollTop = consoleOutput.scrollHeight;
-            }
-
-            radios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    const group = e.target.name === 'arq' ? 'ARQUITECTURA' : 'IDENTIDAD';
-                    const value = e.target.value;
-                    printToConsole(`Seteando parámetro [${group}] a: "${value}"`);
-                    printToConsole(`Cargando dependencias de ${value}... [OK]`);
-                });
-            });
-
-            const btnTransmit = document.getElementById('btnTransmit');
-            const waNumber = "50768529324"; 
-
-            btnTransmit.addEventListener('click', () => {
-                const selectedArq = document.querySelector('input[name="arq"]:checked');
-                const selectedId = document.querySelector('input[name="id"]:checked');
-
-                if(!selectedArq || !selectedId) {
-                    printToConsole("ERR: Faltan parámetros. Seleccione Arquitectura e Identidad.");
-                    return;
+                // Handoff del Navbar
+                if(scrolled > 50) {
+                    topNavbar.style.transform = 'translateY(-100%)';
+                } else {
+                    topNavbar.style.transform = 'translateY(0)';
                 }
 
-                printToConsole("Compilando solicitud de infraestructura...");
-                
-                setTimeout(() => {
-                    const msg = `Hola Disk Creativo. He iniciado la configuración de mi proyecto.\n\n*Parámetros del Sistema:*\n- Arquitectura: ${selectedArq.value}\n- Identidad: ${selectedId.value}\n\nRequiero conexión para evaluar el despliegue.`;
-                    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
-                    printToConsole("Redirigiendo a nodo de comunicaciones (WhatsApp)...");
-                    setTimeout(() => { window.open(waUrl, '_blank'); }, 800);
-                }, 600);
-            });
+                // Lógica de colisión suave del Dock con el Footer
+                if (footer && cameraDock) {
+                    const footerTop = footer.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (footerTop < windowHeight) {
+                        const pushAmount = windowHeight - footerTop;
+                        cameraDock.style.transform = `translateX(-50%) translateY(-${pushAmount}px)`;
+                    } else {
+                        cameraDock.style.transform = `translateX(-50%) translateY(0px)`;
+                    }
+                }
+            }, { passive: true });
 
-            // ─── LÓGICA DEL DOCK ───
-            const hitboxes = document.querySelectorAll('.hitbox');
-            const cameraDock = document.getElementById('cameraDock');
+            // 2. Animación Mecánica de Clic en el Dock
             hitboxes.forEach(box => {
                 box.addEventListener('click', () => {
-                    cameraDock.style.transform = 'translateX(-50%) translateY(8px)';
-                    setTimeout(() => { cameraDock.style.transform = 'translateX(-50%) translateY(0)'; }, 150);
+                    const wrapper = document.querySelector('.camera-float-wrapper');
+                    wrapper.style.transition = 'transform 0.15s';
+                    wrapper.style.transform = 'translateY(8px)';
+                    setTimeout(() => { 
+                        wrapper.style.transform = ''; 
+                        setTimeout(() => { wrapper.style.transition = ''; }, 150); 
+                    }, 150);
                 });
             });
 
-            // ─── MOTOR 3D INTERACTIVO DE PROYECTOS ───
+            // 3. Lógica de Interacción 3D de las Tarjetas
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
                 cards.forEach(wrapper => {
                     const card = wrapper.querySelector('.card-editorial');
+                    
                     const handleMove = (e) => {
                         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -672,15 +469,19 @@
                         const y = clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
+                        
                         const rotateX = ((y - centerY) / centerY) * -15; 
                         const rotateY = ((x - centerX) / centerX) * 15;
+                        
                         card.style.transform = `rotate3d(1, 0, 0, ${rotateX}deg) rotate3d(0, 1, 0, ${rotateY}deg) scale(1.02)`;
                         card.classList.add('is-active');
                     };
+
                     const handleLeave = () => {
                         card.style.transform = `rotate3d(0, 0, 0, 0deg) scale(1)`;
                         card.classList.remove('is-active');
                     };
+
                     wrapper.addEventListener('mousemove', handleMove);
                     wrapper.addEventListener('mouseleave', handleLeave);
                     wrapper.addEventListener('touchmove', handleMove, { passive: true });
@@ -688,49 +489,49 @@
                 });
             }
 
-            // ─── API GOOGLE SHEETS ───
+            // 4. Motor de Conexión a Base de Datos (Google Sheets API)
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
-            let proyectosData = [];
             const grid = document.getElementById('portfolioGrid');
 
             async function fetchProyectos() {
                 try {
                     const response = await fetch(API_URL);
-                    proyectosData = await response.json();
+                    const proyectosData = await response.json();
+                    
                     if (proyectosData && proyectosData.length > 0) { 
-                        renderGrid(); 
+                        grid.innerHTML = ''; 
+                        proyectosData.forEach(p => {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'card-wrapper'; 
+                            
+                            let imgUrl = p.imagen ? p.imagen.trim() : "";
+                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
+
+                            wrapper.innerHTML = `
+                                <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
+                                    <div class="card-thumb">${thumbHtml}</div>
+                                    <div class="card-content">
+                                        <span class="card-badge">${p.categoria || "Sistema"}</span>
+                                        <h3 class="card-title">${p.titulo || "Proyecto_00"}</h3>
+                                        <p class="card-desc">${p.descripcion || "..."}</p>
+                                    </div>
+                                    <div class="card-bottom">
+                                        <span class="card-exe">Ejecutar</span>
+                                    </div>
+                                </a>
+                            `;
+                            grid.appendChild(wrapper);
+                        });
                         init3DInteractions(); 
                     } 
-                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Registro de bases de datos vacío.</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error de red.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Error 503: Falla de conexión con el nodo de origen.</div>';
                 }
             }
 
-            function renderGrid() {
-                grid.innerHTML = ''; 
-                proyectosData.forEach(p => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'card-wrapper'; 
-                    let imgUrl = p.imagen ? p.imagen.trim() : "";
-                    let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
-                    wrapper.innerHTML = `
-                        <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
-                            <div class="card-thumb">${thumbHtml}</div>
-                            <div class="card-content">
-                                <span class="card-badge">${p.categoria || "Sistema"}</span>
-                                <h3 class="card-title">${p.titulo || "Proyecto_00"}</h3>
-                                <p class="card-desc">${p.descripcion || "..."}</p>
-                            </div>
-                            <div class="card-bottom">
-                                <span class="card-exe">Ejecutar</span>
-                            </div>
-                        </a>
-                    `;
-                    grid.appendChild(wrapper);
-                });
-            }
+            // Inicializar la ingesta de datos
             fetchProyectos();
         });
     </script>
