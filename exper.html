@@ -7,7 +7,9 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
@@ -18,6 +20,7 @@
             --text-main: #EAE9E4; 
             --text-muted: rgba(234, 233, 228, 0.5);
             --hairline: 1px solid rgba(255, 255, 255, 0.1);
+            --hairline-dark: 1px solid rgba(0, 0, 0, 0.15);
             --hairline-neon: 1px solid var(--accent-neon);
             
             --font-display: 'Anton', sans-serif;
@@ -26,11 +29,7 @@
             --font-code: 'Courier New', Courier, monospace;
         }
 
-        html, body {
-            overflow-x: clip !important; 
-            max-width: 100%; width: 100%;
-        }
-
+        html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
         html { scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -46,18 +45,15 @@
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
             width: 100vw; height: 110vh; 
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/27a5f1ff96e9d1b4c4a205126ccbcba5a9b57582/DIQC/file_000000006e7481fd87c722d8d1370ae9.png');
+            /* AQUÍ ESTÁ EL NUEVO FONDO LIMPIO QUE SUBISTE */
+            background-image: url('./image_ef0320.jpg'); 
             background-position: center center; background-size: cover; background-repeat: no-repeat;
             background-color: var(--bg-primary); 
             background-attachment: fixed;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
 
-        .stars-container {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -2; pointer-events: none;
-        }
-
+        .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
         .stars-1 {
             position: absolute; width: 1px; height: 1px; background: transparent;
             box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
@@ -70,47 +66,28 @@
         }
         @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
 
-        /* ─── 02. NAVBAR PREMIUM ─── */
+        /* ─── 02. NAVBAR B2B ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(5, 5, 5, 0.5);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: var(--hairline);
-            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: var(--hairline); display: flex; justify-content: space-between; align-items: center;
             padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
-
-        .navbar-brand { 
-            display: flex; align-items: center; gap: 10px;
-            font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
-            color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
-        }
+        .navbar-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; }
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
-
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
-        .nav-link {
-            color: var(--text-main); text-decoration: none; 
-            font-family: var(--font-sans); font-size: 0.75rem; 
-            text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
-        }
+        .nav-link { color: var(--text-main); text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .nav-link:hover { color: var(--brand-purple); }
-        
         .nav-btn-wa {
             background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400;
-            text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
+            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400; text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
             display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
         }
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── 03. HERO SECTION ─── */
-        .hero-section {
-            position: relative; height: 100vh; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 2vw;
-            padding-top: 70px; z-index: 10;
-        }
-        
+        /* ─── 03. HERO SECTION (SILENCIO ABSOLUTO) ─── */
+        .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
         .hero-giant-text {
@@ -130,8 +107,7 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
-            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45));
-            backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
+            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45)); backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
             position: relative; 
         }
 
@@ -141,10 +117,8 @@
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
         .giant-transparent-logo {
-            position: absolute; 
-            top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: clamp(120px, 18vw, 320px); 
-            z-index: 5; pointer-events: none;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
@@ -154,6 +128,7 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
+        /* Botón Reproductor */
         .hero-reproductor-btn {
             display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
@@ -173,14 +148,12 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── 05. NÚCLEO DE CONTENIDO (FONDO NEGRO SÓLIDO + ESTRELLAS LOCALES) ─── */
+        /* ─── 05. NÚCLEO INFERIOR (NEGRO MATE + ESTRELLAS + SHADER) ─── */
         .engineering-bg { 
-            background-color: var(--bg-primary); /* Negro sólido de vuelta */
-            position: relative; z-index: 20; 
-            width: 100%; display: block;
+            background-color: var(--bg-primary); 
+            position: relative; z-index: 20; width: 100%; display: block;
         }
 
-        /* Patrón de estrellas integrado al fondo negro que scrollea natural */
         .stars-pattern {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             z-index: 1; pointer-events: none;
@@ -189,77 +162,74 @@
                 radial-gradient(1.5px 1.5px at 75px 125px, rgba(255,255,255,0.2) 100%, transparent),
                 radial-gradient(1px 1px at 150px 40px, rgba(255,255,255,0.5) 100%, transparent),
                 radial-gradient(2px 2px at 220px 180px, rgba(255,255,255,0.3) 100%, transparent);
-            background-size: 300px 300px;
-            animation: staticTwinkle 10s infinite alternate ease-in-out;
+            background-size: 300px 300px; animation: staticTwinkle 10s infinite alternate ease-in-out;
         }
-        @keyframes staticTwinkle { 0% { opacity: 0.3; } 100% { opacity: 0.9; } }
 
-        /* Contenedor que va encima de las estrellas locales */
+        /* WEBGL CANVAS CONTAINER */
+        #aurora-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; opacity: 0.6; pointer-events: none; mix-blend-mode: screen;
+        }
+
         .content-wrapper {
-            position: relative; z-index: 5;
+            position: relative; z-index: 10;
             padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
         }
 
-        /* ─── SECCIÓN DE IDENTIDAD (B2B ESTRUCTURADO) ─── */
+        /* ─── IDENTIDAD (FICHA TÉCNICA) ─── */
         .identity-split { 
             display: grid; grid-template-columns: 60% 40%; gap: 4rem;
-            align-items: center; margin-bottom: 8rem; 
+            align-items: center; margin-bottom: 10rem; 
         }
 
         .identity-text { display: flex; flex-direction: column; gap: 2rem; }
-        
-        .section-label { font-family: var(--font-sans); color: var(--brand-purple); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;}
+        .section-label { font-family: var(--font-sans); color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;}
         .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; color: var(--text-main); font-weight: 400;}
         .identity-title i { color: var(--brand-purple); font-style: italic; }
-        
-        .identity-desc { font-family: var(--font-sans); font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; color: var(--text-muted); font-weight: 300;}
 
-        /* Píldoras de Atributos */
         .pill-container { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;}
         .attr-pill {
             padding: 0.6rem 1.5rem; border: var(--hairline); border-radius: 50px;
             font-family: var(--font-sans); font-size: 0.8rem; color: #fff;
-            letter-spacing: 1px; font-weight: 500;
+            letter-spacing: 1px; font-weight: 500; background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
 
         .identity-mockup { display: flex; justify-content: center; align-items: center;}
         .playground-img { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); animation: floatEditorial 12s ease-in-out infinite;}
-        @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* ─── DIRECTORIO DE PROYECTOS (TARJETAS OSCURAS ORIGINALES) ─── */
-        .projects-header { margin-bottom: 4rem; }
-        .projects-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--text-main); font-weight: 400; margin-bottom: 0.5rem;}
-        .projects-subtitle { font-family: var(--font-sans); font-size: 1rem; color: var(--text-muted); font-weight: 300;}
-
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
-        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
+        /* ─── DIRECTORIO (MUSEO PASSEPARTOUT) ─── */
+        .projects-header { margin-bottom: 4rem; text-align: center; }
+        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;}
+        
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
+        .card-wrapper { width: 100%; perspective: 1200px; }
         
         .card-editorial {
-            width: 100%; height: 100%; position: relative; background: rgba(255, 255, 255, 0.02); border: var(--hairline);
-            transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
-            transition: box-shadow 0.3s, border-color 0.3s;
+            width: 100%; background: var(--text-main); /* Blanco Hueso */
+            padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
+            transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
         .card-thumb {
-            width: 100%; height: 220px; background: #000; transform: translate3d(0,0,20px);
-            position: relative; overflow: hidden; border-bottom: var(--hairline); pointer-events: none;
+            width: 100%; height: 260px; background: #ddd; transform: translate3d(0,0,20px);
+            position: relative; overflow: hidden; pointer-events: none;
         }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; filter: grayscale(30%); transition: all 0.5s ease; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: all 0.5s ease; }
+        
+        .card-content { padding: 1.5rem 0 0 0; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; pointer-events: none;}
+        .card-badge { font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;}
+        .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: #050505; line-height: 1.1; margin-bottom: 0.5rem; font-weight: 700;}
+        .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 400; color: #444; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        .card-content { padding: 1.5rem 2rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none;}
-        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 600;}
-        .card-title { font-family: var(--font-serif); font-size: 1.6rem; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; font-weight: 400;}
-        .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+        .card-bottom { padding: 1rem 0 0 0; margin-top: 1rem; border-top: var(--hairline-dark); transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+        .card-exe { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #050505; font-weight: 800; transition: color 0.3s;}
 
-        .card-bottom { padding: 1rem 2rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
-        .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 500; transition: color 0.3s;}
+        .card-editorial:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .card-editorial:hover .card-thumb img { filter: grayscale(0%) scale(1.05); }
+        .card-editorial:hover .card-exe { color: var(--brand-purple); }
 
-        /* Físicas de Tarjeta Oscura */
-        .card-editorial:hover, .card-editorial.is-active { box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.3); }
-        .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
-        .card-editorial.is-active .card-exe { color: var(--accent-neon); }
-
-        /* ─── 06. FOOTER B2B PREMIUM (BLOQUE SÓLIDO AL FINAL) ─── */
+        /* ─── 06. FOOTER B2B PREMIUM ─── */
         .b2b-footer {
             background-color: var(--bg-secondary); border-top: var(--hairline);
             padding: 5rem 4vw; position: relative; z-index: 20; display: block;
@@ -291,13 +261,14 @@
             .identity-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             
             .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .card-wrapper { height: 280px; }
+            .card-editorial { padding: 0.8rem; }
+            .card-wrapper { height: auto; }
             .card-thumb { height: 100px; }
-            .card-content { padding: 1rem; }
+            .card-content { padding: 1rem 0 0 0; }
             .card-badge { font-size: 0.5rem; margin-bottom: 0.4rem;}
             .card-title { font-size: 1.1rem; margin-bottom: 0.3rem;}
             .card-desc { font-size: 0.7rem; line-height: 1.3; -webkit-line-clamp: 2;}
-            .card-bottom { padding: 0.8rem 1rem; }
+            .card-bottom { padding: 0.5rem 0 0 0; margin-top: 0.5rem;}
             .card-exe { font-size: 0.6rem; }
 
             .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -350,10 +321,12 @@
     <div class="analog-cut"></div>
 
     <main class="engineering-bg">
+        
         <div class="stars-pattern"></div>
+        
+        <div id="aurora-canvas"></div>
 
         <div class="content-wrapper">
-            
             <section class="identity-split" id="sistemas">
                 <div class="identity-text">
                     <span class="section-label">Identidad Corporativa</span>
@@ -366,7 +339,8 @@
                     <div class="pill-container">
                         <span class="attr-pill">Ingeniería Web</span>
                         <span class="attr-pill">Diseño B2B</span>
-                        <span class="attr-pill">Rendimiento Acelerado</span>
+                        <span class="attr-pill">Código Puro</span>
+                        <span class="attr-pill">Performance 60fps</span>
                     </div>
                 </div>
 
@@ -377,14 +351,14 @@
 
             <section class="projects-section">
                 <div class="projects-header">
-                    <h2 class="projects-title">Proyectos Destacados</h2>
-                    <p class="projects-subtitle">Arquitecturas desarrolladas para nuestros clientes.</p>
+                    <h2 class="projects-title">Registro de Operaciones</h2>
+                    <p class="projects-subtitle">Nuestra arquitectura aplicada.</p>
                 </div>
                 
                 <div class="grid-editorial" id="portfolioGrid">
-                    </div>
+                    <div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Cargando nodos...</div>
+                </div>
             </section>
-
         </div>
     </main>
 
@@ -398,7 +372,7 @@
                 <h4>Navegación</h4>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#sistemas">Sistemas</a></li>
+                    <li><a href="#sistemas">Identidad</a></li>
                     <li><a href="dex.html">Construye tu Proyecto</a></li>
                 </ul>
             </div>
@@ -407,13 +381,13 @@
                 <ul>
                     <li><a href="#">Ciudad de Panamá, PTY</a></li>
                     <li><a href="#">hello@diskcreativo.com</a></li>
-                    <li><a href="https://wa.me/50768529324" target="_blank">Atención Directa (WhatsApp)</a></li>
+                    <li><a href="https://wa.me/50768529324" target="_blank">WhatsApp Directo</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Disk Creativo. Todos los derechos reservados.</span>
-            <span>Operando en Panamá.</span>
+            <span>Sistema Operativo.</span>
         </div>
     </footer>
 
@@ -423,17 +397,12 @@
             const dynamicLogo = document.getElementById('dynamic-logo');
             const topNavbar = document.getElementById('topNavbar');
             
-            // Navbar Handoff
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                if(scrolled > 50) {
-                    topNavbar.style.transform = 'translateY(-100%)';
-                } else {
-                    topNavbar.style.transform = 'translateY(0)';
-                }
+                if(scrolled > 50) topNavbar.style.transform = 'translateY(-100%)';
+                else topNavbar.style.transform = 'translateY(0)';
             }, { passive: true });
 
-            // Parallax del Ratón
             const heroContainer = document.getElementById('inicio');
             if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
@@ -445,41 +414,117 @@
                 heroContainer.addEventListener('mouseleave', () => { dynamicLogo.style.transform = 'translate(-50%, -50%)'; });
             }
 
-            // Físicas 3D
-            function init3DInteractions() {
-                const cards = document.querySelectorAll('.card-wrapper');
-                cards.forEach(wrapper => {
-                    const card = wrapper.querySelector('.card-editorial');
-                    
-                    const handleMove = (e) => {
-                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                        const rect = wrapper.getBoundingClientRect();
-                        const x = clientX - rect.left;
-                        const y = clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        
-                        const rotateX = ((y - centerY) / centerY) * -15; 
-                        const rotateY = ((x - centerX) / centerX) * 15;
-                        
-                        card.style.transform = `rotate3d(1, 0, 0, ${rotateX}deg) rotate3d(0, 1, 0, ${rotateY}deg) scale(1.02)`;
-                        card.classList.add('is-active');
-                    };
+            // ─── SHADER WEBGL (TORMENTA BLANCA / PLATA) TRADUCIDO DE REACT ───
+            const initWebGL = () => {
+                const container = document.getElementById('aurora-canvas');
+                if (!container || !window.THREE) return;
 
-                    const handleLeave = () => {
-                        card.style.transform = `rotate3d(0, 0, 0, 0deg) scale(1)`;
-                        card.classList.remove('is-active');
-                    };
+                const scene = new THREE.Scene();
+                const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                container.appendChild(renderer.domElement);
 
-                    wrapper.addEventListener('mousemove', handleMove);
-                    wrapper.addEventListener('mouseleave', handleLeave);
-                    wrapper.addEventListener('touchmove', handleMove, { passive: true });
-                    wrapper.addEventListener('touchend', handleLeave);
+                const material = new THREE.ShaderMaterial({
+                    transparent: true,
+                    uniforms: {
+                        iTime: { value: 0 },
+                        iResolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) }
+                    },
+                    vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+                    fragmentShader: `
+                        uniform float iTime;
+                        uniform vec2 iResolution;
+                        #define NUM_OCTAVES 3
+
+                        float rand(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
+
+                        float noise(vec2 p) {
+                            vec2 ip = floor(p); vec2 u = fract(p); u = u*u*(3.0-2.0*u);
+                            float res = mix(
+                                mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+                                mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+                            return res * res;
+                        }
+
+                        float fbm(vec2 x) {
+                            float v = 0.0; float a = 0.3; vec2 shift = vec2(100.0);
+                            mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+                            for (int i = 0; i < NUM_OCTAVES; ++i) {
+                                v += a * noise(x); x = rot * x * 2.0 + shift; a *= 0.4;
+                            }
+                            return v;
+                        }
+
+                        vec4 tanh_custom(vec4 x) {
+                            vec4 e2x = exp(2.0 * x);
+                            return (e2x - 1.0) / (e2x + 1.0);
+                        }
+
+                        void main() {
+                            vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
+                            vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
+                            vec2 v;
+                            vec4 o = vec4(0.0);
+                            float f = 2.0 + fbm(p + vec2(iTime * 5.0, 0.0)) * 0.5;
+
+                            for (float i = 0.0; i < 35.0; i++) {
+                                v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
+                                float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
+                                
+                                // INYECCIÓN BLANCO / PLATA (Modificado del RGB original)
+                                vec4 auroraColors = vec4(0.9, 0.95, 1.0, 1.0); 
+
+                                vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
+                                float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
+                                o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
+                            }
+
+                            vec4 base = o / 100.0;
+                            vec4 p_val = vec4(pow(base.x, 1.6), pow(base.y, 1.6), pow(base.z, 1.6), pow(base.w, 1.6));
+                            o = tanh_custom(p_val);
+                            gl_FragColor = o * 1.5;
+                        }
+                    `
                 });
-            }
 
-            // Google Sheets API - Módulo Original Recuperado
+                const geometry = new THREE.PlaneGeometry(2, 2);
+                const mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+
+                let frameId;
+                let isVisible = false;
+
+                const animate = () => {
+                    if (!isVisible) return;
+                    material.uniforms.iTime.value += 0.016;
+                    renderer.render(scene, camera);
+                    frameId = requestAnimationFrame(animate);
+                };
+
+                // Smart Rendering: Solo animar cuando la sección está en pantalla
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            isVisible = true; animate();
+                        } else {
+                            isVisible = false; cancelAnimationFrame(frameId);
+                        }
+                    });
+                }, { threshold: 0.01 });
+
+                observer.observe(document.getElementById('sistemas'));
+
+                window.addEventListener('resize', () => {
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                    material.uniforms.iResolution.value.set(container.clientWidth, container.clientHeight);
+                });
+            };
+
+            // Esperar un segundo para asegurar que Three.js cargó del CDN antes de iniciar
+            setTimeout(initWebGL, 500);
+
+            // ─── API GOOGLE SHEETS PARA PROYECTOS ───
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             const grid = document.getElementById('portfolioGrid');
 
@@ -495,7 +540,7 @@
                             wrapper.className = 'card-wrapper'; 
                             
                             let imgUrl = p.imagen ? p.imagen.trim() : "";
-                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
+                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-family:var(--font-sans);">[Sin Imagen]</div>`;
 
                             wrapper.innerHTML = `
                                 <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
@@ -506,18 +551,17 @@
                                         <p class="card-desc">${p.descripcion || "..."}</p>
                                     </div>
                                     <div class="card-bottom">
-                                        <span class="card-exe">Explorar Proyecto</span>
+                                        <span class="card-exe">VER PROYECTO</span>
                                     </div>
                                 </a>
                             `;
                             grid.appendChild(wrapper);
                         });
-                        init3DInteractions(); 
                     } 
-                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-sans); color: var(--text-muted);">Registro de bases de datos vacío.</div>'; }
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-sans); color: var(--text-muted);">Error 503: Falla de conexión.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error 503: Falla de conexión.</div>';
                 }
             }
 
