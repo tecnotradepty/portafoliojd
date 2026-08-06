@@ -7,17 +7,17 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-primary: #050505;
+            --bg-secondary: #0A0A0C;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
-            --text-muted: rgba(234, 233, 228, 0.6);
-            --hairline: 1px solid rgba(255, 255, 255, 0.15);
-            --hairline-dark: 1px solid rgba(0, 0, 0, 0.15);
+            --text-muted: rgba(234, 233, 228, 0.5);
+            --hairline: 1px solid rgba(255, 255, 255, 0.1);
             --hairline-neon: 1px solid var(--accent-neon);
             
             --font-display: 'Anton', sans-serif;
@@ -26,68 +26,91 @@
             --font-code: 'Courier New', Courier, monospace;
         }
 
-        html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
+        html, body {
+            overflow-x: clip !important; 
+            max-width: 100%; width: 100%;
+        }
+
         html { scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            color: var(--text-main); font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased; background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-primary);
             position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO ESPACIAL ─── */
+        /* ─── 01. LIENZO ESPACIAL DEL HERO ─── */
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
             width: 100vw; height: 110vh; 
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/27a5f1ff96e9d1b4c4a205126ccbcba5a9b57582/DIQC/file_000000006e7481fd87c722d8d1370ae9.png');
             background-position: center center; background-size: cover; background-repeat: no-repeat;
-            background-color: var(--bg-primary); background-attachment: fixed;
+            background-color: var(--bg-primary); 
+            background-attachment: fixed;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
 
-        .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
+        .stars-container {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -2; pointer-events: none;
+        }
+
         .stars-1 {
             position: absolute; width: 1px; height: 1px; background: transparent;
-            box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF, 30vw 95vh #FFF, 80vw 90vh #FFF;
+            box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
             animation: twinkle 40s infinite alternate ease-in-out;
         }
         .stars-2 {
             position: absolute; width: 2px; height: 2px; background: transparent;
-            box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF, 20vw 90vh #FFF, 90vw 85vh #FFF;
+            box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
             animation: twinkle 60s infinite alternate-reverse ease-in-out;
         }
-        .stars-static-twinkle {
-            position: absolute; width: 1px; height: 1px; background: transparent;
-            box-shadow: 5vw 10vh #AAA, 10vw 30vh #AAA, 3vw 60vh #AAA, 12vw 80vh #AAA, 7vw 90vh #AAA, 2vw 20vh #AAA, 95vw 10vh #AAA, 90vw 30vh #AAA, 97vw 60vh #AAA, 88vw 80vh #AAA, 93vw 90vh #AAA, 98vw 20vh #AAA, 30vw 5vh #AAA, 70vw 95vh #AAA, 45vw 80vh #AAA, 65vw 75vh #AAA;
-            animation: breathing 15s infinite alternate ease-in-out;
-        }
-
         @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
-        @keyframes breathing { 0% { opacity: 0.1; } 100% { opacity: 0.6; } }
 
-        /* ─── NAVBAR PREMIUM ─── */
+        /* ─── 02. NAVBAR PREMIUM ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: var(--hairline); display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: var(--hairline);
+            display: flex; justify-content: space-between; align-items: center;
             padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
-        .navbar-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; }
+
+        .navbar-brand { 
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
+            color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
+        }
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
+
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
-        .nav-link { color: var(--text-main); text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-link {
+            color: var(--text-main); text-decoration: none; 
+            font-family: var(--font-sans); font-size: 0.75rem; 
+            text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
+        }
         .nav-link:hover { color: var(--brand-purple); }
+        
         .nav-btn-wa {
             background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400; text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
+            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400;
+            text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
             display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
         }
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── HERO SECTION ─── */
-        .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
+        /* ─── 03. HERO SECTION ─── */
+        .hero-section {
+            position: relative; height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 2vw;
+            padding-top: 70px; z-index: 10;
+        }
+        
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
         .hero-giant-text {
@@ -101,6 +124,7 @@
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
         }
+        
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
@@ -117,19 +141,21 @@
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
         .giant-transparent-logo {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
+            position: absolute; 
+            top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: clamp(120px, 18vw, 320px); 
+            z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
+
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
-        /* BOTÓN REPRODUCTOR */
         .hero-reproductor-btn {
-            display: block; margin-top: 4rem; width: 90%; max-width: 420px;
+            display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
             transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s;
             filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.8));
@@ -138,149 +164,144 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* ─── CINTA ANALÓGICA ─── */
+        /* ─── 04. CINTA ANALÓGICA ─── */
         .analog-cut {
-            width: 100%; height: 6vh; min-height: 40px;
+            width: 100%; height: 6vh; min-height: 40px; display: block;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
             background-size: cover; background-position: center; background-repeat: no-repeat;
             position: relative; z-index: 25; border-top: var(--hairline); border-bottom: var(--hairline);
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── NÚCLEO FUSIONADO: CRISTAL AHUMADO ─── */
-        /* Al ser semitransparente, permite ver las estrellas caer por el fondo */
+        /* ─── 05. NÚCLEO DE CONTENIDO (FONDO NEGRO SÓLIDO + ESTRELLAS LOCALES) ─── */
         .engineering-bg { 
-            background-color: rgba(5, 5, 5, 0.8); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-            position: relative; z-index: 20; padding-bottom: 0px; width: 100%; overflow: hidden; 
+            background-color: var(--bg-primary); /* Negro sólido de vuelta */
+            position: relative; z-index: 20; 
+            width: 100%; display: block;
         }
-        .system-section { padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
 
-        .editorial-frame { border: var(--hairline); display: flex; flex-direction: column; background: rgba(255,255,255,0.02); width: 100%; margin-bottom: 4rem; }
-        .identity-split { display: grid; grid-template-columns: 60% 40%; border-bottom: var(--hairline); width: 100%; }
-        .identity-text { padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem; border-right: var(--hairline); }
+        /* Patrón de estrellas integrado al fondo negro que scrollea natural */
+        .stars-pattern {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1; pointer-events: none;
+            background-image: 
+                radial-gradient(1px 1px at 25px 5px, rgba(255,255,255,0.4) 100%, transparent),
+                radial-gradient(1.5px 1.5px at 75px 125px, rgba(255,255,255,0.2) 100%, transparent),
+                radial-gradient(1px 1px at 150px 40px, rgba(255,255,255,0.5) 100%, transparent),
+                radial-gradient(2px 2px at 220px 180px, rgba(255,255,255,0.3) 100%, transparent);
+            background-size: 300px 300px;
+            animation: staticTwinkle 10s infinite alternate ease-in-out;
+        }
+        @keyframes staticTwinkle { 0% { opacity: 0.3; } 100% { opacity: 0.9; } }
+
+        /* Contenedor que va encima de las estrellas locales */
+        .content-wrapper {
+            position: relative; z-index: 5;
+            padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
+        }
+
+        /* ─── SECCIÓN DE IDENTIDAD (B2B ESTRUCTURADO) ─── */
+        .identity-split { 
+            display: grid; grid-template-columns: 60% 40%; gap: 4rem;
+            align-items: center; margin-bottom: 8rem; 
+        }
+
+        .identity-text { display: flex; flex-direction: column; gap: 2rem; }
         
-        .sys-header { font-family: var(--font-sans); color: rgba(255,255,255,0.3); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;}
-        .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1; color: var(--text-main); font-weight: 400;}
+        .section-label { font-family: var(--font-sans); color: var(--brand-purple); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; font-weight: 600;}
+        .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; color: var(--text-main); font-weight: 400;}
         .identity-title i { color: var(--brand-purple); font-style: italic; }
+        
+        .identity-desc { font-family: var(--font-sans); font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; color: var(--text-muted); font-weight: 300;}
 
-        /* FICHA TÉCNICA B2B */
-        .tech-specs { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; border-top: var(--hairline); padding-top: 3rem; }
-        .spec-row { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: start; }
-        .spec-label { font-family: var(--font-code); font-size: 0.75rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 1px; border-bottom: var(--hairline-neon); padding-bottom: 4px; display: inline-block;}
-        .spec-value { font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-main); font-weight: 300; line-height: 1.5; }
+        /* Píldoras de Atributos */
+        .pill-container { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;}
+        .attr-pill {
+            padding: 0.6rem 1.5rem; border: var(--hairline); border-radius: 50px;
+            font-family: var(--font-sans); font-size: 0.8rem; color: #fff;
+            letter-spacing: 1px; font-weight: 500;
+        }
 
-        .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 2rem; overflow: hidden; min-width: 0;}
+        .identity-mockup { display: flex; justify-content: center; align-items: center;}
         .playground-img { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); animation: floatEditorial 12s ease-in-out infinite;}
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* DIRECTORIO INTEGRADO (MUSEO) */
-        .projects-container { padding: 4rem; width: 100%; }
-        .projects-intro { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-main); font-weight: 400; margin-top: 1rem; margin-bottom: 4rem; font-style: italic;}
+        /* ─── DIRECTORIO DE PROYECTOS (TARJETAS OSCURAS ORIGINALES) ─── */
+        .projects-header { margin-bottom: 4rem; }
+        .projects-title { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--text-main); font-weight: 400; margin-bottom: 0.5rem;}
+        .projects-subtitle { font-family: var(--font-sans); font-size: 1rem; color: var(--text-muted); font-weight: 300;}
 
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
-        .card-wrapper { width: 100%; perspective: 1200px; }
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; perspective: 1200px; width: 100%;}
+        .card-wrapper { width: 100%; height: 450px; perspective: 1200px; }
         
-        /* DISEÑO PASSEPARTOUT */
         .card-editorial {
-            width: 100%; background: var(--text-main); /* Blanco Hueso */
-            padding: 1.2rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
-            transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%; height: 100%; position: relative; background: rgba(255, 255, 255, 0.02); border: var(--hairline);
+            transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
+            transition: box-shadow 0.3s, border-color 0.3s;
         }
+
         .card-thumb {
-            width: 100%; height: 220px; background: #ddd; transform: translate3d(0,0,20px);
-            position: relative; overflow: hidden; pointer-events: none;
+            width: 100%; height: 220px; background: #000; transform: translate3d(0,0,20px);
+            position: relative; overflow: hidden; border-bottom: var(--hairline); pointer-events: none;
         }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: all 0.5s ease; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; filter: grayscale(30%); transition: all 0.5s ease; }
+
+        .card-content { padding: 1.5rem 2rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none;}
+        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 600;}
+        .card-title { font-family: var(--font-serif); font-size: 1.6rem; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; font-weight: 400;}
+        .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+
+        .card-bottom { padding: 1rem 2rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+        .card-exe { font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 500; transition: color 0.3s;}
+
+        /* Físicas de Tarjeta Oscura */
+        .card-editorial:hover, .card-editorial.is-active { box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.3); }
+        .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+        .card-editorial.is-active .card-exe { color: var(--accent-neon); }
+
+        /* ─── 06. FOOTER B2B PREMIUM (BLOQUE SÓLIDO AL FINAL) ─── */
+        .b2b-footer {
+            background-color: var(--bg-secondary); border-top: var(--hairline);
+            padding: 5rem 4vw; position: relative; z-index: 20; display: block;
+        }
+        .footer-grid {
+            max-width: 1600px; margin: 0 auto; display: grid; 
+            grid-template-columns: 2fr 1fr 1fr; gap: 4rem;
+        }
+        .footer-brand h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem; letter-spacing: 1px;}
+        .footer-brand p { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 400px;}
         
-        .card-content { padding: 1.5rem 0 0 0; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; pointer-events: none;}
-        .card-badge { font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;}
-        .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: #050505; line-height: 1.1; margin-bottom: 0.5rem; font-weight: 600;}
-        .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 400; color: #444; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-
-        .card-bottom { padding: 1rem 0 0 0; margin-top: 1rem; border-top: var(--hairline-dark); transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
-        .card-exe { font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #050505; font-weight: 800; transition: color 0.3s;}
-
-        .card-editorial.is-active { box-shadow: 20px 30px 50px rgba(0,0,0,0.9); }
-        .card-editorial.is-active .card-thumb img { filter: grayscale(0%) scale(1.05); }
-        .card-editorial.is-active .card-exe { color: var(--brand-purple); }
-
-        /* ─── MASSIVE CTA & SERVER LABEL FOOTER ─── */
-        .site-footer { background-color: var(--bg-primary); border-top: var(--hairline); padding: 6rem 4vw; position: relative; z-index: 20; overflow: hidden;}
+        .footer-nav h4 { font-family: var(--font-sans); font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; font-weight: 600;}
+        .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .footer-nav a { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s;}
+        .footer-nav a:hover { color: var(--brand-purple); }
         
-        .massive-cta-container { text-align: center; margin-bottom: 6rem; display: flex; flex-direction: column; align-items: center; gap: 2rem;}
-        .massive-cta { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 12rem); line-height: 0.85; color: var(--text-main); text-transform: uppercase; margin: 0; letter-spacing: -2px;}
-        .btn-footer-setup {
-            background: #fff; color: #000; padding: 1rem 3rem; font-family: var(--font-code); font-size: 1rem;
-            text-transform: uppercase; font-weight: 800; letter-spacing: 2px; text-decoration: none;
-            transition: all 0.2s; box-shadow: 4px 4px 0 var(--brand-purple);
-        }
-        .btn-footer-setup:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--brand-purple); background: var(--accent-neon);}
+        .footer-bottom { max-width: 1600px; margin: 0 auto; margin-top: 4rem; padding-top: 2rem; border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);}
 
-        .server-label {
-            max-width: 1600px; margin: 0 auto; border: var(--hairline); background: rgba(10,10,10, 0.8);
-            display: flex; flex-direction: column;
-        }
-        .label-header {
-            display: flex; justify-content: space-between; align-items: center; border-bottom: var(--hairline); padding: 1.5rem 2rem;
-        }
-        .label-brand { font-family: var(--font-code); font-size: 1rem; font-weight: 600; color: #fff; letter-spacing: 2px;}
-        
-        /* Código de barras vectorial generado en CSS/HTML */
-        .barcode { height: 30px; display: flex; gap: 3px; align-items: center;}
-        .bar { background: #fff; height: 100%; }
-        .b1 { width: 2px;} .b2 { width: 4px;} .b3 { width: 1px;} .b4 { width: 6px;} .b5 { width: 2px;} .b6 { width: 5px;} .b7 { width: 1px;} .b8 { width: 3px;} .b9 { width: 2px;}
-
-        .label-body {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; padding: 3rem 2rem;
-        }
-        .label-col { display: flex; flex-direction: column; gap: 0.5rem; }
-        .col-title { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;}
-        .col-data { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-main); line-height: 1.5;}
-        .col-link { font-family: var(--font-code); font-size: 0.85rem; color: var(--accent-neon); text-decoration: none; transition: opacity 0.2s;}
-        .col-link:hover { opacity: 0.7; }
-        .warning-text { color: var(--brand-purple); font-weight: 600; }
-
-        /* ─── RESPONSIVE MÓVIL (GRID WIDGETS) ─── */
+        /* ─── RESPONSIVE MÓVIL ─── */
         @media (max-width: 900px) {
-            .top-navbar { padding: 0 4vw; height: 60px; }
-            .navbar-brand { font-size: 0.8rem; gap: 6px; }
-            .navbar-brand span { display: none; } 
+            .navbar-links { display: none; }
             .brand-icon { height: 18px; }
-            .navbar-links { gap: 1rem; }
-            .nav-link { font-size: 0.65rem; }
-            .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
-            
             .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
-            .giant-transparent-logo { width: 40vw; left: 50%; top: 50%; transform: translate(-50%, -50%);}
-            .hero-reproductor-btn { width: 85%; margin-top: 1.5rem; }
+            .giant-transparent-logo { width: 40vw;}
+            .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
 
-            .system-section { padding: 3rem 4vw; }
-            .editorial-frame { margin-bottom: 2rem;}
-            .identity-split { grid-template-columns: 1fr; }
-            .identity-text { padding: 1.5rem 1rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
-            .identity-mockup { padding: 1rem; align-items: flex-start; min-width: 0; }
+            .content-wrapper { padding: 4rem 1.5rem; }
+            .identity-split { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 5rem;}
+            .identity-title { font-size: clamp(2.2rem, 8vw, 3rem); }
             
-            .spec-row { grid-template-columns: 1fr; gap: 0.3rem; margin-bottom: 1rem;}
-            .identity-title { font-size: clamp(2rem, 8vw, 2.5rem); }
-            
-            /* GRID MÓVIL: 2 COLUMNAS (WIDGETS PASSEPARTOUT) */
-            .projects-container { padding: 1.5rem 1rem; }
-            .projects-intro { font-size: 1.2rem; margin-bottom: 1.5rem; }
-            
-            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .card-editorial { padding: 0.6rem; }
-            .card-wrapper { height: auto; }
-            .card-thumb { height: 90px; }
-            .card-content { padding: 0.8rem 0 0 0; }
-            .card-badge { font-size: 0.5rem; margin-bottom: 0.3rem; letter-spacing: 1px;}
-            .card-title { font-size: 1rem; margin-bottom: 0.2rem; line-height: 1.1;}
-            .card-desc { font-size: 0.65rem; line-height: 1.3; -webkit-line-clamp: 2;}
-            .card-bottom { padding: 0.5rem 0; margin-top: 0.5rem;}
-            .card-exe { font-size: 0.5rem; }
+            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .card-wrapper { height: 280px; }
+            .card-thumb { height: 100px; }
+            .card-content { padding: 1rem; }
+            .card-badge { font-size: 0.5rem; margin-bottom: 0.4rem;}
+            .card-title { font-size: 1.1rem; margin-bottom: 0.3rem;}
+            .card-desc { font-size: 0.7rem; line-height: 1.3; -webkit-line-clamp: 2;}
+            .card-bottom { padding: 0.8rem 1rem; }
+            .card-exe { font-size: 0.6rem; }
 
-            .label-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .massive-cta { font-size: 18vw; }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
@@ -288,7 +309,6 @@
 
     <div class="ambient-canvas" id="parallaxBg"></div>
     <div class="stars-container">
-        <div class="stars-static-twinkle"></div>
         <div class="stars-1"></div>
         <div class="stars-2"></div>
     </div>
@@ -330,89 +350,71 @@
     <div class="analog-cut"></div>
 
     <main class="engineering-bg">
-        <section class="system-section" id="sistemas">
-            <div class="editorial-frame">
-                
-                <div class="identity-split">
-                    <div class="identity-text">
-                        <div class="sys-header">SISTEMAS</div>
-                        <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
-                        
-                        <div class="tech-specs">
-                            <div class="spec-row">
-                                <span class="spec-label">ARQUITECTURA</span>
-                                <span class="spec-value">Ecosistemas B2B & Plataformas Transaccionales. Construimos el núcleo operativo de empresas sólidas.</span>
-                            </div>
-                            <div class="spec-row">
-                                <span class="spec-label">MOTOR</span>
-                                <span class="spec-value">Código Puro, WebGL, Cero Dependencias Genéricas. Erradicamos el diseño de plantilla y el "AI Slop".</span>
-                            </div>
-                            <div class="spec-row">
-                                <span class="spec-label">RENDIMIENTO</span>
-                                <span class="spec-value">Despliegues de alta velocidad (60-120 FPS) acelerados matemáticamente por hardware.</span>
-                            </div>
-                            <div class="spec-row">
-                                <span class="spec-label">CAPACIDAD</span>
-                                <span class="spec-value">Desde Landing Pages tácticas hasta redes Air-Gapped locales para logística interna.</span>
-                            </div>
-                        </div>
-                    </div>
+        <div class="stars-pattern"></div>
 
-                    <div class="identity-mockup">
-                        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
-                    </div>
-                </div>
-
-                <div class="projects-container">
-                    <div class="sys-header">IDENTIDAD</div>
-                    <h3 class="projects-intro">Aquí tienes un poco de lo que construimos.</h3>
+        <div class="content-wrapper">
+            
+            <section class="identity-split" id="sistemas">
+                <div class="identity-text">
+                    <span class="section-label">Identidad Corporativa</span>
+                    <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
                     
-                    <div class="grid-editorial" id="portfolioGrid">
-                        </div>
+                    <p class="identity-desc">
+                        No usamos plantillas. Construimos infraestructura digital escalable. Somos el disco duro donde se almacena, diseña y ejecuta el núcleo operativo de tu marca.
+                    </p>
+                    
+                    <div class="pill-container">
+                        <span class="attr-pill">Ingeniería Web</span>
+                        <span class="attr-pill">Diseño B2B</span>
+                        <span class="attr-pill">Rendimiento Acelerado</span>
+                    </div>
                 </div>
 
-            </div>
-        </section>
+                <div class="identity-mockup">
+                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+                </div>
+            </section>
+
+            <section class="projects-section">
+                <div class="projects-header">
+                    <h2 class="projects-title">Proyectos Destacados</h2>
+                    <p class="projects-subtitle">Arquitecturas desarrolladas para nuestros clientes.</p>
+                </div>
+                
+                <div class="grid-editorial" id="portfolioGrid">
+                    </div>
+            </section>
+
+        </div>
     </main>
 
-    <footer class="site-footer" id="mainFooter">
-        
-        <div class="massive-cta-container">
-            <h2 class="massive-cta">¿CONSTRUIMOS<br>TU PROYECTO?</h2>
-            <a href="dex.html" class="btn-footer-setup">[ INICIAR_SETUP ]</a>
-        </div>
-
-        <div class="server-label">
-            <div class="label-header">
-                <span class="label-brand">DISK_CREATIVO OS // BUILD_V1.2</span>
-                <div class="barcode">
-                    <div class="bar b1"></div><div class="bar b4"></div><div class="bar b2"></div>
-                    <div class="bar b3"></div><div class="bar b6"></div><div class="bar b1"></div>
-                    <div class="bar b8"></div><div class="bar b2"></div><div class="bar b5"></div>
-                    <div class="bar b7"></div><div class="bar b9"></div><div class="bar b4"></div>
-                    <div class="bar b1"></div><div class="bar b8"></div><div class="bar b3"></div>
-                </div>
+    <footer class="b2b-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>Disk Creativo</h2>
+                <p>Agencia de infraestructura digital, desarrollo de ecosistemas B2B y diseño UI/UX de alto rendimiento.</p>
             </div>
-            <div class="label-body">
-                <div class="label-col">
-                    <span class="col-title">BASE DE OPERACIONES</span>
-                    <span class="col-data">Ciudad de Panamá</span>
-                    <span class="col-data">Casco Antiguo</span>
-                    <span class="col-data">LOC: 8.9824° N, 79.5199° W</span>
-                </div>
-                <div class="label-col">
-                    <span class="col-title">COMUNICACIÓN</span>
-                    <a href="https://wa.me/50768529324" class="col-link">WHATSAPP: +507 6852-9324</a>
-                    <a href="#" class="col-link">INSTAGRAM: @diskcreativo</a>
-                </div>
-                <div class="label-col">
-                    <span class="col-title">ESTADO DEL SISTEMA</span>
-                    <span class="col-data" style="color: var(--accent-neon);">[ ONLINE // OPERATIVO ]</span>
-                    <span class="col-data warning-text">CAUTION: HIGH PERFORMANCE INFRASTRUCTURE</span>
-                </div>
+            <div class="footer-nav">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sistemas">Sistemas</a></li>
+                    <li><a href="dex.html">Construye tu Proyecto</a></li>
+                </ul>
+            </div>
+            <div class="footer-nav">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Ciudad de Panamá, PTY</a></li>
+                    <li><a href="#">hello@diskcreativo.com</a></li>
+                    <li><a href="https://wa.me/50768529324" target="_blank">Atención Directa (WhatsApp)</a></li>
+                </ul>
             </div>
         </div>
-
+        <div class="footer-bottom">
+            <span>&copy; 2026 Disk Creativo. Todos los derechos reservados.</span>
+            <span>Operando en Panamá.</span>
+        </div>
     </footer>
 
     <script>
@@ -477,7 +479,7 @@
                 });
             }
 
-            // Google Sheets API - Módulo Adaptado a Ruta B (Passepartout Blanco Hueso)
+            // Google Sheets API - Módulo Original Recuperado
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             const grid = document.getElementById('portfolioGrid');
 
@@ -493,9 +495,8 @@
                             wrapper.className = 'card-wrapper'; 
                             
                             let imgUrl = p.imagen ? p.imagen.trim() : "";
-                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-family:var(--font-sans);">[Sin Imagen]</div>`;
+                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
 
-                            // Inyección HTML del nuevo layout editorial de galería
                             wrapper.innerHTML = `
                                 <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
                                     <div class="card-thumb">${thumbHtml}</div>
@@ -505,7 +506,7 @@
                                         <p class="card-desc">${p.descripcion || "..."}</p>
                                     </div>
                                     <div class="card-bottom">
-                                        <span class="card-exe">EJECUTAR / VER</span>
+                                        <span class="card-exe">Explorar Proyecto</span>
                                     </div>
                                 </a>
                             `;
@@ -513,10 +514,10 @@
                         });
                         init3DInteractions(); 
                     } 
-                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">Registro de bases de datos vacío.</div>'; }
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-sans); color: var(--text-muted);">Registro de bases de datos vacío.</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">Error 503: Falla de conexión.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-sans); color: var(--text-muted);">Error 503: Falla de conexión.</div>';
                 }
             }
 
