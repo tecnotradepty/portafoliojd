@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Fixed Sandbox</title>
+    <title>Disk Creativo | Hero Aluminum Sandbox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@800&family=Unbounded:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -18,8 +18,9 @@
             --text-muted: rgba(234, 233, 228, 0.6);
             --hairline: 1px solid rgba(255, 255, 255, 0.1);
             
-            /* NUEVA FUENTE DISPLAY: 'Unbounded' (Alternativa: 'Syne') */
-            --font-display: 'Unbounded', sans-serif;
+            /* ROLLBACK a Anton */
+            --font-display: 'Anton', sans-serif;
+            --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
         }
@@ -84,22 +85,44 @@
         .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
-        /* TIPOGRAFÍA ANCHA 'UNBOUNDED' */
+        /* RESTAURACIÓN DEL TAMAÑO PARA ANTON + RESPIRACIÓN DE CAPAS */
         .hero-giant-text {
             font-family: var(--font-display); 
-            font-size: clamp(2.5rem, 11vw, 16rem); /* Ajustado para fuente ancha */
-            font-weight: 900;
-            line-height: 0.9; text-align: center; margin: 0; text-transform: uppercase;
-            display: flex; flex-direction: column; gap: clamp(1.5rem, 6vh, 5rem); 
-            letter-spacing: -3px; width: 100%;
+            font-size: clamp(3rem, 15vw, 22rem);
+            line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
+            display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        .solid-gray-letter {
-            color: #B8B8B8; display: inline-block; position: relative;
-            text-shadow: 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
+        /* NUEVA TEXTURA: ALUMINIO FRESADO CNC (Reemplaza al gris mate) */
+        .aluminum-letter {
+            display: inline-block; 
+            position: relative;
+            /* Gradiente complejo para simular el reflejo anisotrópico del metal cilíndrico */
+            background: linear-gradient(180deg, 
+                #ffffff 0%, 
+                #d4d4d4 30%, 
+                #8a8a8a 48%, 
+                #3a3a3a 50%, 
+                #d1d1d1 52%, 
+                #ffffff 80%, 
+                #a3a3a3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            
+            /* Extrusión 3D calculada mediante drop-shadow para no romper el canal alfa */
+            filter: drop-shadow(0px 1px 0px #a1a1a1) 
+                    drop-shadow(0px 2px 0px #858585) 
+                    drop-shadow(0px 3px 0px #666666) 
+                    drop-shadow(0px 4px 0px #4d4d4d) 
+                    drop-shadow(0px 5px 0px #333333)
+                    drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.5)) 
+                    drop-shadow(0px 25px 25px rgba(0, 0, 0, 0.8));
         }
         
+        /* Letras Frontales: Cristal Líquido sobre Aluminio (Ultra Premium) */
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
@@ -114,10 +137,10 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
-        /* CORRECCIÓN VERTICAL PC: top: 32% eleva el disco a la parte superior */
+        /* CD POSICIONADO ESTRATÉGICAMENTE (Liberando la letra A) */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
-            width: clamp(120px, 16vw, 280px); z-index: 5; pointer-events: none;
+            width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
@@ -127,8 +150,9 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
+        /* BOTÓN REPRODUCTOR CTA */
         .hero-reproductor-btn {
-            display: block; margin-top: 4rem; width: 90%; max-width: 400px;
+            display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
             transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s;
             filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.8));
@@ -137,6 +161,7 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
+        /* CINTA ANALÓGICA */
         .analog-cut {
             width: 100%; height: 6vh; min-height: 40px; display: block;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
@@ -145,7 +170,7 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── RESPONSIVE MÓVIL (CORREGIDO DE RAÍZ) ─── */
+        /* ─── RESPONSIVE MÓVIL ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
@@ -157,14 +182,13 @@
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            .hero-giant-text { font-size: 13.5vw; gap: 2.5vh; line-height: 0.95;} 
+            .hero-giant-text { font-size: 19vw; gap: 2.5vh; line-height: 0.95;} 
             
-            /* FIX MÓVIL: top: 26% eleva el CD por encima de 'CREATIVO', liberando la 'A' por completo */
             .giant-transparent-logo { 
                 width: clamp(90px, 28vw, 140px); 
                 top: 26%; 
             }
-            .hero-reproductor-btn { width: 85%; margin-top: 2.5rem; }
+            .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
         }
     </style>
 </head>
@@ -196,10 +220,10 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back solid-gray-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back solid-gray-letter">S</span><span class="z-front solid-gray-letter float-anim delay-2">K</span>
+                    <span class="z-back aluminum-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back aluminum-letter">S</span><span class="z-front aluminum-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front solid-gray-letter float-anim delay-3">C</span><span class="z-back solid-gray-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back solid-gray-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-gray-letter overlap-i-behind">I</span><span class="z-back solid-gray-letter delay-6">V</span><span class="z-front solid-gray-letter float-anim delay-6">O</span>
+                    <span class="z-front aluminum-letter float-anim delay-3">C</span><span class="z-back aluminum-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back aluminum-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back aluminum-letter overlap-i-behind">I</span><span class="z-back aluminum-letter delay-6">V</span><span class="z-front aluminum-letter float-anim delay-6">O</span>
                 </div>
             </h1>
             
