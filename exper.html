@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -19,6 +19,7 @@
             
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
+            --font-cursive: 'Caveat', cursive; /* NUEVA VARIABLE CURSIVA */
             --font-code: 'Courier New', Courier, monospace;
         }
 
@@ -89,7 +90,6 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* EFECTO MATE ORIGINAL (TITULAR) */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 
@@ -112,7 +112,6 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
-        /* CD POSICIONADO ESTRATÉGICAMENTE */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
@@ -126,19 +125,18 @@
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
 
-        /* ─── SUBTÍTULO: ROLLBACK A SANS-SERIF + AUMENTO DE TAMAÑO Y GROSOR ─── */
+        /* ─── SUBTÍTULO: ESTÉTICA CURSIVA / FIRMA DE AUTOR ─── */
         .hero-tagline {
-            font-family: var(--font-sans); /* Inter */
-            font-size: clamp(1rem, 1.5vw, 1.35rem); /* Un poco más grande */
-            font-weight: 800; /* Mucho más grueso */
+            font-family: var(--font-cursive); 
+            /* Aumentamos drásticamente el tamaño porque las cursivas se ven más pequeñas */
+            font-size: clamp(1.8rem, 3vw, 2.5rem); 
+            font-weight: 700; /* Peso robusto para mantener el efecto 3D visible */
             margin-top: 2rem; position: relative; z-index: 20;
-            text-transform: uppercase; /* Restaurado para estructura */
-            letter-spacing: 1.5px; text-align: center;
+            /* Eliminado el uppercase para no romper los trazos manuscritos */
+            letter-spacing: 1px; text-align: center;
         }
 
-        /* ─── COLORES: SATURACIÓN PROFESIONAL (Ni pastel aburrido, ni neón puro) ─── */
-        /* Efecto 3D de 2 capas: Color Brillante + 3px de Sombra Sólida Oscurecida */
-        
+        /* COLORES: SATURACIÓN PROFESIONAL (Mantenido del paso anterior) */
         .code-red { 
             color: #E0525C; /* Rojo Carmín Vibrante */
             text-shadow: 0px 1px 0px #8E2931, 0px 2px 0px #8E2931, 0px 3px 0px #8E2931, 0px 10px 15px rgba(0,0,0,0.6); 
@@ -150,18 +148,18 @@
         }
         
         .code-pink { 
-            color: #D254C2; /* Magenta/Rosa Energético */
+            color: #D254C2; /* Magenta Suave */
             text-shadow: 0px 1px 0px #87287A, 0px 2px 0px #87287A, 0px 3px 0px #87287A, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
         .code-green { 
-            color: #43B565; /* Verde Esmeralda Técnico */
+            color: #43B565; /* Verde Esmeralda */
             text-shadow: 0px 1px 0px #226E38, 0px 2px 0px #226E38, 0px 3px 0px #226E38, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
-        /* Palabras base blancas y de puntuación */
+        /* Palabras base blancas */
         .text-base {
-            color: #F0F4F8; /* Blanco muy nítido */
+            color: #F0F4F8;
             text-shadow: 0px 1px 0px #7A8499, 0px 2px 0px #7A8499, 0px 3px 0px #7A8499, 0px 10px 15px rgba(0,0,0,0.6);
         }
 
@@ -210,9 +208,9 @@
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
             
-            /* Ajuste extra de línea para móvil dado el aumento de tamaño */
+            /* Ajuste de cursiva en móvil */
             .hero-tagline { 
-                line-height: 1.4; 
+                line-height: 1.3; 
                 padding: 0 15px;
             }
         }
