@@ -12,20 +12,11 @@
     <style>
         :root {
             --bg-primary: #050505;
-            
-            /* NUEVAS VARIABLES DE COLOR DE CÓDIGO */
-            --code-red: #FF5555;
-            --code-blue: #5555FF;
-            --code-pink: #FF55FF;
-            --code-green: #55FF55;
-
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
-            --text-muted: rgba(234, 233, 228, 0.6);
             --hairline: 1px solid rgba(255, 255, 255, 0.1);
             
-            /* FUENTE DISPLAY: 'Anton' (Firme y monumental) */
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
@@ -65,7 +56,7 @@
         }
         @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
 
-        /* ─── 03. NAVBAR PREMIUM MULTI-DISPOSITIVO (visible en móvil) ─── */
+        /* ─── 03. NAVBAR PREMIUM MULTI-DISPOSITIVO ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -89,11 +80,9 @@
 
         /* ─── 04. HERO SECTION ─── */
         .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
-        
-        /* CORRECCIÓN ADAPTATIVA: position: relative para el sándwich de capas */
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
-        /* Oxígeno tipográfico mantenido para geometría */
+        /* Oxígeno tipográfico de la Geometría Central */
         .hero-giant-text {
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
@@ -101,23 +90,16 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* RESTAURACIÓN DEL EFECTO 3D MATE ORIGINAL (Gris multi-shadow stack) */
+        /* EFECTO MATE ORIGINAL */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
-            /* La ilusión del bloque 3D se crea mediante sombras apiladas */
             text-shadow: 
-                0px 1px 0px #909090, 
-                0px 2px 0px #858585, 
-                0px 3px 0px #7A7A7A, 
-                0px 4px 0px #707070, 
-                0px 5px 0px #656565, 
-                0px 6px 0px #4A4A4A, 
-                0px 7px 0px #404040, 
-                0px 15px 15px rgba(0, 0, 0, 0.4), 
-                0px 30px 25px rgba(0, 0, 0, 0.6);
+                0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 
+                0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 
+                0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
         }
         
-        /* Letra Frontal: Cristal Líquido Semi-transparente */
+        /* Cristal Líquido Semi-transparente */
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
@@ -132,7 +114,7 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
-        /* CD POSICIONADO ESTRATÉGICAMENTE (Liberando la letra A de CREATIVO) */
+        /* CD POSICIONADO ESTRATÉGICAMENTE */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
@@ -145,37 +127,45 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
-        /* NUEVAS CLASES DE COLOR DE CÓDIGO */
-        .code-red { color: var(--code-red); }
-        .code-blue { color: var(--code-blue); }
-        .code-pink { color: var(--code-pink); }
-        .code-green { color: var(--code-green); }
 
-        /* MODIFICACIÓN DEL SUBTÍTULO (GROSOR Y EFECTO 3D AVANZADO) */
+        /* ─── SUBTÍTULO: ESTÉTICA DESATURADA (NORD/DRACULA THEME) CON VOLUMEN DUAL ─── */
         .hero-tagline {
             font-family: var(--font-sans); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
-            /* REQUISITO: Grosor, más grueso pero no bloque */
-            font-weight: 600; 
-            margin-top: 2rem; position: relative; z-index: 20;
-            text-transform: uppercase; letter-spacing: 1.5px; 
-            text-align: center;
-            /* REQUISITO: Efecto 3D avanzado, adaptando .solid-gray-letter */
-            color: rgba(255, 255, 255, 0.9); /* Color base claro */
-            text-shadow: 
-                /* Sombra superior clara (brillo de borde) */
-                0px -1px 0px rgba(255, 255, 255, 0.5),
-                /* Sombras sólidas apiladas hacia abajo (efecto mate) */
-                0px 1px 0px #a1a1a1, 
-                0px 2px 0px #909090, 
-                0px 3px 0px #858585, 
-                0px 4px 0px #7A7A7A, 
-                0px 5px 0px #707070, 
-                0px 6px 0px #656565, 
-                0px 7px 0px #404040, 
-                0px 8px 0px #222222,
-                /* Sombras de caída de bloque profundas */
-                0px 15px 15px rgba(0, 0, 0, 0.5), 
-                0px 30px 25px rgba(0, 0, 0, 0.7);
+            font-weight: 600; margin-top: 2rem; position: relative; z-index: 20;
+            text-transform: uppercase; letter-spacing: 1.5px; text-align: center;
+        }
+
+        /* Capa 1 (Color base pastel/desaturado) y Capa 2 (Sombra volumétrica sólida de color oscurecido) */
+        
+        .code-red { 
+            color: #BF616A; /* Coral Desaturado */
+            text-shadow: 0px 1px 0px #7A3A41, 0px 2px 0px #7A3A41, 0px 3px 0px #7A3A41, 0px 10px 15px rgba(0,0,0,0.6); 
+        }
+        
+        .code-blue { 
+            color: #81A1C1; /* Azul Pizarra */
+            text-shadow: 0px 1px 0px #4C657F, 0px 2px 0px #4C657F, 0px 3px 0px #4C657F, 0px 10px 15px rgba(0,0,0,0.6); 
+        }
+        
+        .code-pink { 
+            color: #B48EAD; /* Malva Profesional */
+            text-shadow: 0px 1px 0px #6E5369, 0px 2px 0px #6E5369, 0px 3px 0px #6E5369, 0px 10px 15px rgba(0,0,0,0.6); 
+        }
+        
+        .code-green { 
+            color: #A3BE8C; /* Verde Salvia */
+            text-shadow: 0px 1px 0px #637553, 0px 2px 0px #637553, 0px 3px 0px #637553, 0px 10px 15px rgba(0,0,0,0.6); 
+        }
+        
+        /* Palabras base blancas y grises del texto */
+        .text-base {
+            color: #E5E9F0;
+            text-shadow: 0px 1px 0px #8E95A3, 0px 2px 0px #8E95A3, 0px 3px 0px #8E95A3, 0px 10px 15px rgba(0,0,0,0.6);
+        }
+
+        .text-muted {
+            color: rgba(229, 233, 240, 0.3); /* Muy oculto para dejar brillar el código */
+            text-shadow: 0px 1px 0px rgba(0,0,0,0.8), 0px 2px 0px rgba(0,0,0,0.8), 0px 3px 0px rgba(0,0,0,0.8);
         }
 
         /* BOTÓN REPRODUCTOR CTA */
@@ -212,15 +202,12 @@
             
             .hero-giant-text { font-size: 19vw; gap: 3vh; line-height: 0.9;} 
             
-            /* FIX GEOMÉTRICO MÓVIL MANTENIDO: 
-               El disco reduce su tamaño y ajusta su posición vertical relativa (top: 26%) 
-               para no pisar la 'A' de CREATIVO en la pantalla reducida.
-            */
             .giant-transparent-logo { 
                 width: clamp(100px, 25vw, 150px); 
                 top: 26%; 
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
+            .hero-tagline { line-height: 1.5; padding: 0 10px;}
         }
     </style>
 </head>
@@ -262,7 +249,7 @@
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
             
             <p class="hero-tagline">
-                <span class="text-muted">> "</span><span class="code-red">Los límites</span> de <span class="code-blue">tu proyecto</span> <span class="code-pink">no están</span> <span class="code-green">en el espacio</span><span class="text-muted">. Alójate</span> <span class="code-pink">con nosotros</span><span class="text-muted">."</span>
+                <span class="text-muted">> "</span><span class="code-red">Los límites</span> <span class="text-base">de</span> <span class="code-blue">tu proyecto</span> <span class="code-pink">no están</span> <span class="code-green">en el espacio</span><span class="text-muted">. Alójate</span> <span class="code-pink">con nosotros</span><span class="text-muted">."</span>
             </p>
             
             <a href="dex.html" class="hero-reproductor-btn">
