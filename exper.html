@@ -128,43 +128,46 @@
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
 
-        /* ─── SUBTÍTULO: ESTÉTICA DESATURADA (NORD/DRACULA THEME) CON VOLUMEN DUAL ─── */
+        /* ─── SUBTÍTULO: UNIFICACIÓN TIPOGRÁFICA (ANTON) + PALETA VIBRANTE 2 CAPAS ─── */
         .hero-tagline {
-            font-family: var(--font-sans); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
-            font-weight: 600; margin-top: 2rem; position: relative; z-index: 20;
-            text-transform: uppercase; letter-spacing: 1.5px; text-align: center;
+            /* NUEVA FUENTE: var(--font-display) ('Anton') */
+            font-family: var(--font-display); 
+            /* NUEVO TAMAÑO AJUSTADO (Un poco más grande): clamp(1rem, 1.6vw, 1.4rem) */
+            font-size: clamp(1rem, 1.6vw, 1.4rem); 
+            margin-top: 2rem; position: relative; z-index: 20;
+            letter-spacing: 0.5px; text-align: center;
         }
 
-        /* Capa 1 (Color base pastel/desaturado) y Capa 2 (Sombra volumétrica sólida de color oscurecido) */
+        /* Capa 1 (Frontal Vibrante) y Capa 2 (Sombra Volumétrica Sólida Oscurecida al 50%) */
         
         .code-red { 
-            color: #BF616A; /* Coral Desaturado */
-            text-shadow: 0px 1px 0px #7A3A41, 0px 2px 0px #7A3A41, 0px 3px 0px #7A3A41, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #EF1D1D; /* NUEVO: Rojo Vibrante */
+            text-shadow: 0px 1px 0px #AB1212, 0px 2px 0px #AB1212, 0px 3px 0px #AB1212, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
         .code-blue { 
-            color: #81A1C1; /* Azul Pizarra */
-            text-shadow: 0px 1px 0px #4C657F, 0px 2px 0px #4C657F, 0px 3px 0px #4C657F, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #0E57FF; /* NUEVO: Azul Puro */
+            text-shadow: 0px 1px 0px #0039B3, 0px 2px 0px #0039B3, 0px 3px 0px #0039B3, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
-        .code-pink { 
-            color: #B48EAD; /* Malva Profesional */
-            text-shadow: 0px 1px 0px #6E5369, 0px 2px 0px #6E5369, 0px 3px 0px #6E5369, 0px 10px 15px rgba(0,0,0,0.6); 
+        .code-purple { 
+            color: #A04FD7; /* NUEVO: Morado Premium */
+            text-shadow: 0px 1px 0px #6F2A9B, 0px 2px 0px #6F2A9B, 0px 3px 0px #6F2A9B, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
         .code-green { 
-            color: #A3BE8C; /* Verde Salvia */
-            text-shadow: 0px 1px 0px #637553, 0px 2px 0px #637553, 0px 3px 0px #637553, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #1E9034; /* NUEVO: Verde Esmeralda */
+            text-shadow: 0px 1px 0px #0A4D1A, 0px 2px 0px #0A4D1A, 0px 3px 0px #0A4D1A, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
-        /* Palabras base blancas y grises del texto */
+        /* Palabras base blancas y grises del texto (Efecto Mate Restaurado) */
         .text-base {
             color: #E5E9F0;
             text-shadow: 0px 1px 0px #8E95A3, 0px 2px 0px #8E95A3, 0px 3px 0px #8E95A3, 0px 10px 15px rgba(0,0,0,0.6);
         }
 
         .text-muted {
-            color: rgba(229, 233, 240, 0.3); /* Muy oculto para dejar brillar el código */
+            color: rgba(229, 233, 240, 0.4); 
             text-shadow: 0px 1px 0px rgba(0,0,0,0.8), 0px 2px 0px rgba(0,0,0,0.8), 0px 3px 0px rgba(0,0,0,0.8);
         }
 
@@ -207,7 +210,11 @@
                 top: 26%; 
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
-            .hero-tagline { line-height: 1.5; padding: 0 10px;}
+            .hero-tagline { 
+                line-height: 1.2; 
+                padding: 0 15px;
+                letter-spacing: 0.2px;
+            }
         }
     </style>
 </head>
