@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -82,7 +82,6 @@
         .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
-        /* Oxígeno tipográfico de la Geometría Central */
         .hero-giant-text {
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
@@ -90,7 +89,7 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* EFECTO MATE ORIGINAL */
+        /* EFECTO MATE ORIGINAL (TITULAR) */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 
@@ -99,7 +98,6 @@
                 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
         }
         
-        /* Cristal Líquido Semi-transparente */
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
@@ -128,46 +126,47 @@
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
 
-        /* ─── SUBTÍTULO: UNIFICACIÓN TIPOGRÁFICA (ANTON) + PALETA VIBRANTE 2 CAPAS ─── */
+        /* ─── SUBTÍTULO: ROLLBACK A SANS-SERIF + AUMENTO DE TAMAÑO Y GROSOR ─── */
         .hero-tagline {
-            /* NUEVA FUENTE: var(--font-display) ('Anton') */
-            font-family: var(--font-display); 
-            /* NUEVO TAMAÑO AJUSTADO (Un poco más grande): clamp(1rem, 1.6vw, 1.4rem) */
-            font-size: clamp(1rem, 1.6vw, 1.4rem); 
+            font-family: var(--font-sans); /* Inter */
+            font-size: clamp(1rem, 1.5vw, 1.35rem); /* Un poco más grande */
+            font-weight: 800; /* Mucho más grueso */
             margin-top: 2rem; position: relative; z-index: 20;
-            letter-spacing: 0.5px; text-align: center;
+            text-transform: uppercase; /* Restaurado para estructura */
+            letter-spacing: 1.5px; text-align: center;
         }
 
-        /* Capa 1 (Frontal Vibrante) y Capa 2 (Sombra Volumétrica Sólida Oscurecida al 50%) */
+        /* ─── COLORES: SATURACIÓN PROFESIONAL (Ni pastel aburrido, ni neón puro) ─── */
+        /* Efecto 3D de 2 capas: Color Brillante + 3px de Sombra Sólida Oscurecida */
         
         .code-red { 
-            color: #EF1D1D; /* NUEVO: Rojo Vibrante */
-            text-shadow: 0px 1px 0px #AB1212, 0px 2px 0px #AB1212, 0px 3px 0px #AB1212, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #E0525C; /* Rojo Carmín Vibrante */
+            text-shadow: 0px 1px 0px #8E2931, 0px 2px 0px #8E2931, 0px 3px 0px #8E2931, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
         .code-blue { 
-            color: #0E57FF; /* NUEVO: Azul Puro */
-            text-shadow: 0px 1px 0px #0039B3, 0px 2px 0px #0039B3, 0px 3px 0px #0039B3, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #4A90E2; /* Azul Técnico Premium */
+            text-shadow: 0px 1px 0px #225691, 0px 2px 0px #225691, 0px 3px 0px #225691, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
-        .code-purple { 
-            color: #A04FD7; /* NUEVO: Morado Premium */
-            text-shadow: 0px 1px 0px #6F2A9B, 0px 2px 0px #6F2A9B, 0px 3px 0px #6F2A9B, 0px 10px 15px rgba(0,0,0,0.6); 
+        .code-pink { 
+            color: #D254C2; /* Magenta/Rosa Energético */
+            text-shadow: 0px 1px 0px #87287A, 0px 2px 0px #87287A, 0px 3px 0px #87287A, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
         .code-green { 
-            color: #1E9034; /* NUEVO: Verde Esmeralda */
-            text-shadow: 0px 1px 0px #0A4D1A, 0px 2px 0px #0A4D1A, 0px 3px 0px #0A4D1A, 0px 10px 15px rgba(0,0,0,0.6); 
+            color: #43B565; /* Verde Esmeralda Técnico */
+            text-shadow: 0px 1px 0px #226E38, 0px 2px 0px #226E38, 0px 3px 0px #226E38, 0px 10px 15px rgba(0,0,0,0.6); 
         }
         
-        /* Palabras base blancas y grises del texto (Efecto Mate Restaurado) */
+        /* Palabras base blancas y de puntuación */
         .text-base {
-            color: #E5E9F0;
-            text-shadow: 0px 1px 0px #8E95A3, 0px 2px 0px #8E95A3, 0px 3px 0px #8E95A3, 0px 10px 15px rgba(0,0,0,0.6);
+            color: #F0F4F8; /* Blanco muy nítido */
+            text-shadow: 0px 1px 0px #7A8499, 0px 2px 0px #7A8499, 0px 3px 0px #7A8499, 0px 10px 15px rgba(0,0,0,0.6);
         }
 
         .text-muted {
-            color: rgba(229, 233, 240, 0.4); 
+            color: rgba(240, 244, 248, 0.4); 
             text-shadow: 0px 1px 0px rgba(0,0,0,0.8), 0px 2px 0px rgba(0,0,0,0.8), 0px 3px 0px rgba(0,0,0,0.8);
         }
 
@@ -210,10 +209,11 @@
                 top: 26%; 
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
+            
+            /* Ajuste extra de línea para móvil dado el aumento de tamaño */
             .hero-tagline { 
-                line-height: 1.2; 
+                line-height: 1.4; 
                 padding: 0 15px;
-                letter-spacing: 0.2px;
             }
         }
     </style>
