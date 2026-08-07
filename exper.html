@@ -7,11 +7,18 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-primary: #050505;
+            
+            /* NUEVAS VARIABLES DE COLOR DE CÓDIGO */
+            --code-red: #FF5555;
+            --code-blue: #5555FF;
+            --code-pink: #FF55FF;
+            --code-green: #55FF55;
+
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
@@ -138,11 +145,37 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
+        /* NUEVAS CLASES DE COLOR DE CÓDIGO */
+        .code-red { color: var(--code-red); }
+        .code-blue { color: var(--code-blue); }
+        .code-pink { color: var(--code-pink); }
+        .code-green { color: var(--code-green); }
+
+        /* MODIFICACIÓN DEL SUBTÍTULO (GROSOR Y EFECTO 3D AVANZADO) */
         .hero-tagline {
             font-family: var(--font-sans); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
-            color: rgba(255,255,255,0.8); margin-top: 2rem; position: relative; z-index: 20;
-            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 300;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
+            /* REQUISITO: Grosor, más grueso pero no bloque */
+            font-weight: 600; 
+            margin-top: 2rem; position: relative; z-index: 20;
+            text-transform: uppercase; letter-spacing: 1.5px; 
+            text-align: center;
+            /* REQUISITO: Efecto 3D avanzado, adaptando .solid-gray-letter */
+            color: rgba(255, 255, 255, 0.9); /* Color base claro */
+            text-shadow: 
+                /* Sombra superior clara (brillo de borde) */
+                0px -1px 0px rgba(255, 255, 255, 0.5),
+                /* Sombras sólidas apiladas hacia abajo (efecto mate) */
+                0px 1px 0px #a1a1a1, 
+                0px 2px 0px #909090, 
+                0px 3px 0px #858585, 
+                0px 4px 0px #7A7A7A, 
+                0px 5px 0px #707070, 
+                0px 6px 0px #656565, 
+                0px 7px 0px #404040, 
+                0px 8px 0px #222222,
+                /* Sombras de caída de bloque profundas */
+                0px 15px 15px rgba(0, 0, 0, 0.5), 
+                0px 30px 25px rgba(0, 0, 0, 0.7);
         }
 
         /* BOTÓN REPRODUCTOR CTA */
@@ -228,7 +261,9 @@
             
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
             
-            <p class="hero-tagline">> "Los límites de tu proyecto no están en el espacio. Alójate con nosotros."</p>
+            <p class="hero-tagline">
+                <span class="text-muted">> "</span><span class="code-red">Los límites</span> de <span class="code-blue">tu proyecto</span> <span class="code-pink">no están</span> <span class="code-green">en el espacio</span><span class="text-muted">. Alójate</span> <span class="code-pink">con nosotros</span><span class="text-muted">."</span>
+            </p>
             
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
