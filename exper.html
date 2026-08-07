@@ -7,18 +7,18 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-primary: #050505;
+            --bg-secondary: #0A0A0C;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
-            --text-muted: rgba(234, 233, 228, 0.6);
-            --hairline: 1px solid rgba(255, 255, 255, 0.15);
+            --text-muted: rgba(234, 233, 228, 0.5);
+            --hairline: 1px solid rgba(255, 255, 255, 0.1);
+            --hairline-dark: 1px solid rgba(0, 0, 0, 0.15);
             --hairline-neon: 1px solid var(--accent-neon);
             
             --font-display: 'Anton', sans-serif;
@@ -37,7 +37,7 @@
             position: relative; min-height: 100%;
         }
 
-        /* ─── LIENZO ESPACIAL LIMPIO ─── */
+        /* ─── 01. LIENZO ESPACIAL DEL HERO ─── */
         .ambient-canvas {
             position: fixed; top: -5vh; left: 0; right: 0; 
             width: 100vw; height: 110vh; 
@@ -47,36 +47,18 @@
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
 
-        /* ─── ESTRELLAS ANIMADAS (SOLO FUGACES) ─── */
-        .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
-        .stars-1 {
-            position: absolute; width: 1px; height: 1px; background: transparent;
-            box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
-            animation: twinkle 40s infinite alternate ease-in-out;
-        }
-        .stars-2 {
-            position: absolute; width: 2px; height: 2px; background: transparent;
-            box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
-            animation: twinkle 60s infinite alternate-reverse ease-in-out;
-        }
-
-        @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
-
-        /* ─── NAVBAR PREMIUM ─── */
+        /* ─── 02. NAVBAR B2B ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: var(--hairline); display: flex; justify-content: space-between; align-items: center;
             padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
-
         .navbar-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; }
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
-
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
         .nav-link { color: var(--text-main); text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .nav-link:hover { color: var(--brand-purple); }
-        
         .nav-btn-wa {
             background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
             padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400; text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
@@ -85,9 +67,8 @@
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── SECCIÓN 1: HERO ─── */
+        /* ─── 03. HERO SECTION (SILENCIO ABSOLUTO) ─── */
         .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
-        
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
         .hero-giant-text {
@@ -97,55 +78,40 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* TIPOGRAFÍA GRIS MATE (FONDO) */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
         }
         
-        /* TIPOGRAFÍA CRISTAL LÍQUIDO (FRENTE) */
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
-            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45));
-            backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
+            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45)); backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
             position: relative; 
         }
 
-        /* ORDEN DE CAPAS PERFECTO */
         .z-back { z-index: 1 !important; position: relative; }
         .z-front { z-index: 10 !important; position: relative; }
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
-        /* LOGO 3D REDUCIDO E INTEGRADO (Z-INDEX 5) */
         .giant-transparent-logo {
-            position: absolute; 
-            top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: clamp(120px, 18vw, 320px); 
-            z-index: 5; pointer-events: none;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
 
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-        
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
-        .hero-tagline {
-            font-family: var(--font-sans); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
-            color: rgba(255,255,255,0.8); margin-top: 2rem; position: relative; z-index: 20;
-            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 300;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
-        }
-
-        /* BOTÓN REPRODUCTOR */
+        /* Botón Reproductor */
         .hero-reproductor-btn {
-            display: block; margin-top: 2rem; width: 90%; max-width: 420px;
+            display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
             transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s;
             filter: drop-shadow(0px 15px 20px rgba(0,0,0,0.8));
@@ -154,146 +120,152 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* ─── CINTA ANALÓGICA ORIGINAL (CORREGIDA) ─── */
+        /* ─── 04. CINTA ANALÓGICA ─── */
         .analog-cut {
-            width: 100%; height: 6vh; min-height: 40px;
+            width: 100%; height: 6vh; min-height: 40px; display: block;
             background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
             background-size: cover; background-position: center; background-repeat: no-repeat;
             position: relative; z-index: 25; border-top: var(--hairline); border-bottom: var(--hairline);
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── NÚCLEO FUSIONADO: IDENTIDAD + PROYECTOS ─── */
+        /* ─── 05. NÚCLEO INFERIOR (NEGRO MATE + 10 ESTRELLAS) ─── */
         .engineering-bg { 
             background-color: var(--bg-primary); 
-            position: relative; z-index: 20; padding-bottom: 100px; width: 100%; overflow: hidden; 
+            position: relative; z-index: 20; padding-bottom: 50px; width: 100%; overflow: hidden; 
         }
+
+        /* VACÍO CONTROLADO: Exactamente 10 estrellas fijas en el fondo oscuro */
+        .minimal-stars {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1; pointer-events: none;
+        }
+        .minimal-stars::after {
+            content: ""; position: absolute; width: 2px; height: 2px; background: transparent;
+            box-shadow: 
+                15vw 10vh rgba(255,255,255,0.5), 
+                85vw 25vh rgba(255,255,255,0.3), 
+                45vw 40vh rgba(255,255,255,0.6), 
+                10vw 60vh rgba(255,255,255,0.4), 
+                75vw 70vh rgba(255,255,255,0.5),
+                90vw 15vh rgba(255,255,255,0.2),
+                25vw 85vh rgba(255,255,255,0.4),
+                65vw 90vh rgba(255,255,255,0.3),
+                5vw 35vh rgba(255,255,255,0.5),
+                50vw 15vh rgba(255,255,255,0.2);
+            animation: slowBreathe 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowBreathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
+
+        .content-wrapper {
+            position: relative; z-index: 10;
+            padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
+        }
+
+        /* ─── IDENTIDAD (EL MANIFIESTO B2B PANAMEÑO) ─── */
+        .identity-split { 
+            display: grid; grid-template-columns: 55% 45%; gap: 5rem;
+            align-items: center; margin-bottom: 10rem; 
+        }
+
+        .identity-text { display: flex; flex-direction: column; gap: 1.5rem; }
         
-        /* WEBGL CANVAS CONTAINER */
-        #aurora-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; opacity: 0.45; pointer-events: none; mix-blend-mode: screen;
-        }
-
-        /* CONTENEDOR RELATIVO PARA QUE EL CONTENIDO ESTÉ POR ENCIMA DEL SHADER */
-        .system-section { position: relative; z-index: 10; padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%; }
-
-        .editorial-frame { border: var(--hairline); display: flex; flex-direction: column; background: rgba(255,255,255,0.01); width: 100%; margin-bottom: 4rem; }
-        .identity-split { display: grid; grid-template-columns: 60% 40%; border-bottom: var(--hairline); width: 100%; }
-
-        .identity-text { padding: 5rem 4rem; display: flex; flex-direction: column; gap: 2rem; border-right: var(--hairline); }
-        .sys-header { font-family: var(--font-code); color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; font-weight: 400;}
-        .identity-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 1; color: var(--text-main); font-weight: 400;}
+        .identity-title { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 4.5rem); line-height: 1.1; color: var(--text-main); font-weight: 400; margin-bottom: 1rem;}
         .identity-title i { color: var(--brand-purple); font-style: italic; }
-        .identity-desc { font-family: var(--font-serif); font-size: clamp(1rem, 1.8vw, 1.6rem); line-height: 1.5; color: var(--text-muted); font-weight: 400;}
-        .identity-desc strong { color: var(--text-main); font-style: italic; font-weight: 400; }
 
-        .module-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; padding-top: 3rem; border-top: var(--hairline);}
-        .module-item { display: flex; flex-direction: column; gap: 0.8rem; }
-        .module-tag { font-family: var(--font-code); font-size: 0.7rem; color: var(--brand-purple); letter-spacing: 1px; font-weight: 600;}
-        .module-item h4 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); font-weight: 400;}
-        .module-item p { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.6; }
+        .identity-desc { font-family: var(--font-sans); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; color: var(--text-muted); font-weight: 300;}
+        .identity-desc strong { color: var(--text-main); font-weight: 500; }
+        .highlight-accent { color: var(--accent-neon); font-style: normal;}
 
-        .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 2rem; overflow: hidden; min-width: 0;}
-        .playground-img { width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); animation: floatEditorial 12s ease-in-out infinite;}
+        .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 1rem; position: relative;}
+        .playground-img { width: 100%; max-width: 600px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); animation: floatEditorial 12s ease-in-out infinite;}
+        
         @keyframes floatEditorial { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-15px) scale(1.02); } }
 
-        /* Directorio Integrado */
-        .projects-container { padding: 4rem; width: 100%; }
-        .projects-intro { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-main); font-weight: 400; margin-top: 1rem; margin-bottom: 3rem; font-style: italic;}
-
-        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; perspective: 1200px; width: 100%;}
+        /* ─── DIRECTORIO (MUSEO PASSEPARTOUT) ─── */
+        .projects-header { margin-bottom: 4rem; text-align: center; }
+        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;}
         
-        .card-wrapper { width: 100%; height: 420px; perspective: 1200px; }
+        .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
+        .card-wrapper { width: 100%; perspective: 1200px; }
+        
         .card-editorial {
-            width: 100%; height: 100%; position: relative; background: transparent; border: var(--hairline);
-            transform-style: preserve-3d; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
-            transition: box-shadow 0.3s, background 0.3s;
+            width: 100%; background: var(--text-main);
+            padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
+            transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
         .card-thumb {
-            width: 100%; height: 180px; background: #000; transform: translate3d(0,0,20px);
-            position: relative; overflow: hidden; border-bottom: var(--hairline); pointer-events: none;
+            width: 100%; height: 260px; background: #ddd; transform: translate3d(0,0,20px);
+            position: relative; overflow: hidden; pointer-events: none;
         }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(50%); transition: all 0.5s ease; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: all 0.5s ease; }
+        
+        .card-content { padding: 1.5rem 0 0 0; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; pointer-events: none;}
+        .card-badge { font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;}
+        .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: #050505; line-height: 1.1; margin-bottom: 0.5rem; font-weight: 700;}
+        .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 400; color: #444; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        .card-content { padding: 1.2rem 1.5rem; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; flex-grow: 1; pointer-events: none; overflow: hidden;}
-        .card-badge { font-family: var(--font-sans); font-size: 0.65rem; color: var(--text-main); opacity: 0.5; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: block;}
-        .card-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text-main); line-height: 1.1; margin-bottom: 0.5rem; font-weight: 400;}
-        .card-desc { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 300; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-bottom { padding: 1rem 0 0 0; margin-top: 1rem; border-top: var(--hairline-dark); transform: translate3d(0, 0, 40px); display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+        .card-exe { font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #050505; font-weight: 800; transition: color 0.3s;}
 
-        .card-bottom {
-            padding: 1rem 1.5rem; border-top: var(--hairline); transform: translate3d(0, 0, 40px); 
-            display: flex; justify-content: space-between; align-items: center; pointer-events: none;
+        .card-editorial:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .card-editorial:hover .card-thumb img { filter: grayscale(0%) scale(1.05); }
+        .card-editorial:hover .card-exe { color: var(--brand-purple); }
+
+        /* ─── 06. FOOTER B2B PREMIUM ─── */
+        .b2b-footer {
+            background-color: var(--bg-secondary); border-top: var(--hairline);
+            padding: 5rem 4vw; position: relative; z-index: 20; display: block;
         }
-        .card-exe { font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); opacity: 0.4; transition: opacity 0.3s; font-weight: 600;}
-
-        .card-editorial.is-active { box-shadow: 10px 20px 30px rgba(0,0,0,0.8); background: rgba(255,255,255,0.02); }
-        .card-editorial.is-active .card-thumb img { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
-        .card-editorial.is-active .card-exe { opacity: 1; color: var(--accent-neon); }
-
-        /* ─── FOOTER SUIZO ─── */
-        .site-footer { background-color: var(--bg-primary); border-top: var(--hairline); padding: 4rem 4vw; padding-bottom: 6rem; position: relative; z-index: 20; }
-        .footer-grid { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; align-items: end; }
-        .footer-brand { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem;}
-        .footer-status { font-family: var(--font-sans); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 2px; text-transform: uppercase; font-weight: 600;}
-        .footer-info p { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0;}
-        .footer-links { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-link { font-family: var(--font-code); font-size: 0.85rem; color: var(--text-main); text-decoration: none; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px;}
-        .footer-link:hover { color: var(--brand-purple); }
+        .footer-grid {
+            max-width: 1600px; margin: 0 auto; display: grid; 
+            grid-template-columns: 2fr 1fr 1fr; gap: 4rem;
+        }
+        .footer-brand h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: var(--text-main); text-transform: uppercase; line-height: 1; margin-bottom: 1rem; letter-spacing: 1px;}
+        .footer-brand p { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 400px;}
+        
+        .footer-nav h4 { font-family: var(--font-sans); font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; font-weight: 600;}
+        .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .footer-nav a { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s;}
+        .footer-nav a:hover { color: var(--brand-purple); }
+        
+        .footer-bottom { max-width: 1600px; margin: 0 auto; margin-top: 4rem; padding-top: 2rem; border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);}
 
         /* ─── RESPONSIVE MÓVIL ─── */
         @media (max-width: 900px) {
             .navbar-links { display: none; }
             .brand-icon { height: 18px; }
-            
             .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
-            .giant-transparent-logo { width: 40vw; left: 50%; top: 50%; transform: translate(-50%, -50%);}
-            .hero-tagline { font-size: 0.8rem; padding: 0 1rem; line-height: 1.4; margin-top: 1.5rem;}
-            .hero-reproductor-btn { width: 85%; margin-top: 1.5rem; }
+            .giant-transparent-logo { width: 40vw;}
+            .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
 
-            .system-section { padding: 3rem 4vw; }
-            .editorial-frame { margin-bottom: 2rem;}
+            .content-wrapper { padding: 4rem 1.5rem; }
+            .identity-split { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 5rem;}
+            .identity-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
+            .identity-desc { font-size: 0.95rem; }
             
-            .identity-split { grid-template-columns: 1fr; }
-            .identity-text { padding: 1.5rem 1rem; gap: 1rem; border-right: none; border-bottom: var(--hairline);}
-            .identity-mockup { padding: 1rem; align-items: flex-start; min-width: 0; }
-            
-            .sys-header { font-size: 0.5rem; letter-spacing: 1px;}
-            .identity-title { font-size: clamp(1.5rem, 5vw, 2.2rem); }
-            .identity-desc { font-size: 0.8rem; line-height: 1.4; }
-            
-            .module-list { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem;}
-            .module-tag { font-size: 0.55rem; }
-            .module-item h4 { font-size: 1.1rem; line-height: 1.1;}
-            .module-item p { font-size: 0.75rem; line-height: 1.4; }
-            
-            .projects-container { padding: 1.5rem 1rem; }
-            .projects-intro { font-size: 1.2rem; margin-bottom: 1.5rem; }
-            
-            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .card-wrapper { height: 260px; }
-            .card-thumb { height: 90px; }
-            .card-content { padding: 0.8rem; }
-            .card-badge { font-size: 0.5rem; margin-bottom: 0.3rem;}
-            .card-title { font-size: 1rem; margin-bottom: 0.2rem;}
-            .card-desc { font-size: 0.65rem; line-height: 1.3; }
-            .card-bottom { padding: 0.5rem 0.8rem; }
-            .card-exe { font-size: 0.5rem; }
+            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .card-editorial { padding: 0.8rem; }
+            .card-wrapper { height: auto; }
+            .card-thumb { height: 100px; }
+            .card-content { padding: 1rem 0 0 0; }
+            .card-badge { font-size: 0.5rem; margin-bottom: 0.4rem;}
+            .card-title { font-size: 1.1rem; margin-bottom: 0.3rem;}
+            .card-desc { font-size: 0.7rem; line-height: 1.3; -webkit-line-clamp: 2;}
+            .card-bottom { padding: 0.5rem 0 0 0; margin-top: 0.5rem;}
+            .card-exe { font-size: 0.6rem; }
 
-            .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-            .footer-links { flex-direction: row; justify-content: center; gap: 1rem; flex-wrap: wrap;}
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <div class="ambient-canvas" id="parallaxBg"></div>
-    <div class="stars-container">
-        <div class="stars-1"></div>
-        <div class="stars-2"></div>
-    </div>
-
+    
     <nav class="top-navbar" id="topNavbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
@@ -322,8 +294,6 @@
             
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
             
-            <p class="hero-tagline">> "Los límites de tu proyecto no están en el espacio. Alójate con nosotros."</p>
-            
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
             </a>
@@ -334,69 +304,71 @@
 
     <main class="engineering-bg">
         
-        <div id="aurora-canvas"></div>
+        <div class="minimal-stars"></div>
 
-        <section class="system-section" id="sistemas">
-            <div class="editorial-frame">
+        <div class="content-wrapper">
+            <section class="identity-split" id="identidad">
                 
-                <div class="identity-split">
-                    <div class="identity-text">
-                        <div class="sys-header">Módulo // Operación</div>
-                        <h2 class="identity-title">El Playground <i>de tu Empresa</i></h2>
-                        
-                        <p class="identity-desc">
-                            Nos llaman 'disque creativos', pero creamos <strong>pura ingeniería.</strong> 
-                            Somos el disco donde se almacena y ejecuta el futuro de tu empresa. 
-                            Desde despliegues rápidos para emprendimientos hasta plataformas custom para marcas posicionadas.
-                        </p>
-                        
-                        <div class="module-list">
-                            <div class="module-item">
-                                <span class="module-tag">DIR_01 / ACELERADO</span>
-                                <h4>Ecosistemas Pre-Ensamblados</h4>
-                                <p>Menús interactivos y redes operativas aisladas. Listos para activarse en tiempo récord bajo una identidad visual inquebrantable.</p>
-                            </div>
-                            <div class="module-item">
-                                <span class="module-tag">DIR_02 / A LA MEDIDA</span>
-                                <h4>Arquitectura Custom</h4>
-                                <p>Desarrollo web corporativo. Construimos facturadoras y e-commerce de alto rendimiento estructurados para operar a la máxima capacidad.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="identity-mockup">
-                        <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
-                    </div>
-                </div>
-
-                <div class="projects-container">
-                    <div class="sys-header">Módulo // Evidencia Empírica</div>
-                    <h3 class="projects-intro">> "Aquí tienes un poco de lo que construimos."</h3>
+                <div class="identity-text">
+                    <h2 class="identity-title">Ey, ¿qué tal? Bienvenido a <i>Disk Creativo.</i></h2>
                     
-                    <div class="grid-editorial" id="portfolioGrid">
-                        <div style="grid-column: 1/-1; padding: 4rem; text-align: center; font-family: var(--font-code); color: var(--text-muted);">
-                            > Extrayendo paquetes de la base de datos...
-                        </div>
-                    </div>
+                    <p class="identity-desc">
+                        Es un placer recibirte. Sabemos que tu tiempo y tu espacio valen plata, por eso somos el disco duro ideal para almacenar tus proyectos más pesados. <strong>Aterrizamos tus ideas desde el vacío del espacio y las materializamos en la nube.</strong>
+                    </p>
+                    
+                    <p class="identity-desc">
+                        Para nosotros, la vuelta es simple: si lo puedes imaginar, lo podemos programar. Las agencias tradicionales andan perdiendo su identidad armando webs genéricas que no transmiten nada. Nosotros no. Buscamos inyectar el corazón y la sangre de tu negocio en el código. Si tienes un tattoo shop, no te armamos un sitio común de agendas; diseñamos una experiencia que le dé confianza al cliente, que casi <strong>sienta la aguja en la piel</strong> al navegar. Si vendes carros, hacemos que tu cliente sienta el arranque del motor en un entorno virtual antes de pisar la agencia.
+                    </p>
+
+                    <p class="identity-desc">
+                        Construimos software a la medida, automatizaciones, plataformas SaaS y Landing Pages transaccionales. No somos un simple grupo de programadores, somos <span class="highlight-accent">un motor de ventas</span>. Una máquina enfocada en mover dinero. Porque seamos claros: nuestras arquitecturas no están hechas nada más para verse "pritty", <strong>están hechas para vender.</strong>
+                    </p>
                 </div>
 
-            </div>
-        </section>
+                <div class="identity-mockup">
+                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f974271e75e0acba0bc781f5d774beb93c9457fe/DIQC/1784658517638.png" alt="Disk Creativo 3D Playground" class="playground-img">
+                </div>
+
+            </section>
+
+            <section class="projects-section">
+                <div class="projects-header">
+                    <h2 class="projects-title">Portafolio</h2>
+                </div>
+                
+                <div class="grid-editorial" id="portfolioGrid">
+                    <div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Iniciando lectura de servidor...</div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer class="site-footer" id="mainFooter">
+    <footer class="b2b-footer">
         <div class="footer-grid">
-            <div class="footer-info">
-                <h2 class="footer-brand">DISK CREATIVO</h2>
-                <span class="footer-status">[ SYS // ONLINE ]</span>
+            <div class="footer-brand">
+                <h2>Disk Creativo</h2>
+                <p>Agencia de infraestructura digital, desarrollo de ecosistemas B2B y diseño de software de alto rendimiento.</p>
             </div>
-            <div class="footer-info">
-                <p>Base de Operaciones:<br>Ciudad de Panamá / Casco Antiguo</p>
+            <div class="footer-nav">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">La Base</a></li>
+                    <li><a href="#identidad">Identidad</a></li>
+                    <li><a href="dex.html">Construye tu Proyecto</a></li>
+                </ul>
             </div>
-            <div class="footer-links">
-                <a href="#" class="footer-link">IG -> @diskcreativo</a>
-                <a href="https://wa.me/50768529324" class="footer-link">WA -> Contacto Directo</a>
+            <div class="footer-nav">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Ciudad de Panamá, PTY</a></li>
+                    <li><a href="mailto:hello@diskcreativo.com">hello@diskcreativo.com</a></li>
+                    <li><a href="https://wa.me/50768529324" target="_blank">Atención Directa (WhatsApp)</a></li>
+                </ul>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Disk Creativo. Todos los derechos reservados.</span>
+            <span>Desplegado desde el Casco Antiguo.</span>
         </div>
     </footer>
 
@@ -406,17 +378,12 @@
             const dynamicLogo = document.getElementById('dynamic-logo');
             const topNavbar = document.getElementById('topNavbar');
             
-            // Navbar Handoff
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                if(scrolled > 50) {
-                    topNavbar.style.transform = 'translateY(-100%)';
-                } else {
-                    topNavbar.style.transform = 'translateY(0)';
-                }
+                if(scrolled > 50) topNavbar.style.transform = 'translateY(-100%)';
+                else topNavbar.style.transform = 'translateY(0)';
             }, { passive: true });
 
-            // Parallax del Ratón
             const heroContainer = document.getElementById('inicio');
             if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
@@ -428,7 +395,7 @@
                 heroContainer.addEventListener('mouseleave', () => { dynamicLogo.style.transform = 'translate(-50%, -50%)'; });
             }
 
-            // Físicas 3D
+            // Físicas 3D de Tarjetas
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
                 cards.forEach(wrapper => {
@@ -478,18 +445,18 @@
                             wrapper.className = 'card-wrapper'; 
                             
                             let imgUrl = p.imagen ? p.imagen.trim() : "";
-                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#555;font-family:var(--font-sans);">[Sin Imagen]</div>`;
+                            let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-family:var(--font-sans);">[Sin Imagen]</div>`;
 
                             wrapper.innerHTML = `
                                 <a href="${p.enlace || "#"}" target="_blank" class="card-editorial">
                                     <div class="card-thumb">${thumbHtml}</div>
                                     <div class="card-content">
-                                        <span class="card-badge">${p.categoria || "Sistema"}</span>
+                                        <span class="card-badge">${p.categoria || "SOFTWARE"}</span>
                                         <h3 class="card-title">${p.titulo || "Proyecto_00"}</h3>
                                         <p class="card-desc">${p.descripcion || "..."}</p>
                                     </div>
                                     <div class="card-bottom">
-                                        <span class="card-exe">Ejecutar</span>
+                                        <span class="card-exe">Explorar Plataforma</span>
                                     </div>
                                 </a>
                             `;
@@ -497,132 +464,14 @@
                         });
                         init3DInteractions(); 
                     } 
-                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Registro de bases de datos vacío.</div>'; }
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
                 } catch (error) {
                     console.error("Error API:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; font-family: var(--font-code); color: var(--text-muted);">> Error 503: Falla de conexión con el nodo de origen.</div>';
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error 503: Falla de conexión con servidor.</div>';
                 }
             }
 
             fetchProyectos();
-
-            // ─── SHADER WEBGL (TORMENTA BLANCA / PLATA) EN VANILLA JS ───
-            const initWebGL = () => {
-                const container = document.getElementById('aurora-canvas');
-                if (!container || !window.THREE) return;
-
-                const scene = new THREE.Scene();
-                const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                
-                renderer.setSize(container.clientWidth, container.clientHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); 
-                container.appendChild(renderer.domElement);
-
-                const material = new THREE.ShaderMaterial({
-                    transparent: true,
-                    uniforms: {
-                        iTime: { value: 0 },
-                        iResolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) }
-                    },
-                    vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
-                    fragmentShader: `
-                        uniform float iTime;
-                        uniform vec2 iResolution;
-                        #define NUM_OCTAVES 3
-
-                        float rand(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
-
-                        float noise(vec2 p) {
-                            vec2 ip = floor(p); vec2 u = fract(p); u = u*u*(3.0-2.0*u);
-                            float res = mix(
-                                mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
-                                mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
-                            return res * res;
-                        }
-
-                        float fbm(vec2 x) {
-                            float v = 0.0; float a = 0.3; vec2 shift = vec2(100.0);
-                            mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-                            for (int i = 0; i < NUM_OCTAVES; ++i) {
-                                v += a * noise(x); x = rot * x * 2.0 + shift; a *= 0.4;
-                            }
-                            return v;
-                        }
-
-                        vec4 tanh_custom(vec4 x) {
-                            vec4 e2x = exp(2.0 * x);
-                            return (e2x - 1.0) / (e2x + 1.0);
-                        }
-
-                        void main() {
-                            vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
-                            vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
-                            vec2 v;
-                            vec4 o = vec4(0.0);
-                            float f = 2.0 + fbm(p + vec2(iTime * 5.0, 0.0)) * 0.5;
-
-                            for (float i = 0.0; i < 35.0; i++) {
-                                v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
-                                float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / 35.0));
-                                
-                                // INYECCIÓN BLANCO / PLATA (Luz Pura)
-                                float lum = 0.6 + 0.4 * sin(i * 0.2 + iTime * 0.4);
-                                vec4 auroraColors = vec4(lum, lum, lum + 0.05, 1.0);
-
-                                vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
-                                float thinnessFactor = smoothstep(0.0, 1.0, i / 35.0) * 0.6;
-                                o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
-                            }
-
-                            vec4 base = o / 100.0;
-                            vec4 p_val = vec4(pow(base.x, 1.6), pow(base.y, 1.6), pow(base.z, 1.6), pow(base.w, 1.6));
-                            o = tanh_custom(p_val);
-                            gl_FragColor = o * 1.5;
-                        }
-                    `
-                });
-
-                const geometry = new THREE.PlaneGeometry(2, 2);
-                const mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
-
-                let frameId;
-                let isVisible = false;
-
-                const animate = () => {
-                    if (!isVisible) return;
-                    material.uniforms.iTime.value += 0.01; 
-                    renderer.render(scene, camera);
-                    frameId = requestAnimationFrame(animate);
-                };
-
-                // Smart Rendering (Intersection Observer)
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            isVisible = true; animate();
-                        } else {
-                            isVisible = false; cancelAnimationFrame(frameId);
-                        }
-                    });
-                }, { threshold: 0.01 });
-
-                observer.observe(document.querySelector('.engineering-bg'));
-
-                window.addEventListener('resize', () => {
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                    material.uniforms.iResolution.value.set(container.clientWidth, container.clientHeight);
-                });
-            };
-
-            // Iniciar WebGL después de que el DOM esté listo
-            if(window.THREE) {
-                initWebGL();
-            } else {
-                const script = document.querySelector('script[src*="three"]');
-                if(script) script.onload = initWebGL;
-            }
         });
     </script>
 </body>
