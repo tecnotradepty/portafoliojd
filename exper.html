@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Aluminum Sandbox</title>
+    <title>Disk Creativo | Hero 3D Fixed Sandbox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +18,8 @@
             --text-muted: rgba(234, 233, 228, 0.6);
             --hairline: 1px solid rgba(255, 255, 255, 0.1);
             
-            /* ROLLBACK a Anton */
+            /* FUENTE DISPLAY: 'Anton' (Firme y monumental) */
             --font-display: 'Anton', sans-serif;
-            --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
         }
@@ -59,7 +58,7 @@
         }
         @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
 
-        /* ─── 03. NAVBAR PREMIUM MULTI-DISPOSITIVO ─── */
+        /* ─── 03. NAVBAR PREMIUM MULTI-DISPOSITIVO (visible en móvil) ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
             background: rgba(5, 5, 5, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -83,46 +82,35 @@
 
         /* ─── 04. HERO SECTION ─── */
         .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
+        
+        /* CORRECCIÓN ADAPTATIVA: position: relative para el sándwich de capas */
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         
-        /* RESTAURACIÓN DEL TAMAÑO PARA ANTON + RESPIRACIÓN DE CAPAS */
+        /* Oxígeno tipográfico mantenido para geometría */
         .hero-giant-text {
-            font-family: var(--font-display); 
-            font-size: clamp(3rem, 15vw, 22rem);
+            font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
             display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* NUEVA TEXTURA: ALUMINIO FRESADO CNC (Reemplaza al gris mate) */
-        .aluminum-letter {
-            display: inline-block; 
-            position: relative;
-            /* Gradiente complejo para simular el reflejo anisotrópico del metal cilíndrico */
-            background: linear-gradient(180deg, 
-                #ffffff 0%, 
-                #d4d4d4 30%, 
-                #8a8a8a 48%, 
-                #3a3a3a 50%, 
-                #d1d1d1 52%, 
-                #ffffff 80%, 
-                #a3a3a3 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            
-            /* Extrusión 3D calculada mediante drop-shadow para no romper el canal alfa */
-            filter: drop-shadow(0px 1px 0px #a1a1a1) 
-                    drop-shadow(0px 2px 0px #858585) 
-                    drop-shadow(0px 3px 0px #666666) 
-                    drop-shadow(0px 4px 0px #4d4d4d) 
-                    drop-shadow(0px 5px 0px #333333)
-                    drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.5)) 
-                    drop-shadow(0px 25px 25px rgba(0, 0, 0, 0.8));
+        /* RESTAURACIÓN DEL EFECTO 3D MATE ORIGINAL (Gris multi-shadow stack) */
+        .solid-gray-letter {
+            color: #B8B8B8; display: inline-block; position: relative;
+            /* La ilusión del bloque 3D se crea mediante sombras apiladas */
+            text-shadow: 
+                0px 1px 0px #909090, 
+                0px 2px 0px #858585, 
+                0px 3px 0px #7A7A7A, 
+                0px 4px 0px #707070, 
+                0px 5px 0px #656565, 
+                0px 6px 0px #4A4A4A, 
+                0px 7px 0px #404040, 
+                0px 15px 15px rgba(0, 0, 0, 0.4), 
+                0px 30px 25px rgba(0, 0, 0, 0.6);
         }
         
-        /* Letras Frontales: Cristal Líquido sobre Aluminio (Ultra Premium) */
+        /* Letra Frontal: Cristal Líquido Semi-transparente */
         .liquid-glass-letter {
             font-family: var(--font-display); display: inline-block;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
@@ -137,7 +125,7 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
-        /* CD POSICIONADO ESTRATÉGICAMENTE (Liberando la letra A) */
+        /* CD POSICIONADO ESTRATÉGICAMENTE (Liberando la letra A de CREATIVO) */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
@@ -149,6 +137,13 @@
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
+
+        .hero-tagline {
+            font-family: var(--font-sans); font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+            color: rgba(255,255,255,0.8); margin-top: 2rem; position: relative; z-index: 20;
+            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 300;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: center;
+        }
 
         /* BOTÓN REPRODUCTOR CTA */
         .hero-reproductor-btn {
@@ -170,7 +165,7 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── RESPONSIVE MÓVIL ─── */
+        /* ─── RESPONSIVE MÓVIL CORRECTO ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
@@ -182,10 +177,14 @@
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            .hero-giant-text { font-size: 19vw; gap: 2.5vh; line-height: 0.95;} 
+            .hero-giant-text { font-size: 19vw; gap: 3vh; line-height: 0.9;} 
             
+            /* FIX GEOMÉTRICO MÓVIL MANTENIDO: 
+               El disco reduce su tamaño y ajusta su posición vertical relativa (top: 26%) 
+               para no pisar la 'A' de CREATIVO en la pantalla reducida.
+            */
             .giant-transparent-logo { 
-                width: clamp(90px, 28vw, 140px); 
+                width: clamp(100px, 25vw, 150px); 
                 top: 26%; 
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
@@ -220,14 +219,16 @@
         <div class="hero-sandwich">
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="z-back aluminum-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back aluminum-letter">S</span><span class="z-front aluminum-letter float-anim delay-2">K</span>
+                    <span class="z-back solid-gray-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back solid-gray-letter">S</span><span class="z-front solid-gray-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="z-front aluminum-letter float-anim delay-3">C</span><span class="z-back aluminum-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back aluminum-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back aluminum-letter overlap-i-behind">I</span><span class="z-back aluminum-letter delay-6">V</span><span class="z-front aluminum-letter float-anim delay-6">O</span>
+                    <span class="z-front solid-gray-letter float-anim delay-3">C</span><span class="z-back solid-gray-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back solid-gray-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-gray-letter overlap-i-behind">I</span><span class="z-back solid-gray-letter delay-6">V</span><span class="z-front solid-gray-letter float-anim delay-6">O</span>
                 </div>
             </h1>
             
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
+            
+            <p class="hero-tagline">> "Los límites de tu proyecto no están en el espacio. Alójate con nosotros."</p>
             
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
