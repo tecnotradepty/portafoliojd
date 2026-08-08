@@ -107,25 +107,28 @@
             display: flex; flex-direction: column; 
             gap: clamp(1rem, 4vh, 4rem); 
             letter-spacing: -2px; width: 100%;
-            position: relative; z-index: 10; 
+            position: relative; 
+            /* [REMOVIDO] z-index: 10; para evitar el Stacking Context Trap */
         }
 
         .hero-giant-text div { 
             display: flex; justify-content: center; align-items: center; gap: 0.2vw; 
-            flex-wrap: nowrap; /* BLOQUEO DE SALTO DE LÍNEA */
+            flex-wrap: nowrap;
         }
 
-        /* ─── MATERIALES TIPOGRÁFICOS (GRIS SÓLIDO MATE) ─── */
+        /* ─── MATERIALES TIPOGRÁFICOS Y JERARQUÍA ESTRICTA ─── */
         
+        /* 1. GRIS SÓLIDO MATE (D-S-K, C-R-A-V-O) */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 
                 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 
                 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 
                 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
-            z-index: 1; /* Detrás del CD */
+            z-index: 1; /* Jerarquía 1: Atrás del CD */
         }
         
+        /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
         .acrylic-letter {
             font-family: var(--font-display); display: inline-block; position: relative;
             background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
@@ -133,7 +136,7 @@
             -webkit-text-fill-color: transparent; 
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); /* Borde de cristal */
             filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
-            z-index: 10; /* Delante del CD */
+            z-index: 10; /* Jerarquía 10: Delante del CD */
         }
 
         .overlap-i { margin-left: -0.08em; }
@@ -145,7 +148,7 @@
             top: 50%; left: 50%; 
             transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); 
-            z-index: 5; 
+            z-index: 5; /* Jerarquía 5: En el medio del Sándwich */
             pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
@@ -239,7 +242,6 @@
             padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
         }
 
-        /* IDENTIDAD EN BLOQUES */
         .identity-split { 
             display: grid; grid-template-columns: 55% 45%; gap: 5rem;
             align-items: center; margin-bottom: 10rem; 
@@ -260,7 +262,6 @@
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 1rem; position: relative;}
         .playground-img { width: 100%; max-width: 600px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); animation: floatEditorial 12s ease-in-out infinite;}
 
-        /* DIRECTORIO (TARJETAS GRISES B2B) */
         .projects-header { margin-bottom: 4rem; text-align: center; }
         .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;}
         
@@ -311,7 +312,7 @@
         
         .footer-bottom { max-width: 1600px; margin: 0 auto; margin-top: 4rem; padding-top: 2rem; border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);}
 
-        /* ─── RESPONSIVE MÓVIL CORRECTO Y PROPORCIONAL (2 LÍNEAS) ─── */
+        /* ─── RESPONSIVE MÓVIL CORRECTO Y PROPORCIONAL ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
@@ -323,29 +324,27 @@
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            /* HERO MÓVIL: BLOQUEO DE SALTO DE LÍNEA Y AJUSTE DE ESPACIO MUERTO */
             .hero-section {
                 height: 100vh;
                 padding-top: 60px; 
             }
             .hero-giant-text { 
-                /* 11.5vw * 8 letras = ~92vw. Llena el ancho sin colapsar la fila */
                 font-size: 11.5vw; 
                 gap: 1vh; 
                 line-height: 0.9;
             }
             
             .hero-giant-text div {
-                flex-wrap: nowrap; /* IMPIDE EL SALTO DE LÍNEA EN "CREATIVO" */
+                flex-wrap: nowrap; 
                 gap: 0; 
             }
 
             .giant-transparent-logo { 
-                width: 60vw; /* Disco central proporcionado */
-                top: 50%; /* Centrado correcto respecto a las 2 líneas */
+                width: 60vw; 
+                top: 50%; 
             }
             
-            .hero-reproductor-btn { width: 85%; margin-top: 2rem; } /* Reduce el hueco vertical */
+            .hero-reproductor-btn { width: 85%; margin-top: 2rem; } 
 
             .sym-1 { top: 5%; left: -10%; } .sym-2 { top: 20%; right: 5%; } .sym-3 { bottom: 20%; left: 5%; }
 
@@ -421,16 +420,16 @@
                 <h1 class="hero-giant-text">
                     <div>
                         <span class="solid-gray-letter delay-1">D</span>
-                        <span class="acrylic-letter float-anim delay-1" data-text="I">I</span>
+                        <span class="acrylic-letter float-anim delay-1">I</span>
                         <span class="solid-gray-letter">S</span>
                         <span class="solid-gray-letter float-anim delay-2">K</span>
                     </div>
                     <div>
                         <span class="solid-gray-letter float-anim delay-3">C</span>
                         <span class="solid-gray-letter delay-4">R</span>
-                        <span class="acrylic-letter float-anim delay-4" data-text="E">E</span>
+                        <span class="acrylic-letter float-anim delay-4">E</span>
                         <span class="solid-gray-letter delay-5">A</span>
-                        <span class="acrylic-letter overlap-t float-anim delay-5" data-text="T">T</span>
+                        <span class="acrylic-letter overlap-t float-anim delay-5">T</span>
                         <span class="solid-gray-letter overlap-i delay-6">I</span>
                         <span class="solid-gray-letter float-anim delay-6">V</span>
                         <span class="solid-gray-letter">O</span>
