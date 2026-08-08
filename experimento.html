@@ -11,6 +11,7 @@
 
     <style>
         :root {
+            /* Variables Core */
             --bg-primary: #050505;
             --bg-secondary: #0A0A0C;
             --brand-purple: #6B00FF;
@@ -21,10 +22,15 @@
             --hairline-dark: 1px solid rgba(255, 255, 255, 0.05);
             --hairline-neon: 1px solid var(--accent-neon);
             
+            /* Tipografía */
             --font-display: 'Anton', sans-serif;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
+
+            /* TEXTURAS DE MARCA (URL Raw de Github comprobadas) */
+            --texture-light: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/86894d470812fc787f491a287e3b1d4df507a6c0/DIQC/telamorada%20(1).jpeg');
+            --texture-dark: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/fba2d6e6d218d9e5ca407c4c0ef2dbc28df954e1/DIQC/telamoradaoscura.jpeg');
         }
 
         html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
@@ -46,6 +52,20 @@
             background-color: var(--bg-primary); background-attachment: fixed;
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
+
+        /* ─── ESTRELLAS ANIMADAS (SOLO FUGACES) ─── */
+        .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
+        .stars-1 {
+            position: absolute; width: 1px; height: 1px; background: transparent;
+            box-shadow: 15vw 20vh #FFF, 40vw 60vh #FFF, 80vw 15vh #FFF, 25vw 85vh #FFF, 60vw 30vh #FFF, 90vw 70vh #FFF, 10vw 45vh #FFF, 70vw 80vh #FFF;
+            animation: twinkle 40s infinite alternate ease-in-out;
+        }
+        .stars-2 {
+            position: absolute; width: 2px; height: 2px; background: transparent;
+            box-shadow: 35vw 10vh #FFF, 85vw 50vh #FFF, 50vw 85vh #FFF, 15vw 70vh #FFF, 75vw 25vh #FFF;
+            animation: twinkle 60s infinite alternate-reverse ease-in-out;
+        }
+        @keyframes twinkle { 0% { opacity: 0.1; } 100% { opacity: 0.4; } }
 
         /* ─── 02. NAVBAR B2B ─── */
         .top-navbar {
@@ -76,31 +96,74 @@
         .hero-giant-text {
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
-            display: flex; flex-direction: column; gap: 1vh; letter-spacing: -2px; width: 100%;
+            display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
+            position: relative; z-index: 1; /* Detrás o mezclado con el CD */
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        .solid-gray-letter {
-            color: #B8B8B8; display: inline-block; position: relative;
-            text-shadow: 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
+        /* ─── ARQUITECTURA DE LETRAS 2 CAPAS (SIN BUGS WEB-KIT) ─── */
+        
+        /* 1. TEXTURA MORADA DUAL (D-S-K, C-R-A-I-V-O) */
+        .texture-letter {
+            display: inline-block; position: relative;
+            color: transparent; /* Contenedor invisible */
+            z-index: 1; 
+        }
+
+        /* CAPA TRASERA (Volumen Oscuro) */
+        .texture-letter::before {
+            content: attr(data-text);
+            position: absolute; 
+            left: 0.035em; top: 0.035em; /* Extrusión proporcional */
+            background-image: var(--texture-dark);
+            background-size: cover; background-position: center;
+            -webkit-background-clip: text; background-clip: text; 
+            color: transparent; -webkit-text-fill-color: transparent;
+            /* Sombra para separarlo del fondo espacial */
+            filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.9));
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* CAPA FRONTAL (Cara Clara) */
+        .texture-letter::after {
+            content: attr(data-text);
+            position: absolute; left: 0; top: 0;
+            background-image: var(--texture-light);
+            background-size: cover; background-position: center;
+            -webkit-background-clip: text; background-clip: text; 
+            color: transparent; -webkit-text-fill-color: transparent;
+            z-index: 2;
+            pointer-events: none;
         }
         
-        .liquid-glass-letter {
-            font-family: var(--font-display); display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 240, 255, 0.1) 20%, transparent 40%, transparent 60%, rgba(255, 0, 60, 0.1) 80%, rgba(255, 255, 255, 0.3) 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.05); -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
-            filter: drop-shadow(0px 75px 25px rgba(0, 0, 0, 0.45)); backdrop-filter: blur(2px) saturate(110%); -webkit-backdrop-filter: blur(2px) saturate(110%);
-            position: relative; 
+        /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
+        .acrylic-letter {
+            font-family: var(--font-display); display: inline-block; position: relative;
+            color: transparent;
+            filter: drop-shadow(0px 0.08em 0.08em rgba(0, 0, 0, 0.7)); 
+            z-index: 10; /* Por encima de la textura y el disco */
         }
 
-        .z-back { z-index: 1 !important; position: relative; }
-        .z-front { z-index: 10 !important; position: relative; }
-        .overlap-t { z-index: 25 !important; position: relative; }
-        .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
+        /* Capa frontal del acrílico aislada */
+        .acrylic-letter::after {
+            content: attr(data-text);
+            position: absolute; left: 0; top: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            -webkit-text-fill-color: transparent; 
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
+            z-index: 2;
+            pointer-events: none;
+        }
 
+        /* Utilidades de superposición */
+        .overlap-i { margin-left: -0.08em; }
+        .overlap-t { z-index: 25 !important; position: relative; }
+
+        /* CD CENTRAL FLOTANTE */
         .giant-transparent-logo {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
@@ -111,6 +174,7 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
+        /* BOTÓN REPRODUCTOR */
         .hero-reproductor-btn {
             display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
@@ -130,7 +194,7 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── 05. NÚCLEO INFERIOR (ESTRELLAS DE FONDO) ─── */
+        /* ─── 05. NÚCLEO INFERIOR (NEGRO MATE + 10 ESTRELLAS) ─── */
         .engineering-bg { 
             background-color: var(--bg-primary); 
             position: relative; z-index: 20; padding-bottom: 50px; width: 100%; overflow: hidden; 
@@ -185,7 +249,6 @@
         .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
         .card-wrapper { width: 100%; perspective: 1200px; }
         
-        /* Gris oscuro elegante para el marco */
         .card-editorial {
             width: 100%; background: #161618; border: var(--hairline-dark);
             padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
@@ -201,7 +264,6 @@
         .card-content { padding: 1.5rem 0 0 0; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; pointer-events: none;}
         .card-badge { font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;}
         
-        /* Textos blancos y grises claros sobre la tarjeta negra */
         .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: #FFFFFF; line-height: 1.1; margin-bottom: 0.5rem; font-weight: 500;}
         .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
@@ -233,19 +295,18 @@
 
         /* ─── RESPONSIVE MÓVIL CORRECTO ─── */
         @media (max-width: 900px) {
-            /* Navbar visible y compacta en móviles */
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
-            .navbar-brand span { display: none; } /* Oculta ".CREATIVO" para ganar espacio */
+            .navbar-brand span { display: none; } 
             .brand-icon { height: 18px; }
             
-            .navbar-links { display: flex; gap: 1rem; } /* Vuelve a mostrar los links */
+            .navbar-links { display: flex; gap: 1rem; } 
             .nav-link { font-size: 0.6rem; }
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
-            .giant-transparent-logo { width: 40vw;}
+            .hero-giant-text { font-size: 19vw; gap: 3vh; line-height: 0.9;} 
+            .giant-transparent-logo { width: clamp(100px, 25vw, 150px); top: 26%; }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
 
             .content-wrapper { padding: 4rem 1.5rem; }
@@ -275,6 +336,11 @@
 
     <div class="ambient-canvas" id="parallaxBg"></div>
 
+    <div class="stars-container">
+        <div class="stars-1"></div>
+        <div class="stars-2"></div>
+    </div>
+
     <nav class="top-navbar" id="topNavbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
@@ -292,16 +358,17 @@
 
     <section class="hero-section" id="inicio">
         <div class="hero-sandwich">
-            <h1 class="hero-giant-text">
-                <div>
-                    <span class="z-back solid-gray-letter delay-1">D</span><span class="z-front liquid-glass-letter float-anim delay-1">I</span><span class="z-back solid-gray-letter">S</span><span class="z-front solid-gray-letter float-anim delay-2">K</span>
-                </div>
-                <div>
-                    <span class="z-front solid-gray-letter float-anim delay-3">C</span><span class="z-back solid-gray-letter delay-4">R</span><span class="z-front liquid-glass-letter float-anim delay-4">E</span><span class="z-back solid-gray-letter delay-5">A</span><span class="z-front liquid-glass-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-gray-letter overlap-i-behind">I</span><span class="z-back solid-gray-letter delay-6">V</span><span class="z-front solid-gray-letter float-anim delay-6">O</span>
-                </div>
-            </h1>
             
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
+            
+            <h1 class="hero-giant-text">
+                <div>
+                    <span class="texture-letter delay-1" data-text="D">D</span><span class="acrylic-letter float-anim delay-1" data-text="I">I</span><span class="texture-letter" data-text="S">S</span><span class="texture-letter float-anim delay-2" data-text="K">K</span>
+                </div>
+                <div>
+                    <span class="texture-letter float-anim delay-3" data-text="C">C</span><span class="texture-letter delay-4" data-text="R">R</span><span class="acrylic-letter float-anim delay-4" data-text="E">E</span><span class="texture-letter delay-5" data-text="A">A</span><span class="acrylic-letter overlap-t float-anim delay-5" data-text="T">T</span><span class="texture-letter overlap-i delay-6" data-text="I">I</span><span class="texture-letter float-anim delay-6" data-text="V">V</span><span class="texture-letter" data-text="O">O</span>
+                </div>
+            </h1>
             
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
