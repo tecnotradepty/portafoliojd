@@ -28,9 +28,12 @@
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
 
-            /* TEXTURAS DE MARCA (URL Raw de Github comprobadas) */
-            --texture-light: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/86894d470812fc787f491a287e3b1d4df507a6c0/DIQC/telamorada%20(1).jpeg');
-            --texture-dark: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/fba2d6e6d218d9e5ca407c4c0ef2dbc28df954e1/DIQC/telamoradaoscura.jpeg');
+            /* Material de Cubos Flotantes (Gris Sólido Mate) */
+            --cube-edge: rgba(255, 255, 255, 0.15);
+            --c-bright: #999999;
+            --c-mid: #666666;
+            --c-dark: #444444;
+            --c-deep: #222222;
         }
 
         html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
@@ -97,67 +100,34 @@
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
             display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
-            position: relative; z-index: 1; /* Detrás o mezclado con el CD */
+            position: relative; z-index: 10; 
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* ─── ARQUITECTURA DE LETRAS 2 CAPAS (SIN BUGS WEB-KIT) ─── */
+        /* ─── MATERIALES TIPOGRÁFICOS PURIFICADOS ─── */
         
-        /* 1. TEXTURA MORADA DUAL (D-S-K, C-R-A-I-V-O) */
-        .texture-letter {
-            display: inline-block; position: relative;
-            color: transparent; /* Contenedor invisible */
-            z-index: 1; 
-        }
-
-        /* CAPA TRASERA (Volumen Oscuro) */
-        .texture-letter::before {
-            content: attr(data-text);
-            position: absolute; 
-            left: 0.035em; top: 0.035em; /* Extrusión proporcional */
-            background-image: var(--texture-dark);
-            background-size: cover; background-position: center;
-            -webkit-background-clip: text; background-clip: text; 
-            color: transparent; -webkit-text-fill-color: transparent;
-            /* Sombra para separarlo del fondo espacial */
-            filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.9));
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* CAPA FRONTAL (Cara Clara) */
-        .texture-letter::after {
-            content: attr(data-text);
-            position: absolute; left: 0; top: 0;
-            background-image: var(--texture-light);
-            background-size: cover; background-position: center;
-            -webkit-background-clip: text; background-clip: text; 
-            color: transparent; -webkit-text-fill-color: transparent;
-            z-index: 2;
-            pointer-events: none;
+        /* 1. GRIS SÓLIDO MATE (D-S-K, C-R-A-I-V-O) */
+        .solid-gray-letter {
+            color: #B8B8B8; display: inline-block; position: relative;
+            text-shadow: 
+                0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 
+                0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 
+                0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
+            z-index: 1; /* Detrás del CD */
         }
         
         /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
         .acrylic-letter {
             font-family: var(--font-display); display: inline-block; position: relative;
-            color: transparent;
-            filter: drop-shadow(0px 0.08em 0.08em rgba(0, 0, 0, 0.7)); 
-            z-index: 10; /* Por encima de la textura y el disco */
-        }
-
-        /* Capa frontal del acrílico aislada */
-        .acrylic-letter::after {
-            content: attr(data-text);
-            position: absolute; left: 0; top: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: transparent; 
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
-            z-index: 2;
-            pointer-events: none;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); /* Borde de cristal */
+            filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
+            z-index: 10; /* Delante del CD */
         }
 
-        /* Utilidades de superposición */
+        /* Utilidades tipográficas */
         .overlap-i { margin-left: -0.08em; }
         .overlap-t { z-index: 25 !important; position: relative; }
 
@@ -172,9 +142,11 @@
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
-        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
+        
+        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } 
+        .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
-        /* BOTÓN REPRODUCTOR */
+        /* BOTÓN REPRODUCTOR CTA */
         .hero-reproductor-btn {
             display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
@@ -194,7 +166,42 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── 05. NÚCLEO INFERIOR (NEGRO MATE + 10 ESTRELLAS) ─── */
+        /* ─── ECOSISTEMA DE CUBOS 3D ─── */
+        .floating-ecosystem {
+            position: absolute; inset: 0; pointer-events: none; overflow: hidden; 
+            z-index: 1; perspective: 3000px; 
+        }
+        .cube-container { position: absolute; transform-style: preserve-3d; filter: drop-shadow(0 15px 40px rgba(0,0,0,0.9)); }
+        .cube-object { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+        
+        .c-f {
+            position: absolute; width: 100%; height: 100%;
+            border: 1px solid var(--cube-edge); backface-visibility: visible; opacity: 1;
+        }
+        
+        .f { transform: translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
+        .bk { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); background: var(--c-deep); }
+        .L { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-mid); }
+        .R { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); background: var(--c-dark); }
+        .T { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
+        .B { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-dark); }
+
+        @keyframes slowRotate1 { to { transform: rotateX(360deg) rotateY(180deg); } }
+        @keyframes slowRotate2 { to { transform: rotateX(-180deg) rotateY(360deg) rotateZ(90deg); } }
+        @keyframes slowRotate3 { to { transform: rotateX(90deg) rotateY(-180deg) rotateZ(360deg); } }
+        @keyframes slowRotate4 { to { transform: rotateX(-360deg) rotateZ(-180deg); } }
+        @keyframes spaceDrift { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30px, -20px); } 66% { transform: translate(-15px, 25px); } }
+
+        .sym-1 { --size: clamp(8rem, 15vw, 18rem); width: var(--size); height: var(--size); top: 10%; left: 5%; filter: blur(8px) drop-shadow(0 20px 50px rgba(0,0,0,0.95)); z-index: 30; animation: spaceDrift 60s infinite ease-in-out; }
+        .sym-1 .cube-object { animation: slowRotate1 95s infinite linear; }
+        .sym-2 { --size: clamp(3rem, 6vw, 6rem); width: var(--size); height: var(--size); top: 25%; right: 15%; opacity: 0.7; animation: spaceDrift 75s infinite ease-in-out reverse -10s; }
+        .sym-2 .cube-object { animation: slowRotate2 120s infinite linear -15s; }
+        .sym-3 { --size: clamp(2.5rem, 5vw, 5rem); width: var(--size); height: var(--size); bottom: 25%; left: 18%; filter: blur(1px); opacity: 0.6; animation: spaceDrift 90s infinite ease-in-out -25s; }
+        .sym-3 .cube-object { animation: slowRotate3 105s infinite linear -5s; }
+        .sym-4 { --size: clamp(1.5rem, 3vw, 3rem); width: var(--size); height: var(--size); top: 60%; right: 35%; filter: blur(2.5px); opacity: 0.2; animation: spaceDrift 80s infinite linear reverse -40s; }
+        .sym-4 .cube-object { animation: slowRotate4 130s infinite linear; }
+
+        /* ─── 05. NÚCLEO INFERIOR (IDENTIDAD Y PROYECTOS) ─── */
         .engineering-bg { 
             background-color: var(--bg-primary); 
             position: relative; z-index: 20; padding-bottom: 50px; width: 100%; overflow: hidden; 
@@ -214,14 +221,13 @@
                 5vw 35vh rgba(255,255,255,0.5), 50vw 15vh rgba(255,255,255,0.2);
             animation: slowBreathe 8s infinite alternate ease-in-out;
         }
-        @keyframes slowBreathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
 
         .content-wrapper {
             position: relative; z-index: 10;
             padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
         }
 
-        /* ─── IDENTIDAD (ESTRUCTURA EN BLOQUES) ─── */
+        /* IDENTIDAD EN BLOQUES */
         .identity-split { 
             display: grid; grid-template-columns: 55% 45%; gap: 5rem;
             align-items: center; margin-bottom: 10rem; 
@@ -242,7 +248,7 @@
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 1rem; position: relative;}
         .playground-img { width: 100%; max-width: 600px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); animation: floatEditorial 12s ease-in-out infinite;}
 
-        /* ─── DIRECTORIO (TARJETAS GRISES B2B) ─── */
+        /* DIRECTORIO (TARJETAS GRISES B2B) */
         .projects-header { margin-bottom: 4rem; text-align: center; }
         .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;}
         
@@ -305,9 +311,11 @@
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            .hero-giant-text { font-size: 19vw; gap: 3vh; line-height: 0.9;} 
-            .giant-transparent-logo { width: clamp(100px, 25vw, 150px); top: 26%; }
+            .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
+            .giant-transparent-logo { width: 40vw;}
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
+
+            .sym-1 { top: 5%; left: -10%; } .sym-2 { top: 20%; right: 5%; } .sym-3 { bottom: 20%; left: 5%; }
 
             .content-wrapper { padding: 4rem 1.5rem; }
             .identity-split { grid-template-columns: 1fr; gap: 3rem; margin-bottom: 5rem;}
@@ -336,9 +344,11 @@
 
     <div class="ambient-canvas" id="parallaxBg"></div>
 
-    <div class="stars-container">
-        <div class="stars-1"></div>
-        <div class="stars-2"></div>
+    <div class="floating-ecosystem">
+        <div class="cube-container sym-1"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-2"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-3"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-4"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
     </div>
 
     <nav class="top-navbar" id="topNavbar">
@@ -363,10 +373,10 @@
             
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="texture-letter delay-1" data-text="D">D</span><span class="acrylic-letter float-anim delay-1" data-text="I">I</span><span class="texture-letter" data-text="S">S</span><span class="texture-letter float-anim delay-2" data-text="K">K</span>
+                    <span class="solid-gray-letter delay-1">D</span><span class="acrylic-letter float-anim delay-1">I</span><span class="solid-gray-letter">S</span><span class="solid-gray-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="texture-letter float-anim delay-3" data-text="C">C</span><span class="texture-letter delay-4" data-text="R">R</span><span class="acrylic-letter float-anim delay-4" data-text="E">E</span><span class="texture-letter delay-5" data-text="A">A</span><span class="acrylic-letter overlap-t float-anim delay-5" data-text="T">T</span><span class="texture-letter overlap-i delay-6" data-text="I">I</span><span class="texture-letter float-anim delay-6" data-text="V">V</span><span class="texture-letter" data-text="O">O</span>
+                    <span class="solid-gray-letter float-anim delay-3">C</span><span class="solid-gray-letter delay-4">R</span><span class="acrylic-letter float-anim delay-4">E</span><span class="solid-gray-letter delay-5">A</span><span class="acrylic-letter overlap-t float-anim delay-5">T</span><span class="solid-gray-letter overlap-i delay-6">I</span><span class="solid-gray-letter float-anim delay-6">V</span><span class="solid-gray-letter">O</span>
                 </div>
             </h1>
             
