@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Texturizado Fixed</title>
+    <title>Disk Creativo | Hero Tela Morada Sandbox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +22,8 @@
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
 
-            /* ACTU URL SEGURA: Textura de Marca (URL Raw de Github comprobada) */
-            --brand-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/9c3176cc60046d19be0e560f5965128df4351141/DIQC/image.png');
+            /* ACTU: URL RAW DE LA TELA MORADA */
+            --brand-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/29fc10c2b7a0baa8e0fe14c037b94f26a53c80cf/DIQC/telamorada.jpg');
 
             /* Material de Cubos Flotantes (Gris Sólido) */
             --cube-edge: rgba(255, 255, 255, 0.15);
@@ -78,42 +78,40 @@
             font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
             display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
-            position: relative; z-index: 1; /* El texto debe estar detrás o mezclado con el CD */
+            position: relative; z-index: 1;
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
         /* ─── MATERIALES TIPOGRÁFICOS ─── */
         
-        /* 1. TEXTURA MARRÓN/DORADA + SOMBRA MATE NEGRA (D-S-K-C-R-A-I-V-O) */
+        /* 1. TEXTURA TELA MORADA + EXTRUSIÓN VÍA DROP-SHADOW (Solución Bug WebKit) */
         .texture-letter {
             display: inline-block; position: relative;
             
-            /* El recorte perfecto de textura */
+            /* Textura Frontal */
             background-image: var(--brand-texture-url);
             background-size: cover; 
             background-position: center;
             -webkit-background-clip: text; 
             background-clip: text; 
             color: transparent;
-            -webkit-text-fill-color: transparent; /* Forzar transparencia interna */
+            -webkit-text-fill-color: transparent;
             
-            /* Volumen 3D Negro/Oscuro detrás de la textura */
-            text-shadow: 
-                0px 1px 0px rgba(0, 0, 0, 0.4), 
-                0px 2px 0px rgba(0, 0, 0, 0.5),
-                0px 3px 0px rgba(0, 0, 0, 0.6),
-                0px 4px 0px rgba(0, 0, 0, 0.7), 
-                0px 5px 0px rgba(0, 0, 0, 0.8),
-                0px 6px 0px rgba(0, 0, 0, 0.9),
-                0px 7px 0px rgba(0, 0, 0, 1),
-                0px 15px 15px rgba(0, 0, 0, 0.6), 
-                0px 30px 25px rgba(0, 0, 0, 0.8);
-            z-index: 1; /* Capa Base */
+            /* FIX: Usamos drop-shadow en vez de text-shadow para que el volumen no tape el background-clip. 
+               Colores tintados en morado oscuro para emular la sombra de la tela. */
+            filter: 
+                drop-shadow(0px 1px 0px #2a004d)
+                drop-shadow(0px 2px 0px #220040)
+                drop-shadow(0px 3px 0px #1a0033)
+                drop-shadow(0px 4px 0px #110022)
+                drop-shadow(0px 5px 0px #0a0011)
+                drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.7));
+            z-index: 1; 
         }
         
         /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
         .acrylic-letter {
-            display: inline-block; position: relative;
+            font-family: var(--font-display); display: inline-block; position: relative;
             background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: transparent; 
@@ -122,14 +120,15 @@
             z-index: 10; /* Por encima de la textura y el disco */
         }
 
-        /* Utilidad estructural */
+        /* Utilidades de superposición */
         .overlap-i { margin-left: -0.08em; }
+        .overlap-t { z-index: 25 !important; position: relative; }
 
-        /* CD CENTRAL FLOTANTE (Intercalado mediante z-index local) */
+        /* CD CENTRAL FLOTANTE */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); 
-            z-index: 5; /* Flota sobre .texture-letter (1) y bajo .acrylic-letter (10) */
+            z-index: 5; /* Intercalado en el sándwich */
             pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
@@ -153,7 +152,7 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* ─── CUBOS 3D (RESTAURADOS A GRIS SÓLIDO / MATE) ─── */
+        /* ─── CUBOS 3D (Gris Sólido/Mate) ─── */
         .floating-ecosystem {
             position: absolute; inset: 0; pointer-events: none; overflow: hidden; 
             z-index: 1; perspective: 3000px; 
@@ -166,7 +165,6 @@
             border: 1px solid var(--cube-edge); backface-visibility: visible; opacity: 1;
         }
         
-        /* Material Gris Geométrico Puro (Sin texturas raras) */
         .f { transform: translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
         .bk { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); background: var(--c-deep); }
         .L { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-mid); }
@@ -255,7 +253,7 @@
                     <span class="texture-letter delay-1">D</span><span class="acrylic-letter float-anim delay-1">I</span><span class="texture-letter">S</span><span class="texture-letter float-anim delay-2">K</span>
                 </div>
                 <div>
-                    <span class="texture-letter float-anim delay-3">C</span><span class="texture-letter delay-4">R</span><span class="acrylic-letter float-anim delay-4">E</span><span class="texture-letter delay-5">A</span><span class="acrylic-letter float-anim delay-5">T</span><span class="texture-letter overlap-i delay-6">I</span><span class="texture-letter float-anim delay-6">V</span><span class="texture-letter">O</span>
+                    <span class="texture-letter float-anim delay-3">C</span><span class="texture-letter delay-4">R</span><span class="acrylic-letter float-anim delay-4">E</span><span class="texture-letter delay-5">A</span><span class="acrylic-letter overlap-t float-anim delay-5">T</span><span class="texture-letter overlap-i delay-6">I</span><span class="texture-letter float-anim delay-6">V</span><span class="texture-letter">O</span>
                 </div>
             </h1>
             
