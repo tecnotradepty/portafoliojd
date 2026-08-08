@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Optimizado Sandbox</title>
+    <title>Disk Creativo | Hero Sandwich Texturizado Sandbox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +22,8 @@
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
 
-            /* Textura de Marca */
-            --brand-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/9c3176cc60046d19be0e560f5965128df4351141/DIQC/image.png');
+            /* ACTU: TEXTURA DE MARCA (NUEVA IMAGEN SUBIDA -image_ca62f4.jpg-) */
+            --brand-texture-url: url('image_ca62f4.jpg');
 
             /* Material de Cubos Flotantes (Gris Sólido) */
             --cube-edge: rgba(255, 255, 255, 0.15);
@@ -81,20 +81,31 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* CAPA TRASERA (D, S, K, C, R, A, I, V, O): IMAGEN DE TEXTURA + SOMBRA 3D GRIS */
+        /* ─── SANDWICH TIPOGRÁFICO CORREGIDO & OPTIMIZADO ─── */
+        
+        /* h1 duplicado para sandwich modular limpio */
+        .hero-giant-text.h1-front { position: absolute; inset: 0; }
+
+        /* CAPA TRASERA (D, S, K, C, R, A, I, V, O): TEXTURA MARRÓN/DORADA + VOLUMEN MATE NEGRO */
         .solid-gray-letter {
             display: inline-block; position: relative;
             background-image: var(--brand-texture-url);
             background-size: cover; background-position: center;
             -webkit-background-clip: text; background-clip: text; color: transparent;
-            /* La sombra crea el bloque 3D por detrás de la imagen de textura */
+            /* ACTU: Sombras negras semi-transparentes apiladas para volumen mate que respeta el color de textura, erradicando el gris neutro */
             text-shadow: 
-                0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 
-                0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 
-                0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
+                0px 1px 0px rgba(0, 0, 0, 0.3), 
+                0px 2px 0px rgba(0, 0, 0, 0.4),
+                0px 3px 0px rgba(0, 0, 0, 0.5),
+                0px 4px 0px rgba(0, 0, 0, 0.6), 
+                0px 5px 0px rgba(0, 0, 0, 0.7),
+                0px 6px 0px rgba(0, 0, 0, 0.8),
+                0px 7px 0px rgba(0, 0, 0, 0.9),
+                0px 15px 15px rgba(0, 0, 0, 0.5), 
+                0px 30px 25px rgba(0, 0, 0, 0.7);
         }
         
-        /* CAPA FRONTAL (I, E, T): ACRÍLICO OSCURO */
+        /* CAPA FRONTAL (I, E, T): ACRÍLICO OSCURO (Mantenido) */
         .acrylic-letter {
             font-family: var(--font-display); display: inline-block; position: relative;
             background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
@@ -102,6 +113,9 @@
             -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
             filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
         }
+
+        /* Ocultar letras invisibles del front para alineación modular */
+        .acrylic-letter.invisible { visibility: hidden; }
 
         .z-back { z-index: 1 !important; position: relative; }
         .z-front { z-index: 10 !important; position: relative; }
@@ -119,9 +133,6 @@
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
-        
-        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } 
-        .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
         /* BOTÓN REPRODUCTOR */
         .hero-reproductor-btn {
@@ -134,7 +145,7 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* ─── CUBOS 3D (RESTAURADOS A GRIS SÓLIDO / MATE) ─── */
+        /* CUBOS 3D (Gris Sólido/Mate) */
         .floating-ecosystem {
             position: absolute; inset: 0; pointer-events: none; overflow: hidden; 
             z-index: 1; perspective: 3000px; 
@@ -147,7 +158,7 @@
             border: 1px solid var(--cube-edge); backface-visibility: visible; opacity: 1;
         }
         
-        /* Material Gris Geométrico */
+        /* Material Gris Geométrico (Mantenido) */
         .f { transform: translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
         .bk { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); background: var(--c-deep); }
         .L { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-mid); }
@@ -228,16 +239,26 @@
 
     <section class="hero-section" id="inicio">
         <div class="hero-sandwich">
-            <h1 class="hero-giant-text">
+            
+            <h1 class="hero-giant-text z-back h1-back">
                 <div>
-                    <span class="z-back solid-gray-letter delay-1">D</span><span class="z-front acrylic-letter float-anim delay-1">I</span><span class="z-back solid-gray-letter">S</span><span class="z-front solid-gray-letter float-anim delay-2">K</span>
+                    <span class="solid-gray-letter">D</span><span class="solid-gray-letter">S</span><span class="solid-gray-letter">K</span>
                 </div>
                 <div>
-                    <span class="z-front solid-gray-letter float-anim delay-3">C</span><span class="z-back solid-gray-letter delay-4">R</span><span class="z-front acrylic-letter float-anim delay-4">E</span><span class="z-back solid-gray-letter delay-5">A</span><span class="z-front acrylic-letter overlap-t float-anim delay-5">T</span><span class="z-back solid-gray-letter overlap-i-behind">I</span><span class="z-back solid-gray-letter delay-6">V</span><span class="z-front solid-gray-letter float-anim delay-6">O</span>
+                    <span class="solid-gray-letter">C</span><span class="solid-gray-letter">R</span><span class="solid-gray-letter">A</span><span class="solid-gray-letter overlap-i-behind">I</span><span class="solid-gray-letter">V</span><span class="solid-gray-letter">O</span>
                 </div>
             </h1>
-            
+
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
+            
+            <h1 class="hero-giant-text z-front h1-front">
+                <div>
+                    <span class="acrylic-letter invisible">D</span><span class="acrylic-letter float-anim">I</span><span class="acrylic-letter invisible">S</span><span class="acrylic-letter invisible">K</span>
+                </div>
+                <div>
+                    <span class="acrylic-letter invisible">C</span><span class="acrylic-letter invisible">R</span><span class="acrylic-letter float-anim">E</span><span class="acrylic-letter invisible">A</span><span class="acrylic-letter float-anim overlap-t">T</span><span class="acrylic-letter invisible">I</span><span class="acrylic-letter invisible">V</span><span class="acrylic-letter invisible">O</span>
+                </div>
+            </h1>
             
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
