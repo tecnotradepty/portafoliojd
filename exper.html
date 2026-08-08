@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Tela Morada Sandbox</title>
+    <title>Disk Creativo | Hero Texturizado HD Sandbox</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,18 +11,15 @@
 
     <style>
         :root {
-            /* Variables Core */
             --bg-primary: #050505;
             --brand-purple: #6B00FF;
-            --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
             --hairline: 1px solid rgba(255, 255, 255, 0.1);
             
-            /* Tipografía */
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
 
-            /* ACTU: URL RAW DE LA TELA MORADA */
+            /* TELA MORADA RAW */
             --brand-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/29fc10c2b7a0baa8e0fe14c037b94f26a53c80cf/DIQC/telamorada.jpg');
 
             /* Material de Cubos Flotantes (Gris Sólido) */
@@ -82,13 +79,27 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* ─── MATERIALES TIPOGRÁFICOS ─── */
+        /* ─── ARQUITECTURA ANTI-WEBKIT BUG (MATERIALES TIPOGRÁFICOS) ─── */
         
-        /* 1. TEXTURA TELA MORADA + EXTRUSIÓN VÍA DROP-SHADOW (Solución Bug WebKit) */
+        /* 1. TEXTURA TELA MORADA + VOLUMEN 3D */
         .texture-letter {
             display: inline-block; position: relative;
-            
-            /* Textura Frontal */
+            /* La letra base es invisible, pero proyecta la sombra 3D */
+            color: transparent; 
+            text-shadow: 
+                0px 1px 0px #2a004d,
+                0px 2px 0px #220040,
+                0px 3px 0px #1a0033,
+                0px 4px 0px #110022,
+                0px 5px 0px #0a0011,
+                0px 15px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1; 
+        }
+
+        /* Pseudo-elemento: Aísla la textura de la sombra para evitar el bug negro */
+        .texture-letter::after {
+            content: attr(data-text); /* Clona la letra exacta desde el HTML */
+            position: absolute; left: 0; top: 0;
             background-image: var(--brand-texture-url);
             background-size: cover; 
             background-position: center;
@@ -96,28 +107,31 @@
             background-clip: text; 
             color: transparent;
             -webkit-text-fill-color: transparent;
-            
-            /* FIX: Usamos drop-shadow en vez de text-shadow para que el volumen no tape el background-clip. 
-               Colores tintados en morado oscuro para emular la sombra de la tela. */
-            filter: 
-                drop-shadow(0px 1px 0px #2a004d)
-                drop-shadow(0px 2px 0px #220040)
-                drop-shadow(0px 3px 0px #1a0033)
-                drop-shadow(0px 4px 0px #110022)
-                drop-shadow(0px 5px 0px #0a0011)
-                drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.7));
-            z-index: 1; 
+            text-shadow: none; /* Asegura que la capa superior no ensucie la imagen */
+            z-index: 2;
+            pointer-events: none;
         }
         
         /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
         .acrylic-letter {
-            font-family: var(--font-display); display: inline-block; position: relative;
+            font-family: var(--font-display); 
+            display: inline-block; position: relative;
+            color: transparent;
+            /* Sombra proyectada desde la caja base */
+            filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
+            z-index: 10;
+        }
+
+        /* Capa frontal del acrílico aislada */
+        .acrylic-letter::after {
+            content: attr(data-text);
+            position: absolute; left: 0; top: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(20,20,20,0.8) 20%, rgba(5,5,5,0.9) 45%, rgba(255,255,255,0.8) 50%, rgba(5,5,5,0.9) 55%, rgba(20,20,20,0.8) 80%, rgba(255,255,255,0.3) 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: transparent; 
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); /* Borde de cristal */
-            filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
-            z-index: 10; /* Por encima de la textura y el disco */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
+            z-index: 2;
+            pointer-events: none;
         }
 
         /* Utilidades de superposición */
@@ -128,7 +142,7 @@
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); 
-            z-index: 5; /* Intercalado en el sándwich */
+            z-index: 5; /* Intercalado en el sándwich entre texturas(1) y acrílico(10) */
             pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
@@ -250,10 +264,10 @@
             
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="texture-letter delay-1">D</span><span class="acrylic-letter float-anim delay-1">I</span><span class="texture-letter">S</span><span class="texture-letter float-anim delay-2">K</span>
+                    <span class="texture-letter delay-1" data-text="D">D</span><span class="acrylic-letter float-anim delay-1" data-text="I">I</span><span class="texture-letter" data-text="S">S</span><span class="texture-letter float-anim delay-2" data-text="K">K</span>
                 </div>
                 <div>
-                    <span class="texture-letter float-anim delay-3">C</span><span class="texture-letter delay-4">R</span><span class="acrylic-letter float-anim delay-4">E</span><span class="texture-letter delay-5">A</span><span class="acrylic-letter overlap-t float-anim delay-5">T</span><span class="texture-letter overlap-i delay-6">I</span><span class="texture-letter float-anim delay-6">V</span><span class="texture-letter">O</span>
+                    <span class="texture-letter float-anim delay-3" data-text="C">C</span><span class="texture-letter delay-4" data-text="R">R</span><span class="acrylic-letter float-anim delay-4" data-text="E">E</span><span class="texture-letter delay-5" data-text="A">A</span><span class="acrylic-letter overlap-t float-anim delay-5" data-text="T">T</span><span class="texture-letter overlap-i delay-6" data-text="I">I</span><span class="texture-letter float-anim delay-6" data-text="V">V</span><span class="texture-letter" data-text="O">O</span>
                 </div>
             </h1>
             
