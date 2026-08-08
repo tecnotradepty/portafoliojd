@@ -28,13 +28,20 @@
             --font-sans: 'Inter', sans-serif;
             --font-code: 'Courier New', Courier, monospace;
 
-            /* TEXTURAS DE MARCA (URL Raw de Github comprobadas) */
+            /* TEXTURAS DE MARCA (Caras Clara y Oscura) */
             --texture-light: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/86894d470812fc787f491a287e3b1d4df507a6c0/DIQC/telamorada%20(1).jpeg');
             --texture-dark: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/fba2d6e6d218d9e5ca407c4c0ef2dbc28df954e1/DIQC/telamoradaoscura.jpeg');
+
+            /* Material de Cubos Flotantes (Gris Sólido) */
+            --cube-edge: rgba(255, 255, 255, 0.15);
+            --c-bright: #999999;
+            --c-mid: #666666;
+            --c-dark: #444444;
+            --c-deep: #222222;
         }
 
-        html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
-        html { scroll-behavior: smooth; height: 100%; }
+        /* ─── RESET Y BASE ─── */
+        html, body { overflow-x: clip !important; max-width: 100%; width: 100%; scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -53,7 +60,7 @@
             z-index: -3; filter: brightness(0.9) saturate(1.1);
         }
 
-        /* ─── ESTRELLAS ANIMADAS (SOLO FUGACES) ─── */
+        /* ─── ESTRELLAS ANIMADAS ─── */
         .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
         .stars-1 {
             position: absolute; width: 1px; height: 1px; background: transparent;
@@ -89,43 +96,51 @@
         .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── 03. HERO SECTION ─── */
-        .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
-        .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
+        /* ─── 03. HERO SECTION (CORREGIDO) ─── */
+        .hero-section { 
+            position: relative; height: 100vh; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; 
+        }
+        .hero-sandwich { 
+            position: relative; display: flex; flex-direction: column; align-items: center; 
+            width: 100%; max-width: 100%; z-index: 10; 
+        }
         
         .hero-giant-text {
-            font-family: var(--font-display); font-size: clamp(3rem, 15vw, 22rem);
+            font-family: var(--font-display); font-size: clamp(3rem, 11vw, 22rem);
             line-height: 0.85; text-align: center; margin: 0; text-transform: uppercase;
-            display: flex; flex-direction: column; gap: clamp(1rem, 5vh, 4rem); letter-spacing: -2px; width: 100%;
-            position: relative; z-index: 1; /* Detrás o mezclado con el CD */
+            display: flex; flex-direction: column; gap: 2vh; letter-spacing: -2px; width: 100%;
+            position: relative; z-index: 10; 
         }
-        .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* ─── ARQUITECTURA DE LETRAS 2 CAPAS (SIN BUGS WEB-KIT) ─── */
+        /* FIX: Evita que las letras se apilen hacia abajo en móviles */
+        .hero-giant-text div { 
+            display: flex; justify-content: center; align-items: center; gap: 0.2vw; 
+            flex-wrap: nowrap; /* BLOQUEO DE SALTO DE LÍNEA */
+        }
+
+        /* ─── ARQUITECTURA AISLADA DE LETRAS (ANTI-WEBKIT BUG) ─── */
         
-        /* 1. TEXTURA MORADA DUAL (D-S-K, C-R-A-I-V-O) */
+        /* 1. TEXTURA MORADA 3D (Capa Base) */
         .texture-letter {
             display: inline-block; position: relative;
-            color: transparent; /* Contenedor invisible */
-            z-index: 1; /* Capa Base (Abajo) */
+            color: transparent; /* Elemento real invisible */
+            z-index: 1; /* Nivel 1: Atrás del CD */
         }
 
-        /* Pseudo-elemento: Volumen Oscuro (Sombra Proyectada) */
+        /* Cara Oscura (Volumen 3D Extruido) */
         .texture-letter::before {
             content: attr(data-text);
-            position: absolute; 
-            left: 0.035em; top: 0.035em; /* Extrusión proporcional */
+            position: absolute; left: 0.04em; top: 0.04em; /* Extrusión matemática */
             background-image: var(--texture-dark);
             background-size: cover; background-position: center;
             -webkit-background-clip: text; background-clip: text; 
             color: transparent; -webkit-text-fill-color: transparent;
-            /* Sombra para separarlo del fondo espacial */
-            filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.9));
-            z-index: -1;
-            pointer-events: none;
+            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.9)); /* Sombra ambiental fuera de la letra */
+            z-index: -1; pointer-events: none;
         }
 
-        /* Pseudo-elemento: Cara Clara (Frente) */
+        /* Cara Clara (Frente Texturizado) */
         .texture-letter::after {
             content: attr(data-text);
             position: absolute; left: 0; top: 0;
@@ -133,19 +148,17 @@
             background-size: cover; background-position: center;
             -webkit-background-clip: text; background-clip: text; 
             color: transparent; -webkit-text-fill-color: transparent;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 2; pointer-events: none;
         }
         
-        /* 2. ACRÍLICO OSCURO PULIDO (I-E-T) */
+        /* 2. ACRÍLICO OSCURO PULIDO (Capa Frontal) */
         .acrylic-letter {
             font-family: var(--font-display); display: inline-block; position: relative;
             color: transparent;
-            filter: drop-shadow(0px 0.08em 0.08em rgba(0, 0, 0, 0.7)); /* Sombra proporcional */
-            z-index: 10; /* Delante del CD y la textura (Arriba) */
+            filter: drop-shadow(0px 0.08em 0.08em rgba(0, 0, 0, 0.7)); 
+            z-index: 10; /* Nivel 10: Arriba de todo */
         }
 
-        /* Capa frontal del acrílico aislada */
         .acrylic-letter::after {
             content: attr(data-text);
             position: absolute; left: 0; top: 0;
@@ -153,18 +166,18 @@
             -webkit-background-clip: text; background-clip: text; color: transparent;
             -webkit-text-fill-color: transparent; 
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); /* Borde de cristal */
-            z-index: 2;
-            pointer-events: none;
+            z-index: 2; pointer-events: none;
         }
 
         /* Utilidades tipográficas */
         .overlap-i { margin-left: -0.08em; }
-        .overlap-t { z-index: 25 !important; position: relative; }
 
-        /* CD CENTRAL FLOTANTE (Intercalado en z-index: 5) */
+        /* CD CENTRAL FLOTANTE (Nivel Medio) */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
-            width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
+            width: clamp(120px, 18vw, 320px); 
+            z-index: 5; /* Nivel 5: En medio del Sándwich */
+            pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
         }
@@ -172,7 +185,9 @@
         @keyframes mechanicalFloat { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, -52%); } }
         @keyframes floatLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
-        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
+        
+        .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } 
+        .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
         /* BOTÓN REPRODUCTOR CTA */
         .hero-reproductor-btn {
@@ -194,7 +209,44 @@
             box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
         }
 
-        /* ─── 05. NÚCLEO INFERIOR (NEGRO MATE + 10 ESTRELLAS) ─── */
+        /* ─── ECOSISTEMA DE CUBOS 3D (REINTEGRADOS, GRISES MATE) ─── */
+        .floating-ecosystem {
+            position: absolute; inset: 0; pointer-events: none; overflow: hidden; 
+            z-index: 0; perspective: 3000px; 
+        }
+        .cube-container { position: absolute; transform-style: preserve-3d; filter: drop-shadow(0 15px 40px rgba(0,0,0,0.9)); }
+        .cube-object { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+        
+        .c-f {
+            position: absolute; width: 100%; height: 100%;
+            border: 1px solid var(--cube-edge); backface-visibility: visible; opacity: 1;
+        }
+        
+        /* Gris Corporativo Sólido */
+        .f { transform: translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
+        .bk { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); background: var(--c-deep); }
+        .L { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-mid); }
+        .R { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); background: var(--c-dark); }
+        .T { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
+        .B { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-dark); }
+
+        @keyframes slowRotate1 { to { transform: rotateX(360deg) rotateY(180deg); } }
+        @keyframes slowRotate2 { to { transform: rotateX(-180deg) rotateY(360deg) rotateZ(90deg); } }
+        @keyframes slowRotate3 { to { transform: rotateX(90deg) rotateY(-180deg) rotateZ(360deg); } }
+        @keyframes slowRotate4 { to { transform: rotateX(-360deg) rotateZ(-180deg); } }
+        @keyframes spaceDrift { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30px, -20px); } 66% { transform: translate(-15px, 25px); } }
+
+        .sym-1 { --size: clamp(8rem, 15vw, 18rem); width: var(--size); height: var(--size); top: 10%; left: 5%; filter: blur(8px) drop-shadow(0 20px 50px rgba(0,0,0,0.95)); z-index: 10; animation: spaceDrift 60s infinite ease-in-out; }
+        .sym-1 .cube-object { animation: slowRotate1 95s infinite linear; }
+        .sym-2 { --size: clamp(3rem, 6vw, 6rem); width: var(--size); height: var(--size); top: 25%; right: 15%; opacity: 0.7; animation: spaceDrift 75s infinite ease-in-out reverse -10s; }
+        .sym-2 .cube-object { animation: slowRotate2 120s infinite linear -15s; }
+        .sym-3 { --size: clamp(2.5rem, 5vw, 5rem); width: var(--size); height: var(--size); bottom: 25%; left: 18%; filter: blur(1px); opacity: 0.6; animation: spaceDrift 90s infinite ease-in-out -25s; }
+        .sym-3 .cube-object { animation: slowRotate3 105s infinite linear -5s; }
+        .sym-4 { --size: clamp(1.5rem, 3vw, 3rem); width: var(--size); height: var(--size); top: 60%; right: 35%; filter: blur(2.5px); opacity: 0.2; animation: spaceDrift 80s infinite linear reverse -40s; }
+        .sym-4 .cube-object { animation: slowRotate4 130s infinite linear; }
+
+
+        /* ─── 05. NÚCLEO INFERIOR (IDENTIDAD Y PROYECTOS) ─── */
         .engineering-bg { 
             background-color: var(--bg-primary); 
             position: relative; z-index: 20; padding-bottom: 50px; width: 100%; overflow: hidden; 
@@ -214,14 +266,12 @@
                 5vw 35vh rgba(255,255,255,0.5), 50vw 15vh rgba(255,255,255,0.2);
             animation: slowBreathe 8s infinite alternate ease-in-out;
         }
-        @keyframes slowBreathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
 
         .content-wrapper {
             position: relative; z-index: 10;
             padding: 6rem 4vw; max-width: 1600px; margin: 0 auto; width: 100%;
         }
 
-        /* IDENTIDAD EN BLOQUES */
         .identity-split { 
             display: grid; grid-template-columns: 55% 45%; gap: 5rem;
             align-items: center; margin-bottom: 10rem; 
@@ -242,14 +292,12 @@
         .identity-mockup { display: flex; justify-content: center; align-items: center; padding: 1rem; position: relative;}
         .playground-img { width: 100%; max-width: 600px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9)); animation: floatEditorial 12s ease-in-out infinite;}
 
-        /* DIRECTORIO (TARJETAS GRISES B2B) */
         .projects-header { margin-bottom: 4rem; text-align: center; }
         .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;}
         
         .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
         .card-wrapper { width: 100%; perspective: 1200px; }
         
-        /* Gris oscuro elegante para el marco */
         .card-editorial {
             width: 100%; background: #161618; border: var(--hairline-dark);
             padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
@@ -265,7 +313,6 @@
         .card-content { padding: 1.5rem 0 0 0; transform: translate3d(0, 0, 30px); display: flex; flex-direction: column; pointer-events: none;}
         .card-badge { font-family: var(--font-code); font-size: 0.65rem; color: var(--brand-purple); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;}
         
-        /* Textos blancos y grises claros sobre la tarjeta negra */
         .card-title { font-family: var(--font-serif); font-size: 1.8rem; color: #FFFFFF; line-height: 1.1; margin-bottom: 0.5rem; font-weight: 500;}
         .card-desc { font-family: var(--font-sans); font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
@@ -295,31 +342,49 @@
         
         .footer-bottom { max-width: 1600px; margin: 0 auto; margin-top: 4rem; padding-top: 2rem; border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);}
 
-        /* ─── RESPONSIVE MÓVIL CORRECTO ─── */
+        /* ─── MÓVIL CORRECTO Y DEFINITIVO (LA CURA DEL COLAPSO) ─── */
         @media (max-width: 900px) {
-            /* Navbar visible y compacta en móviles */
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
-            .navbar-brand span { display: none; } /* Oculta ".CREATIVO" para ganar espacio */
+            .navbar-brand span { display: none; } 
             .brand-icon { height: 18px; }
             
-            .navbar-links { display: flex; gap: 1rem; } /* Menú visible en móvil */
+            .navbar-links { display: flex; gap: 1rem; } 
             .nav-link { font-size: 0.6rem; }
             .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.6rem; gap: 4px;}
             .nav-btn-wa svg { width: 12px; height: 12px; }
             
-            /* HERO MÓVIL: YA NO APILA HORIZONTALMENTE Y "RESPIRA" */
-            .hero-giant-text { font-size: 19vw; gap: 0vw; line-height: 0.9;} 
+            /* HERO MÓVIL: BLOQUEO DE SALTO DE LÍNEA Y ESCALADO FLUIDO */
+            .hero-section {
+                height: 100vh;
+                padding-top: 60px; /* Compensa el navbar compacto */
+            }
+            .hero-giant-text { 
+                font-size: 11vw; /* Disminuido matemáticamente para que quepan 8 letras */
+                gap: 1vh; /* Se elimina el vacío masivo vertical */
+                line-height: 0.9;
+            }
+            /* Esto salva el layout: Fuerza a las letras a quedarse en fila horizontal */
+            .hero-giant-text div {
+                flex-wrap: nowrap;
+                gap: 0; /* Letras pegadas para maximizar espacio */
+            }
+
             .giant-transparent-logo { 
-                width: 40vw; /* Tamaño reducido proporcional en móvil */
-                top: 26%; /* Ajustado para el tamaño reducido de texto */
+                width: 55vw; /* Disco central proporcionado */
+                top: 35%; /* Centrado corregido */
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
 
-            /* NÚCLEO INFERIOR: RESPONSIVE MÓVIL (Intacto) */
+            /* ANIMACIÓN REDUCIDA PARA NO DESENCAJAR CAPAS */
+            .float-anim {
+                animation: floatLetterMobile 8s ease-in-out infinite;
+            }
+
+            .sym-1 { top: 5%; left: -10%; } .sym-2 { top: 20%; right: 5%; } .sym-3 { bottom: 20%; left: 5%; }
+
             .content-wrapper { padding: 4rem 1.5rem; }
             .identity-split { grid-template-columns: 1fr; gap: 3rem; margin-bottom: 5rem;}
-            
             .identity-text { gap: 2.5rem; }
             .identity-title { font-size: clamp(2rem, 8vw, 2.5rem); }
             .identity-desc { font-size: 0.95rem; }
@@ -338,6 +403,12 @@
             .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
+
+        /* Fotograma clave de animación tenue para móviles */
+        @keyframes floatLetterMobile {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
     </style>
 </head>
 <body>
@@ -349,6 +420,13 @@
         <div class="stars-2"></div>
     </div>
 
+    <div class="floating-ecosystem">
+        <div class="cube-container sym-1"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-2"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-3"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+        <div class="cube-container sym-4"><div class="cube-object"><div class="c-f f"></div><div class="c-f bk"></div><div class="c-f L"></div><div class="c-f R"></div><div class="c-f T"></div><div class="c-f B"></div></div></div>
+    </div>
+
     <nav class="top-navbar" id="topNavbar">
         <a href="#inicio" class="navbar-brand">
             DISK<span>.CREATIVO</span>
@@ -356,10 +434,10 @@
         </a>
         <div class="navbar-links">
             <a href="#inicio" class="nav-link">Inicio</a>
-            <a href="#identidad" class="nav-link">Identidad</a>
-            <a href="mailto:hello@diskcreativo.com" class="nav-btn-wa">
+            <a href="dex.html" class="nav-link">Construye</a>
+            <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-                Atención Directa
+                WhatsApp
             </a>
         </div>
     </nav>
@@ -371,14 +449,24 @@
             
             <h1 class="hero-giant-text">
                 <div>
-                    <span class="texture-letter delay-1" data-text="D">D</span><span class="acrylic-letter float-anim delay-1" data-text="I">I</span><span class="texture-letter">S</span><span class="texture-letter float-anim delay-2">K</span>
+                    <span class="texture-letter delay-1" data-text="D">D</span>
+                    <span class="acrylic-letter float-anim delay-1" data-text="I">I</span>
+                    <span class="texture-letter" data-text="S">S</span>
+                    <span class="texture-letter float-anim delay-2" data-text="K">K</span>
                 </div>
                 <div>
-                    <span class="texture-letter float-anim delay-3">C</span><span class="texture-letter delay-4">R</span><span class="acrylic-letter float-anim delay-4">E</span><span class="texture-letter delay-5">A</span><span class="acrylic-letter overlap-t float-anim delay-5">T</span><span class="texture-letter overlap-i delay-6">I</span><span class="texture-letter float-anim delay-6">V</span><span class="texture-letter">O</span>
+                    <span class="texture-letter float-anim delay-3" data-text="C">C</span>
+                    <span class="texture-letter delay-4" data-text="R">R</span>
+                    <span class="acrylic-letter float-anim delay-4" data-text="E">E</span>
+                    <span class="texture-letter delay-5" data-text="A">A</span>
+                    <span class="acrylic-letter overlap-t float-anim delay-5" data-text="T">T</span>
+                    <span class="texture-letter overlap-i delay-6" data-text="I">I</span>
+                    <span class="texture-letter float-anim delay-6" data-text="V">V</span>
+                    <span class="texture-letter" data-text="O">O</span>
                 </div>
             </h1>
             
-            <a href="#identidad" class="hero-reproductor-btn">
+            <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
             </a>
         </div>
@@ -445,7 +533,7 @@
                 <ul>
                     <li><a href="#inicio">La Base</a></li>
                     <li><a href="#identidad">Identidad</a></li>
-                    <li><a href="#portfolioGrid">Portafolio</a></li>
+                    <li><a href="dex.html">Construye tu Proyecto</a></li>
                 </ul>
             </div>
             <div class="footer-nav">
@@ -453,7 +541,7 @@
                 <ul>
                     <li><a href="#">Ciudad de Panamá, PTY</a></li>
                     <li><a href="mailto:hello@diskcreativo.com">hello@diskcreativo.com</a></li>
-                    <li><a href="tel:+50700000000">+507 0000-0000</a></li>
+                    <li><a href="https://wa.me/50768529324" target="_blank">Atención Directa (WhatsApp)</a></li>
                 </ul>
             </div>
         </div>
@@ -469,66 +557,58 @@
             const dynamicLogo = document.getElementById('dynamic-logo');
             const topNavbar = document.getElementById('topNavbar');
             
-            // Navbar Hide/Show on Scroll
-            let lastScrollY = window.scrollY;
             window.addEventListener('scroll', () => {
-                if(window.innerWidth > 900) { // Solo en escritorio
-                    if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                        topNavbar.style.transform = 'translateY(-100%)';
-                    } else {
-                        topNavbar.style.transform = 'translateY(0)';
-                    }
-                    lastScrollY = window.scrollY;
-                }
+                const scrolled = window.scrollY;
+                if(scrolled > 50) topNavbar.style.transform = 'translateY(-100%)';
+                else topNavbar.style.transform = 'translateY(0)';
             }, { passive: true });
 
-            // Interacción de Paralaje del Logo del Disco
             const heroContainer = document.getElementById('inicio');
             if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
                     const rect = heroContainer.getBoundingClientRect();
                     const x = (e.clientX - rect.left) / rect.width - 0.5;
                     const y = (e.clientY - rect.top) / rect.height - 0.5;
-                    
-                    // Paralaje suave invertido
                     dynamicLogo.style.transform = `translate(calc(-50% + ${x * -40}px), calc(-50% + ${y * -40}px))`;
                 });
-
-                // Resetear al salir
-                heroContainer.addEventListener('mouseleave', () => {
-                    dynamicLogo.style.transform = 'translate(-50%, -50%)';
-                });
+                heroContainer.addEventListener('mouseleave', () => { dynamicLogo.style.transform = 'translate(-50%, -50%)'; });
             }
 
-            // Físicas 3D de Tarjetas de Portafolio
+            // Físicas 3D de Tarjetas
             function init3DInteractions() {
                 const cards = document.querySelectorAll('.card-wrapper');
                 cards.forEach(wrapper => {
                     const card = wrapper.querySelector('.card-editorial');
                     
-                    wrapper.addEventListener('mousemove', (e) => {
+                    const handleMove = (e) => {
+                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                         const rect = wrapper.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
+                        const x = clientX - rect.left;
+                        const y = clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
                         
-                        // Rotación física basada en el puntero
-                        const rotateX = ((y - centerY) / centerY) * -15; // Invertido
+                        const rotateX = ((y - centerY) / centerY) * -15; 
                         const rotateY = ((x - centerX) / centerX) * 15;
                         
                         card.style.transform = `rotate3d(1, 0, 0, ${rotateX}deg) rotate3d(0, 1, 0, ${rotateY}deg) scale(1.02)`;
                         card.classList.add('is-active');
-                    });
+                    };
 
-                    wrapper.addEventListener('mouseleave', () => {
+                    const handleLeave = () => {
                         card.style.transform = `rotate3d(0, 0, 0, 0deg) scale(1)`;
                         card.classList.remove('is-active');
-                    });
+                    };
+
+                    wrapper.addEventListener('mousemove', handleMove);
+                    wrapper.addEventListener('mouseleave', handleLeave);
+                    wrapper.addEventListener('touchmove', handleMove, { passive: true });
+                    wrapper.addEventListener('touchend', handleLeave);
                 });
             }
 
-            // Google Sheets API Integration
+            // Google Sheets API
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             const grid = document.getElementById('portfolioGrid');
 
@@ -537,13 +617,12 @@
                     const response = await fetch(API_URL);
                     const proyectosData = await response.json();
                     
-                    if (proyectosData && proyectosData.length > 0) {
-                        grid.innerHTML = ''; // Limpiar el cargador
-
+                    if (proyectosData && proyectosData.length > 0) { 
+                        grid.innerHTML = ''; 
                         proyectosData.forEach(p => {
                             const wrapper = document.createElement('div');
-                            wrapper.className = 'card-wrapper'; // Necesario para la física 3D
-
+                            wrapper.className = 'card-wrapper'; 
+                            
                             let imgUrl = p.imagen ? p.imagen.trim() : "";
                             let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-family:var(--font-sans);">[Sin Imagen]</div>`;
 
@@ -562,19 +641,15 @@
                             `;
                             grid.appendChild(wrapper);
                         });
-                        
-                        // Inicializar físicas 3D tras cargar las tarjetas
-                        init3DInteractions();
-                    } else {
-                        grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">No hay proyectos disponibles actualmente.</div>';
-                    }
+                        init3DInteractions(); 
+                    } 
+                    else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
                 } catch (error) {
-                    console.error("Error al cargar proyectos:", error);
-                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error al conectar con el servidor de portafolio.</div>';
+                    console.error("Error API:", error);
+                    grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Error 503: Falla de conexión con servidor.</div>';
                 }
             }
 
-            // Iniciar carga
             fetchProyectos();
         });
     </script>
