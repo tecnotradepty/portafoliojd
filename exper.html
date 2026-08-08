@@ -99,6 +99,7 @@
 
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.2vw; flex-wrap: nowrap; }
 
+        /* MATERIALES TIPOGRÁFICOS */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 0px 1px 0px #909090, 0px 2px 0px #858585, 0px 3px 0px #7A7A7A, 0px 4px 0px #707070, 0px 5px 0px #656565, 0px 6px 0px #4A4A4A, 0px 7px 0px #404040, 0px 15px 15px rgba(0, 0, 0, 0.4), 0px 30px 25px rgba(0, 0, 0, 0.6);
@@ -129,6 +130,7 @@
         .float-anim { display: inline-block; animation: floatLetter 9s ease-in-out infinite; }
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
+        /* REPRODUCTOR NUEVO PNG (NODO CTA) */
         .hero-reproductor-btn {
             display: block; margin-top: 2rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
@@ -185,14 +187,13 @@
             max-width: 1400px; margin: 0 auto; width: 100%;
         }
 
-        /* Bloques Editoriales (Divididos por Líneas Blancas) */
+        /* Bloques Editoriales */
         .b2b-block {
-            display: grid; grid-template-columns: 55% 45%; gap: 5rem;
-            align-items: center; padding: 7rem 4vw;
+            display: grid; grid-template-columns: 55% 45%; gap: 3rem;
+            align-items: center; padding: 4rem 4vw;
             border-top: var(--line-solid-white);
         }
-        /* El primer bloque no necesita línea arriba */
-        .b2b-block:first-child { border-top: none; padding-top: 5rem; }
+        .b2b-block:first-child { border-top: none; padding-top: 2rem; }
 
         .block-text { display: flex; flex-direction: column; gap: 1.5rem; }
         .bp-sub { font-family: var(--font-code); color: var(--accent-neon); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; display: inline-block; border-bottom: 1px solid var(--accent-neon); padding-bottom: 4px; align-self: flex-start;}
@@ -211,21 +212,25 @@
 
         /* DIRECTORIO (TARJETAS GRISES B2B) */
         .portfolio-block {
-            display: block; padding-top: 7rem; padding-bottom: 4rem;
+            display: block; padding-top: 4rem; padding-bottom: 2rem;
+            border-top: var(--line-solid-white);
         }
         
-        .projects-header { margin-bottom: 5rem; text-align: center; }
+        .projects-header { margin-bottom: 3rem; text-align: center; }
         .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin: 0;}
         
         /* Contenedor Producto debajo del Título Portafolio */
         .product-split {
-            display: grid; grid-template-columns: 45% 55%; gap: 5rem;
-            align-items: center; margin-bottom: 7rem;
+            display: grid; grid-template-columns: 45% 55%; gap: 3rem;
+            align-items: center; margin-bottom: 4rem;
         }
 
         .grid-editorial { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; perspective: 1200px; width: 100%;}
         .card-wrapper { width: 100%; perspective: 1200px; }
         
+        /* OCULTAR TARJETAS EN PAGINACIÓN */
+        .card-hidden { display: none !important; }
+
         .card-editorial {
             width: 100%; background: #161618; border: var(--hairline-dark);
             padding: 1.5rem; display: flex; flex-direction: column; text-decoration: none; cursor: pointer;
@@ -250,6 +255,21 @@
         .card-editorial:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 30px 60px rgba(0,0,0,0.9); border-color: rgba(255,255,255,0.15);}
         .card-editorial:hover .card-thumb img { filter: grayscale(0%) scale(1.05); }
         .card-editorial:hover .card-exe { color: var(--accent-neon); }
+
+        /* BOTÓN BRUTALISTA MOSTRAR MÁS */
+        .portfolio-toggle-container {
+            display: flex; justify-content: center; width: 100%; margin-top: 4rem;
+        }
+        .btn-toggle-portfolio {
+            background: transparent; color: var(--text-main);
+            border: var(--line-solid-white); padding: 1rem 2.5rem;
+            font-family: var(--font-code); font-size: 0.8rem; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-toggle-portfolio:hover {
+            background: var(--text-main); color: var(--bg-primary);
+            box-shadow: 0 0 25px rgba(255,255,255,0.2);
+        }
 
         /* ─── 06. FOOTER B2B PREMIUM ─── */
         .b2b-footer { background-color: var(--bg-secondary); border-top: var(--hairline); padding: 5rem 4vw; position: relative; z-index: 20; display: block; }
@@ -280,27 +300,27 @@
             .giant-transparent-logo { width: 60vw; top: 50%; }
             .hero-reproductor-btn { width: 85%; margin-top: 2rem; } 
 
-            /* Colapso de Bloques Lineales */
-            .b2b-block { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+            .b2b-block { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
             .bp-title { font-size: clamp(2rem, 8vw, 2.5rem); }
-            
-            .product-split { grid-template-columns: 1fr; gap: 3rem; margin-bottom: 4rem; padding: 0 1.5rem; }
-            /* Invertir orden en móvil para que el texto vaya primero */
+            .block-text { gap: 1rem; }
+
+            .product-split { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; padding: 0 1.5rem; }
             .product-split .block-text { order: 1; }
             .product-split .block-img { order: 2; }
 
-            .projects-header { margin-bottom: 3rem; }
+            .projects-header { margin-bottom: 1.5rem; }
+            .portfolio-block { padding-top: 2rem; padding-bottom: 2rem; }
 
-            .grid-editorial { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 0 1.5rem;}
+            .grid-editorial { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1.5rem;}
             .card-editorial { padding: 0.8rem; }
             .card-wrapper { height: auto; }
-            .card-thumb { height: 100px; }
+            .card-thumb { height: 160px; }
             .card-content { padding: 1rem 0 0 0; }
             .card-badge { font-size: 0.5rem; margin-bottom: 0.4rem;}
-            .card-title { font-size: 1rem; margin-bottom: 0.3rem;}
-            .card-desc { font-size: 0.65rem; line-height: 1.3; -webkit-line-clamp: 2;}
+            .card-title { font-size: 1.2rem; margin-bottom: 0.3rem;}
+            .card-desc { font-size: 0.75rem; line-height: 1.3; -webkit-line-clamp: 2;}
             .card-bottom { padding: 0.5rem 0 0 0; margin-top: 0.5rem;}
-            .card-exe { font-size: 0.55rem; }
+            .card-exe { font-size: 0.6rem; }
 
             .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
@@ -368,7 +388,7 @@
                 </h1>
                 
                 <a href="dex.html" class="hero-reproductor-btn">
-                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
+                    <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/b76e72cc984d67653151504a02d0d10f0d35099c/DIQC/1786229208318.png" alt="Configuración de Sistema">
                 </a>
             </div> 
         </div>
@@ -426,6 +446,10 @@
 
                 <div class="grid-editorial" id="portfolioGrid">
                     <div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Iniciando lectura de servidor...</div>
+                </div>
+
+                <div class="portfolio-toggle-container" id="toggleContainer" style="display: none;">
+                    <button id="toggleProjectsBtn" class="btn-toggle-portfolio">[ MOSTRAR MÁS PROYECTOS ]</button>
                 </div>
 
             </section>
@@ -519,9 +543,12 @@
                 });
             }
 
-            // Google Sheets API
+            // Google Sheets API + Paginación
             const API_URL = 'https://script.google.com/macros/s/AKfycbzyXAjKVOHlpxDYFgZ_J_TPOoync5-J9zaXdPdW3ex4O-y9o-WVUepMV2CflgF9dxo0Eg/exec';
             const grid = document.getElementById('portfolioGrid');
+            const toggleContainer = document.getElementById('toggleContainer');
+            const toggleBtn = document.getElementById('toggleProjectsBtn');
+            let isExpanded = false;
 
             async function fetchProyectos() {
                 try {
@@ -530,9 +557,11 @@
                     
                     if (proyectosData && proyectosData.length > 0) { 
                         grid.innerHTML = ''; 
-                        proyectosData.forEach(p => {
+                        
+                        proyectosData.forEach((p, index) => {
                             const wrapper = document.createElement('div');
-                            wrapper.className = 'card-wrapper'; 
+                            // Si el proyecto es mayor al índice 2 (4to proyecto en adelante), se oculta por defecto
+                            wrapper.className = index >= 3 ? 'card-wrapper card-hidden' : 'card-wrapper'; 
                             
                             let imgUrl = p.imagen ? p.imagen.trim() : "";
                             let thumbHtml = imgUrl !== "" ? `<img src="${imgUrl}" alt="${p.titulo}">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-family:var(--font-sans);">[Sin Imagen]</div>`;
@@ -552,6 +581,29 @@
                             `;
                             grid.appendChild(wrapper);
                         });
+
+                        // Mostrar botón si hay más de 3 proyectos
+                        if (proyectosData.length > 3) {
+                            toggleContainer.style.display = 'flex';
+                            
+                            toggleBtn.addEventListener('click', () => {
+                                const hiddenCards = grid.querySelectorAll('.card-wrapper');
+                                isExpanded = !isExpanded;
+                                
+                                hiddenCards.forEach((card, idx) => {
+                                    if (idx >= 3) {
+                                        if (isExpanded) {
+                                            card.classList.remove('card-hidden');
+                                        } else {
+                                            card.classList.add('card-hidden');
+                                        }
+                                    }
+                                });
+
+                                toggleBtn.textContent = isExpanded ? '[ MOSTRAR MENOS ]' : '[ MOSTRAR MÁS PROYECTOS ]';
+                            });
+                        }
+
                         init3DInteractions(); 
                     } 
                     else { grid.innerHTML = '<div style="grid-column: 1/-1; padding: 3rem; text-align:center; color: var(--text-muted);">Registro vacío.</div>'; }
