@@ -3,394 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Setup de Proyecto</title>
+    <title>Disk Creativo | Inicializar Proyecto</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
+            /* Variables Core */
             --bg-primary: #050505;
-            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-secondary: #0A0A0C;
+            --bg-panel: #111111;
             --brand-purple: #6B00FF;
             --accent-neon: #00FF66;
             --text-main: #EAE9E4; 
-            --text-muted: rgba(234, 233, 228, 0.6);
-            --hairline: 1px solid rgba(255, 255, 255, 0.12);
-            --hairline-focus: 1px solid rgba(107, 0, 255, 0.8);
+            --text-muted: rgba(234, 233, 228, 0.5);
+            --hairline: 1px solid rgba(255, 255, 255, 0.1);
+            --hairline-focus: 1px solid var(--accent-neon);
             
+            /* Tipografía */
             --font-display: 'Anton', sans-serif;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
+            --font-code: 'Courier New', Courier, monospace;
         }
 
-        html, body { overflow-x: hidden !important; max-width: 100%; width: 100%; }
-        html { scroll-behavior: smooth; height: 100%; }
+        html, body { overflow-x: hidden; max-width: 100%; width: 100%; scroll-behavior: smooth; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
-            background-color: var(--bg-primary);
-            position: relative; min-height: 100vh;
-            display: flex; flex-direction: column;
+        
+        body { 
+            color: var(--text-main); font-family: var(--font-sans); 
+            -webkit-font-smoothing: antialiased; background-color: var(--bg-primary); 
+            min-height: 100vh; display: flex; flex-direction: column;
         }
 
-        /* ─── NAVBAR SUPERIOR UNIVERSAL (IGUAL A INDEX) ─── */
+        /* ─── FONDOS Y ATMÓSFERA ─── */
+        .ambient-canvas {
+            position: fixed; top: -5vh; left: 0; width: 100vw; height: 110vh; 
+            background: var(--bg-primary) url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/27a5f1ff96e9d1b4c4a205126ccbcba5a9b57582/DIQC/file_000000006e7481fd87c722d8d1370ae9.png') center/cover no-repeat fixed;
+            z-index: -3; filter: brightness(0.9) saturate(1.1);
+        }
+        
+        .minimal-stars { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; pointer-events: none; }
+        .minimal-stars::after {
+            content: ""; position: absolute; width: 2px; height: 2px; background: transparent;
+            box-shadow: 15vw 10vh rgba(255,255,255,0.5), 85vw 25vh rgba(255,255,255,0.3), 45vw 40vh rgba(255,255,255,0.6), 10vw 60vh rgba(255,255,255,0.4), 75vw 70vh rgba(255,255,255,0.5), 90vw 15vh rgba(255,255,255,0.2), 25vw 85vh rgba(255,255,255,0.4), 65vw 90vh rgba(255,255,255,0.3), 5vw 35vh rgba(255,255,255,0.5), 50vw 15vh rgba(255,255,255,0.2);
+            animation: slowBreathe 8s infinite alternate ease-in-out;
+        }
+        @keyframes slowBreathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
+
+        /* ─── NAVBAR PREMIUM ─── */
         .top-navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: var(--hairline);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 4vw; z-index: 2000; transition: all 0.3s ease;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: var(--hairline); display: flex; justify-content: space-between; align-items: center;
+            padding: 0 4vw; z-index: 2000; transition: transform 0.3s ease;
         }
-
-        .navbar-brand { 
-            display: flex; align-items: center; gap: 10px;
-            font-family: var(--font-sans); font-size: 1rem; font-weight: 600; 
-            color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase;
-        }
+        .navbar-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #fff; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; }
         .brand-icon { height: 22px; width: auto; object-fit: contain; }
-
         .navbar-links { display: flex; gap: 3rem; align-items: center; }
-        .nav-link {
-            color: var(--text-main); text-decoration: none; font-family: var(--font-sans);
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
-        }
+        .nav-link { color: var(--text-main); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .nav-link:hover { color: var(--brand-purple); }
-        
-        .nav-btn-wa {
-            background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 400;
-            text-decoration: none; font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-transform: uppercase;
-        }
-        .nav-btn-wa svg { width: 14px; height: 14px; fill: currentColor; }
-        .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
-        /* ─── TERMINAL DE CONFIGURACIÓN ─── */
-        .setup-container {
-            margin-top: 70px; flex-grow: 1;
-            display: grid; grid-template-columns: 38% 62%;
-            width: 100%; min-height: calc(100vh - 70px);
+        /* ─── CONTENEDOR DEL FORMULARIO B2B ─── */
+        .onboarding-section {
+            padding: 120px 4vw 4rem 4vw; /* Espacio para el navbar */
+            display: flex; justify-content: center; align-items: flex-start;
+            flex-grow: 1; z-index: 10; position: relative;
         }
 
-        /* Columna Izquierda: Información de Modo */
-        .setup-sidebar {
-            padding: 5rem 4vw; border-right: var(--hairline);
-            display: flex; flex-direction: column; justify-content: space-between;
-            background: var(--bg-primary);
+        .terminal-panel {
+            background-color: var(--bg-panel);
+            border: var(--hairline);
+            width: 100%; max-width: 800px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: relative;
         }
 
-        .sidebar-content { display: flex; flex-direction: column; gap: 2rem; }
-
-        .sys-header { 
-            font-family: var(--font-sans); color: var(--brand-purple); 
-            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;
-        }
-        .setup-title { 
-            font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.5rem); 
-            line-height: 0.95; color: #fff; text-transform: uppercase; letter-spacing: -1px;
-        }
-        
-        .setup-desc { 
-            font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.35rem); 
-            line-height: 1.6; color: var(--text-muted); font-weight: 400;
-        }
-        .setup-desc strong { color: var(--text-main); font-style: italic; font-weight: 400; }
-
-        /* Tabs de Selección Amigables */
-        .tab-controls { 
-            display: flex; flex-direction: column; gap: 1rem; 
-            margin-top: 2rem; border-top: var(--hairline); padding-top: 2.5rem;
-        }
-        
-        .tab-btn {
-            background: var(--bg-card); border: var(--hairline);
-            border-radius: 12px; padding: 1.2rem 1.5rem; text-align: left;
-            font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        .panel-header {
+            padding: 1.5rem 2rem; border-bottom: var(--hairline);
+            background: var(--bg-secondary);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .tab-btn:hover { 
-            background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.3); 
+        
+        .sys-status { font-family: var(--font-code); color: var(--accent-neon); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;}
+        .panel-title { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; color: var(--text-main); line-height: 1;}
+
+        .panel-body { padding: 3rem 4rem; }
+        .intro-text { font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 3rem; font-weight: 300;}
+
+        /* ─── ESTILOS DE FORMULARIO BRUTALISTA ─── */
+        .form-group { margin-bottom: 2.5rem; }
+        
+        .form-label { 
+            display: block; font-family: var(--font-code); font-size: 0.8rem; 
+            color: var(--brand-purple); text-transform: uppercase; letter-spacing: 1px; 
+            margin-bottom: 0.8rem; font-weight: 600;
         }
-        .tab-btn.active { 
-            background: rgba(107, 0, 255, 0.12); border-color: var(--brand-purple); 
-            color: #fff; font-weight: 600; box-shadow: 0 10px 25px rgba(107, 0, 255, 0.15);
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%; background: transparent; border: none;
+            border-bottom: var(--hairline); color: var(--text-main);
+            font-family: var(--font-sans); font-size: 1rem; padding: 0.8rem 0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0; outline: none;
         }
-        .tab-btn.active .tab-indicator {
-            width: 8px; height: 8px; background: var(--accent-neon); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-neon);
+        
+        .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+        .form-textarea { resize: vertical; min-height: 80px; }
+        
+        .form-select { cursor: pointer; color: var(--text-main); appearance: none; background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 0 center/15px; }
+        .form-select option { background: var(--bg-panel); color: var(--text-main); }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus { 
+            border-bottom: var(--hairline-focus); 
+            box-shadow: 0 10px 10px -10px rgba(0, 255, 102, 0.1); 
         }
-        .tab-indicator {
-            width: 8px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 50%;
+
+        /* Custom Radio Buttons */
+        .radio-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem;}
+        .radio-label {
+            display: flex; align-items: center; cursor: pointer;
+            padding: 1rem; border: var(--hairline); background: rgba(255,255,255,0.02);
             transition: all 0.3s;
         }
-
-        /* Columna Derecha: Formularios Suaves y Amigables */
-        .setup-forms {
-            padding: 5rem 5vw; position: relative;
-            background: rgba(255,255,255,0.008);
-            display: flex; flex-direction: column; justify-content: center;
+        .radio-label:hover { background: rgba(255,255,255,0.05); }
+        .radio-input { display: none; }
+        .radio-custom {
+            width: 16px; height: 16px; border: 1px solid rgba(255,255,255,0.4);
+            margin-right: 1rem; display: flex; justify-content: center; align-items: center;
         }
-
-        .form-module { display: none; flex-direction: column; gap: 2.2rem; animation: fadeIn 0.4s ease forwards; max-width: 750px;}
-        .form-module.active { display: flex; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-        .form-header { margin-bottom: 0.5rem; }
-        .form-title { font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem); color: #fff; font-weight: 400; line-height: 1.1; margin-bottom: 0.8rem;}
-        .form-subtitle { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.5;}
-
-        /* UX Amigable en Inputs */
-        .form-group { display: flex; flex-direction: column; gap: 0.6rem; position: relative; }
-        
-        .form-group label {
-            font-family: var(--font-sans); font-size: 0.72rem; text-transform: uppercase;
-            letter-spacing: 1.5px; color: rgba(255,255,255,0.7); font-weight: 500;
-            display: flex; justify-content: space-between; align-items: center;
+        .radio-input:checked + .radio-custom { border-color: var(--accent-neon); }
+        .radio-input:checked + .radio-custom::after {
+            content: ""; width: 8px; height: 8px; background: var(--accent-neon);
         }
-        .form-group label span { font-size: 0.65rem; color: var(--brand-purple); text-transform: none; letter-spacing: 0;}
+        .radio-input:checked ~ .radio-text { color: var(--accent-neon); }
+        .radio-text { font-family: var(--font-sans); font-size: 0.9rem; font-weight: 300; }
 
-        .input-container { position: relative; width: 100%; }
-
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; background: rgba(255, 255, 255, 0.025);
-            border: var(--hairline); border-radius: 10px;
-            color: var(--text-main); font-family: var(--font-sans); font-size: 1rem; font-weight: 400;
-            padding: 1.1rem 1.2rem; outline: none; transition: all 0.3s ease;
-            appearance: none; -webkit-appearance: none;
+        /* Botón Submit */
+        .submit-btn {
+            width: 100%; background: var(--text-main); color: var(--bg-primary);
+            border: none; padding: 1.2rem; font-family: var(--font-display);
+            font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.3s ease; margin-top: 2rem;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
         }
+        .submit-btn:hover { background: var(--accent-neon); color: #000; box-shadow: 0 10px 30px rgba(0, 255, 102, 0.3); transform: translateY(-3px);}
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-        .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
-        .form-group select { cursor: pointer; }
-        .form-group select option { background: #0F0F12; color: #fff; padding: 10px; }
-
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--brand-purple);
-            box-shadow: 0 0 0 3px rgba(107, 0, 255, 0.15);
-        }
-
-        ::placeholder { color: rgba(255,255,255,0.25); font-weight: 300; }
-
-        /* Botón de Acción Principal */
-        .btn-submit {
-            align-self: flex-start; margin-top: 1rem;
-            background: #fff; color: #050505; border: none; border-radius: 50px;
-            font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 2px;
-            padding: 1.1rem 3rem; cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .btn-submit:hover { 
-            background: var(--brand-purple); color: #fff; 
-            transform: translateY(-2px); box-shadow: 0 12px 25px rgba(107, 0, 255, 0.35); 
-        }
-
-        /* ─── RESPONSIVE MÓVIL Y TABLET ─── */
+        /* ─── RESPONSIVE MÓVIL ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
-            .navbar-brand { font-size: 0.8rem; gap: 6px; }
-            .navbar-brand span { display: none; }
+            .navbar-brand { font-size: 0.75rem; gap: 4px; }
+            .navbar-brand span { display: none; } 
             .brand-icon { height: 18px; }
-            
-            .navbar-links { gap: 1rem; }
-            .nav-link { font-size: 0.65rem; }
-            .nav-btn-wa { padding: 0.4rem 0.8rem; font-size: 0.65rem; gap: 5px;}
-            .nav-btn-wa svg { width: 12px; height: 12px; }
+            .navbar-links { display: none; } /* Ocultar links en móvil en el form para enfoque */
 
-            .setup-container { grid-template-columns: 1fr; margin-top: 60px;}
-            .setup-sidebar { padding: 3rem 5vw; border-right: none; border-bottom: var(--hairline); }
-            .setup-forms { padding: 3.5rem 5vw; }
-            .btn-submit { width: 100%; justify-content: center; }
+            .onboarding-section { padding: 100px 4vw 2rem 4vw; }
+            .panel-header { padding: 1.2rem; flex-direction: column; align-items: flex-start; gap: 0.5rem;}
+            .panel-title { font-size: 1.5rem; }
+            .panel-body { padding: 2rem 1.5rem; }
+            .intro-text { font-size: 0.85rem; margin-bottom: 2rem; }
+            .radio-label { padding: 0.8rem; }
+            .radio-text { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="ambient-canvas"></div>
+    <div class="minimal-stars"></div>
+
     <nav class="top-navbar">
         <a href="index.html" class="navbar-brand">
             DISK<span>.CREATIVO</span>
-            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/46948a0b43ad27ad2e2994bcc269c9fea0a8382f/DIQC/1785277935413.png" alt="Disk Icon" class="brand-icon">
+            <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/ea71a2a658c405870ed1a44f792c411025c2e937/DIQC/1785538967768.png" alt="Disk Icon" class="brand-icon">
         </a>
         <div class="navbar-links">
             <a href="index.html" class="nav-link">Inicio</a>
-            <a href="dex.html" class="nav-link" style="color:var(--brand-purple);">Construye</a>
             <a href="https://wa.me/50768529324" target="_blank" class="nav-btn-wa">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                WhatsApp
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                WhatsApp Directo
             </a>
         </div>
     </nav>
 
-    <main class="setup-container">
-        
-        <aside class="setup-sidebar">
-            <div class="sidebar-content">
-                <div>
-                    <div class="sys-header">Módulo // Configuración</div>
-                    <h1 class="setup-title">Setup</h1>
-                </div>
-                
-                <p class="setup-desc" id="contextDesc">
-                    Selecciona el protocolo de entrada. Puedes solicitar la <strong>ejecución de un proyecto</strong> si buscas cotizar infraestructura, o solicitar un <strong>diagnóstico de operaciones</strong> si deseas detectar cuellos de botella en tu local.
+    <main class="onboarding-section">
+        <div class="terminal-panel">
+            <div class="panel-header">
+                <h1 class="panel-title">Init_Project</h1>
+                <span class="sys-status">SYS // RECEPCIÓN DE DATOS</span>
+            </div>
+            
+            <div class="panel-body">
+                <p class="intro-text">
+                    La ingeniería requiere contexto. Completa este manifiesto técnico para que podamos evaluar la viabilidad, la arquitectura requerida y los recursos a desplegar en tu empresa.
                 </p>
 
-                <div class="tab-controls">
-                    <button class="tab-btn active" data-target="form-sales">
-                        <span>[ DIR_01 // DESPLIEGUE ]</span>
-                        <div class="tab-indicator"></div>
+                <form id="diskForm" onsubmit="enviarWhatsApp(event)">
+                    
+                    <div class="form-group">
+                        <label class="form-label">01. Nodo Emisor (Tu Nombre)</label>
+                        <input type="text" id="nombre" class="form-input" placeholder="Ej: Jonathan O..." required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">02. Entidad Comercial (Empresa / Marca)</label>
+                        <input type="text" id="empresa" class="form-input" placeholder="Ej: RED Casco Antiguo / Tattoo Shop" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">03. Estado de Infraestructura Actual</label>
+                        <div class="radio-grid">
+                            <label class="radio-label">
+                                <input type="radio" name="infraestructura" value="Cero absoluto. Es una idea nueva." class="radio-input" required>
+                                <div class="radio-custom"></div>
+                                <span class="radio-text">Cero absoluto. Es una idea o negocio nuevo.</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="infraestructura" value="Solo redes sociales operando." class="radio-input">
+                                <div class="radio-custom"></div>
+                                <span class="radio-text">Solo redes sociales (IG/TikTok) operando.</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="infraestructura" value="Tenemos web pero está obsoleta o es genérica." class="radio-input">
+                                <div class="radio-custom"></div>
+                                <span class="radio-text">Tenemos sitio web, pero está obsoleto o genérico.</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="infraestructura" value="Sistema operativo pero necesitamos escalar." class="radio-input">
+                                <div class="radio-custom"></div>
+                                <span class="radio-text">Ecosistema operando, pero necesitamos escalar/rediseñar.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">04. Arquitectura Requerida (Servicio principal)</label>
+                        <select id="servicio" class="form-select" required>
+                            <option value="" disabled selected>Selecciona un módulo de despliegue...</option>
+                            <option value="Landing Page Transaccional (DIR_01)">Landing Page Transaccional (Captación/Ventas)</option>
+                            <option value="E-commerce de Alto Rendimiento">E-commerce de Alto Rendimiento</option>
+                            <option value="Sistema Aislado / Software a la medida (DIR_02)">Software a Medida / SaaS / Sistema Interno</option>
+                            <option value="Re-branding / Posicionamiento Visual">Re-branding / Posicionamiento Visual Premium</option>
+                            <option value="Consultoría Técnica">Consultoría Técnica / Auditoría</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">05. Brief de Operación (¿Qué quieres lograr?)</label>
+                        <textarea id="brief" class="form-textarea" placeholder="Describe brevemente tu objetivo o el problema que buscas resolver en tu negocio. Se directo." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">06. Capacidad de Despliegue (Rango de Inversión)</label>
+                        <select id="presupuesto" class="form-select" required>
+                            <option value="" disabled selected>Selecciona tu rango de presupuesto asignado...</option>
+                            <option value="< $1,000 USD (Despliegue Rápido)">&lt; $1,000 USD (Módulos Básicos / Despliegue Rápido)</option>
+                            <option value="$1,000 - $3,000 USD (Ecosistema Estándar)">$1,000 - $3,000 USD (Ecosistemas Estándar B2B)</option>
+                            <option value="$3,000 - $10,000+ USD (Enterprise)">$3,000 - $10,000+ USD (Arquitectura Enterprise / Custom)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                        Transmitir Datos al CTO
                     </button>
-                    <button class="tab-btn" data-target="form-diag">
-                        <span>[ DIR_02 // DIAGNÓSTICO ]</span>
-                        <div class="tab-indicator"></div>
-                    </button>
-                </div>
+                </form>
             </div>
-        </aside>
-
-        <section class="setup-forms">
-
-            <form id="form-sales" class="form-module active" action="https://formspree.io/f/mqakvoge" method="POST">
-                <div class="form-header">
-                    <h2 class="form-title">Construir Sistema</h2>
-                    <p class="form-subtitle">Completa los campos con la información de tu proyecto para iniciar el diseño de tu infraestructura.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Nombre y Apellido <span>(Obligatorio)</span></label>
-                    <div class="input-container">
-                        <input type="text" name="nombre" placeholder="Ej. Carlos Mendoza" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Nombre del Negocio / Empresa</label>
-                    <div class="input-container">
-                        <input type="text" name="empresa" placeholder="Ej. Restaurante La Costa" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Tipo de Infraestructura Requerida</label>
-                    <div class="input-container">
-                        <select name="modulo" required>
-                            <option value="" disabled selected>Selecciona la solución que necesitas...</option>
-                            <option value="qr">Menú Interactivo QR (Despliegue Rápido)</option>
-                            <option value="pos">Red Local / Comandas Sin Internet (Air-Gapped)</option>
-                            <option value="web">Sitio Web / Plataforma Custom (Enterprise)</option>
-                            <option value="branding">Identidad Visual & Dirección de Arte</option>
-                            <option value="consultoria">Consultoría Técnica General</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Presupuesto Estimado de Inversión</label>
-                    <div class="input-container">
-                        <select name="presupuesto" required>
-                            <option value="" disabled selected>Selecciona un rango...</option>
-                            <option value="basico">$500 - $1,500 (Módulos Rápidos)</option>
-                            <option value="mid">$1,500 - $4,000 (Arquitectura Estándar)</option>
-                            <option value="high">$4,000+ (Desarrollo Custom)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Detalles del Proyecto</label>
-                    <div class="input-container">
-                        <textarea name="detalles" placeholder="Cuéntanos un poco sobre lo que quieres lograr con esta solución..." required></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit">
-                    Enviar Requerimiento
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-            </form>
-
-            <form id="form-diag" class="form-module" action="https://formspree.io/f/mqakvoge" method="POST">
-                <div class="form-header">
-                    <h2 class="form-title">Diagnóstico Operativo</h2>
-                    <p class="form-subtitle">Un cuestionario simple de consulta para identificar dónde pierde tiempo o dinero tu negocio.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Tu Nombre <span>(Persona de contacto)</span></label>
-                    <div class="input-container">
-                        <input type="text" name="contacto_diag" placeholder="Ej. Ana Rodríguez" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Nombre del Establecimiento</label>
-                    <div class="input-container">
-                        <input type="text" name="local_diag" placeholder="Ej. Boutique Central" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Cuello de Botella Principal</label>
-                    <div class="input-container">
-                        <textarea name="cuello_botella" placeholder="¿Qué proceso manual (tomar pedidos, inventario, cobros) atrasa más la atención en tu local?" required></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Área de Fuga o Ineficiencia</label>
-                    <div class="input-container">
-                        <textarea name="fuga_capital" placeholder="¿En qué aspecto sientes que tu equipo o negocio pierde dinero o clientes diariamente?" required></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit">
-                    Solicitar Diagnóstico
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-            </form>
-
-        </section>
+        </div>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lógica de Tabs
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const formModules = document.querySelectorAll('.form-module');
-            const contextDesc = document.getElementById('contextDesc');
+        // Lógica de Interceptación y Enrutamiento a WhatsApp
+        function enviarWhatsApp(event) {
+            event.preventDefault(); // Evita que la página se recargue
 
-            const texts = {
-                'form-sales': "Despliega tu infraestructura digital. Detalla los requerimientos de tu proyecto en el formulario y comenzaremos a <strong>diseñar el código</strong> para tu negocio.",
-                'form-diag': "Sin compromisos de venta. Queremos entender dónde está el fallo técnico de tu local. Llena este formulario rápido para <strong>detectar ineficiencias</strong>."
-            };
-
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    formModules.forEach(f => f.classList.remove('active'));
-                    
-                    btn.classList.add('active');
-                    const targetId = btn.getAttribute('data-target');
-                    document.getElementById(targetId).classList.add('active');
-                    
-                    contextDesc.style.opacity = 0;
-                    setTimeout(() => {
-                        contextDesc.innerHTML = texts[targetId];
-                        contextDesc.style.opacity = 1;
-                    }, 180);
-                });
-            });
+            // Recolectar datos del DOM
+            const nombre = document.getElementById('nombre').value.trim();
+            const empresa = document.getElementById('empresa').value.trim();
             
-            contextDesc.style.transition = "opacity 0.2s ease";
-        });
+            // Obtener el radio button seleccionado
+            const infraRadios = document.getElementsByName('infraestructura');
+            let infraestructura = '';
+            for (let i = 0; i < infraRadios.length; i++) {
+                if (infraRadios[i].checked) {
+                    infraestructura = infraRadios[i].value;
+                    break;
+                }
+            }
+
+            const servicio = document.getElementById('servicio').value;
+            const brief = document.getElementById('brief').value.trim();
+            const presupuesto = document.getElementById('presupuesto').value;
+
+            // Formatear el payload para WhatsApp (Usando codificación URI)
+            const numeroTarget = "50768529324";
+            
+            let mensaje = `*INICIALIZACIÓN DE PROYECTO: DISK CREATIVO* 💿🚀\n\n`;
+            mensaje += `👤 *Emisor:* ${nombre}\n`;
+            mensaje += `🏢 *Entidad:* ${empresa}\n`;
+            mensaje += `⚙️ *Infraestructura Actual:* ${infraestructura}\n`;
+            mensaje += `🛠️ *Módulo Requerido:* ${servicio}\n`;
+            mensaje += `💰 *Rango de Inversión:* ${presupuesto}\n\n`;
+            mensaje += `📝 *Brief Operativo:*\n"${brief}"`;
+
+            // Codificar el texto para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            
+            // Construir la URL final de la API de WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroTarget}?text=${mensajeCodificado}`;
+
+            // Redirigir al usuario en una nueva pestaña
+            window.open(urlWhatsApp, '_blank');
+        }
     </script>
 </body>
 </html>
