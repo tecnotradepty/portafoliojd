@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -19,8 +19,13 @@
             
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
-            --font-cursive: 'Caveat', cursive; /* NUEVA VARIABLE CURSIVA */
             --font-code: 'Courier New', Courier, monospace;
+
+            /* PALETA TÉCNICA VIBRANTE */
+            --color-red: #E0525C;
+            --color-blue: #4A90E2;
+            --color-pink: #D254C2;
+            --color-green: #43B565;
         }
 
         html, body { overflow-x: clip !important; max-width: 100%; width: 100%; }
@@ -30,7 +35,7 @@
         body {
             color: var(--text-main); font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased; background-color: var(--bg-primary);
-            position: relative; min-height: 100%;
+            position: relative; min-height: 100%; overflow: hidden; /* Evitar scroll en el sandbox */
         }
 
         /* ─── 01. LIENZO ESPACIAL ─── */
@@ -90,6 +95,7 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
+        /* EFECTO MATE ORIGINAL (TITULAR) */
         .solid-gray-letter {
             color: #B8B8B8; display: inline-block; position: relative;
             text-shadow: 
@@ -112,6 +118,7 @@
         .overlap-t { z-index: 25 !important; position: relative; }
         .overlap-i-behind { z-index: 1 !important; position: relative; margin-left: -0.08em; }
 
+        /* CD POSICIONADO ESTRATÉGICAMENTE */
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); z-index: 5; pointer-events: none;
@@ -125,50 +132,7 @@
         .delay-1 { animation-delay: 0s; } .delay-2 { animation-delay: 1.5s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4.5s; } .delay-5 { animation-delay: 6s; } .delay-6 { animation-delay: 7.5s; }
 
 
-        /* ─── SUBTÍTULO: ESTÉTICA CURSIVA / FIRMA DE AUTOR ─── */
-        .hero-tagline {
-            font-family: var(--font-cursive); 
-            /* Aumentamos drásticamente el tamaño porque las cursivas se ven más pequeñas */
-            font-size: clamp(1.8rem, 3vw, 2.5rem); 
-            font-weight: 700; /* Peso robusto para mantener el efecto 3D visible */
-            margin-top: 2rem; position: relative; z-index: 20;
-            /* Eliminado el uppercase para no romper los trazos manuscritos */
-            letter-spacing: 1px; text-align: center;
-        }
-
-        /* COLORES: SATURACIÓN PROFESIONAL (Mantenido del paso anterior) */
-        .code-red { 
-            color: #E0525C; /* Rojo Carmín Vibrante */
-            text-shadow: 0px 1px 0px #8E2931, 0px 2px 0px #8E2931, 0px 3px 0px #8E2931, 0px 10px 15px rgba(0,0,0,0.6); 
-        }
-        
-        .code-blue { 
-            color: #4A90E2; /* Azul Técnico Premium */
-            text-shadow: 0px 1px 0px #225691, 0px 2px 0px #225691, 0px 3px 0px #225691, 0px 10px 15px rgba(0,0,0,0.6); 
-        }
-        
-        .code-pink { 
-            color: #D254C2; /* Magenta Suave */
-            text-shadow: 0px 1px 0px #87287A, 0px 2px 0px #87287A, 0px 3px 0px #87287A, 0px 10px 15px rgba(0,0,0,0.6); 
-        }
-        
-        .code-green { 
-            color: #43B565; /* Verde Esmeralda */
-            text-shadow: 0px 1px 0px #226E38, 0px 2px 0px #226E38, 0px 3px 0px #226E38, 0px 10px 15px rgba(0,0,0,0.6); 
-        }
-        
-        /* Palabras base blancas */
-        .text-base {
-            color: #F0F4F8;
-            text-shadow: 0px 1px 0px #7A8499, 0px 2px 0px #7A8499, 0px 3px 0px #7A8499, 0px 10px 15px rgba(0,0,0,0.6);
-        }
-
-        .text-muted {
-            color: rgba(240, 244, 248, 0.4); 
-            text-shadow: 0px 1px 0px rgba(0,0,0,0.8), 0px 2px 0px rgba(0,0,0,0.8), 0px 3px 0px rgba(0,0,0,0.8);
-        }
-
-        /* BOTÓN REPRODUCTOR CTA */
+        /* ─── BOTÓN REPRODUCTOR CTA (Mantenido) ─── */
         .hero-reproductor-btn {
             display: block; margin-top: 5rem; width: 90%; max-width: 400px;
             position: relative; z-index: 20; cursor: pointer;
@@ -179,13 +143,98 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* CINTA ANALÓGICA */
-        .analog-cut {
-            width: 100%; height: 6vh; min-height: 40px; display: block;
-            background-image: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/0bc1cbae60e585237d38e03ea2fa9c12a7231d0a/DIQC/IMG_20260723_145416.jpg');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
-            position: relative; z-index: 25; border-top: var(--hairline); border-bottom: var(--hairline);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.9), 0 10px 40px rgba(0,0,0,0.9);
+        /* ─── OBJETOS FLOTANTES DE CÓDIGO (PROFUNDIDAD DE CAMPO 3D) ─── */
+        .floating-symbols {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none; overflow: hidden; z-index: 1; /* Detrás del título */
+        }
+
+        .sym-obj {
+            position: absolute; font-family: var(--font-code);
+            font-weight: 800; display: inline-block;
+            /* Volumen Base 3D */
+            text-shadow: 0px 2px 0px rgba(0,0,0,0.5), 0px 4px 10px rgba(0,0,0,0.8);
+        }
+
+        /* 1. PLANO FRONTAL (Gigantes y borrosos por estar "fuera de foco" cerca de la cámara) */
+        .sym-1 {
+            color: rgba(74, 144, 226, 0.3); /* Azul Técnico */
+            font-size: clamp(8rem, 15vw, 18rem);
+            top: 10%; left: 5%;
+            filter: blur(8px) drop-shadow(0 10px 20px rgba(0,0,0,0.9));
+            z-index: 30; /* Por encima del título */
+            animation: driftSpin1 25s infinite linear;
+        }
+
+        .sym-2 {
+            color: rgba(224, 82, 92, 0.3); /* Rojo Carmín */
+            font-size: clamp(6rem, 12vw, 14rem);
+            bottom: 5%; right: -2%;
+            filter: blur(5px) drop-shadow(0 10px 20px rgba(0,0,0,0.9));
+            z-index: 30; 
+            animation: driftSpin2 22s infinite linear reverse;
+        }
+
+        /* 2. PLANO MEDIO (Nítidos, tamaño intermedio, flotando detrás del título) */
+        .sym-3 {
+            color: rgba(67, 181, 101, 0.6); /* Verde Esmeralda */
+            font-size: clamp(3rem, 6vw, 6rem);
+            top: 25%; right: 15%;
+            filter: blur(0px);
+            text-shadow: 0px 1px 0px #226E38, 0px 2px 0px #226E38, 0px 10px 15px rgba(0,0,0,0.8);
+            animation: driftSpin3 18s infinite ease-in-out;
+        }
+
+        .sym-4 {
+            color: rgba(210, 84, 194, 0.5); /* Magenta */
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            bottom: 25%; left: 18%;
+            filter: blur(1px);
+            text-shadow: 0px 1px 0px #87287A, 0px 10px 15px rgba(0,0,0,0.8);
+            animation: driftSpin1 15s infinite ease-in-out reverse;
+        }
+
+        /* 3. PLANO LEJANO (Pequeños, oscuros y ligeramente borrosos) */
+        .sym-5 {
+            color: rgba(255, 255, 255, 0.1); 
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            top: 60%; right: 35%;
+            filter: blur(2px);
+            animation: driftSpin2 30s infinite linear;
+        }
+
+        .sym-6 {
+            color: rgba(74, 144, 226, 0.15); 
+            font-size: clamp(2rem, 4vw, 4rem);
+            top: 15%; left: 35%;
+            filter: blur(2px);
+            animation: driftSpin3 28s infinite linear reverse;
+        }
+
+        .sym-7 {
+            color: rgba(224, 82, 92, 0.15); 
+            font-size: clamp(1rem, 2vw, 2.5rem);
+            bottom: 10%; right: 40%;
+            filter: blur(1px);
+            animation: driftSpin1 20s infinite ease-in-out;
+        }
+
+        /* Físicas de Gravedad Zero */
+        @keyframes driftSpin1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -40px) rotate(15deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes driftSpin2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-40px, -60px) rotate(45deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes driftSpin3 {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(20px, 30px) rotate(-20deg) scale(1.1); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
 
         /* ─── RESPONSIVE MÓVIL CORRECTO ─── */
@@ -208,11 +257,11 @@
             }
             .hero-reproductor-btn { width: 85%; margin-top: 3rem; }
             
-            /* Ajuste de cursiva en móvil */
-            .hero-tagline { 
-                line-height: 1.3; 
-                padding: 0 15px;
-            }
+            /* Ajustes de cámara para móvil en los símbolos */
+            .sym-1 { top: 5%; left: -10%; }
+            .sym-2 { bottom: 10%; right: -15%; }
+            .sym-3 { top: 20%; right: 5%; }
+            .sym-4 { bottom: 20%; left: 5%; }
         }
     </style>
 </head>
@@ -223,6 +272,16 @@
     <div class="stars-container">
         <div class="stars-1"></div>
         <div class="stars-2"></div>
+    </div>
+
+    <div class="floating-symbols">
+        <span class="sym-obj sym-1">{</span>
+        <span class="sym-obj sym-2">&lt;/&gt;</span>
+        <span class="sym-obj sym-3">[ ]</span>
+        <span class="sym-obj sym-4">}</span>
+        <span class="sym-obj sym-5">;</span>
+        <span class="sym-obj sym-6">()</span>
+        <span class="sym-obj sym-7">//</span>
     </div>
 
     <nav class="top-navbar" id="topNavbar">
@@ -253,29 +312,19 @@
             
             <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/93b5261029d61bf88eee569ffe36701e636d2899/DIQC/discoC.png" alt="Disk Creativo Render 3D" class="giant-transparent-logo" id="dynamic-logo">
             
-            <p class="hero-tagline">
-                <span class="text-muted">> "</span><span class="code-red">Los límites</span> <span class="text-base">de</span> <span class="code-blue">tu proyecto</span> <span class="code-pink">no están</span> <span class="code-green">en el espacio</span><span class="text-muted">. Alójate</span> <span class="code-pink">con nosotros</span><span class="text-muted">."</span>
-            </p>
-            
             <a href="dex.html" class="hero-reproductor-btn">
                 <img src="https://raw.githubusercontent.com/tecnotradepty/portafoliojd/f8e0514422bcda8f54aaf7aeb2dfda902f312d0c/DIQC/file_00000000f0e4822fbe46c8a8053e88e8.png" alt="Reproductor Configuración">
             </a>
         </div>
     </section>
 
-    <div class="analog-cut"></div>
+    <div class="analog-cut" style="position: absolute; bottom: 0; width: 100%;"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dynamicLogo = document.getElementById('dynamic-logo');
             const topNavbar = document.getElementById('topNavbar');
             
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                if(scrolled > 50) topNavbar.style.transform = 'translateY(-100%)';
-                else topNavbar.style.transform = 'translateY(0)';
-            }, { passive: true });
-
             const heroContainer = document.getElementById('inicio');
             if(heroContainer && dynamicLogo && window.innerWidth > 768) {
                 heroContainer.addEventListener('mousemove', (e) => {
