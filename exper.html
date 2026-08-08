@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Disk Creativo | Hero Texturizado HD Sandbox</title>
+    <title>Disk Creativo | Hero Textura Dual</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +19,11 @@
             --font-display: 'Anton', sans-serif;
             --font-sans: 'Inter', sans-serif;
 
-            /* TELA MORADA RAW */
-            --brand-texture-url: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/29fc10c2b7a0baa8e0fe14c037b94f26a53c80cf/DIQC/telamorada.jpg');
+            /* IMÁGENES RAW INYECTADAS DESDE GITHUB */
+            --texture-light: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/86894d470812fc787f491a287e3b1d4df507a6c0/DIQC/telamorada%20(1).jpeg');
+            --texture-dark: url('https://raw.githubusercontent.com/tecnotradepty/portafoliojd/fba2d6e6d218d9e5ca407c4c0ef2dbc28df954e1/DIQC/telamoradaoscura.jpeg');
 
-            /* Material de Cubos Flotantes (Gris Sólido) */
+            /* Material de Cubos Flotantes */
             --cube-edge: rgba(255, 255, 255, 0.15);
             --c-bright: #999999;
             --c-mid: #666666;
@@ -79,35 +80,39 @@
         }
         .hero-giant-text div { display: flex; justify-content: center; align-items: center; gap: 0.8vw; flex-wrap: wrap; }
 
-        /* ─── ARQUITECTURA ANTI-WEBKIT BUG (MATERIALES TIPOGRÁFICOS) ─── */
+        /* ─── ARQUITECTURA DE LETRAS 2 CAPAS (SIN BUGS WEB-KIT) ─── */
         
-        /* 1. TEXTURA TELA MORADA + VOLUMEN 3D */
+        /* 1. TEXTURA MORADA DUAL (D-S-K, C-R-A-I-V-O) */
         .texture-letter {
             display: inline-block; position: relative;
-            /* La letra base es invisible, pero proyecta la sombra 3D */
-            color: transparent; 
-            text-shadow: 
-                0px 1px 0px #2a004d,
-                0px 2px 0px #220040,
-                0px 3px 0px #1a0033,
-                0px 4px 0px #110022,
-                0px 5px 0px #0a0011,
-                0px 15px 15px rgba(0, 0, 0, 0.7);
+            color: transparent; /* Elemento base invisible, sirve de contenedor */
             z-index: 1; 
         }
 
-        /* Pseudo-elemento: Aísla la textura de la sombra para evitar el bug negro */
+        /* CAPA TRASERA (Volumen Oscuro) */
+        .texture-letter::before {
+            content: attr(data-text);
+            position: absolute; 
+            /* Se usan unidades 'em' para que la extrusión crezca proporcional al tamaño de la pantalla */
+            left: 0.035em; top: 0.035em; 
+            background-image: var(--texture-dark);
+            background-size: cover; background-position: center;
+            -webkit-background-clip: text; background-clip: text; 
+            color: transparent; -webkit-text-fill-color: transparent;
+            /* Sombra ambiental negra para despegarlo del fondo espacial */
+            filter: drop-shadow(-5px -5px 15px rgba(0, 0, 0, 0.9));
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* CAPA FRONTAL (Cara Clara) */
         .texture-letter::after {
-            content: attr(data-text); /* Clona la letra exacta desde el HTML */
+            content: attr(data-text);
             position: absolute; left: 0; top: 0;
-            background-image: var(--brand-texture-url);
-            background-size: cover; 
-            background-position: center;
-            -webkit-background-clip: text; 
-            background-clip: text; 
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            text-shadow: none; /* Asegura que la capa superior no ensucie la imagen */
+            background-image: var(--texture-light);
+            background-size: cover; background-position: center;
+            -webkit-background-clip: text; background-clip: text; 
+            color: transparent; -webkit-text-fill-color: transparent;
             z-index: 2;
             pointer-events: none;
         }
@@ -117,12 +122,10 @@
             font-family: var(--font-display); 
             display: inline-block; position: relative;
             color: transparent;
-            /* Sombra proyectada desde la caja base */
-            filter: drop-shadow(0px 30px 20px rgba(0, 0, 0, 0.7));
+            filter: drop-shadow(0px 0.08em 0.08em rgba(0, 0, 0, 0.7)); /* Sombra proporcional */
             z-index: 10;
         }
 
-        /* Capa frontal del acrílico aislada */
         .acrylic-letter::after {
             content: attr(data-text);
             position: absolute; left: 0; top: 0;
@@ -134,7 +137,7 @@
             pointer-events: none;
         }
 
-        /* Utilidades de superposición */
+        /* Utilidades tipográficas */
         .overlap-i { margin-left: -0.08em; }
         .overlap-t { z-index: 25 !important; position: relative; }
 
@@ -142,7 +145,7 @@
         .giant-transparent-logo {
             position: absolute; top: 32%; left: 50%; transform: translate(-50%, -50%); 
             width: clamp(120px, 18vw, 320px); 
-            z-index: 5; /* Intercalado en el sándwich entre texturas(1) y acrílico(10) */
+            z-index: 5; /* Intercalado perfectamente entre la base(1) y acrílico(10) */
             pointer-events: none;
             filter: drop-shadow(0px 20px 15px rgba(0, 0, 0, 0.95));
             animation: mechanicalFloat 10s ease-in-out infinite; 
@@ -166,7 +169,7 @@
         .hero-reproductor-btn:hover { transform: translateY(4px); filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.9)); }
         .hero-reproductor-btn:active { transform: translateY(10px); filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.95)); }
 
-        /* ─── CUBOS 3D (Gris Sólido/Mate) ─── */
+        /* ─── CUBOS 3D (Gris Sólido Mate) ─── */
         .floating-ecosystem {
             position: absolute; inset: 0; pointer-events: none; overflow: hidden; 
             z-index: 1; perspective: 3000px; 
@@ -186,23 +189,18 @@
         .T { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); background: var(--c-bright); }
         .B { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); background: var(--c-dark); }
 
-        /* Animaciones Físicas */
         @keyframes slowRotate1 { to { transform: rotateX(360deg) rotateY(180deg); } }
         @keyframes slowRotate2 { to { transform: rotateX(-180deg) rotateY(360deg) rotateZ(90deg); } }
         @keyframes slowRotate3 { to { transform: rotateX(90deg) rotateY(-180deg) rotateZ(360deg); } }
         @keyframes slowRotate4 { to { transform: rotateX(-360deg) rotateZ(-180deg); } }
         @keyframes spaceDrift { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30px, -20px); } 66% { transform: translate(-15px, 25px); } }
 
-        /* Nodos Flotantes (DoF) */
         .sym-1 { --size: clamp(8rem, 15vw, 18rem); width: var(--size); height: var(--size); top: 10%; left: 5%; filter: blur(8px) drop-shadow(0 20px 50px rgba(0,0,0,0.95)); z-index: 30; animation: spaceDrift 60s infinite ease-in-out; }
         .sym-1 .cube-object { animation: slowRotate1 95s infinite linear; }
-        
         .sym-2 { --size: clamp(3rem, 6vw, 6rem); width: var(--size); height: var(--size); top: 25%; right: 15%; opacity: 0.7; animation: spaceDrift 75s infinite ease-in-out reverse -10s; }
         .sym-2 .cube-object { animation: slowRotate2 120s infinite linear -15s; }
-        
         .sym-3 { --size: clamp(2.5rem, 5vw, 5rem); width: var(--size); height: var(--size); bottom: 25%; left: 18%; filter: blur(1px); opacity: 0.6; animation: spaceDrift 90s infinite ease-in-out -25s; }
         .sym-3 .cube-object { animation: slowRotate3 105s infinite linear -5s; }
-        
         .sym-4 { --size: clamp(1.5rem, 3vw, 3rem); width: var(--size); height: var(--size); top: 60%; right: 35%; filter: blur(2.5px); opacity: 0.2; animation: spaceDrift 80s infinite linear reverse -40s; }
         .sym-4 .cube-object { animation: slowRotate4 130s infinite linear; }
 
