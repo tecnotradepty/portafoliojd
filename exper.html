@@ -30,7 +30,7 @@
             --font-code: 'Courier New', Courier, monospace;
         }
 
-        html, body { overflow-x: clip !important; max-width: 100%; width: 100%; scroll-behavior: smooth; height: 100%; }
+        html, body { overflow-x: hidden !important; max-width: 100%; width: 100%; scroll-behavior: smooth; height: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -85,7 +85,7 @@
         .nav-btn-wa:hover { background: #25D366; border-color: #25D366; color: #000; }
 
         /* ─── 03. HERO SECTION ─── */
-        .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; }
+        .hero-section { position: relative; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2vw; padding-top: 70px; z-index: 10; overflow: hidden; }
         .hero-sandwich { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; z-index: 10; }
         .sandwich-node { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; }
 
@@ -197,8 +197,12 @@
         .block-text { display: flex; flex-direction: column; gap: 1.5rem; }
         .bp-sub { font-family: var(--font-code); color: var(--accent-neon); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; display: inline-block; border-bottom: 1px solid var(--accent-neon); padding-bottom: 4px; align-self: flex-start;}
         
-        /* Modificado para protección móvil léxica */
-        .bp-title { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 4.5rem); line-height: 1.1; color: var(--text-main); font-weight: 400; margin: 0; word-break: normal; overflow-wrap: break-word;}
+        /* BLINDAJE LÉXICO: keep-all impide que la palabra se rompa a la mitad */
+        .bp-title { 
+            font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 4.5rem); 
+            line-height: 1.1; color: var(--text-main); font-weight: 400; margin: 0; 
+            word-break: keep-all; hyphens: none;
+        }
         .bp-title i { color: var(--brand-purple); font-style: italic; }
         
         .bp-desc { font-family: var(--font-sans); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; color: var(--text-muted); font-weight: 300; margin: 0;}
@@ -219,7 +223,12 @@
         }
         
         .projects-header { margin-bottom: 3rem; text-align: center; }
-        .projects-title { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); color: var(--text-main); line-height: 1; text-transform: uppercase; letter-spacing: 1px; margin: 0; word-break: normal; overflow-wrap: break-word;}
+        .projects-title { 
+            font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); 
+            color: var(--text-main); line-height: 1; text-transform: uppercase; 
+            letter-spacing: 1px; margin: 0; 
+            word-break: keep-all; hyphens: none;
+        }
         
         /* Contenedor Producto debajo del Título Portafolio */
         .product-split {
@@ -284,7 +293,7 @@
         .footer-nav a:hover { color: var(--brand-purple); }
         .footer-bottom { max-width: 1600px; margin: 0 auto; margin-top: 4rem; padding-top: 2rem; border-top: var(--hairline); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);}
 
-        /* ─── RESPONSIVE MÓVIL (CORREGIDO CONTRA RUPTURA LÉXICA) ─── */
+        /* ─── RESPONSIVE MÓVIL (BLINDAJE LÉXICO) ─── */
         @media (max-width: 900px) {
             .top-navbar { padding: 0 4vw; height: 60px; }
             .navbar-brand { font-size: 0.75rem; gap: 4px; }
@@ -304,12 +313,14 @@
 
             .b2b-block { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem; }
             
-            /* PREVENCIÓN DE FRACTURA TIPOGRÁFICA MÓVIL */
+            /* LA CURA LÉXICA: Escala reducida y prohibición de ruptura de palabra */
             .bp-title { 
-                font-size: clamp(1.5rem, 7vw, 2.2rem); 
+                font-size: clamp(1.5rem, 8vw, 2.2rem); 
                 line-height: 1.2;
+                word-break: keep-all; 
+                hyphens: none;
             }
-            .bp-desc { font-size: 0.9rem; } /* Mejor legibilidad */
+            .bp-desc { font-size: 0.9rem; }
 
             .block-text { gap: 1rem; }
 
@@ -318,7 +329,11 @@
             .product-split .block-img { order: 2; }
 
             .projects-header { margin-bottom: 1.5rem; }
-            .projects-title { font-size: clamp(2rem, 8vw, 2.8rem); } /* Blindaje móvil */
+            .projects-title { 
+                font-size: clamp(2rem, 10vw, 2.8rem); 
+                word-break: keep-all; 
+                hyphens: none;
+            } 
             
             .portfolio-block { padding-top: 2rem; padding-bottom: 2rem; }
 
